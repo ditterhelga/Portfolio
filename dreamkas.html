@@ -1124,6 +1124,14 @@
             }
         }
 
+        @media (max-width: 639px) {
+            [data-parallax-wrap] .lqip-parallax-host,
+            [data-parallax-wrap] [data-parallax-image] {
+                transform: none !important;
+                will-change: auto !important;
+            }
+        }
+
         /* Colophon — align with “Is it a match?” / #footer-match-main horizontal inset */
         .footer-year-strip {
             justify-content: flex-start !important;
@@ -1281,6 +1289,7 @@
                 <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
                     <p class="min-w-0">A <span class="font-medium">sudden regulatory shift forced every business,</span> from bakeries to open-air markets, to adopt certified digital registers within months.</p>
                 </div>
+                <div class="lqip-parallax-host min-w-0 md:hidden" data-lqip-ref="assets/images/dreamkas-challenge-old-pos.png"><img src="assets/images/dreamkas-challenge-old-pos.png" alt="" class="dreamkas-challenge-img mt-10 mb-10 w-full rounded-[20px] object-cover lqip-fadein"/></div>
                 <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
                     <p class="min-w-0">Thousands of cashiers and store owners with limited digital skills <span class="font-medium">had to master unfamiliar systems </span>while handling real-time sales under constant pressure.</p>
                 </div>
@@ -1290,7 +1299,7 @@
                     <img src="assets/images/dreamkas-keyphrase-logo copy.png" alt="" class="h-[56px] w-auto max-w-[200px] shrink-0 object-contain object-left"/>
                     <p class="font-light text-5/8">The market was <span class="font-medium">dominated by outdated, unintuitive systems </span>that made everyday retail harder, not easier.</p>
                 </div>
-                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/dreamkas-challenge-old-pos.png"><img src="assets/images/dreamkas-challenge-old-pos.png" alt="" class="dreamkas-challenge-img mt-8 w-full rounded-[20px] object-cover md:mt-6 xl:col-start-1 xl:row-start-3 xl:mt-8 2xl:col-start-1 2xl:row-start-3 2xl:mt-[24px] lqip-fadein"/></div>
+                <div class="lqip-parallax-host min-w-0 hidden md:block" data-lqip-ref="assets/images/dreamkas-challenge-old-pos.png"><img src="assets/images/dreamkas-challenge-old-pos.png" alt="" class="dreamkas-challenge-img mt-8 w-full rounded-[20px] object-cover md:mt-6 xl:col-start-1 xl:row-start-3 xl:mt-8 2xl:col-start-1 2xl:row-start-3 2xl:mt-[24px] lqip-fadein"/></div>
             </div>
             </div>
         </section>
@@ -1720,10 +1729,10 @@
                 </div>
                 <div class="order-5 flex w-full flex-col gap-y-8 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:flex-row md:gap-x-4 md:gap-y-0 md:items-stretch md:items-start xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
                         <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/dreamkas-receipt.png"><img src="assets/images/dreamkas-receipt.png" alt="" class="overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:flex-none md:h-[320px] md:w-[320px] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
-                        <img src="assets/images/dreamkas-alco.png" alt="" class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-auto md:h-[320px] md:min-w-0 md:flex-1 xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover"/>
+                        <img src="assets/images/dreamkas-alco.png" alt="" class="block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-auto md:h-[320px] md:min-w-0 md:flex-1 xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover"/>
                 </div>
                 </div>
-                <div class="order-3 invisible pointer-events-none min-w-0 w-full rounded-[20px] bg-[#ECF1F4] max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px] flex flex-col gap-y-6 md:order-3 md:mt-4 xl:mt-0 xl:col-start-2 xl:row-start-2 xl:row-span-2 2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6 2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]" aria-hidden="true">
+                <div class="order-3 invisible pointer-events-none min-w-0 w-full rounded-[20px] bg-[#ECF1F4] max-md:hidden px-[56px] pt-[56px] pb-[64px] flex flex-col gap-y-6 md:order-3 md:mt-4 xl:mt-0 xl:col-start-2 xl:row-start-2 xl:row-span-2 2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6 2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]" aria-hidden="true">
                     <img src="assets/images/dreamkas-keyphrase-logo copy.png" alt="" class="h-[56px] w-auto max-w-[200px] shrink-0 object-contain object-left"/>
                     <p class="font-light text-5/8">Reliability had to live <span class="font-medium">behind the scenes</span>, where shoppers never looked.</p>
                 </div>
@@ -1829,13 +1838,17 @@
                             </div>
                         </div>
                         <div class="dreamkas-video-player dreamkas-video-placeholder relative aspect-video w-full overflow-hidden rounded-[20px] bg-[#0f2410]" data-dreamkas-player="mp4">
-                            <video class="absolute inset-0 z-0 h-full w-full object-cover" playsinline preload="metadata" poster="assets/images/dreamkas-eco-shop2.png" src="assets/videos/Video-dreamkas.mp4"></video>
+                            <video class="absolute inset-0 z-0 h-full w-full object-cover" playsinline muted preload="metadata" poster="assets/images/dreamkas-eco-shop2.png" src="assets/videos/Video-dreamkas.mp4"></video>
                             <div class="lqip-parallax-host absolute inset-0 z-0 min-w-0" data-lqip-ref="assets/images/dreamkas-eco-shop2.png"><img src="assets/images/dreamkas-eco-shop2.png" alt="" class="dreamkas-video-poster absolute inset-0 z-0 h-full w-full object-cover opacity-50 lqip-fadein" aria-hidden="true"/></div>
                             <button type="button" class="dreamkas-video-overlay group absolute inset-0 z-10 flex cursor-pointer items-center justify-center border-0 bg-black/30 p-0 transition-colors duration-300 hover:bg-black/45 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" aria-label="Play video: Designing for the Real World">
                                 <span class="pointer-events-none flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-white/20 shadow-[0_12px_40px_rgba(0,0,0,0.35)] ring-2 ring-white/60 transition duration-300 ease-out group-hover:scale-110 group-hover:bg-[#FDE4DF] group-hover:ring-[#FDE4DF] group-hover:shadow-[0_16px_48px_rgba(253,228,223,0.5)]">
                                     <svg class="h-[28px] w-[11px] shrink-0 -scale-x-100 text-white transition-colors duration-300 ease-out group-hover:text-[#8891D6] will-change-transform" viewBox="0 0 13 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.9 32.9004L0.899992 16.9004L11.9 0.900393" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 </span>
                             </button>
+                            <div class="dreamkas-video-inline-controls pointer-events-none absolute inset-x-0 bottom-0 z-20 hidden items-center justify-end gap-x-2 p-3 sm:p-4">
+                                <button type="button" class="dreamkas-video-toggle-play pointer-events-auto inline-flex items-center justify-center rounded-full bg-black/50 px-3 py-2 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-black/65 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" aria-label="Pause video">Pause</button>
+                                <button type="button" class="dreamkas-video-toggle-sound pointer-events-auto inline-flex items-center justify-center rounded-full bg-black/50 px-3 py-2 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-black/65 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" aria-label="Turn sound on">Unmute</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2114,11 +2127,59 @@
                         var v = root.querySelector("video");
                         if (!v) return;
                         var posterEl = root.querySelector(".dreamkas-video-poster");
+                        var inlineControls = root.querySelector(".dreamkas-video-inline-controls");
+                        var playToggle = root.querySelector(".dreamkas-video-toggle-play");
+                        var soundToggle = root.querySelector(".dreamkas-video-toggle-sound");
+
+                        function updateInlineControls() {
+                            if (playToggle) {
+                                var isPaused = v.paused;
+                                playToggle.textContent = isPaused ? "Play" : "Pause";
+                                playToggle.setAttribute("aria-label", isPaused ? "Play video" : "Pause video");
+                            }
+                            if (soundToggle) {
+                                var isMuted = v.muted || v.volume === 0;
+                                soundToggle.textContent = isMuted ? "Unmute" : "Mute";
+                                soundToggle.setAttribute("aria-label", isMuted ? "Turn sound on" : "Turn sound off");
+                            }
+                        }
+
                         if (posterEl) posterEl.classList.add("hidden");
-                        v.controls = true;
+                        v.controls = false;
+                        v.muted = true;
+                        v.volume = 0;
                         overlay.classList.add("hidden");
+                        if (inlineControls) inlineControls.classList.remove("hidden");
+                        if (playToggle && !playToggle.hasAttribute("data-bound")) {
+                            playToggle.setAttribute("data-bound", "1");
+                            playToggle.addEventListener("click", function () {
+                                if (v.paused) {
+                                    var pp = v.play();
+                                    if (pp && typeof pp.catch === "function") pp.catch(function () {});
+                                } else {
+                                    v.pause();
+                                }
+                                updateInlineControls();
+                            });
+                        }
+                        if (soundToggle && !soundToggle.hasAttribute("data-bound")) {
+                            soundToggle.setAttribute("data-bound", "1");
+                            soundToggle.addEventListener("click", function () {
+                                var turnOn = v.muted || v.volume === 0;
+                                v.muted = !turnOn ? true : false;
+                                v.volume = turnOn ? 1 : 0;
+                                updateInlineControls();
+                            });
+                        }
+                        if (!v.hasAttribute("data-bound-events")) {
+                            v.setAttribute("data-bound-events", "1");
+                            v.addEventListener("play", updateInlineControls);
+                            v.addEventListener("pause", updateInlineControls);
+                            v.addEventListener("volumechange", updateInlineControls);
+                        }
                         var p = v.play();
                         if (p && typeof p.catch === "function") p.catch(function () {});
+                        updateInlineControls();
                     } else if (kind === "youtube") {
                         if (root.querySelector("iframe") || root.getAttribute("data-youtube-started") === "1") return;
                         root.setAttribute("data-youtube-started", "1");
@@ -3048,6 +3109,40 @@
 
             if (stripPrev) stripPrev.addEventListener("click", function () { setSelected(selected - 1); });
             if (stripNext) stripNext.addEventListener("click", function () { setSelected(selected + 1); });
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let hasTouchStart = false;
+            const swipeMinDistance = 40;
+            const mobileAndTablet = window.matchMedia("(max-width: 1279px)");
+
+            function onGalleryTouchStart(event) {
+                if (!mobileAndTablet.matches) return;
+                if (!event.touches || !event.touches.length) return;
+                touchStartX = event.touches[0].clientX;
+                touchStartY = event.touches[0].clientY;
+                hasTouchStart = true;
+            }
+
+            function onGalleryTouchEnd(event) {
+                if (!mobileAndTablet.matches || !hasTouchStart) return;
+                if (!event.changedTouches || !event.changedTouches.length) return;
+                const endX = event.changedTouches[0].clientX;
+                const endY = event.changedTouches[0].clientY;
+                const deltaX = endX - touchStartX;
+                const deltaY = endY - touchStartY;
+                const absX = Math.abs(deltaX);
+                const absY = Math.abs(deltaY);
+
+                hasTouchStart = false;
+                if (absX < swipeMinDistance || absX <= absY) return;
+                if (deltaX < 0) setSelected(selected + 1);
+                else setSelected(selected - 1);
+            }
+
+            mainImg.addEventListener("touchstart", onGalleryTouchStart, { passive: true });
+            mainImg.addEventListener("touchend", onGalleryTouchEnd, { passive: true });
+            mainImg.addEventListener("touchcancel", function () { hasTouchStart = false; }, { passive: true });
 
             ensureWindowContainsSelection();
             updateUI();

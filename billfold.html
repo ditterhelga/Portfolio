@@ -1090,6 +1090,14 @@
             }
         }
 
+        @media (max-width: 639px) {
+            [data-parallax-wrap] .lqip-parallax-host,
+            [data-parallax-wrap] [data-parallax-image] {
+                transform: none !important;
+                will-change: auto !important;
+            }
+        }
+
         /* Colophon — align with “Is it a match?” / #footer-match-main horizontal inset */
         .footer-year-strip {
             justify-content: flex-start !important;
@@ -1939,9 +1947,12 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
             </div>
                 </div>
 
-                <img src="assets/images/results-billfold.png"
-                     alt="Billfold results and impact"
-                     class="order-2 py-8 w-full rounded-[20px] object-contain md:hidden"/>
+                <picture class="order-2 md:hidden">
+                    <source media="(max-width: 639px)" srcset="assets/images/results-billfold-mobile.png"/>
+                    <img src="assets/images/results-billfold.png"
+                         alt="Billfold results and impact"
+                         class="py-8 w-full rounded-[20px] object-contain"/>
+                </picture>
 
                 <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
                 <div class="order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:flex-row md:gap-x-4 md:gap-y-0 md:items-stretch md:items-start xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
