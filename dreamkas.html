@@ -797,18 +797,18 @@
                 flex-direction: row !important;
                 flex-wrap: nowrap !important;
                 align-items: center !important;
-                gap: 0.75rem !important;
+                gap: 0 !important;
                 flex: 1 1 100% !important;
                 min-width: 0 !important;
                 width: 100% !important;
-                justify-content: flex-start !important;
+                justify-content: space-between !important;
             }
 
             #footer-match .footer-match-nav-links a {
                 font-size: 15px !important;
                 line-height: 1.2 !important;
-                flex: 1 1 0 !important;
-                text-align: left !important;
+                flex: 1 1 25% !important;
+                text-align: center !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] {
@@ -895,14 +895,14 @@
             position: absolute;
             left: 24px;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) scale(1);
             width: 23px;
             height: 23px;
             max-width: none;
             object-fit: contain;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         #footer-match .match-cta:hover .match-cta-circle,
@@ -913,6 +913,7 @@
         #footer-match .match-cta:hover .match-cta-send,
         #footer-match .match-cta:focus-visible .match-cta-send {
             opacity: 1;
+            transform: translateY(-50%) scale(0.84);
         }
 
         #footer-match .match-cta-label {
@@ -2527,7 +2528,7 @@
       <h2 class="footer-match-heading" style="
         font-family: 'Sofia Sans Condensed', sans-serif;
         font-size: 148px;
-        font-weight: 800;
+        font-weight: 500;
         color: #ffffff;
         line-height: 0.88;
         letter-spacing: -0.01em;

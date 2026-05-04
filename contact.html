@@ -330,14 +330,14 @@
             position: absolute;
             left: 24px;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) scale(1);
             width: 23px;
             height: 23px;
             max-width: none;
             object-fit: contain;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .contact-match-cta:hover .match-cta-circle,
@@ -348,6 +348,7 @@
         .contact-match-cta:hover .match-cta-send,
         .contact-match-cta:focus-visible .match-cta-send {
             opacity: 1;
+            transform: translateY(-50%) scale(0.84);
         }
 
         .contact-match-cta .match-cta-label {
