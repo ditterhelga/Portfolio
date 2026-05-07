@@ -16,6 +16,18 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="assets/js/global-lenis.js" defer></script>
     <script src="assets/js/img-lqip.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var from = new URLSearchParams(window.location.search).get('from');
+            var link = document.getElementById('breadcrumb-back');
+            if (!link) return;
+            if (from === 'about') {
+                link.href = 'about.html#beyond';
+            } else {
+                link.href = 'index.html#beyond';
+            }
+        });
+    </script>
 
     <style type="text/tailwindcss">
         @theme {
@@ -338,51 +350,50 @@
             }
         }
 
+        /* Match CTA — pill button */
         #footer-match .match-cta {
             position: relative;
-            z-index: 0;
-            isolation: isolate;
             display: inline-flex;
             flex-direction: row;
             align-items: center;
-            column-gap: 1rem;
+            gap: 12px;
+            height: 64px;
             width: fit-content;
             max-width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-            padding-right: 32px;
+            padding: 8px 8px 8px 36px;
+            border-radius: 100px;
             box-sizing: border-box;
             cursor: pointer;
             pointer-events: auto;
+            text-decoration: none;
+            overflow: visible;
+            transition: gap 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         #footer-match .match-cta::before {
             content: "";
             position: absolute;
+            top: 0;
             left: 0;
-            top: 50%;
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            border-radius: 9999px;
-            background-color: var(--color-accent-yellow);
+            width: 100%;
+            height: 100%;
+            border-radius: 100px;
+            background-color: #FDE4DF;
             z-index: 0;
-            pointer-events: none;
             transition:
-                width 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                height 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                margin-top 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                top 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                background-color 0.35s ease;
+                background-color 0.35s cubic-bezier(0.33, 1, 0.32, 1),
+                width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #footer-match .match-cta:hover,
+        #footer-match .match-cta:focus-visible {
+            gap: 48px;
         }
 
         #footer-match .match-cta:hover::before,
         #footer-match .match-cta:focus-visible::before {
-            top: 0;
-            margin-top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-pink-badge);
+            background-color: #FDC448;
+            width: calc(100% + 18px);
         }
 
         #footer-match .match-cta-icon {
@@ -391,45 +402,45 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #ffffff;
             flex-shrink: 0;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        #footer-match .match-cta-circle {
+        #footer-match .match-cta-icon .icon-chevron {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease;
-            width: 40px;
-            height: 40px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.25s ease;
         }
 
-        #footer-match .match-cta-send {
+        #footer-match .match-cta-icon .icon-send {
             position: absolute;
-            left: 24px;
-            top: 50%;
-            transform: translateY(-50%) scale(1);
-            width: 23px;
-            height: 23px;
-            max-width: none;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
-        #footer-match .match-cta:hover .match-cta-circle,
-        #footer-match .match-cta:focus-visible .match-cta-circle {
+        #footer-match .match-cta:hover .icon-chevron,
+        #footer-match .match-cta:focus-visible .icon-chevron {
             opacity: 0;
         }
 
-        #footer-match .match-cta:hover .match-cta-send,
-        #footer-match .match-cta:focus-visible .match-cta-send {
+        #footer-match .match-cta:hover .icon-send,
+        #footer-match .match-cta:focus-visible .icon-send {
             opacity: 1;
-            transform: translateY(-50%) scale(0.84);
+        }
+
+        #footer-match .match-cta:hover .match-cta-icon,
+        #footer-match .match-cta:focus-visible .match-cta-icon {
+            transform: translateX(18px);
         }
 
         #footer-match .match-cta-label {
@@ -441,14 +452,23 @@
             line-height: 24px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: #fff;
-            transform: translateY(1px);
-            transition: color 0.35s ease;
+            color: #0016F2;
+            padding: 0 8px;
         }
 
-        #footer-match .match-cta:hover .match-cta-label,
-        #footer-match .match-cta:focus-visible .match-cta-label {
-            color: var(--color-primary-light);
+        #footer-match .match-cta-label::after {
+            content: "........";
+            position: absolute;
+            left: 100%;
+            top: 0;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        #footer-match .match-cta:hover .match-cta-label::after,
+        #footer-match .match-cta:focus-visible .match-cta-label::after {
+            opacity: 1;
         }
 
         #footer-match .match-cta:focus-visible {
@@ -457,10 +477,12 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+            #footer-match .match-cta,
             #footer-match .match-cta::before,
-            #footer-match .match-cta-circle,
-            #footer-match .match-cta-send,
-            #footer-match .match-cta-label {
+            #footer-match .match-cta-label::after,
+            #footer-match .match-cta-icon,
+            #footer-match .match-cta-icon .icon-chevron,
+            #footer-match .match-cta-icon .icon-send {
                 transition: none;
             }
         }
@@ -710,18 +732,38 @@
         </aside>
 
         <section id="hero" class="flex flex-col">
-            <div class="experiments-breadcrumbs mb-6 md:mb-4 font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
-                <a class="no-underline transition-colors duration-[250ms] ease-out hover:text-[#0016F2]" href="index.html#work">Work</a>
-                <span aria-hidden="true">/</span>
-                <span class="text-[#8A8A8A]">Experiments</span>
+            <div class="flex flex-col gap-y-8 md:gap-y-10 xl:flex-row xl:items-center xl:gap-x-10">
+                <div class="w-full max-w-[400px] overflow-hidden rounded-[20px]">
+                    <div class="lqip-parallax-host" data-lqip-ref="assets/images/vibe_coding.png"><img src="assets/images/vibe_coding.png"
+                         alt="Olga portrait"
+                         class="w-full h-auto object-cover lqip-fadein"/></div>
+                </div>
+
+                <div class="flex flex-col gap-y-4 md:gap-y-6 flex-1 min-w-0">
+                    <div class="experiments-breadcrumbs font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
+                        <a id="breadcrumb-back" class="no-underline transition-colors duration-[250ms] ease-out hover:text-[#0016F2]" href="index.html#beyond">Beyond work</a>
+                        <span aria-hidden="true">/</span>
+                        <span class="text-[#8A8A8A]">AI Experiments</span>
+                    </div>
+                    <h1 class="section-header">Most designers design. I decided to build.</h1>
+                    <p class="font-light text-5/8">These are personal projects I actually built: a sleep app, a therapy tracker, this website, and a pocket money app built with my son over breakfast. Real problems, real code, real outcomes.</p>
+                </div>
             </div>
-            <h1 class="experiments-hero-lede">Most designers design. I decided to build.</h1>
-            <p class="mt-4 font-light text-5/8">These are personal projects made with AI tools — a sleep app, a therapy tracker for my son, this website, and a pocket money app built over breakfast. Real problems, real builds, real outcomes.</p>
         </section>
 
         <section id="dimme-app" class="-mt-[1.35rem] flex flex-col gap-y-10 md:-mt-[1.8rem] md:gap-y-12 xl:-mt-[1.95rem] xl:gap-y-14 2xl:-mt-[36px] scroll-mt-[120px]">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                    <span class="badge">Lovable</span>
+                    <span class="badge">claude</span>
+                    <span class="badge">Figma</span>
+                    <span class="badge">ElevenLabs</span>
+                    <span class="badge">Suno</span>
+                    <span class="badge">GarageBand</span>
+                    <span class="badge">Midjourney</span>
+                </div>
+
                 <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">Dimme. The sleep app I built for myself</h2>
@@ -730,16 +772,6 @@
                     <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Dimme. The sleep app I built for myself</h2>
 
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="card-badges w-full min-w-0 order-3">
-                            <span class="badge">Lovable</span>
-                            <span class="badge">claude</span>
-                            <span class="badge">Figma</span>
-                            <span class="badge">ElevenLabs</span>
-                            <span class="badge">Suno</span>
-                            <span class="badge">GarageBand</span>
-                            <span class="badge">Midjourney</span>
-                        </div>
-
                         <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-2 2xl:min-w-0">
                             <p class="font-light text-5/8">Every night I had the same routine: breathing app, then meditation app, then grab my phone in the dark to start the music. Three interruptions right at the moment I was finally calming down.</p>
                             <p class="font-light text-5/8">And the voices. I went through dozens of meditation apps and couldn't find a single voice that felt right to me. Voice is deeply personal before sleep — pace, tone, accent, energy — and I had a very clear sense of what I needed. I just couldn't find it anywhere.</p>
@@ -776,7 +808,7 @@
                         </div>
                         <div class="space-y-3">
                             <p class="text-5/8 font-medium">The result</p>
-                            <p class="font-light text-5/8">It works. My sleep improved noticeably in the first weeks of using it.</p>
+                            <p class="font-light text-5/8">It works. I've used it every night since I built it. A month later, I was falling asleep in minutes — something that genuinely hadn't happened in years.</p>
                         </div>
                     </div>
                 </div>
@@ -786,6 +818,12 @@
 
         <section id="project-2" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                    <span class="badge">cursor</span>
+                    <span class="badge">claude</span>
+                    <span class="badge">figma</span>
+                </div>
+
                 <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">Mouth Ninja. A therapy app for my son</h2>
@@ -796,12 +834,6 @@
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
                         <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
                             <p class="font-light text-5/8">My son's myofunctional therapist prescribed daily mouth exercises for tongue position and jaw development, twice a day, every day without exception. I'm supposed to make sure they happen. The problem: I can't watch every session, and he has exactly zero motivation to do them on his own.</p>
-                        </div>
-
-                        <div class="card-badges w-full min-w-0 order-2">
-                            <span class="badge">cursor</span>
-                            <span class="badge">claude</span>
-                            <span class="badge">figma</span>
                         </div>
 
                         <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
@@ -830,7 +862,7 @@
                             <p class="font-light text-5/8">A simple exercise app where he opens it, sees his list for morning or evening, taps an exercise and sees himself on camera — like a mirror — with a timer running. The camera keeps his attention on what he's actually doing. Face tracking detects whether he's moving, so waiting out the timer without doing anything doesn't work.</p>
                         </div>
                         <div class="space-y-3">
-                            <p class="text-5/8 font-medium">The design problem I didn't solve at first</p>
+                            <p class="text-5/8 font-medium">What I got wrong — and what actually worked</p>
                             <p class="font-light text-5/8">I added gamification — streaks, rewards, points. None of it worked. A 9-year-old with no internal motivation will outlast any reward system you design. So I changed the goal: stop trying to make him want to do it, and make doing it as frictionless as possible. Short sessions, clear progress, done. Resistance lower than compliance.</p>
                         </div>
                         <div class="space-y-3">
@@ -844,27 +876,27 @@
 
         <section id="project-3" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                    <span class="badge">cursor</span>
+                    <span class="badge">claude</span>
+                    <span class="badge">chatgpt</span>
+                    <span class="badge">figma</span>
+                    <span class="badge">midjourney</span>
+                </div>
+
                 <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                        <h2 class="section-header w-full">Full control. No compromises.</h2>
+                        <h2 class="section-header w-full">I got tired of compromising. So I built it myself.</h2>
                     </div>
 
-                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Full control. No compromises.</h2>
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">I got tired of compromising. So I built it myself.</h2>
 
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
                         <div class="dimme-overview-problem w-full min-w-0 space-y-8 md:space-y-10 order-1 2xl:min-w-0">
                             <div class="space-y-3">
-                                <p class="font-light text-5/8">I had a site on Squarespace. It looked like Squarespace. Constructor tools give you speed but take your design: wrong breakpoints, sluggish animations, constant compromises. I wanted full control, so I switched to building it myself.</p>
+                                <p class="font-light text-5/8">I had a site on Squarespace. It looked like Squarespace. Constructor tools give you speed but steal your design decisions. I wanted full control, so I switched to building it myself.</p>
                                 <p class="font-light text-5/8">This entire portfolio site — designed in Figma, built in Cursor with AI assistance. Every breakpoint, every animation, exactly as designed.</p>
                             </div>
-                        </div>
-
-                        <div class="card-badges w-full min-w-0 order-2">
-                            <span class="badge">cursor</span>
-                            <span class="badge">claude</span>
-                            <span class="badge">chatgpt</span>
-                            <span class="badge">figma</span>
-                            <span class="badge">midjourney</span>
                         </div>
 
                         <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
@@ -877,7 +909,7 @@
                     <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="space-y-3">
                             <p class="text-5/8 font-medium">How it went</p>
-                            <p class="font-light text-5/8">I used Cursor as both a builder and a teacher. While it wrote the code I asked it to explain every decision — why this component, why this structure. I was building a site and taking a coding course at the same time, on my own codebase, in real time.</p>
+                            <p class="font-light text-5/8">I used Cursor as both a build tool and a learning tool. While it wrote the code I asked it to explain every decision — why this component, why this structure. I was building a site and taking a coding course at the same time, on my own codebase, in real time.</p>
                             <p class="font-light text-5/8">The moment it clicked was opening the site on different devices and seeing every breakpoint and animation behave exactly as I'd designed them. No tool making decisions for me.</p>
                         </div>
                         <div class="space-y-3">
@@ -891,6 +923,11 @@
 
         <section id="project-4" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                    <span class="badge">Google AI Studio</span>
+                    <span class="badge">claude</span>
+                </div>
+
                 <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">Leobank — a pocket money tracker for my son</h2>
@@ -902,11 +939,6 @@
                         <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
                             <p class="font-light text-5/8">Cash became useless in Amsterdam — everything is cards or online. But my son still earns money for things he does, and without tracking it we constantly argued about the truth. "I have 20 euros." "No, remember you spent 10 on that game." "No I didn't." Every parent knows this conversation.</p>
                             <p class="font-light text-5/8">Instead of finding an existing app I built one with him, in Google AI Studio, over breakfast at our favourite cafe. One session, one laptop, one very opinionated real user sitting right next to me.</p>
-                        </div>
-
-                        <div class="card-badges w-full min-w-0 order-2">
-                            <span class="badge">Google AI Studio</span>
-                            <span class="badge">claude</span>
                         </div>
 
                         <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
@@ -960,7 +992,7 @@
         <footer id="footer-match" class="site-footer full-bleed" style="
           position: relative;
           background: #0016F2;
-          height: 820px;
+          height: 920px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
@@ -994,7 +1026,7 @@
             <div class="footer-match-main" style="
               position: relative;
               z-index: 15;
-              padding-top: 114px; padding-bottom: 0;
+              padding-top: 114px; padding-bottom: 200px;
               display: grid;
               grid-template-columns: 1fr auto;
               pointer-events: none;
@@ -1003,14 +1035,14 @@
                 <div class="footer-match-copy" style="pointer-events: auto; user-select: text; -webkit-user-select: text;">
                     <h2 class="footer-match-heading" style="
                       font-family: 'Sofia Sans Condensed', sans-serif;
-                      font-size: 148px;
+                      font-size: 104px;
                       font-weight: 500;
                       color: #ffffff;
-                      line-height: 0.88;
+                      line-height: 1;
                       letter-spacing: -0.01em;
                       margin-bottom: 28px;
-                      white-space: nowrap;
-                    ">Is it a match?</h2>
+                      white-space: normal;
+                    ">Still reading?<br>That's a good sign.</h2>
 
                     <p class="footer-match-blurb" style="
                       font-family: 'Inter', sans-serif;
@@ -1019,7 +1051,7 @@
                       color: #ffffff;
                       line-height: 1.6;
                       margin-bottom: 32px;
-                    ">Feel free to reach out, I'm happy to share more about my projects or talk about how I can help your team.</p>
+                    ">I'm currently looking for a product designer role where complexity is a feature, not a problem. If you're building something that needs to work for real people in real conditions — I'd love to talk.</p>
 
                     <p class="footer-match-email" style="
                       font-family: 'Inter', sans-serif;
@@ -1028,14 +1060,18 @@
                       color: #ffffff;
                       line-height: 1.6;
                       margin-bottom: 64px;
-                    ">Send me a message or email me directly at: <a href="mailto:hello@peppered.design" style="color:#FDE4DF;text-decoration:none;font-weight:300;pointer-events:auto;">hello@peppered.design</a></p>
+                    ">Reach me at <a href="mailto:hello@peppered.design" style="color:#FDE4DF;text-decoration:none;font-weight:300;pointer-events:auto;">hello@peppered.design</a> — or just hit the button. I don't bite.</p>
 
                     <a href="contact.html" class="match-cta no-underline">
+                        <span class="match-cta-label">Let's talk</span>
                         <span class="match-cta-icon" aria-hidden="true">
-                            <img class="match-cta-circle" src="assets/images/match-figma-cta-circle.svg" alt="" decoding="async" />
-                            <img class="match-cta-send" src="assets/images/send-icon.svg" alt="" decoding="async" />
+                            <span class="icon-chevron">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 4L13 10L7 16" stroke="#0016F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <img class="icon-send" src="assets/images/send-icon.svg" alt=""/>
                         </span>
-                        <span class="match-cta-label">Send me a message</span>
                     </a>
                 </div>
 
@@ -1135,8 +1171,8 @@
         const sideNav = document.getElementById("case-side-nav");
         const overviewSection = document.getElementById("dimme-app");
         const shellEl = document.querySelector(".experiments-shell");
-        const reflectionsSection = document.getElementById("project-4") || document.getElementById("project-3");
-        const reflectionsCard = null;
+        const reflectionsSection = document.getElementById("project-5") || document.getElementById("project-4") || document.getElementById("project-3");
+        const reflectionsCard = document.querySelector("#project-5 .lqip-parallax-host");
         const sectionIds = ["dimme-app", "project-2", "project-3", "project-4", "project-5"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];

@@ -787,51 +787,50 @@
         }
 
         /* Match CTA — physics footer (#footer-match), shared with index */
+        /* Match CTA — pill button */
         #footer-match .match-cta {
             position: relative;
-            z-index: 0;
-            isolation: isolate;
             display: inline-flex;
             flex-direction: row;
             align-items: center;
-            column-gap: 1rem;
+            gap: 12px;
+            height: 64px;
             width: fit-content;
             max-width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-            padding-right: 32px;
+            padding: 8px 8px 8px 36px;
+            border-radius: 100px;
             box-sizing: border-box;
             cursor: pointer;
             pointer-events: auto;
+            text-decoration: none;
+            overflow: visible;
+            transition: gap 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         #footer-match .match-cta::before {
             content: "";
             position: absolute;
+            top: 0;
             left: 0;
-            top: 50%;
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            border-radius: 9999px;
-            background-color: var(--color-accent-yellow);
+            width: 100%;
+            height: 100%;
+            border-radius: 100px;
+            background-color: #FDE4DF;
             z-index: 0;
-            pointer-events: none;
             transition:
-                width 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                height 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                margin-top 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                top 0.4s cubic-bezier(0.33, 1, 0.32, 1),
-                background-color 0.35s ease;
+                background-color 0.35s cubic-bezier(0.33, 1, 0.32, 1),
+                width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #footer-match .match-cta:hover,
+        #footer-match .match-cta:focus-visible {
+            gap: 48px;
         }
 
         #footer-match .match-cta:hover::before,
         #footer-match .match-cta:focus-visible::before {
-            top: 0;
-            margin-top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-pink-badge);
+            background-color: #FDC448;
+            width: calc(100% + 18px);
         }
 
         #footer-match .match-cta-icon {
@@ -840,45 +839,45 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #ffffff;
             flex-shrink: 0;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        #footer-match .match-cta-circle {
+        #footer-match .match-cta-icon .icon-chevron {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease;
-            width: 40px;
-            height: 40px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.25s ease;
         }
 
-        #footer-match .match-cta-send {
+        #footer-match .match-cta-icon .icon-send {
             position: absolute;
-            left: 24px;
-            top: 50%;
-            transform: translateY(-50%) scale(1);
-            width: 23px;
-            height: 23px;
-            max-width: none;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
-        #footer-match .match-cta:hover .match-cta-circle,
-        #footer-match .match-cta:focus-visible .match-cta-circle {
+        #footer-match .match-cta:hover .icon-chevron,
+        #footer-match .match-cta:focus-visible .icon-chevron {
             opacity: 0;
         }
 
-        #footer-match .match-cta:hover .match-cta-send,
-        #footer-match .match-cta:focus-visible .match-cta-send {
+        #footer-match .match-cta:hover .icon-send,
+        #footer-match .match-cta:focus-visible .icon-send {
             opacity: 1;
-            transform: translateY(-50%) scale(0.84);
+        }
+
+        #footer-match .match-cta:hover .match-cta-icon,
+        #footer-match .match-cta:focus-visible .match-cta-icon {
+            transform: translateX(18px);
         }
 
         #footer-match .match-cta-label {
@@ -890,14 +889,23 @@
             line-height: 24px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: #fff;
-            transform: translateY(1px);
-            transition: color 0.35s ease;
+            color: #0016F2;
+            padding: 0 8px;
         }
 
-        #footer-match .match-cta:hover .match-cta-label,
-        #footer-match .match-cta:focus-visible .match-cta-label {
-            color: var(--color-primary-light);
+        #footer-match .match-cta-label::after {
+            content: "........";
+            position: absolute;
+            left: 100%;
+            top: 0;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        #footer-match .match-cta:hover .match-cta-label::after,
+        #footer-match .match-cta:focus-visible .match-cta-label::after {
+            opacity: 1;
         }
 
         #footer-match .match-cta:focus-visible {
@@ -906,10 +914,12 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+            #footer-match .match-cta,
             #footer-match .match-cta::before,
-            #footer-match .match-cta-circle,
-            #footer-match .match-cta-send,
-            #footer-match .match-cta-label {
+            #footer-match .match-cta-label::after,
+            #footer-match .match-cta-icon,
+            #footer-match .match-cta-icon .icon-chevron,
+            #footer-match .match-cta-icon .icon-send {
                 transition: none;
             }
         }
@@ -1395,7 +1405,7 @@
                     <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
                         <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                             <div class="my-part-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">I joined Billfold when there was <span class="font-medium">no design team, no interface, and no real product, just a vision, a rough hardware prototype, and the urgency to move fast.</span> From that starting point, my role was to transform a raw idea into something real, usable, and resilient enough for the chaos of live events.</p>
+                                <p class="min-w-0">I joined Billfold when there was <span class="font-medium">no design team, no interface, and no real product — just a vision, a rough hardware prototype, and the urgency to move fast.</span> From that starting point, my role was to transform a raw idea into something real, usable, and resilient enough for the chaos of live events.</p>
                             </div>
                             <div class="my-part-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
                                 <p class="min-w-0">For several years, <span class="font-medium">I was the sole designer on the team</span>, responsible for everything from early research and wireframes to polished prototypes and final UI. I created design systems, explored countless edge cases, and ensured consistency across hundreds of vendor- and guest-facing screens.</p>
@@ -1422,19 +1432,19 @@
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
                                 <span class="font-medium">Remote research workflow</span><br/>
-                                Designed everything from Russia while events happened in the US. I couldn’t just pop into a festival, so I relied on user videos, staff feedback, and constant iteration with engineers on-site.
+                                Based in Russia while events ran in the US, I couldn’t just pop into a festival, so I relied on user videos, staff feedback, and constant iteration with engineers on-site.
                             </div>
                             <div>
-                                <span class="font-medium">End-to-end design</span><br/>
-                                Created flows, wireframes, and polished prototypes for both vendor and guest-facing tools.
+                                <span class="font-medium">End-to-end ownership</span><br/>
+                                I owned the full design process: flows, wireframes, and production-ready prototypes for all interfaces.
                             </div>
                             <div>
-                                <span class="font-medium">Real-world constraints</span><br/>
-                                Designed for sun glare, rushed taps, drunk users, hardware quirks, and unpredictable environments.
+                                <span class="font-medium">Designing for chaos</span><br/>
+                                Every decision accounted for sun glare, rushed taps, intoxicated users, unreliable hardware, and environments where nothing went to plan.
                             </div>
                             <div>
                                 <span class="font-medium">Tight collaboration</span><br/>
-                                Partnered closely with founders and engineers to adapt quickly between live events.
+                                Worked closely with founders and engineers to stay aligned and adapt quickly between live events, no hand-off, no disappearing after delivery.
                             </div>
                         </div>
                     </div>
@@ -1485,20 +1495,20 @@
                             <div id="research-acc-panel-1" data-open="0" class="w-full max-w-full pt-4 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                 <div class="flex flex-col gap-y-4 font-light text-5/8">
                                     <div>
-                                        <span class="font-medium">Remote observations</span><br/>
-                                        Analyzed staff videos and on-site recordings to see how devices performed during rush hours and where transactions failed.
+                                        <span class="font-medium">Remote observation</span><br/>
+                                        Reviewed staff videos and on-site recordings to see exactly where transactions stalled or failed during peak load, and what staff did (or didn't do) when things broke.
                                     </div>
                                     <div>
-                                        <span class="font-medium">Feedback loops</span><br/>
-                                        Collected input from PMs, event organizers, and engineers after each live deployment to capture recurring pain points.
+                                        <span class="font-medium">Feedback loops after every event</span><br/>
+                                        Collected structured input from PMs, event staff, and engineers after each deployment. Recurring pain points shaped the next iteration.
                                     </div>
                                     <div>
                                         <span class="font-medium">Scenario mapping</span><br/>
-                                        Broke down critical moments like bar rushes, entry bottlenecks, and late-night crowd surges to identify risks.
+                                        Broke down the highest-risk moments: bar rushes, entry bottlenecks, late-night surges, to find the failure patterns worth solving first.
                                     </div>
                                     <div>
-                                        <span class="font-medium">Environment factors</span><br/>
-                                        Studied how sun, glare, sticky hands, and loud settings shaped what people noticed (or missed) on the screen.
+                                        <span class="font-medium">Environment as a design constraint</span><br/>
+                                        Studied how sun, glare, noise, and wet hands shaped what users actually noticed on screen. Physical context wasn't a footnote — it drove decisions.
                                     </div>
                                 </div>
                             </div>
@@ -1657,7 +1667,7 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Features & design decisions</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">SEE FULL IMPACT</span></span>
             </button>
 
             <div id="vendor-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -1665,24 +1675,24 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
                     <div id="vendor-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Dual-Screen Layout</span><br/>
-                                We used a hardware setup with two screens back-to-back (one facing staff, one facing guest). I crafted the UI so that each side showed only relevant information. This prevented accidental taps and made interactions clear for both parties.
+                                <span class="font-medium">Dual-screen hardware, split purpose</span><br/>
+                                One screen for the vendor, one for the guest. I designed each side to show only what that person needed: no shared clutter, no accidental cross-taps, no confusion about who sees what.
                             </div>
                             <div>
-                                <span class="font-medium">Large, Legible UI</span><br/>
-                                The staff interface used large buttons and clear text. Bartenders working under pressure could quickly select items without slowing down or making mistakes.
+                                <span class="font-medium">Large, legible interface under pressure</span><br/>
+                                Buttons sized for people working fast in loud environments. Bartenders could select items and process orders without slowing down or second-guessing the UI.
                             </div>
                             <div>
-                                <span class="font-medium">Rapid actions</span><br/>
-                                The flow was reduced to two steps: select items and tap to pay. No unnecessary confirmations. Transactions averaged ~2 seconds.
+                                <span class="font-medium">Two-step transaction flow</span><br/>
+                                Select items. Tap to pay. No extra confirmations in the happy path. Average transaction time: under 2 seconds.
                             </div>
                             <div>
-                                <span class="font-medium">Fail-safes for Offline</span><br/>
-                                The system continued working without internet, storing transactions locally and showing subtle warnings without interrupting service.
+                                <span class="font-medium">Works without internet</span><br/>
+                                When Wi-Fi dropped, the POS kept running — caching transactions locally and syncing when connectivity returned. Staff saw a subtle status indicator but service never stopped.
                             </div>
                             <div>
-                                <span class="font-medium">Additional Vendor Tools</span><br/>
-                                Refunds and voids were accessible but protected with confirmations to prevent mistakes or abuse.
+                                <span class="font-medium">Protected actions for refunds and voids</span><br/>
+                                Refunds and voids were accessible but required confirmation steps, reducing the risk of accidental or unauthorized use under pressure.
                             </div>
                         </div>
                     </div>
@@ -1763,24 +1773,24 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
                     <div id="guest-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Live Order Display</span><br/>
-                                As each item was added, it appeared in real-time on the guest screen — e.g., “Beer ×2 – $12.” This gave guests a transparent, receipt-like view of their order and helped prevent confusion or disputes.
+                                <span class="font-medium">Live order display</span><br/>
+                                Each item appeared in real time as the vendor added it — e.g., "Beer ×2 – $12." Guests could see exactly what they were paying for, which cut disputes before they started.
                             </div>
                             <div>
-                                <span class="font-medium">Simple, Confident Checkout</span><br/>
-                                Once the order was ready, the screen showed a clear total and prompt: “Total $24. Tap wristband to pay.” After payment, it instantly confirmed with a big green checkmark.
+                                <span class="font-medium">Clear, confident checkout</span><br/>
+                                The screen showed a clean total and a single prompt: "Total $24. Tap wristband to pay." After payment, a large green checkmark confirmed it instantly — no ambiguity.
                             </div>
                             <div>
-                                <span class="font-medium">Kind Error Feedback</span><br/>
-                                If a tap failed (e.g., card declined), the screen showed clear, neutral messaging like “Card declined – try another card.” The goal was to resolve the moment without confusion or embarrassment — tone and clarity mattered as much as the UX flow.
+                                <span class="font-medium">Neutral error messaging</span><br/>
+                                If a tap failed or a card was declined, the screen showed clear, calm feedback: "Card declined — try another card." Tone was treated as part of the UX. Embarrassment in a crowd makes things worse; the goal was to resolve the moment quietly.
                             </div>
                             <div>
-                                <span class="font-medium">Subtle Promotions (Billfold Engage)</span><br/>
+                                <span class="font-medium">Idle state promotions (Billfold Engage)</span><br/>
                                 During idle times, the screen could display sponsor promos or venue messages. I designed a banner area that appeared only when no transaction was in progress, and kept it visually quiet to avoid distracting from the main task flow.
                             </div>
                             <div>
-                                <span class="font-medium">One-Tap Donations (Billfold Give)</span><br/>
-                                After checkout, at select events, guests could choose to round up their total and donate spare change to charity. I’m proud that this design led to a surprisingly high opt-in rate – it turns out many people in a good mood at a festival are happy to donate their spare change if you make it one tap.
+                                <span class="font-medium">One-tap donations (Billfold Give)</span><br/>
+                                After checkout, guests at select events could round up and donate spare change. Making it a single tap with no friction turned it into a surprisingly high opt-in — people at festivals, in a good mood, will give if you make it effortless.
                             </div>
                         </div>
                     </div>
@@ -1842,7 +1852,7 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
                 </div>
 
                 <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">The design challenge was to guide distracted guests through a one-time setup in under 20 sec. Clear instructions, simple steps, and instant feedback made it possible. <span class="font-medium">Once their card was linked to the RFID wristband, guests could put wallets and phones away and just tap to pay.</span></p>
+                    <p class="min-w-0">The design challenge was to guide distracted guests through a one-time setup in under 20 seconds. Clear instructions, simple steps, and instant feedback made it possible. <span class="font-medium">Once their card was linked to the RFID wristband, guests could put wallets and phones away and just tap to pay.</span></p>
                 </div>
                 </div>
 
@@ -1861,20 +1871,20 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
                     <div id="kiosk-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Fast Flow</span><br/>
-                                I designed the flow to have as few steps as possible. Tap your wristband to start → Swipe or insert your credit card (or select Apple/Google Pay) → (Optional: enter your phone or email if you want a receipt) → Done — enjoy the event. It typically took less than a minute.
+                                <span class="font-medium">Minimal steps, maximum flow</span><br/>
+                                Tap wristband → swipe or insert card (or use Apple/Google Pay) → optional: enter phone/email for a receipt → done. Most guests were through in under 30 seconds.
                             </div>
                             <div>
-                                <span class="font-medium">Clarity and Reassurance</span><br/>
-                                Each step included a progress indicator (“Step 2 of 3”) so users understood that the flow was quick and simple. We used clear visuals — such as an icon of a wristband being tapped or a credit card — to make the process intuitive at a glance. At the end, the confirmation screen told them their wristband was now their wallet. For added reassurance, if they entered contact info, we sent a confirmation text with a link.
+                                <span class="font-medium">Clarity at every step</span><br/>
+                                Progress indicators ("Step 2 of 3") told guests the flow was short. Icons: a tapping wristband, a card, made each action self-explanatory. The confirmation screen told guests their wristband was now their wallet.
                             </div>
                             <div>
-                                <span class="font-medium">UX for Difficult Environments</span><br/>
-                                These kiosks might be used in sunlight or at night by thousands of attendees, some of whom might not speak English well (especially at international events). We allowed users to choose their language at the start, and I ensured the UI used simple phrasing, large text, and universal icons.
+                                <span class="font-medium">Designed for difficult environments</span><br/>
+                                Kiosks had to work in direct sunlight and at night, for guests who might not speak English. Language selection was offered upfront. The UI used simple phrasing, large text, and universal icons to remove any dependence on reading.
                             </div>
                             <div>
-                                <span class="font-medium">No Bottlenecks</span><br/>
-                                Recognizing that check-in could become a bottleneck itself, we designed the system to support multiple kiosks and roaming staff with handheld versions. The software was identical across both. My flows had to account for someone starting at a kiosk and possibly finishing with staff assistance.
+                                <span class="font-medium">No single point of failure</span><br/>
+                                Knowing check-in could become a bottleneck itself, we designed for multiple kiosks in parallel and roaming staff with handheld versions running identical software. My flows had to handle someone starting at a kiosk and finishing with staff assistance.
                             </div>
                         </div>
                     </div>
@@ -1947,7 +1957,7 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Features & design decisions</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">SEE FULL IMPACT</span></span>
             </button>
 
             <div id="results-real-world-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -1956,23 +1966,27 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
                                 <span class="font-medium">Faster service at scale</span><br/>
-                                Transactions that once took ~1 minute on credit card readers were cut to under 2 seconds with RFID wristbands. At peak hours, bartenders could process more than 200 orders per hour, shrinking bar lines and keeping guests in the show instead of stuck in queues.
+                                Transactions that once took ~1 minute on traditional card readers dropped to under 2 seconds with RFID. At peak hours, bartenders could process more than 200 orders per hour, shrinking bar lines and keeping guests in the show instead of stuck in queues.
                             </div>
                             <div>
-                                <span class="font-medium">Higher guest confidence & spending</span><br/>
-                                Guests no longer worried about wallets, phones, or failed card swipes. Clear on-screen confirmations made every tap trustworthy. This simplicity drove behavior change: per-person spend rose by 60% at some venues, and RFID users spent over 2× more than card users at large festivals.
+                                <span class="font-medium">Higher spending per guest</span><br/>
+                                When payment is invisible, people spend more. Guests no longer worried about wallets, phones, or failed card swipes. Clear on-screen confirmations made every tap trustworthy. Per-person spend rose up to 60% at some venues, and RFID users spent over 2× more than card users at large festivals.
                             </div>
                             <div>
-                                <span class="font-medium">Boosted vendor performance & tips</span><br/>
-                                For staff, the POS became a tool they could learn in minutes. Error-proof buttons, minimal steps, and offline fail-safes kept service flowing even in chaos. Bartenders not only served faster but also saw their tips double on average, since seamless payments let guests tip without friction.
+                                <span class="font-medium">Boosted vendor performance</span><br/>
+                                For staff, the POS became a tool they could learn in minutes. Error-proof buttons, minimal steps, and offline fail-safes kept service flowing even in chaos.
+                            </div>
+                            <div>
+                                <span class="font-medium">Tips doubled for vendors</span><br/>
+                                Staff not only served faster — they earned more. Seamless checkout made tipping effortless, and bartenders saw their tips double on average. A better UX flow had a direct impact on take-home pay.
                             </div>
                             <div>
                                 <span class="font-medium">Revenue growth for organizers</span><br/>
-                                Removing bottlenecks directly impacted the bottom line. Events using Billfold reported up to 79% higher total revenue, driven by faster throughput, more transactions, and increased per-guest spend.
+                                Faster throughput, more transactions, higher per-guest spend — the combination drove up to 50% higher total revenue at major events. For organizers, switching to Billfold wasn't just a UX upgrade, it was a business decision that showed in the numbers.
                             </div>
                             <div>
-                                <span class="font-medium">Resilient operations in chaos</span><br/>
-                                Even when Wi-Fi crashed, Billfold didn’t. POS devices cached transactions locally and synced when back online, ensuring 99% offline success. For organizers, this reliability meant no sales lost during network failures — and real-time dashboards finally gave visibility across every vendor and location.
+                                <span class="font-medium">Reliable even when Wi-Fi wasn't</span><br/>
+                                When the network dropped, the POS kept running. Transactions were cached locally and synced automatically when connectivity returned — 99% offline success rate. No lost sales during failures, and real-time dashboards gave organizers visibility across every vendor the moment service resumed.
                             </div>
                         </div>
                     </div>
@@ -2416,7 +2430,7 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
     <footer id="footer-match" class="site-footer full-bleed" style="
   position: relative;
   background: #0016F2;
-  height: 820px;
+  height: 920px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -2458,7 +2472,7 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
   <div class="footer-match-main" style="
     position: relative;
     z-index: 15;
-    padding-top: 114px; padding-bottom: 0;
+    padding-top: 114px; padding-bottom: 200px;
     display: grid;
     grid-template-columns: 1fr auto;
     pointer-events: none;
@@ -2467,14 +2481,14 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
     <div class="footer-match-copy" style="pointer-events: auto; user-select: text; -webkit-user-select: text;">
       <h2 class="footer-match-heading" style="
         font-family: 'Sofia Sans Condensed', sans-serif;
-        font-size: 148px;
+        font-size: 104px;
         font-weight: 500;
         color: #ffffff;
-        line-height: 0.88;
+        line-height: 1;
         letter-spacing: -0.01em;
         margin-bottom: 28px;
-        white-space: nowrap;
-      ">Is it a match?</h2>
+        white-space: normal;
+      ">Still reading?<br>That's a good sign.</h2>
 
       <p style="
         font-family: 'Inter', sans-serif;
@@ -2483,7 +2497,7 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
         color: #ffffff;
         line-height: 1.6;
         margin-bottom: 32px;
-      " class="footer-match-blurb">Feel free to reach out, I'm happy to share more about my projects or talk about how I can help your team.</p>
+      " class="footer-match-blurb">I'm currently looking for a product designer role where complexity is a feature, not a problem. If you're building something that needs to work for real people in real conditions — I'd love to talk.</p>
 
       <p style="
         font-family: 'Inter', sans-serif;
@@ -2492,14 +2506,18 @@ At peak hours, a single extra tap or a confusing screen could slow the entire li
         color: #ffffff;
         line-height: 1.6;
         margin-bottom: 64px;
-      " class="footer-match-email">Send me a message or email me directly at: <a href="mailto:hello@peppered.design" style="color:#FDE4DF;text-decoration:none;font-weight:300;pointer-events:auto;">hello@peppered.design</a></p>
+      " class="footer-match-email">Reach me at <a href="mailto:hello@peppered.design" style="color:#FDE4DF;text-decoration:none;font-weight:300;pointer-events:auto;">hello@peppered.design</a> — or just hit the button. I don't bite.</p>
 
       <a href="contact.html" class="match-cta no-underline">
+        <span class="match-cta-label">Let's talk</span>
         <span class="match-cta-icon" aria-hidden="true">
-          <img class="match-cta-circle" src="assets/images/match-figma-cta-circle.svg" alt="" decoding="async"/>
-          <img class="match-cta-send" src="assets/images/send-icon.svg" alt="" decoding="async"/>
+          <span class="icon-chevron">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 4L13 10L7 16" stroke="#0016F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <img class="icon-send" src="assets/images/send-icon.svg" alt=""/>
         </span>
-        <span class="match-cta-label">Send me a message</span>
       </a>
     </div>
 
