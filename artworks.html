@@ -124,6 +124,8 @@
         position: relative;
         font-weight: 400;
         font-family: var(--font-family-inter);
+        color: white;
+        text-decoration: none;
         transition: color 0.25s ease;
     }
 
@@ -146,7 +148,11 @@
     }
 
     & nav .menulink:hover {
-        color: #0016F2;
+        color: #FDE4DF;
+    }
+
+    & nav .menulink[aria-current=\"page\"] {
+        color: #FDE4DF;
     }
 }
 
@@ -259,7 +265,7 @@
             font-weight: 700;
             line-height: 68px;
             letter-spacing: -0.576px;
-            color: #302F2F;
+            color: #ffffff;
             will-change: transform;
         }
 
@@ -291,17 +297,16 @@
         .iwd-item-7  { transform: translate(-305px,  998px); }
         .iwd-item-8  { transform: translate( 673px,   95px); }
         .iwd-item-9  { transform: translate(-199px, -521px); }
-        .iwd-item-10 { transform: translate( 911px, -941px); }
-        .iwd-item-11 { transform: translate(-703px,   68px); }
-        .iwd-item-12 { transform: translate(-1404px, 114px); }
-        .iwd-item-13 { transform: translate(-1490px,-429px); }
-        .iwd-item-14 { transform: translate(-1028px, 558px); }
-        .iwd-item-15 { transform: translate(1488px, -781px); }
-        .iwd-item-16 { transform: translate(1068px, -381px); }
-        .iwd-item-17 { transform: translate( 431px, 1064px); }
-        .iwd-item-18 { transform: translate(1021px,  653px); }
-        .iwd-item-19 { transform: translate(1064px, 1102px); }
-        .iwd-item-20 { transform: translate(-1080px, 860px); }
+        .iwd-item-10 { transform: translate(  911px, -941px); }
+        .iwd-item-11 { transform: translate( -703px,   68px); }
+        .iwd-item-12 { transform: translate(-1404px,  114px); }
+        .iwd-item-13 { transform: translate(-1490px, -429px); }
+        .iwd-item-14 { transform: translate(-1028px,  558px); }
+        .iwd-item-15 { transform: translate( 1488px, -781px); }
+        .iwd-item-16 { transform: translate( 1068px, -381px); }
+        .iwd-item-17 { transform: translate(  431px, 1064px); }
+        .iwd-item-18 { transform: translate( 1021px,  653px); }
+        .iwd-item-19 { transform: translate( 1064px, 1102px); }
 
         .iwd-photo {
             display: block;
@@ -1244,10 +1249,7 @@
         }
 
         /* Footer grid — md widths: wrap long lines + column gap so copy doesn’t overlap nav */
-        #footer-match .footer-match-main {
-            column-gap: clamp(2.5rem, 6vw, 5rem);
-            row-gap: 2rem;
-        }
+        
 
         #footer-match .footer-match-main .footer-match-copy {
             min-width: 0;
@@ -1366,6 +1368,8 @@
             }
 
             #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
                 grid-template-columns: 1fr !important;
                 padding: 3.75rem 1.25rem 0 !important;
                 row-gap: 2rem !important;
@@ -1916,11 +1920,37 @@
             -webkit-text-fill-color: #000;
         }
 
-        /* Colophon — align with “Is it a match?” / #footer-match-main horizontal inset */
+        
+
+        /* ─────────────────────────────────────────────────────────────── */
+
+        /* ── Footer horizontal padding — matches page content column at every breakpoint ── */
+        #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            #footer-match .footer-match-main {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            #footer-match .footer-match-main {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2));
+                padding-right: max(2rem, calc((100vw - 1440px) / 2));
+            }
+        }
+
+        /* Colophon — same horizontal inset as footer-match-main */
         .footer-year-strip {
             justify-content: flex-start !important;
-            padding-left: 1.25rem !important;
-            padding-right: 1.25rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
             box-sizing: border-box;
         }
 
@@ -1930,13 +1960,17 @@
 
         @media (min-width: 640px) {
             .footer-year-strip {
-                padding-left: 96px !important;
-                padding-right: 96px !important;
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
             }
         }
 
-        /* ─────────────────────────────────────────────────────────────── */
-
+        @media (min-width: 1536px) {
+            .footer-year-strip {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2)) !important;
+                padding-right: max(2rem, calc((100vw - 1440px) / 2)) !important;
+            }
+        }
     </style>
 </head>
 
@@ -1983,33 +2017,32 @@
             </div>
 
             <div class="iwd-canvas iwd-canvas-1" id="iwd-canvas-1">
-              <div class="iwd-item iwd-item-0"><div style="width:251px;"><img src="assets/images/1-art-painting.png" style="display:block;width:100%;height:334px;object-fit:cover;object-position:center;" alt="Artwork 1"/></div></div>
-              <div class="iwd-item iwd-item-1"><div style="width:473px;"><img src="assets/images/9-art-painting.png" style="display:block;width:100%;height:330px;object-fit:cover;object-position:center;" alt="Artwork 9"/></div></div>
-              <div class="iwd-item iwd-item-2"><div style="width:251px;"><img src="assets/images/2-art-painting.png" style="display:block;width:100%;height:334px;object-fit:cover;object-position:center;" alt="Artwork 2"/></div></div>
-              <div class="iwd-item iwd-item-3"><div style="width:407px;"><img src="assets/images/10-art-painting.png" style="display:block;width:100%;height:286px;object-fit:cover;object-position:center;" alt="Artwork 10"/></div></div>
-              <div class="iwd-item iwd-item-4"><div style="width:473px;"><img src="assets/images/11-art-painting.png" style="display:block;width:100%;height:330px;object-fit:cover;object-position:center;" alt="Artwork 11"/></div></div>
+              <div class="iwd-item iwd-item-0"><div style="width:276px;"><img src="assets/images/1-art-painting.png" style="display:block;width:100%;height:367px;object-fit:cover;object-position:center;" alt="Artwork 1"/></div></div>
+              <div class="iwd-item iwd-item-1"><div style="width:520px;"><img src="assets/images/9-art-painting.png" style="display:block;width:100%;height:363px;object-fit:cover;object-position:center;" alt="Artwork 9"/></div></div>
+              <div class="iwd-item iwd-item-2"><div style="width:276px;"><img src="assets/images/2-art-painting.png" style="display:block;width:100%;height:367px;object-fit:cover;object-position:center;" alt="Artwork 2"/></div></div>
+              <div class="iwd-item iwd-item-3"><div style="width:448px;"><img src="assets/images/10-art-painting.png" style="display:block;width:100%;height:315px;object-fit:cover;object-position:center;" alt="Artwork 10"/></div></div>
+              <div class="iwd-item iwd-item-4"><div style="width:520px;"><img src="assets/images/11-art-painting.png" style="display:block;width:100%;height:363px;object-fit:cover;object-position:center;" alt="Artwork 11"/></div></div>
             </div>
 
             <div class="iwd-canvas iwd-canvas-2" id="iwd-canvas-2">
-              <div class="iwd-item iwd-item-5"><div style="width:304px;"><img src="assets/images/3-art-painting.png" style="display:block;width:100%;height:404px;object-fit:cover;object-position:center;" alt="Artwork 3"/></div></div>
-              <div class="iwd-item iwd-item-6"><div style="width:319px;"><img src="assets/images/12-art-painting.png" style="display:block;width:100%;height:231px;object-fit:cover;object-position:center;" alt="Artwork 12"/></div></div>
-              <div class="iwd-item iwd-item-7"><div style="width:473px;"><img src="assets/images/13-art-painting.png" style="display:block;width:100%;height:330px;object-fit:cover;object-position:center;" alt="Artwork 13"/></div></div>
-              <div class="iwd-item iwd-item-8"><div style="width:251px;"><img src="assets/images/4-art-painting.png" style="display:block;width:100%;height:334px;object-fit:cover;object-position:center;" alt="Artwork 4"/></div></div>
-              <div class="iwd-item iwd-item-9"><div style="width:407px;"><img src="assets/images/14-art-painting.png" style="display:block;width:100%;height:286px;object-fit:cover;object-position:center;" alt="Artwork 14"/></div></div>
-              <div class="iwd-item iwd-item-10"><div style="width:319px;"><img src="assets/images/15-art-painting.png" style="display:block;width:100%;height:231px;object-fit:cover;object-position:center;" alt="Artwork 15"/></div></div>
-              <div class="iwd-item iwd-item-11"><div style="width:407px;"><img src="assets/images/16-art-painting.png" style="display:block;width:100%;height:286px;object-fit:cover;object-position:center;" alt="Artwork 16"/></div></div>
+              <div class="iwd-item iwd-item-5"><div style="width:334px;"><img src="assets/images/3-art-painting.png" style="display:block;width:100%;height:444px;object-fit:cover;object-position:center;" alt="Artwork 3"/></div></div>
+              <div class="iwd-item iwd-item-6"><div style="width:351px;"><img src="assets/images/12-art-painting.png" style="display:block;width:100%;height:254px;object-fit:cover;object-position:center;" alt="Artwork 12"/></div></div>
+              <div class="iwd-item iwd-item-7"><div style="width:520px;"><img src="assets/images/13-art-painting.png" style="display:block;width:100%;height:363px;object-fit:cover;object-position:center;" alt="Artwork 13"/></div></div>
+              <div class="iwd-item iwd-item-8"><div style="width:276px;"><img src="assets/images/4-art-painting.png" style="display:block;width:100%;height:367px;object-fit:cover;object-position:center;" alt="Artwork 4"/></div></div>
+              <div class="iwd-item iwd-item-9"><div style="width:448px;"><img src="assets/images/14-art-painting.png" style="display:block;width:100%;height:315px;object-fit:cover;object-position:center;" alt="Artwork 14"/></div></div>
+              <div class="iwd-item iwd-item-10"><div style="width:351px;"><img src="assets/images/15-art-painting.png" style="display:block;width:100%;height:254px;object-fit:cover;object-position:center;" alt="Artwork 15"/></div></div>
+              <div class="iwd-item iwd-item-11"><div style="width:448px;"><img src="assets/images/16-art-painting.png" style="display:block;width:100%;height:315px;object-fit:cover;object-position:center;" alt="Artwork 16"/></div></div>
             </div>
 
             <div class="iwd-canvas iwd-canvas-3" id="iwd-canvas-3">
-              <div class="iwd-item iwd-item-12"><div style="width:251px;"><img src="assets/images/5-art-painting.png" style="display:block;width:100%;height:334px;object-fit:cover;object-position:center;" alt="Artwork 5"/></div></div>
-              <div class="iwd-item iwd-item-13"><div style="width:251px;"><img src="assets/images/6-art-painting.png" style="display:block;width:100%;height:334px;object-fit:cover;object-position:center;" alt="Artwork 6"/></div></div>
-              <div class="iwd-item iwd-item-14"><div style="width:407px;"><img src="assets/images/17-art-painting.png" style="display:block;width:100%;height:286px;object-fit:cover;object-position:center;" alt="Artwork 17"/></div></div>
-              <div class="iwd-item iwd-item-15"><div style="width:306px;"><img src="assets/images/7-art-painting.png" style="display:block;width:100%;height:408px;object-fit:cover;object-position:center;" alt="Artwork 7"/></div></div>
-              <div class="iwd-item iwd-item-16"><div style="width:251px;"><img src="assets/images/8-art-painting.png" style="display:block;width:100%;height:334px;object-fit:cover;object-position:center;" alt="Artwork 8"/></div></div>
-              <div class="iwd-item iwd-item-17"><div style="width:407px;"><img src="assets/images/18-art-painting.png" style="display:block;width:100%;height:286px;object-fit:cover;object-position:center;" alt="Artwork 18"/></div></div>
-              <div class="iwd-item iwd-item-18"><div style="width:374px;"><img src="assets/images/19-art-painting.png" style="display:block;width:100%;height:264px;object-fit:cover;object-position:center;" alt="Artwork 19"/></div></div>
-              <div class="iwd-item iwd-item-19"><div style="width:407px;"><img src="assets/images/20-art-painting.png" style="display:block;width:100%;height:286px;object-fit:cover;object-position:center;" alt="Artwork 20"/></div></div>
-              <div class="iwd-item iwd-item-20"><div style="width:407px;"><img src="assets/images/21-art-painting.png" style="display:block;width:100%;height:286px;object-fit:cover;object-position:center;" alt="Artwork 21"/></div></div>
+              <div class="iwd-item iwd-item-12"><div style="width:276px;"><img src="assets/images/5-art-painting.png" style="display:block;width:100%;height:367px;object-fit:cover;object-position:center;" alt="Artwork 5"/></div></div>
+              <div class="iwd-item iwd-item-13"><div style="width:276px;"><img src="assets/images/6-art-painting.png" style="display:block;width:100%;height:367px;object-fit:cover;object-position:center;" alt="Artwork 6"/></div></div>
+              <div class="iwd-item iwd-item-14"><div style="width:448px;"><img src="assets/images/17-art-painting.png" style="display:block;width:100%;height:315px;object-fit:cover;object-position:center;" alt="Artwork 17"/></div></div>
+              <div class="iwd-item iwd-item-15"><div style="width:337px;"><img src="assets/images/7-art-painting.png" style="display:block;width:100%;height:449px;object-fit:cover;object-position:center;" alt="Artwork 7"/></div></div>
+              <div class="iwd-item iwd-item-16"><div style="width:276px;"><img src="assets/images/8-art-painting.png" style="display:block;width:100%;height:367px;object-fit:cover;object-position:center;" alt="Artwork 8"/></div></div>
+              <div class="iwd-item iwd-item-17"><div style="width:448px;"><img src="assets/images/18-art-painting.png" style="display:block;width:100%;height:315px;object-fit:cover;object-position:center;" alt="Artwork 18"/></div></div>
+              <div class="iwd-item iwd-item-18"><div style="width:411px;"><img src="assets/images/19-art-painting.png" style="display:block;width:100%;height:290px;object-fit:cover;object-position:center;" alt="Artwork 19"/></div></div>
+              <div class="iwd-item iwd-item-19"><div style="width:448px;"><img src="assets/images/20-art-painting.png" style="display:block;width:100%;height:315px;object-fit:cover;object-position:center;" alt="Artwork 20"/></div></div>
             </div>
           </div>
 
@@ -2074,7 +2107,7 @@
   <div class="footer-match-main" style="
     position: relative;
     z-index: 15;
-    padding: 114px 96px 0;
+    padding-top: 114px; padding-bottom: 0;
     display: grid;
     grid-template-columns: 1fr auto;
     pointer-events: none;

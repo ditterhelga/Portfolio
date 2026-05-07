@@ -1095,10 +1095,7 @@
         }
 
         /* Footer grid — md widths: wrap long lines + column gap so copy doesn’t overlap nav */
-        #footer-match .footer-match-main {
-            column-gap: clamp(2.5rem, 6vw, 5rem);
-            row-gap: 2rem;
-        }
+        
 
         #footer-match .footer-match-main .footer-match-copy {
             min-width: 0;
@@ -1217,6 +1214,8 @@
             }
 
             #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
                 grid-template-columns: 1fr !important;
                 padding: 3.75rem 1.25rem 0 !important;
                 row-gap: 2rem !important;
@@ -1766,11 +1765,37 @@
             -webkit-text-fill-color: #000;
         }
 
-        /* Colophon — align with “Is it a match?” / #footer-match-main horizontal inset */
+        
+
+        /* ─────────────────────────────────────────────────────────────── */
+
+        /* ── Footer horizontal padding — matches page content column at every breakpoint ── */
+        #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            #footer-match .footer-match-main {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            #footer-match .footer-match-main {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2));
+                padding-right: max(2rem, calc((100vw - 1440px) / 2));
+            }
+        }
+
+        /* Colophon — same horizontal inset as footer-match-main */
         .footer-year-strip {
             justify-content: flex-start !important;
-            padding-left: 1.25rem !important;
-            padding-right: 1.25rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
             box-sizing: border-box;
         }
 
@@ -1780,13 +1805,17 @@
 
         @media (min-width: 640px) {
             .footer-year-strip {
-                padding-left: 96px !important;
-                padding-right: 96px !important;
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
             }
         }
 
-        /* ─────────────────────────────────────────────────────────────── */
-
+        @media (min-width: 1536px) {
+            .footer-year-strip {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2)) !important;
+                padding-right: max(2rem, calc((100vw - 1440px) / 2)) !important;
+            }
+        }
     </style>
 </head>
 
@@ -2320,7 +2349,7 @@
   <div class="footer-match-main" style="
     position: relative;
     z-index: 15;
-    padding: 114px 96px 0;
+    padding-top: 114px; padding-bottom: 0;
     display: grid;
     grid-template-columns: 1fr auto;
     pointer-events: none;

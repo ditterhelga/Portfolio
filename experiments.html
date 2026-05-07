@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiments - Olga Pertseva</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
+    <script src="assets/js/global-lenis.js" defer></script>
+    <script src="assets/js/img-lqip.js" defer></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            --font-family-sofia: 'Sofia Sans Condensed', sans-serif;
+            --font-family-inter: 'Inter', sans-serif;
+            --color-text-primary: #302F2F;
+            --color-primary-dark: #3B47C2;
+            --color-primary-light: #0016F2;
+            --color-pink-badge: #FDE4DF;
+            --color-blue-light: #8891D6;
+            --color-accent-yellow: #FDC448;
+            --breakpoint-2xl: 96rem;
+        }
+
+        @utility full-bleed {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Same as index.html work cards — pill badges */
+        @utility card-badges {
+            @apply flex flex-row flex-wrap gap-4 justify-items-start;
+
+            & .badge {
+                @apply rounded-full bg-pink-badge text-blue-light uppercase !text-lg font-family-sofia font-normal py-1 px-5;
+            }
+        }
+
+        @layer base {
+            html {
+                @apply flex justify-center bg-white;
+            }
+
+            body {
+                font-family: var(--font-family-inter);
+                font-size: 1.25rem;
+                line-height: 2rem;
+                letter-spacing: 0px;
+                font-weight: 400;
+                color: var(--color-text-primary);
+                background: #FFFFFF;
+                overflow-x: hidden;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                font-family: var(--font-family-sofia);
+            }
+        }
+
+        header {
+            @apply flex z-10;
+
+            & .logo img {
+                height: 63px;
+                width: auto;
+                transition: opacity 0.3s ease, filter 0.6s ease;
+            }
+
+            & #burger {
+                @apply z-20;
+                cursor: pointer;
+            }
+
+            @media (min-width: 768px) {
+                & nav .menulink {
+                    position: relative;
+                    font-weight: 400;
+                    font-family: var(--font-family-inter);
+                    transition: color 0.25s ease;
+                }
+
+                & nav .menulink::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: -2px;
+                    width: 100%;
+                    height: 3px;
+                    background-color: #FDE4DF;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.4s ease;
+                }
+
+                & nav .menulink:hover::after {
+                    transform: scaleX(1);
+                }
+
+                & nav .menulink:hover {
+                    color: #0016F2;
+                }
+            }
+
+            &.menu-open {
+                @apply fixed h-screen w-screen px-4 z-50 md:px-12;
+                inset: 0;
+                background: #0016F2;
+
+                & .logo, nav {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
+                & .logo img {
+                    filter: brightness(0) invert(1);
+                }
+
+                & > #burger {
+                    @apply right-4;
+
+                    & svg rect {
+                        fill: rgba(255, 255, 255, 0.2);
+                    }
+
+                    & svg path {
+                        stroke: white;
+                    }
+                }
+
+                & > div {
+                    @apply flex-col;
+
+                    & > nav {
+                        @apply flex flex-col justify-center gap-y-8 h-screen;
+
+                        & a {
+                            @apply w-full md:h-full text-center;
+                        }
+                    }
+                }
+
+                & .menulink {
+                    font-family: 'Sofia Sans Condensed', sans-serif;
+                    font-size: 4rem;
+                    font-weight: 500;
+                    color: white;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    letter-spacing: -0.02em;
+                    transition: transform 0.3s ease, color 0.3s ease;
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                & .menulink:hover {
+                    color: #FDC448;
+                    transform: translateY(-5px);
+                }
+            }
+        }
+
+        /* Case-study section titles — same as subway.html / “Overview” */
+        .section-header {
+            @apply font-family-sofia font-normal
+                text-[48px]/[56px]
+                md:text-[60px]/[64px]
+                xl:text-[64px]/[64px]
+                2xl:text-[64px]/[64px];
+        }
+
+        /* Hero lede — same scale as index.html work section headers */
+        .experiments-hero-lede {
+            @apply font-family-sofia
+            text-5xl/[3rem]
+            md:text-[4rem]/[4rem]
+            xl:text-7xl/20
+            font-semibold;
+        }
+
+        .experiments-shell {
+            @apply flex flex-col gap-y-[72px] md:gap-y-[88px] xl:gap-y-[120px] px-4 sm:px-8 2xl:px-0;
+        }
+
+        /* White content column with 20px radius (footer stays full-bleed below; no overflow:hidden — keeps fixed side nav visible) */
+        .experiments-page-surface {
+            background: #FFFFFF;
+            border-radius: 20px;
+        }
+
+        
+
+        #footer-match .footer-match-main .footer-match-copy {
+            min-width: 0;
+            max-width: 700px;
+        }
+
+        @media (min-width: 80rem) {
+            #footer-match .footer-match-main .footer-match-copy {
+                max-width: 880px;
+            }
+        }
+
+        @media (min-width: 96rem) {
+            #footer-match .footer-match-main .footer-match-copy {
+                max-width: 1048px;
+            }
+        }
+
+        #footer-match .footer-match-main .footer-match-blurb,
+        #footer-match .footer-match-main .footer-match-email {
+            white-space: normal;
+        }
+
+        #footer-match .footer-match-nav-links a {
+            transition: color 0.25s ease;
+        }
+
+        #footer-match .footer-match-nav-links a:hover,
+        #footer-match .footer-match-nav-links a:focus-visible {
+            color: var(--color-pink-badge) !important;
+        }
+
+        #footer-match .footer-match-email a {
+            text-decoration: none !important;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.25s ease;
+        }
+
+        #footer-match .footer-match-email a:hover,
+        #footer-match .footer-match-email a:focus-visible {
+            border-bottom-color: var(--color-pink-badge);
+        }
+
+        @media (max-width: 639px) {
+            #footer-match.site-footer {
+                height: auto !important;
+                min-height: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
+            #footer-match > img[aria-hidden="true"] {
+                opacity: 0.05 !important;
+            }
+
+            #footer-gg-root {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
+                grid-template-columns: 1fr !important;
+                padding: 3.75rem 1.25rem 0 !important;
+                row-gap: 2rem !important;
+                column-gap: 0 !important;
+            }
+
+            #footer-match .footer-match-heading {
+                font-size: clamp(3rem, 15vw, 4.75rem) !important;
+                line-height: 0.92 !important;
+                margin-bottom: 1.5rem !important;
+                padding-top: 0.75rem !important;
+                white-space: normal !important;
+            }
+
+            #footer-match .footer-match-main .footer-match-blurb {
+                font-size: 20px !important;
+                line-height: 32px !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            #footer-match .footer-match-main .footer-match-email {
+                font-size: 20px !important;
+                line-height: 32px !important;
+                margin-bottom: 2.75rem !important;
+            }
+
+            #footer-match .match-cta {
+                margin-top: 0 !important;
+            }
+
+            #footer-match .match-cta-label {
+                font-size: 24px !important;
+                line-height: 24px !important;
+            }
+
+            #footer-match .footer-match-nav {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                justify-content: flex-start !important;
+                gap: 0.75rem !important;
+                flex-wrap: nowrap !important;
+                padding-top: 1.5rem !important;
+                padding-bottom: 1.5rem !important;
+                margin-top: 0.5rem !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.18);
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            #footer-match .footer-match-nav-links {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: center !important;
+                gap: 0 !important;
+                flex: 1 1 100% !important;
+                min-width: 0 !important;
+                width: 100% !important;
+                justify-content: space-between !important;
+            }
+
+            #footer-match .footer-match-nav-links a {
+                font-size: 15px !important;
+                line-height: 1.2 !important;
+                flex: 1 1 25% !important;
+                text-align: center !important;
+            }
+
+            #footer-match .footer-match-nav > a[aria-label="LinkedIn"] {
+                display: none !important;
+            }
+
+            #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
+                width: 28px !important;
+                height: 28px !important;
+            }
+        }
+
+        #footer-match .match-cta {
+            position: relative;
+            z-index: 0;
+            isolation: isolate;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 1rem;
+            width: fit-content;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            padding-right: 32px;
+            box-sizing: border-box;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        #footer-match .match-cta::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            margin-top: -20px;
+            border-radius: 9999px;
+            background-color: var(--color-accent-yellow);
+            z-index: 0;
+            pointer-events: none;
+            transition:
+                width 0.4s cubic-bezier(0.33, 1, 0.32, 1),
+                height 0.4s cubic-bezier(0.33, 1, 0.32, 1),
+                margin-top 0.4s cubic-bezier(0.33, 1, 0.32, 1),
+                top 0.4s cubic-bezier(0.33, 1, 0.32, 1),
+                background-color 0.35s ease;
+        }
+
+        #footer-match .match-cta:hover::before,
+        #footer-match .match-cta:focus-visible::before {
+            top: 0;
+            margin-top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-pink-badge);
+        }
+
+        #footer-match .match-cta-icon {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        #footer-match .match-cta-circle {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: block;
+        }
+
+        #footer-match .match-cta-send {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%) scale(1);
+            width: 23px;
+            height: 23px;
+            max-width: none;
+            object-fit: contain;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        #footer-match .match-cta:hover .match-cta-circle,
+        #footer-match .match-cta:focus-visible .match-cta-circle {
+            opacity: 0;
+        }
+
+        #footer-match .match-cta:hover .match-cta-send,
+        #footer-match .match-cta:focus-visible .match-cta-send {
+            opacity: 1;
+            transform: translateY(-50%) scale(0.84);
+        }
+
+        #footer-match .match-cta-label {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-family-sofia);
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+            transform: translateY(1px);
+            transition: color 0.35s ease;
+        }
+
+        #footer-match .match-cta:hover .match-cta-label,
+        #footer-match .match-cta:focus-visible .match-cta-label {
+            color: var(--color-primary-light);
+        }
+
+        #footer-match .match-cta:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #footer-match .match-cta::before,
+            #footer-match .match-cta-circle,
+            #footer-match .match-cta-send,
+            #footer-match .match-cta-label {
+                transition: none;
+            }
+        }
+
+        /* ── Footer horizontal padding — matches page content column at every breakpoint ── */
+        #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            #footer-match .footer-match-main {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            #footer-match .footer-match-main {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2));
+                padding-right: max(2rem, calc((100vw - 1440px) / 2));
+            }
+        }
+
+        /* Colophon — same horizontal inset as footer-match-main */
+        .footer-year-strip {
+            justify-content: flex-start !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            box-sizing: border-box;
+        }
+
+        .footer-year-strip span {
+            text-align: left !important;
+        }
+
+        @media (min-width: 640px) {
+            .footer-year-strip {
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            .footer-year-strip {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2)) !important;
+                padding-right: max(2rem, calc((100vw - 1440px) / 2)) !important;
+            }
+        }
+
+        #case-side-nav {
+            position: fixed;
+            top: 0;
+            left: auto;
+            right: 0;
+            width: 320px;
+            padding: 48px 56px 56px 56px;
+            background: #FFFFFF;
+            border: 1px solid #DEE6F5;
+            border-radius: 20px;
+            z-index: 0;
+            opacity: 0;
+            --case-nav-overlap-opacity: 1;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition: opacity 0.55s ease, transform 0.55s ease, height 0.25s ease, padding 0.25s ease;
+            box-sizing: border-box;
+        }
+
+        #case-side-nav.is-visible {
+            opacity: var(--case-nav-overlap-opacity);
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        #case-side-nav nav {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
+            max-height: 420px;
+            overflow: visible;
+        }
+
+        #case-side-nav .case-side-nav-toggle {
+            position: absolute;
+            top: 64px;
+            right: 56px;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            cursor: pointer;
+            transition: color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+            z-index: 2;
+            padding: 0;
+            transform: translateY(-50%);
+        }
+
+        #case-side-nav .case-side-nav-toggle-icon {
+            width: 16px;
+            height: 22px;
+            display: block;
+            opacity: 1;
+            filter: none;
+            transition: none;
+        }
+
+        #case-side-nav .case-side-nav-toggle:hover .case-side-nav-toggle-icon {
+            filter: brightness(0) saturate(100%) invert(15%) sepia(97%) saturate(6437%) hue-rotate(232deg) brightness(99%) contrast(118%);
+        }
+
+        #case-side-nav.is-collapsed {
+            padding: 24px 56px;
+        }
+
+        #case-side-nav.is-collapsed nav {
+            opacity: 1;
+            max-height: 32px;
+            transform: translateY(0);
+            gap: 0;
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-toggle {
+            top: 40px;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-indicator {
+            opacity: 0 !important;
+        }
+
+        #case-side-nav .case-side-nav-indicator {
+            position: absolute;
+            left: -57px;
+            top: 0;
+            width: 6px;
+            height: 40px;
+            border-radius: 3px;
+            background: var(--color-accent-yellow);
+            transform: translateY(0);
+            opacity: 0;
+            transition: transform 0.35s ease, opacity 0.2s ease;
+            will-change: transform;
+        }
+
+        #case-side-nav .case-side-nav-link {
+            position: relative;
+            display: block;
+            font-size: 1.25rem;
+            line-height: 2rem;
+            font-weight: 300;
+            color: #667284;
+            text-decoration: none;
+            opacity: 1;
+            max-height: 40px;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: color 0.25s ease, opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
+        }
+
+        #case-side-nav .case-side-nav-link:hover {
+            color: #0016F2;
+        }
+
+        #case-side-nav .case-side-nav-link.is-active {
+            color: #0016F2;
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-link {
+            opacity: 0;
+            max-height: 0;
+            pointer-events: none;
+            transform: translateY(-4px);
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-link.is-active {
+            color: #667284;
+            opacity: 1;
+            max-height: 40px;
+            pointer-events: auto;
+            transform: translateY(0);
+            padding-right: 32px;
+        }
+
+        main img {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (min-width: 1536px) {
+            #case-side-nav {
+                width: 352px;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col w-full max-w-[1280px] 2xl:max-w-[1440px] justify-center align-middle bg-white">
+<div class="experiments-shell">
+    <div class="experiments-page-surface">
+    <header class="flex pt-8 xl:pt-16">
+        <div class="flex justify-between w-full">
+            <div id="logo" class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="Olga Pertseva" />
+                </a>
+            </div>
+
+            <nav class="hidden flex-col w-full justify-center md:flex md:flex-row md:gap-x-16 md:w-auto md:ml-auto items-center">
+                <a href="index.html#work" class="menulink">Work</a>
+                <a href="about.html" class="menulink">About</a>
+                <a href="contact.html" class="menulink">Contact</a>
+                <a href="assets/docs/2026_Olga_Pertseva_Product_Designer_Resume.pdf" class="menulink" target="_blank" rel="noopener noreferrer">Resume</a>
+            </nav>
+        </div>
+
+        <div id="burger" class="fixed right-4 md:hidden">
+            <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+                <rect width="56" height="56" rx="16" fill="#FDE4DF" />
+                <path id="burgertop" d="M13.417 17.0625H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
+                <path id="burgermiddle" d="M13.417 38.9375H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
+                <path id="burgerbottom" d="M13.417 28H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
+            </svg>
+        </div>
+    </header>
+
+    <main class="flex flex-col gap-y-18 md:gap-y-24 xl:gap-y-26 2xl:gap-y-[120px] mt-16 md:mt-18 xl:mt-18 2xl:mt-22">
+        <aside id="case-side-nav" class="hidden xl:block" aria-label="Experiment projects">
+            <button type="button" id="case-side-nav-toggle" class="case-side-nav-toggle" aria-expanded="true" aria-controls="case-side-nav-menu" aria-label="Toggle section navigation">
+                <img src="assets/images/arrow-down.svg" alt="" aria-hidden="true" class="case-side-nav-toggle-icon"/>
+            </button>
+            <nav id="case-side-nav-menu">
+                <span class="case-side-nav-indicator" aria-hidden="true"></span>
+                <a href="#dimme-app" data-target="dimme-app" class="case-side-nav-link">Dimme</a>
+                <a href="#project-2" data-target="project-2" class="case-side-nav-link">Mouth Ninja</a>
+                <a href="#project-3" data-target="project-3" class="case-side-nav-link">Peppered.design</a>
+                <a href="#project-4" data-target="project-4" class="case-side-nav-link">Leobank</a>
+                <a href="#project-5" data-target="project-5" class="case-side-nav-link">Coming soon</a>
+            </nav>
+        </aside>
+
+        <section id="hero" class="flex flex-col">
+            <div class="experiments-breadcrumbs mb-6 md:mb-4 font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
+                <a class="no-underline transition-colors duration-[250ms] ease-out hover:text-[#0016F2]" href="index.html#work">Work</a>
+                <span aria-hidden="true">/</span>
+                <span class="text-[#8A8A8A]">Experiments</span>
+            </div>
+            <h1 class="experiments-hero-lede">Most designers design. I decided to build.</h1>
+            <p class="mt-4 font-light text-5/8">These are personal projects made with AI tools — a sleep app, a therapy tracker for my son, this website, and a pocket money app built over breakfast. Real problems, real builds, real outcomes.</p>
+        </section>
+
+        <section id="dimme-app" class="-mt-[1.35rem] flex flex-col gap-y-10 md:-mt-[1.8rem] md:gap-y-12 xl:-mt-[1.95rem] xl:gap-y-14 2xl:-mt-[36px] scroll-mt-[120px]">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                        <h2 class="section-header w-full">Dimme. The sleep app I built for myself</h2>
+                    </div>
+
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Dimme. The sleep app I built for myself</h2>
+
+                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                        <div class="card-badges w-full min-w-0 order-3">
+                            <span class="badge">Lovable</span>
+                            <span class="badge">claude</span>
+                            <span class="badge">Figma</span>
+                            <span class="badge">ElevenLabs</span>
+                            <span class="badge">Suno</span>
+                            <span class="badge">GarageBand</span>
+                            <span class="badge">Midjourney</span>
+                        </div>
+
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-2 2xl:min-w-0">
+                            <p class="font-light text-5/8">Every night I had the same routine: breathing app, then meditation app, then grab my phone in the dark to start the music. Three interruptions right at the moment I was finally calming down.</p>
+                            <p class="font-light text-5/8">And the voices. I went through dozens of meditation apps and couldn't find a single voice that felt right to me. Voice is deeply personal before sleep — pace, tone, accent, energy — and I had a very clear sense of what I needed. I just couldn't find it anywhere.</p>
+                        </div>
+
+                        <div class="order-4 min-w-0 overflow-hidden rounded-[20px]">
+                            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/hands-dimme.png"><img src="assets/images/hands-dimme.png"
+                                 alt="DimMe app — hands holding phone in low light"
+                                
+                                 class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
+                        </div>
+
+                        <div class="order-5 hidden w-full flex-col gap-y-8 md:-mt-[8px] md:gap-y-[16px] md:flex-row md:gap-x-4 md:gap-y-0 md:items-start xl:-mt-[16px] xl:gap-y-0 2xl:-mt-[24px] 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                            <img src="assets/images/dinmme-logo.png" style="display:none"
+                                 alt="DimMe app — detail"
+                                 class="overview-img-2 hidden md:block aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:flex-none md:h-[320px] md:w-[320px] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
+                            <div class="min-w-0 overflow-hidden rounded-[20px]">
+                                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/dimme-icons.png"><img src="assets/images/dimme-icons.png" style="display:none"
+                                     alt="DimMe app — session composition"
+                                    
+                                     class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-auto md:h-[320px] md:min-w-0 md:flex-1 xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">What I built</p>
+                            <p class="font-light text-5/8">A personal sleep app where you compose your own session: pick a breathing technique, add meditation, choose music — then start and leave your phone alone. No switching, no touching the screen in the dark.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">How I built it</p>
+                            <p class="font-light text-5/8">I created a custom calming voice in ElevenLabs through dozens of prompt iterations until the tone and pace felt exactly right. Wrote all breathing and meditation scripts myself. Generated sleep music in Suno, mixed everything in GarageBand — a tool I'd never used before. Designed every screen in Figma, created illustrations in Midjourney, built the entire app in Lovable in two days.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">The result</p>
+                            <p class="font-light text-5/8">It works. My sleep improved noticeably in the first weeks of using it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="project-2" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                        <h2 class="section-header w-full">Mouth Ninja. A therapy app for my son</h2>
+                    </div>
+
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Mouth Ninja. A therapy app for my son</h2>
+
+                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
+                            <p class="font-light text-5/8">My son's myofunctional therapist prescribed daily mouth exercises for tongue position and jaw development, twice a day, every day without exception. I'm supposed to make sure they happen. The problem: I can't watch every session, and he has exactly zero motivation to do them on his own.</p>
+                        </div>
+
+                        <div class="card-badges w-full min-w-0 order-2">
+                            <span class="badge">cursor</span>
+                            <span class="badge">claude</span>
+                            <span class="badge">figma</span>
+                        </div>
+
+                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/Mouth-ninja.png"><img src="assets/images/Mouth-ninja.png"
+                                 alt="Mouth Ninja app — hands holding phone in low light"
+                                
+                                 class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
+                        </div>
+
+                        <div class="order-4 hidden w-full flex-col gap-y-8 md:-mt-[8px] md:gap-y-[16px] md:flex-row md:gap-x-4 md:gap-y-0 md:items-start xl:-mt-[16px] xl:gap-y-0 2xl:-mt-[24px] 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                            <img src="assets/images/logo-ninja.png" style="display:none"
+                                 alt="Mouth Ninja app — detail"
+                                 class="overview-img-2 hidden md:block aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:flex-none md:h-[320px] md:w-[320px] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
+                            <div class="min-w-0 overflow-hidden rounded-[20px]">
+                                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/Mouth-ninja-screen.png"><img src="assets/images/Mouth-ninja-screen.png" style="display:none"
+                                     alt="Mouth Ninja app — exercise tracking"
+                                    
+                                     class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-auto md:h-[320px] md:min-w-0 md:flex-1 xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">What I built</p>
+                            <p class="font-light text-5/8">A simple exercise app where he opens it, sees his list for morning or evening, taps an exercise and sees himself on camera — like a mirror — with a timer running. The camera keeps his attention on what he's actually doing. Face tracking detects whether he's moving, so waiting out the timer without doing anything doesn't work.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">The design problem I didn't solve at first</p>
+                            <p class="font-light text-5/8">I added gamification — streaks, rewards, points. None of it worked. A 9-year-old with no internal motivation will outlast any reward system you design. So I changed the goal: stop trying to make him want to do it, and make doing it as frictionless as possible. Short sessions, clear progress, done. Resistance lower than compliance.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">What's next</p>
+                            <p class="font-light text-5/8">Advanced movement recognition — teaching the app what correct mouth positions look like and comparing them in real time to what he actually does. Possible with MediaPipe or TensorFlow.js. On the roadmap.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-3" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                        <h2 class="section-header w-full">Full control. No compromises.</h2>
+                    </div>
+
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Full control. No compromises.</h2>
+
+                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-8 md:space-y-10 order-1 2xl:min-w-0">
+                            <div class="space-y-3">
+                                <p class="font-light text-5/8">I had a site on Squarespace. It looked like Squarespace. Constructor tools give you speed but take your design: wrong breakpoints, sluggish animations, constant compromises. I wanted full control, so I switched to building it myself.</p>
+                                <p class="font-light text-5/8">This entire portfolio site — designed in Figma, built in Cursor with AI assistance. Every breakpoint, every animation, exactly as designed.</p>
+                            </div>
+                        </div>
+
+                        <div class="card-badges w-full min-w-0 order-2">
+                            <span class="badge">cursor</span>
+                            <span class="badge">claude</span>
+                            <span class="badge">chatgpt</span>
+                            <span class="badge">figma</span>
+                            <span class="badge">midjourney</span>
+                        </div>
+
+                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/screen-site.png"><img src="assets/images/screen-site.png"
+                                 alt="Portfolio site screenshots"
+                                 class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
+                        </div>
+                    </div>
+
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">How it went</p>
+                            <p class="font-light text-5/8">I used Cursor as both a builder and a teacher. While it wrote the code I asked it to explain every decision — why this component, why this structure. I was building a site and taking a coding course at the same time, on my own codebase, in real time.</p>
+                            <p class="font-light text-5/8">The moment it clicked was opening the site on different devices and seeing every breakpoint and animation behave exactly as I'd designed them. No tool making decisions for me.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">What it changed</p>
+                            <p class="font-light text-5/8">I now understand what I'm actually asking developers to build — not in theory, but from experience. That changes how I design and how I collaborate.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-4" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                        <h2 class="section-header w-full">Leobank — a pocket money tracker for my son</h2>
+                    </div>
+
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Leobank — a pocket money tracker for my son</h2>
+
+                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
+                            <p class="font-light text-5/8">Cash became useless in Amsterdam — everything is cards or online. But my son still earns money for things he does, and without tracking it we constantly argued about the truth. "I have 20 euros." "No, remember you spent 10 on that game." "No I didn't." Every parent knows this conversation.</p>
+                            <p class="font-light text-5/8">Instead of finding an existing app I built one with him, in Google AI Studio, over breakfast at our favourite cafe. One session, one laptop, one very opinionated real user sitting right next to me.</p>
+                        </div>
+
+                        <div class="card-badges w-full min-w-0 order-2">
+                            <span class="badge">Google AI Studio</span>
+                            <span class="badge">claude</span>
+                        </div>
+
+                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/leobank-main.png"><img src="assets/images/leobank-main.png"
+                                 alt="Leobank app main screen"
+                                 class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
+                        </div>
+                    </div>
+
+                    <div class="dimme-built-copy w-full min-w-0 space-y-3 md:space-y-4 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <p class="font-light text-5/8">What surprised me: even the simplest possible app immediately exposed real design problems. Confirmation buttons placed too close together — he kept tapping the wrong one. Labels that made sense to me meant nothing to him. And he had feature ideas I hadn't thought of at all — preset amounts, a savings goal. We fixed and added everything right there.</p>
+                        <p class="font-light text-5/8">Testing with a 9-year-old is about as honest as usability testing gets. Kids don't work around problems, they just expose them.</p>
+                        <p class="font-light text-5/8">He still uses it. The arguments stopped.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="project-5" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                        <h2 class="section-header w-full">The tool I got tired of waiting for.</h2>
+                    </div>
+
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The tool I got tired of waiting for.</h2>
+
+                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
+                            <p class="font-light text-5/8">The worst moment in AI-assisted design: you've built up the perfect context in one tool, then you need to switch. Open a new chat. Start over. Explain everything again. Every reference, every constraint, every decision you've already made.</p>
+                            <p class="font-light text-5/8">The pieces to solve this exist. They just don't connect. So I'm building the connection — a personal tool where project context lives once: palette, references, tone, constraints, moodboard. One button exports everything to any AI tool in the format it actually understands. A prompt for Claude or ChatGPT, a .cursorrules file for Cursor, a CLAUDE.md for Claude Code.</p>
+                        </div>
+
+                        <div class="dimme-built-copy w-full min-w-0 space-y-3 md:space-y-4 order-2">
+                            <p class="font-light text-5/8">Building it now. Will open source it when it's ready.</p>
+                        </div>
+
+                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/coming-soon.png"><img src="assets/images/coming-soon.png"
+                                 alt="Coming soon project preview"
+                                 class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+    </div>
+
+    <div class="flex flex-col">
+        <footer id="footer-match" class="site-footer full-bleed" style="
+          position: relative;
+          background: #0016F2;
+          height: 820px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          width: 100vw;
+          left: 50%;
+          transform: translateX(-50%);
+        ">
+            <img src="assets/images/logo.svg" aria-hidden="true" style="
+              position: absolute;
+              right: calc(-4% + 128px);
+              top: 50%;
+              transform: translateY(-50%);
+              height: 1076px;
+              width: auto;
+              filter: brightness(0) invert(1);
+              opacity: 0.10;
+              pointer-events: none;
+              user-select: none;
+              z-index: 1;
+            " />
+
+            <div id="footer-gg-root" style="
+              position: absolute;
+              top: 0; left: 0;
+              width: 100%; height: 100%;
+              overflow: hidden;
+              pointer-events: none;
+              z-index: 5;
+            "></div>
+
+            <div class="footer-match-main" style="
+              position: relative;
+              z-index: 15;
+              padding-top: 114px; padding-bottom: 0;
+              display: grid;
+              grid-template-columns: 1fr auto;
+              pointer-events: none;
+              flex-shrink: 0;
+            ">
+                <div class="footer-match-copy" style="pointer-events: auto; user-select: text; -webkit-user-select: text;">
+                    <h2 class="footer-match-heading" style="
+                      font-family: 'Sofia Sans Condensed', sans-serif;
+                      font-size: 148px;
+                      font-weight: 500;
+                      color: #ffffff;
+                      line-height: 0.88;
+                      letter-spacing: -0.01em;
+                      margin-bottom: 28px;
+                      white-space: nowrap;
+                    ">Is it a match?</h2>
+
+                    <p class="footer-match-blurb" style="
+                      font-family: 'Inter', sans-serif;
+                      font-size: 20px;
+                      font-weight: 300;
+                      color: #ffffff;
+                      line-height: 1.6;
+                      margin-bottom: 32px;
+                    ">Feel free to reach out, I'm happy to share more about my projects or talk about how I can help your team.</p>
+
+                    <p class="footer-match-email" style="
+                      font-family: 'Inter', sans-serif;
+                      font-size: 20px;
+                      font-weight: 300;
+                      color: #ffffff;
+                      line-height: 1.6;
+                      margin-bottom: 64px;
+                    ">Send me a message or email me directly at: <a href="mailto:hello@peppered.design" style="color:#FDE4DF;text-decoration:none;font-weight:300;pointer-events:auto;">hello@peppered.design</a></p>
+
+                    <a href="contact.html" class="match-cta no-underline">
+                        <span class="match-cta-icon" aria-hidden="true">
+                            <img class="match-cta-circle" src="assets/images/match-figma-cta-circle.svg" alt="" decoding="async" />
+                            <img class="match-cta-send" src="assets/images/send-icon.svg" alt="" decoding="async" />
+                        </span>
+                        <span class="match-cta-label">Send me a message</span>
+                    </a>
+                </div>
+
+                <nav class="footer-match-nav" style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  gap: 16px;
+                  padding-top: 4px;
+                  pointer-events: auto;
+                ">
+                    <div class="footer-match-nav-links" style="display: flex; flex-direction: column; align-items: flex-end; gap: 16px;">
+                        <a href="index.html#work" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Work</a>
+                        <a href="about.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">About</a>
+                        <a href="contact.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Contact</a>
+                        <a href="assets/docs/2026_Olga_Pertseva_Product_Designer_Resume.pdf" target="_blank" rel="noopener noreferrer" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Resume</a>
+                    </div>
+                    <a href="https://www.linkedin.com/in/olga-pertseva/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="
+                      margin-top: 4px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      line-height: 0;
+                    ">
+                        <img src="assets/images/linkedin-icon.svg" alt="" width="30" height="30" decoding="async" style="display:block" />
+                    </a>
+                </nav>
+            </div>
+        </footer>
+
+        <section class="footer-year-strip full-bleed" aria-label="Site colophon" style="
+          position: relative;
+          width: 100vw;
+          left: 50%;
+          transform: translateX(-50%);
+          min-height: 64px;
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+          background: #040989;
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+          box-sizing: border-box;
+        ">
+            <span style="font-family:'Inter',sans-serif;font-size:16px;font-weight:300;color:rgba(255,255,255,0.7);line-height:1.35;">© 2026 · Hand-coded from scratch. No templates, just curiosity.</span>
+        </section>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const menuTween = gsap.timeline({ paused: true })
+            .to(".menulink", {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                stagger: 0.1,
+                ease: "power2.out"
+            })
+            .to("#burgermiddle", { opacity: 0, duration: 0.25 }, 0)
+            .to("#burgertop", { y: "10.9375px", transformOrigin: "50% 50%", rotation: 45, duration: 0.25 }, 0)
+            .to("#burgerbottom", { transformOrigin: "50% 50%", rotation: -45, duration: 0.25 }, 0);
+
+        const header = document.querySelector("header");
+        const burger = document.querySelector("#burger");
+        let isMenuOpen = false;
+
+        if (burger && header) {
+            burger.addEventListener("click", (event) => {
+                event.stopPropagation();
+                document.body.parentElement.classList.toggle("stop-scrolling");
+                header.classList.toggle("menu-open");
+
+                if (!isMenuOpen) {
+                    menuTween.restart();
+                } else {
+                    menuTween.reverse();
+                }
+                isMenuOpen = !isMenuOpen;
+            });
+
+            document.querySelectorAll("header nav .menulink").forEach((link) => {
+                link.addEventListener("click", () => {
+                    if (!isMenuOpen) return;
+                    document.body.parentElement.classList.remove("stop-scrolling");
+                    menuTween.reverse();
+                    header.classList.remove("menu-open");
+                    isMenuOpen = false;
+                });
+            });
+        }
+
+        const sideNav = document.getElementById("case-side-nav");
+        const overviewSection = document.getElementById("dimme-app");
+        const shellEl = document.querySelector(".experiments-shell");
+        const reflectionsSection = document.getElementById("project-4") || document.getElementById("project-3");
+        const reflectionsCard = null;
+        const sectionIds = ["dimme-app", "project-2", "project-3", "project-4", "project-5"];
+        const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+        const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
+        const sideNavIndicator = sideNav ? sideNav.querySelector(".case-side-nav-indicator") : null;
+        const sideNavToggle = document.getElementById("case-side-nav-toggle");
+        const sideNavMenu = document.getElementById("case-side-nav-menu");
+        const overlapBlockers = Array.from(document.querySelectorAll(
+            'main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3'
+        ));
+
+        if (sideNav && overviewSection && reflectionsSection && sideNavLinks.length) {
+            const STICKY_OFFSET = 120;
+            const SCROLL_OFFSET = 120;
+            const INITIAL_GAP = 48;
+            const END_OFFSET = 120;
+            let ticking = false;
+            let visible = false;
+            let initialDocTop = 0;
+            let initialized = false;
+
+            function clamp(value, min, max) {
+                return Math.min(Math.max(value, min), max);
+            }
+
+            function absTop(node) {
+                return node.getBoundingClientRect().top + window.scrollY;
+            }
+
+            function setActiveLink(scrollY) {
+                const markerY = scrollY + window.innerHeight * 0.35;
+                let activeId = "dimme-app";
+                sectionNodes.forEach((node) => {
+                    if (node && absTop(node) <= markerY) {
+                        activeId = node.id;
+                    }
+                });
+                let activeLink = null;
+                sideNavLinks.forEach((link) => {
+                    const isActive = link.getAttribute("data-target") === activeId;
+                    link.classList.toggle("is-active", isActive);
+                    if (isActive) activeLink = link;
+                });
+                if (sideNavIndicator && activeLink && sideNavMenu) {
+                    const menuRect = sideNavMenu.getBoundingClientRect();
+                    const activeRect = activeLink.getBoundingClientRect();
+                    const indicatorHeight = sideNavIndicator.offsetHeight || 40;
+                    const activeCenterY = activeRect.top - menuRect.top + activeRect.height / 2;
+                    const indicatorY = activeCenterY - indicatorHeight / 2;
+                    sideNavIndicator.style.transform = "translateY(" + indicatorY + "px)";
+                    sideNavIndicator.style.opacity = sideNav.classList.contains("is-collapsed") ? "0" : "1";
+                }
+                return activeId;
+            }
+
+            function ensureInitialized() {
+                if (initialized) return;
+                let titleEl = null;
+                overviewSection.querySelectorAll("h2.section-header").forEach((el) => {
+                    const r = el.getBoundingClientRect();
+                    if (r.height > 0 && r.width > 0) titleEl = el;
+                });
+                if (titleEl) {
+                    initialDocTop = absTop(titleEl) + titleEl.offsetHeight + INITIAL_GAP;
+                } else {
+                    initialDocTop = absTop(overviewSection) + INITIAL_GAP;
+                }
+                initialized = true;
+            }
+
+            function setupSmoothScroll() {
+                function easeInOutCubic(t) {
+                    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                function smoothScrollTo(targetTop, onComplete) {
+                    if (typeof window.__pepperedLenisScrollTo === "function") {
+                        const didScroll = window.__pepperedLenisScrollTo(targetTop, {
+                            immediate: false,
+                            force: true
+                        });
+                        if (didScroll) {
+                            if (typeof window.__pepperedLenisOnScrollComplete === "function") {
+                                window.__pepperedLenisOnScrollComplete(onComplete);
+                            } else if (typeof onComplete === "function") {
+                                window.setTimeout(onComplete, 850);
+                            }
+                            return;
+                        }
+                    }
+
+                    const startTop = window.scrollY || window.pageYOffset;
+                    const distance = targetTop - startTop;
+                    if (Math.abs(distance) < 1) {
+                        if (typeof onComplete === "function") onComplete();
+                        return;
+                    }
+                    const duration = 800;
+                    const startTime = performance.now();
+
+                    function tick(now) {
+                        const elapsed = now - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = easeInOutCubic(progress);
+                        window.scrollTo(0, startTop + distance * eased);
+                        if (progress < 1) {
+                            window.requestAnimationFrame(tick);
+                        } else if (typeof onComplete === "function") {
+                            onComplete();
+                        }
+                    }
+
+                    window.requestAnimationFrame(tick);
+                }
+
+                sideNavLinks.forEach((link) => {
+                    link.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        const targetId = link.getAttribute("data-target");
+                        if (!targetId) return;
+                        const targetNode = document.getElementById(targetId);
+                        if (!targetNode) return;
+                        const targetTop = absTop(targetNode) - SCROLL_OFFSET;
+                        if (sideNav.classList.contains("is-collapsed")) {
+                            sideNav.classList.remove("is-collapsed");
+                            if (sideNavToggle) sideNavToggle.setAttribute("aria-expanded", "true");
+                        }
+                        requestUpdate();
+                        const clampedTop = Math.max(0, targetTop);
+                        smoothScrollTo(clampedTop, null);
+                    });
+                });
+            }
+
+            function setupCollapseToggle() {
+                if (!sideNavToggle) return;
+                sideNavToggle.addEventListener("click", () => {
+                    const isCollapsed = sideNav.classList.toggle("is-collapsed");
+                    sideNavToggle.setAttribute("aria-expanded", String(!isCollapsed));
+                    requestUpdate();
+                    window.setTimeout(requestUpdate, 320);
+                });
+            }
+
+            function overlapRatio(a, b) {
+                const overlapWidth = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left));
+                const overlapHeight = Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+                return (overlapWidth * overlapHeight) / Math.max(1, a.width * a.height);
+            }
+
+            function getOverlapOpacity() {
+                const navRect = sideNav.getBoundingClientRect();
+                if (!navRect.width || !navRect.height) return 1;
+                let maxRatio = 0;
+                overlapBlockers.forEach((blocker) => {
+                    if (!blocker) return;
+                    const rect = blocker.getBoundingClientRect();
+                    if (rect.bottom <= 0 || rect.top >= window.innerHeight || rect.right <= 0 || rect.left >= window.innerWidth) return;
+                    maxRatio = Math.max(maxRatio, overlapRatio(navRect, rect));
+                });
+                return clamp(1 - maxRatio * 0.7, 0.45, 1);
+            }
+
+            function updateSideNav() {
+                ticking = false;
+                if (window.innerWidth < 1280) {
+                    sideNav.classList.remove("is-visible");
+                    visible = false;
+                    initialized = false;
+                    return;
+                }
+
+                const scrollY = window.scrollY || window.pageYOffset;
+                const overviewTop = absTop(overviewSection);
+                const startThreshold = overviewTop - SCROLL_OFFSET;
+                const shouldShow = scrollY >= startThreshold;
+
+                if (!shouldShow) {
+                    sideNav.classList.remove("is-visible");
+                    visible = false;
+                    initialized = false;
+                    sideNav.style.setProperty("--case-nav-overlap-opacity", "1");
+                    return;
+                }
+
+                ensureInitialized();
+
+                if (!visible) {
+                    visible = true;
+                    sideNav.classList.add("is-visible");
+                }
+
+                const navHeight = sideNav.offsetHeight;
+                const reflectionsTop = absTop(reflectionsSection);
+                const reflectionsStop = reflectionsCard
+                    ? absTop(reflectionsCard) + reflectionsCard.offsetHeight + INITIAL_GAP
+                    : reflectionsTop - END_OFFSET - navHeight;
+                const docBottomLimit = document.documentElement.scrollHeight - navHeight - 24;
+                const maxDocTop = clamp(reflectionsStop, initialDocTop, docBottomLimit);
+                const stickyDocTop = scrollY + STICKY_OFFSET;
+                setActiveLink(scrollY);
+                const navDocTop = clamp(stickyDocTop, initialDocTop, maxDocTop);
+                const shellRect = shellEl ? shellEl.getBoundingClientRect() : null;
+                const gutterRight = shellRect ? Math.max(16, window.innerWidth - shellRect.right) : 16;
+                sideNav.style.left = "auto";
+                sideNav.style.right = gutterRight + "px";
+                sideNav.style.top = (navDocTop - scrollY) + "px";
+                sideNav.style.setProperty("--case-nav-overlap-opacity", String(getOverlapOpacity()));
+            }
+
+            function requestUpdate() {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(updateSideNav);
+            }
+
+            window.addEventListener("scroll", requestUpdate, { passive: true });
+            window.addEventListener("resize", requestUpdate);
+            sideNav.addEventListener("transitionend", (event) => {
+                if (event.propertyName === "max-height" || event.propertyName === "padding" || event.propertyName === "height" || event.propertyName === "transform") {
+                    requestUpdate();
+                }
+            });
+            setupSmoothScroll();
+            setupCollapseToggle();
+            requestUpdate();
+        }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script>
+(function () {
+  var CARD_W = 104, CARD_H = 104;
+  var SPAWN_INTERVAL = 110;
+  var TOTAL_CARDS = 27;
+
+  var IMAGES = Array.from({ length: 27 }, function (_, i) {
+    return 'assets/images/' + String(i + 1).padStart(2, '0') + '-statement.png';
+  });
+
+  var root   = document.getElementById('footer-gg-root');
+  var footer = document.getElementById('footer-match');
+  var engine, runner, domCards = [], hasTriggered = false;
+
+  var Matter = window.Matter;
+  var Bodies = Matter.Bodies;
+  var Body   = Matter.Body;
+  var World  = Matter.World;
+
+  var drag = null;
+  var dragRect = null;
+  var samples = [];
+
+  function buildCard(i) {
+    var el = document.createElement('div');
+    el.style.cssText = [
+      'position:absolute;',
+      'width:' + CARD_W + 'px;height:' + CARD_H + 'px;',
+      'border-radius:20px;overflow:hidden;',
+      'user-select:none;transform-origin:center center;',
+      'will-change:transform;pointer-events:none;background:#e8e4dc;',
+      '-webkit-backface-visibility:hidden;backface-visibility:hidden;isolation:isolate;',
+    ].join('');
+    var img = document.createElement('img');
+    img.src = IMAGES[i % IMAGES.length];
+    img.alt = '';
+    img.draggable = false;
+    img.style.cssText = [
+      'position:absolute;left:0;top:0;width:100%;height:100%;',
+      'object-fit:cover;object-position:center;',
+      'transform:scale(1.1);transform-origin:center center;pointer-events:none;',
+    ].join('');
+    el.appendChild(img);
+    return el;
+  }
+
+  function ptFromEvent(e, rect) {
+    var src = e.touches ? e.touches[0] : e;
+    return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+  }
+
+  function cardAt(x, y) {
+    var hits = Matter.Query.point(engine.world.bodies, { x: x, y: y });
+    for (var i = hits.length - 1; i >= 0; i--) {
+      if (hits[i].label === 'card') return hits[i];
+    }
+    return null;
+  }
+
+  function initPhysics(W, H) {
+    engine = Matter.Engine.create({ positionIterations: 10, velocityIterations: 10 });
+    engine.gravity.y = 2.0;
+    runner = Matter.Runner.create({ delta: 1000 / 60 });
+    Matter.Runner.run(runner, engine);
+
+    World.add(engine.world, [
+      Bodies.rectangle(W / 2,  H + 26,  W * 3, 50,   { isStatic: true, friction: 1.0, restitution: 0.1, label: 'wall' }),
+      Bodies.rectangle(-26,    H / 2,   50,    H * 3, { isStatic: true, friction: 0.4, restitution: 0.2, label: 'wall' }),
+      Bodies.rectangle(W + 26, H / 2,   50,    H * 3, { isStatic: true, friction: 0.4, restitution: 0.2, label: 'wall' }),
+    ]);
+
+    var mc = document.createElement('canvas');
+    mc.width  = W; mc.height = H;
+    mc.style.cssText = [
+      'position:absolute;top:0;left:0;opacity:0;pointer-events:auto;',
+      'touch-action:none;z-index:8;',
+      'width:' + W + 'px;height:' + H + 'px;',
+    ].join('');
+    footer.appendChild(mc);
+
+    function onDown(e) {
+      dragRect = mc.getBoundingClientRect();
+      var p    = ptFromEvent(e, dragRect);
+      var body = cardAt(p.x, p.y);
+      if (!body) return;
+      drag = { body: body, offX: p.x - body.position.x, offY: p.y - body.position.y };
+      samples = [{ x: p.x, y: p.y, t: performance.now() }];
+      body.gravityScale = 0;
+      body.frictionAir  = 1;
+      Body.setVelocity(body, { x: 0, y: 0 });
+      Body.setAngularVelocity(body, 0);
+      mc.style.cursor = 'grabbing';
+    }
+
+    function onMove(e) {
+      if (!drag) {
+        var r2  = mc.getBoundingClientRect();
+        var p2  = ptFromEvent(e, r2);
+        var hov = cardAt(p2.x, p2.y);
+        mc.style.cursor = hov ? 'grab' : 'default';
+        return;
+      }
+      var p = ptFromEvent(e, dragRect);
+      Body.setPosition(drag.body, { x: p.x - drag.offX, y: p.y - drag.offY });
+      var now = performance.now();
+      samples.push({ x: p.x, y: p.y, t: now });
+      while (samples.length > 1 && now - samples[0].t > 120) samples.shift();
+    }
+
+    function onUp() {
+      if (!drag) return;
+      var body = drag.body;
+      drag = null;
+      mc.style.cursor = 'default';
+      body.gravityScale = 1;
+      body.frictionAir  = 0.03;
+
+      var now2   = performance.now();
+      var recent = samples.filter(function (s) { return now2 - s.t <= 80; });
+
+      if (recent.length >= 2) {
+        var a      = recent[0];
+        var b      = recent[recent.length - 1];
+        var idleMs = now2 - b.t;
+        var dtSec  = Math.max((b.t - a.t) / 1000, 0.016);
+        var rawVx  = (b.x - a.x) / dtSec;
+        var rawVy  = (b.y - a.y) / dtSec;
+        var speed  = Math.sqrt(rawVx * rawVx + rawVy * rawVy);
+
+        if (speed > 700 && idleMs < 100) {
+          var t  = Math.min((speed - 700) / 1400, 1);
+          var S  = 0.05;
+          var MV = 28;
+          Body.setVelocity(body, {
+            x: Math.max(-MV, Math.min(MV, rawVx * S * t)),
+            y: Math.max(-MV, Math.min(MV, rawVy * S * t)),
+          });
+          Body.setAngularVelocity(body, (rawVx * S * t) * 0.035);
+        }
+      }
+      samples = [];
+    }
+
+    mc.addEventListener('mousedown',  onDown);
+    mc.addEventListener('mousemove',  onMove);
+    mc.addEventListener('mouseup',    onUp);
+    mc.addEventListener('mouseleave', onUp);
+    mc.addEventListener('touchstart', function (e) { e.preventDefault(); onDown(e); }, { passive: false });
+    mc.addEventListener('touchmove',  function (e) { e.preventDefault(); onMove(e); }, { passive: false });
+    mc.addEventListener('touchend',   function (e) { e.preventDefault(); onUp();    }, { passive: false });
+    mc.addEventListener('wheel', function (e) {
+      window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+    }, { passive: true });
+  }
+
+  function spawnCards(W, H) {
+    var cols = 6;
+    var colW = W / cols;
+    var order = Array.from({ length: TOTAL_CARDS }, function (_, i) { return i; });
+    order.sort(function () { return Math.random() - 0.5; });
+
+    order.forEach(function (cardIdx, spawnIdx) {
+      setTimeout(function () {
+        var col = spawnIdx % cols;
+        var x   = colW * col + colW / 2 + (Math.random() - 0.5) * colW * 0.35;
+        x = Math.max(CARD_W / 2 + 8, Math.min(W - CARD_W / 2 - 8, x));
+
+        var body = Bodies.rectangle(x, -(CARD_H / 2 + spawnIdx * 4), CARD_W, CARD_H, {
+          label:       'card',
+          restitution: 0.2,
+          friction:    0.5,
+          frictionAir: 0.03,
+          density:     0.003,
+          chamfer:     { radius: 20 },
+          angle:       (Math.random() - 0.5) * 0.45,
+        });
+
+        Body.setVelocity(body, { x: (Math.random() - 0.5) * 2, y: Math.random() * 0.5 });
+        World.add(engine.world, body);
+
+        var el = buildCard(cardIdx);
+        root.appendChild(el);
+        domCards.push({ body: body, el: el });
+      }, spawnIdx * SPAWN_INTERVAL);
+    });
+  }
+
+  function syncLoop() {
+    for (var i = 0; i < domCards.length; i++) {
+      var dc = domCards[i];
+      var p  = dc.body.position;
+      var a  = dc.body.angle * (180 / Math.PI);
+      dc.el.style.left      = Math.round(p.x - CARD_W / 2) + 'px';
+      dc.el.style.top       = Math.round(p.y - CARD_H / 2) + 'px';
+      dc.el.style.transform = 'translateZ(0) rotate(' + a.toFixed(2) + 'deg)';
+    }
+    requestAnimationFrame(syncLoop);
+  }
+
+  function init() {
+    var W = footer.offsetWidth;
+    var H = footer.offsetHeight;
+    initPhysics(W, H);
+    spawnCards(W, H);
+    syncLoop();
+  }
+
+  var footerXsMq = window.matchMedia('(max-width: 639px)');
+
+  function checkScroll() {
+    if (hasTriggered) return;
+    if (footerXsMq.matches) {
+      if (root) root.style.display = 'none';
+      return;
+    }
+    if (root) root.style.display = '';
+    var rect = footer.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 400) {
+      hasTriggered = true;
+      setTimeout(init, 150);
+    }
+  }
+
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  footerXsMq.addEventListener('change', checkScroll);
+  checkScroll();
+})();
+</script>
+</body>
+</html>
