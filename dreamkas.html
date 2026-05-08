@@ -710,6 +710,18 @@
             color: var(--color-pink-badge) !important;
         }
 
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
+            -webkit-filter: none;
+            filter: none;
+            transition: filter 0.25s ease, -webkit-filter 0.25s ease;
+        }
+
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img,
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:focus-visible img {
+            -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+        }
+
         #footer-match .footer-match-email a {
             text-decoration: none !important;
             border-bottom: 1px solid transparent;
@@ -779,9 +791,9 @@
 
             #footer-match .footer-match-nav {
                 flex-direction: column !important;
-                align-items: stretch !important;
+                align-items: flex-start !important;
                 justify-content: flex-start !important;
-                gap: 0.75rem !important;
+                gap: 1rem !important;
                 flex-wrap: nowrap !important;
                 padding-top: 1.5rem !important;
                 padding-bottom: 1.5rem !important;
@@ -793,30 +805,34 @@
 
             #footer-match .footer-match-nav-links {
                 display: flex !important;
-                flex-direction: row !important;
+                flex-direction: column !important;
                 flex-wrap: nowrap !important;
-                align-items: center !important;
-                gap: 0 !important;
-                flex: 1 1 100% !important;
+                align-items: flex-start !important;
+                gap: 1.125rem !important;
+                flex: 0 1 auto !important;
                 min-width: 0 !important;
                 width: 100% !important;
-                justify-content: space-between !important;
+                justify-content: flex-start !important;
             }
 
             #footer-match .footer-match-nav-links a {
-                font-size: 15px !important;
+                font-size: 20px !important;
                 line-height: 1.2 !important;
-                flex: 1 1 25% !important;
-                text-align: center !important;
+                flex: 0 0 auto !important;
+                width: fit-content !important;
+                max-width: 100% !important;
+                text-align: left !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] {
-                display: none !important;
+                display: flex !important;
+                align-self: flex-start !important;
+                margin-top: 0.25rem !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
-                width: 28px !important;
-                height: 28px !important;
+                width: 32px !important;
+                height: 32px !important;
             }
         }
 
@@ -1844,7 +1860,7 @@
                             </div>
                         </div>
                         <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                            <div class="order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:flex-row md:gap-x-4 md:gap-y-0 md:items-stretch md:items-start xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                            <div class="max-sm:order-2 order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:flex-row md:gap-x-4 md:gap-y-0 md:items-stretch md:items-start xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
                                 <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/dreamkas-results-cashier-portrait.png"><img src="assets/images/dreamkas-results-cashier-portrait.png" alt="Cashier using Dreamkas POS" class="block md:block w-full shrink-0 rounded-[20px] object-cover aspect-[288/184] md:h-[320px] md:w-[320px] md:flex-none xl:h-[328px] xl:w-[328px] xl:flex-none 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
                                 <img src="assets/images/dreamkas-results-cashier-chart.png" alt="Checkout metrics" class="block w-full rounded-[20px] object-cover aspect-[288/184] max-md:mt-4 md:h-[320px] md:w-full md:flex-1 md:min-w-0 xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full"/>
                             </div>
@@ -1937,7 +1953,7 @@
                             </div>
                         </div>
                         <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                            <div class="order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:flex-row md:gap-x-4 md:gap-y-0 md:items-stretch md:items-start xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                            <div class="max-sm:order-2 order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:flex-row md:gap-x-4 md:gap-y-0 md:items-stretch md:items-start xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
                                 <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/dreamkas-results-owner-photo.png"><img src="assets/images/dreamkas-results-owner-photo.png" alt="Store owner" class="block md:block w-full shrink-0 rounded-[20px] object-cover aspect-[288/184] md:h-[320px] md:w-[320px] md:flex-none xl:h-[328px] xl:w-[328px] xl:flex-none 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
                                 <img src="assets/images/dreamkas-results-owner-chart.png" alt="Business metrics" class="block w-full rounded-[20px] object-cover aspect-[288/184] max-md:mt-4 md:h-[320px] md:w-full md:flex-1 md:min-w-0 xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full"/>
                             </div>
@@ -2166,6 +2182,7 @@
                     if (kind === "mp4") {
                         var v = root.querySelector("video");
                         if (!v) return;
+                        var isXs = window.matchMedia("(max-width: 639px)").matches;
                         var posterEl = root.querySelector(".dreamkas-video-poster");
                         var inlineControls = root.querySelector(".dreamkas-video-inline-controls");
                         var playToggle = root.querySelector(".dreamkas-video-toggle-play");
@@ -2184,12 +2201,24 @@
                             }
                         }
 
-                        if (posterEl) posterEl.classList.add("hidden");
-                        v.controls = false;
+                        function showStartedState() {
+                            if (posterEl) posterEl.classList.add("hidden");
+                            overlay.classList.add("hidden");
+                            if (inlineControls) {
+                                if (isXs) {
+                                    inlineControls.classList.add("hidden");
+                                } else {
+                                    inlineControls.classList.remove("hidden");
+                                }
+                            }
+                        }
+
+                        // iOS Safari is more reliable with explicit inline playback hints.
+                        v.setAttribute("playsinline", "");
+                        v.setAttribute("webkit-playsinline", "");
+                        v.controls = !!isXs;
                         v.muted = true;
                         v.volume = 0;
-                        overlay.classList.add("hidden");
-                        if (inlineControls) inlineControls.classList.remove("hidden");
                         if (playToggle && !playToggle.hasAttribute("data-bound")) {
                             playToggle.setAttribute("data-bound", "1");
                             playToggle.addEventListener("click", function () {
@@ -2216,9 +2245,19 @@
                             v.addEventListener("play", updateInlineControls);
                             v.addEventListener("pause", updateInlineControls);
                             v.addEventListener("volumechange", updateInlineControls);
+                            v.addEventListener("play", showStartedState);
                         }
                         var p = v.play();
-                        if (p && typeof p.catch === "function") p.catch(function () {});
+                        if (p && typeof p.then === "function") {
+                            p.then(function () {
+                                showStartedState();
+                            }).catch(function () {
+                                // Keep a working fallback on XS if autoplay promise is blocked.
+                                if (isXs) {
+                                    v.controls = true;
+                                }
+                            });
+                        }
                         updateInlineControls();
                     } else if (kind === "youtube") {
                         if (root.querySelector("iframe") || root.getAttribute("data-youtube-started") === "1") return;

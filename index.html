@@ -514,16 +514,16 @@
                 align-items: center;
                 justify-content: center;
                 padding: 16px 20px;
-                background-color: #ECF1F4;
+                background-color: rgba(253, 228, 223, 0.6);
                 border-radius: 20px;
-                color: #6B6B6B;
+                color: rgba(0, 22, 242, 0.7);
                 font-family: var(--font-family-inter);
                 font-size: 1.125rem;
                 line-height: 1.75rem;
                 font-weight: 300;
                 font-style: italic;
                 text-align: center;
-                transform: translateY(100%);
+                transform: translateY(-100%);
                 transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
                 will-change: transform;
             }
@@ -1173,6 +1173,10 @@
                         object-position: center;
                         display: block;
                     }
+
+                    & > .image-parallax-track > img[src*="svale"] {
+                        object-position: center 22%;
+                    }
                 }
 
                 & .card-description {
@@ -1384,6 +1388,18 @@
             color: var(--color-pink-badge) !important;
         }
 
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
+            -webkit-filter: none;
+            filter: none;
+            transition: filter 0.25s ease, -webkit-filter 0.25s ease;
+        }
+
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img,
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:focus-visible img {
+            -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+        }
+
         #footer-match .footer-match-email a {
             text-decoration: none !important;
             border-bottom: 1px solid transparent;
@@ -1509,9 +1525,9 @@
 
             #footer-match .footer-match-nav {
                 flex-direction: column !important;
-                align-items: stretch !important;
+                align-items: flex-start !important;
                 justify-content: flex-start !important;
-                gap: 0.75rem !important;
+                gap: 1rem !important;
                 flex-wrap: nowrap !important;
                 padding-top: 1.5rem !important;
                 padding-bottom: 1.5rem !important;
@@ -1523,30 +1539,34 @@
 
             #footer-match .footer-match-nav-links {
                 display: flex !important;
-                flex-direction: row !important;
+                flex-direction: column !important;
                 flex-wrap: nowrap !important;
-                align-items: center !important;
-                gap: 0 !important;
-                flex: 1 1 100% !important;
+                align-items: flex-start !important;
+                gap: 1.125rem !important;
+                flex: 0 1 auto !important;
                 min-width: 0 !important;
                 width: 100% !important;
-                justify-content: space-between !important;
+                justify-content: flex-start !important;
             }
 
             #footer-match .footer-match-nav-links a {
-                font-size: 15px !important;
+                font-size: 20px !important;
                 line-height: 1.2 !important;
-                flex: 1 1 25% !important;
-                text-align: center !important;
+                flex: 0 0 auto !important;
+                width: fit-content !important;
+                max-width: 100% !important;
+                text-align: left !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] {
-                display: none !important;
+                display: flex !important;
+                align-self: flex-start !important;
+                margin-top: 0.25rem !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
-                width: 28px !important;
-                height: 28px !important;
+                width: 32px !important;
+                height: 32px !important;
             }
         }
 
@@ -2082,6 +2102,51 @@
                 padding-right: max(2rem, calc((100vw - 1440px) / 2)) !important;
             }
         }
+
+        /* xs only: keep Beyond Work CTA buttons in their resting state (no hover/tap-stick effect) */
+        @media (max-width: 767px) {
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta {
+                padding-right: 0 !important;
+                animation: none !important;
+            }
+
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta::before,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta::before,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta::before,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta::before {
+                top: 50% !important;
+                margin-top: -20px !important;
+                width: 40px !important;
+                height: 40px !important;
+                background-color: var(--color-accent-yellow) !important;
+            }
+
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-chevron,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta-chevron,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta-chevron,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-chevron,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-chevron {
+                opacity: 1 !important;
+            }
+
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-arrow,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta-arrow,
+            #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta-arrow,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-arrow,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-arrow {
+                opacity: 0 !important;
+            }
+
+            #cards-beyond .card-beyond.group:hover .beyond-card-title,
+            #cards-beyond .card-beyond.group:focus-within .beyond-card-title {
+                color: var(--color-text-primary) !important;
+            }
+        }
     </style>
 </head>
 
@@ -2250,7 +2315,7 @@
                     From POS systems and e-commerce platforms to logistics dashboards and enterprise tools, I design for high-stakes environments where complexity meets real people.
                 </h1>
                 <p class="card-text">
-                    I’ve built products that cut training time by 40%, reduced operational errors by over 70%, and increased sales by 50%. Many of them are still in use years later, quietly making everyday work simpler for the people who use them every day.
+                    I’ve built products that cut training time by <span class="font-medium">40%</span>, reduced operational errors by over <span class="font-medium">70%</span>, and increased sales by <span class="font-medium">50%</span>. Many of them are still in use years later, quietly making everyday work simpler for the people who use them every day.
                 </p>
             </div>
         </div>
@@ -2280,7 +2345,7 @@
 
                             <div class="card-paragraph">
                                 <p class="card-text">Led the design of two platforms that simplify employee learning and support franchisees from launch to growth.</p>
-                                <p class="card-text"><b>Impact:</b> 40% faster employee onboarding • 60% higher certification completion • 30% faster store launches • significant reduction in franchisee support calls.</p>
+                                <p class="card-text"><b>Impact:</b> <span class="font-medium">40%</span> faster employee onboarding • <span class="font-medium">60%</span> higher certification completion • <span class="font-medium">30%</span> faster store launches • significant reduction in franchisee support calls.</p>
                             </div>
 
                             <a href="subway.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
@@ -2327,7 +2392,7 @@
 
                             <div class="card-paragraph">
                                 <p class="card-text">Designed a complete POS ecosystem that keeps lines moving and revenue flowing when every second counts.</p>
-                                <p class="card-text"><b>Impact:</b> +30-50% higher sales at major events • up to 60% higher spend per person • 23% more transactions • now deployed worldwide.</p>
+                                <p class="card-text"><b>Impact:</b> <span class="font-medium">+30-50%</span> higher sales at major events • up to <span class="font-medium">60%</span> higher spend per person • <span class="font-medium">23%</span> more transactions • now deployed worldwide.</p>
                             </div>
 
                             <a href="billfold.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
@@ -2371,7 +2436,7 @@
                             </a>
                             <div class="card-paragraph">
                                 <p class="card-text">Built a multi-product logistics ecosystem including driver and customer apps, plus end-to-end tools for dispatchers and operators.</p>
-                                <p class="card-text"><b>Impact:</b> 45% fewer dispatcher calls • 92% driver app adoption in 3 weeks • 65% fewer customer callbacks • 40% faster order processing.</p>
+                                <p class="card-text"><b>Impact:</b> <span class="font-medium">45%</span> fewer dispatcher calls • <span class="font-medium">92%</span> driver app adoption in <span class="font-medium">3 weeks</span> • <span class="font-medium">65%</span> fewer customer callbacks • <span class="font-medium">40%</span> faster order processing.</p>
                             </div>
                             <a href="gazelkin.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
                                 <span class="work-card-cta">
@@ -2416,7 +2481,7 @@
 
                             <div class="card-paragraph">
                                 <p class="card-text">Led the design of POS systems powering high-volume retail across major supermarket chains.</p>
-                                <p class="card-text"><b>Impact:</b> 25% faster checkout speed • 40% fewer user errors •  60% less cashier training time • deployed across major national retailers including Lenta, SPAR, OBI.</p>
+                                <p class="card-text"><b>Impact:</b> <span class="font-medium">25%</span> faster checkout speed • <span class="font-medium">40%</span> fewer user errors •  <span class="font-medium">60%</span> less cashier training time • deployed across major national retailers including Lenta, SPAR, OBI.</p>
                             </div>
                             <a href="dreamkas.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
                                 <span class="work-card-cta">
@@ -2566,7 +2631,7 @@
                                     </svg>
                                     <img class="work-card-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
                                 </span>
-                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">STORY COMING SOON</span></span>
+                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">READ THE STORY</span></span>
                             </span>
                         </span>
                     </div>

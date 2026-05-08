@@ -676,6 +676,18 @@
             color: var(--color-pink-badge) !important;
         }
 
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
+            -webkit-filter: none;
+            filter: none;
+            transition: filter 0.25s ease, -webkit-filter 0.25s ease;
+        }
+
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img,
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:focus-visible img {
+            -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+        }
+
         #footer-match .footer-match-email a {
             text-decoration: none !important;
             border-bottom: 1px solid transparent;
@@ -745,9 +757,9 @@
 
             #footer-match .footer-match-nav {
                 flex-direction: column !important;
-                align-items: stretch !important;
+                align-items: flex-start !important;
                 justify-content: flex-start !important;
-                gap: 0.75rem !important;
+                gap: 1rem !important;
                 flex-wrap: nowrap !important;
                 padding-top: 1.5rem !important;
                 padding-bottom: 1.5rem !important;
@@ -759,30 +771,34 @@
 
             #footer-match .footer-match-nav-links {
                 display: flex !important;
-                flex-direction: row !important;
+                flex-direction: column !important;
                 flex-wrap: nowrap !important;
-                align-items: center !important;
-                gap: 0 !important;
-                flex: 1 1 100% !important;
+                align-items: flex-start !important;
+                gap: 1.125rem !important;
+                flex: 0 1 auto !important;
                 min-width: 0 !important;
                 width: 100% !important;
-                justify-content: space-between !important;
+                justify-content: flex-start !important;
             }
 
             #footer-match .footer-match-nav-links a {
-                font-size: 15px !important;
+                font-size: 20px !important;
                 line-height: 1.2 !important;
-                flex: 1 1 25% !important;
-                text-align: center !important;
+                flex: 0 0 auto !important;
+                width: fit-content !important;
+                max-width: 100% !important;
+                text-align: left !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] {
-                display: none !important;
+                display: flex !important;
+                align-self: flex-start !important;
+                margin-top: 0.25rem !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
-                width: 28px !important;
-                height: 28px !important;
+                width: 32px !important;
+                height: 32px !important;
             }
         }
 
