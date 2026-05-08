@@ -329,8 +329,8 @@
         .about-cta-card__sub {
             margin: 0;
             margin-left: 26px;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
             font-weight: 300;
             color: #2b2b2b;
             transition: color 0.35s ease;
@@ -1384,8 +1384,8 @@
                 justify-content: flex-start !important;
                 gap: 1rem !important;
                 flex-wrap: nowrap !important;
-                padding-top: 1.5rem !important;
-                padding-bottom: 1.5rem !important;
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
                 margin-top: 0.5rem !important;
                 border-top: 1px solid rgba(255, 255, 255, 0.18);
                 width: 100% !important;
@@ -1397,7 +1397,7 @@
                 flex-direction: column !important;
                 flex-wrap: nowrap !important;
                 align-items: flex-start !important;
-                gap: 1.125rem !important;
+                gap: 1.75rem !important;
                 flex: 0 1 auto !important;
                 min-width: 0 !important;
                 width: 100% !important;
@@ -1416,7 +1416,7 @@
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] {
                 display: flex !important;
                 align-self: flex-start !important;
-                margin-top: 0.25rem !important;
+                margin-top: 1.5rem !important;
             }
 
             #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
@@ -2241,9 +2241,9 @@
 
         // XS touch toggle for About portrait: tap switches base/hover stills.
         const aboutPortraitWrap = document.querySelector(".about-portrait-wrap");
+        const aboutPortraitHoverMq = window.matchMedia("(hover: hover) and (pointer: fine)");
         if (aboutPortraitWrap) {
             const aboutPortraitXsMq = window.matchMedia("(max-width: 639px)");
-            const aboutPortraitHoverMq = window.matchMedia("(hover: hover) and (pointer: fine)");
 
             const syncAboutPortraitTapState = () => {
                 if (!aboutPortraitXsMq.matches || aboutPortraitHoverMq.matches) {
