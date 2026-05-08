@@ -384,11 +384,11 @@
             }
         }
 
-        /* Colophon — align with main footer strip / “Is it a match?” inset */
+        /* Colophon — same horizontal inset as site main column (index / artworks) */
         .footer-year-strip {
             justify-content: flex-start !important;
-            padding-left: 1.25rem !important;
-            padding-right: 1.25rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
             box-sizing: border-box;
         }
 
@@ -398,8 +398,15 @@
 
         @media (min-width: 640px) {
             .footer-year-strip {
-                padding-left: 96px !important;
-                padding-right: 96px !important;
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            .footer-year-strip {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2)) !important;
+                padding-right: max(2rem, calc((100vw - 1440px) / 2)) !important;
             }
         }
 
@@ -428,7 +435,7 @@
 
         <div id="burger" class="fixed right-4 md:hidden">
             <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-                <rect width="56" height="56" rx="16" fill="#FDE4DF"/>
+                <rect width="56" height="56" rx="16" fill="rgba(253, 228, 223, 0.83)"/>
                 <path id="burgertop"    d="M13.417 17.0625H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
                 <path id="burgermiddle" d="M13.417 38.9375H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
                 <path id="burgerbottom" d="M13.417 28H42.5837"      stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>

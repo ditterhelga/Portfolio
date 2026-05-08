@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Business - Olga Pertseva</title>
+    <title>How Research Stopped Me From Making a Mistake - Olga Pertseva</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -532,7 +532,7 @@
 
             <div id="burger" class="fixed right-4 md:hidden">
                 <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="56" height="56" rx="16" fill="#FDE4DF" />
+                    <rect width="56" height="56" rx="16" fill="rgba(253, 228, 223, 0.83)" />
                     <path id="burgertop" d="M13.417 17.0625H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
                     <path id="burgermiddle" d="M13.417 38.9375H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
                     <path id="burgerbottom" d="M13.417 28H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
@@ -542,21 +542,75 @@
 
         <main class="flex flex-col mt-16 md:mt-18 xl:mt-18 2xl:mt-22 mb-18 md:mb-24 xl:mb-[120px]">
             <section id="hero" class="flex flex-col">
-                <div class="flex flex-col gap-y-8 md:gap-y-10 xl:flex-row xl:items-center xl:gap-x-10">
-                    <div class="w-full max-w-[400px] overflow-hidden rounded-[20px]">
-                        <div class="lqip-parallax-host" data-lqip-ref="assets/images/vibe_coding.png">
-                            <img src="assets/images/vibe_coding.png" alt="Olga portrait" class="w-full h-auto object-cover lqip-fadein"/>
+                <div class="flex flex-col gap-y-8 md:gap-y-10 xl:flex-row xl:items-center xl:gap-x-16">
+                    <div class="max-sm:order-3 xl:order-1 w-full xl:w-[calc((100%-96px)/3)] xl:flex-shrink-0 overflow-hidden rounded-[20px]">
+                        <div class="lqip-parallax-host" data-lqip-ref="assets/images/svale.png">
+                            <img src="assets/images/svale.png" alt="Svale concept" class="w-full h-auto object-cover lqip-fadein"/>
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-y-4 md:gap-y-6 flex-1 min-w-0">
-                        <div class="font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
+                    <div class="flex flex-col gap-y-4 md:gap-y-6 flex-1 min-w-0 max-sm:contents xl:flex xl:order-2">
+                        <div class="max-sm:order-1 font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
                             <a id="breadcrumb-back" class="no-underline transition-colors duration-[250ms] ease-out hover:text-[#0016F2]" href="index.html#beyond">Beyond work</a>
                             <span aria-hidden="true">/</span>
                             <span class="text-[#8A8A8A]">Business</span>
                         </div>
-                        <h1 class="section-header">Business.</h1>
-                        <p class="font-light text-5/8">More content is coming soon.</p>
+                        <h1 class="max-sm:order-2 section-header">How Research Stopped Me From Making a Mistake</h1>
+                        <p class="max-sm:order-4 font-light text-5/8">I almost booked a flight to China to visit the manufacturers and verify their eco certifications myself. That's how seriously I took this idea. Svale started as a real idea I genuinely believed in, and turned into a full business investigation: user interviews, supplier research, logistics conversations, financial modelling. And then a decision not to launch.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dimme-app" class="mt-16 md:mt-20 xl:mt-24 flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+                <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                    <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                        <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                            <h2 class="section-header w-full">Svale</h2>
+                        </div>
+
+                        <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Svale</h2>
+
+                        <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                            <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
+                                <p class="font-light text-5/8">During my career break I started paying closer attention to what I was cooking with. The eco-kitchenware space was full of vague claims and greenwashing dressed up as values — but the real problem was simpler: switching from plastic and toxic kitchen tools to genuinely safe ones requires research most people don't have time for. Every product needs to be verified individually. Every claim needs to be checked.</p>
+                                <p class="font-light text-5/8">I wanted to remove that entirely. Svale's core idea was curated bundles — pre-designed sets that let busy people switch their kitchen in one move, without having to research every item themselves. A constructor to build your own bundle if you wanted control. And an education layer to explain what "eco" and "non-toxic" actually mean — and what's just marketing.</p>
+                                <p class="font-light text-5/8">I got obsessed. I researched suppliers across Europe and Asia, had real conversations with logistics people and small business owners in the Netherlands, mapped out the product range, and designed the brand. I conducted user interviews, did full competitive analysis across the eco-kitchen market, and worked out storage and fulfilment logistics. My husband ran the financial side in parallel — margins, customer acquisition costs.</p>
+                            </div>
+
+                            <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/svale-tools.png"><img src="assets/images/svale-tools.png"
+                                     alt="DimMe app — hands holding phone in low light"
+                                     class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
+                            </div>
+                        </div>
+
+                        <div class="order-4 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                                    max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                                    flex flex-col gap-y-6
+                                    md:order-3 md:mt-4 xl:mt-0
+                                    xl:col-start-2
+                                    2xl:col-start-2 2xl:row-start-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                                    2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                            <img src="assets/images/logo.svg"
+                                 alt="Svale idea mark"
+                                 class="h-[56px] w-[30px] shrink-0"/>
+                            <p class="font-light text-5/8">I named it Svale — swallow in Swedish. Swallows build nests from natural materials. Nordic design felt like the right reference: clean, considered, nothing unnecessary.</p>
+                        </div>
+
+                        <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                            <div class="space-y-3">
+                                <p class="text-5/8 font-medium">What the research showed</p>
+                                <p class="font-light text-5/8">The user interviews, competitor analysis, supplier conversations, and logistics research all pointed the same way. People didn't want another niche shop — they wanted one place for everything, with the trust and convenience of a large retailer. The competitive landscape was built around scale we couldn't match. Suppliers who looked credible online got harder to verify the closer I looked. And every conversation with logistics people and small business owners in the Netherlands added the same thing: starting a physical product business here is expensive, margins are thin, and customer acquisition costs are brutal for small independent shops.</p>
+                                <p class="font-light text-5/8">The research didn't kill the idea. It just made the decision obvious.</p>
+                            </div>
+                            <div class="space-y-3">
+                                <p class="text-5/8 font-medium">The decision</p>
+                                <p class="font-light text-5/8">Research is only useful if you're willing to follow it somewhere uncomfortable. It's easy to use findings to confirm what you already want to do. It's harder to let them change the decision entirely.</p>
+                                <p class="font-light text-5/8">We stopped. The idea was good. The market conditions weren't.</p>
+                            </div>
+                        </div>
+
+                        <p class="font-light italic text-5/8 text-[#8A8A8A] xl:col-start-1 xl:row-start-4 2xl:col-start-1 2xl:row-start-4 xl:max-w-[856px] 2xl:max-w-[1048px]">Full case study in progress — research artifacts, personas, competitive analysis, and the complete decision framework coming soon.</p>
                     </div>
                 </div>
             </section>

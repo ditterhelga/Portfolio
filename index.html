@@ -428,20 +428,26 @@
                 }
             }
 
-            .about-portrait-frame {
+            .about-portrait-block {
                 position: relative;
-                overflow: hidden;
-                border-radius: 20px;
                 isolation: isolate;
                 flex-shrink: 0;
                 cursor: pointer;
                 @apply max-w-none
-                h-[152px] w-[152px]
+                w-[152px]
                 -mt-40
                 md:-mt-52.75
-                md:h-[208px] md:w-[208px]
-                xl:h-[384px] xl:w-[384px]
+                md:w-[208px]
+                xl:w-[384px]
                 xl:mt-0;
+            }
+
+            .about-portrait-frame {
+                position: relative;
+                overflow: hidden;
+                border-radius: 20px;
+                aspect-ratio: 1;
+                width: 100%;
             }
 
             .about-portrait-stage {
@@ -492,6 +498,52 @@
             .about-portrait-front {
                 z-index: 2;
                 transform: scale(1.03);
+            }
+
+            .about-portrait-caption-tray {
+                overflow: hidden;
+                max-height: 0;
+                margin-top: 0;
+                transition:
+                    max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                    margin-top 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .about-portrait-caption-inner {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 16px 20px;
+                background-color: #ECF1F4;
+                border-radius: 20px;
+                color: #6B6B6B;
+                font-family: var(--font-family-inter);
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+                font-weight: 300;
+                font-style: italic;
+                text-align: center;
+                transform: translateY(100%);
+                transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                will-change: transform;
+            }
+
+            .about-portrait-block:hover .about-portrait-caption-tray,
+            .about-portrait-block:focus-within .about-portrait-caption-tray {
+                max-height: 12rem;
+                margin-top: 8px;
+            }
+
+            .about-portrait-block:hover .about-portrait-caption-inner,
+            .about-portrait-block:focus-within .about-portrait-caption-inner {
+                transform: translateY(0);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .about-portrait-caption-tray,
+                .about-portrait-caption-inner {
+                    transition: none;
+                }
             }
 
         }
@@ -1393,9 +1445,8 @@
                 opacity: 0 !important;
             }
 
-            #about .about-portrait-frame {
+            #about .about-portrait-block {
                 width: 182px !important;
-                height: 182px !important;
             }
 
             #about .button-about {
@@ -2056,7 +2107,7 @@
 
         <div id="burger" class="fixed right-4 md:hidden">
             <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-                <rect width="56" height="56" rx="16" fill="#FDE4DF"/>
+                <rect width="56" height="56" rx="16" fill="rgba(253, 228, 223, 0.83)"/>
                 <path id="burgertop" d="M13.417 17.0625H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
                 <path id="burgermiddle" d="M13.417 38.9375H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
                 <path id="burgerbottom" d="M13.417 28H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
@@ -2151,24 +2202,31 @@
             </a>
         </div>
 
-        <div class="about-portrait-frame">
-            <div class="about-portrait-stage">
-                <div class="about-portrait-tilt">
-                    <div class="about-portrait-stack">
-                        <img class="about-portrait-layer about-portrait-back"
-                             src="assets/images/me-pepper-back.png"
-                             alt=""
-                             width="384"
-                             height="384"
-                             decoding="async"
-                             aria-hidden="true"/>
-                        <img class="about-portrait-layer about-portrait-front"
-                             src="assets/images/me-pepper-front.png"
-                             alt="Olga Pertseva"
-                             width="384"
-                             height="384"
-                             decoding="async"/>
+        <div class="about-portrait-block">
+            <div class="about-portrait-frame">
+                <div class="about-portrait-stage">
+                    <div class="about-portrait-tilt">
+                        <div class="about-portrait-stack">
+                            <img class="about-portrait-layer about-portrait-back"
+                                 src="assets/images/me-pepper-back.png"
+                                 alt=""
+                                 width="384"
+                                 height="384"
+                                 decoding="async"
+                                 aria-hidden="true"/>
+                            <img class="about-portrait-layer about-portrait-front"
+                                 src="assets/images/me-pepper-front.png"
+                                 alt="Olga Pertseva"
+                                 width="384"
+                                 height="384"
+                                 decoding="async"/>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="about-portrait-caption-tray" aria-hidden="true">
+                <div class="about-portrait-caption-inner">
+                    <span>Why peppers? My surname means pepper. Obviously.</span>
                 </div>
             </div>
         </div>
@@ -2734,14 +2792,15 @@
         // End Burger setup
 
         // About portrait: face / hand parallax + subtle 3D tilt toward cursor
-        const portraitFrame = document.querySelector(".about-portrait-frame");
-        const portraitTilt = portraitFrame?.querySelector(".about-portrait-tilt");
-        const portraitBack = portraitFrame?.querySelector(".about-portrait-back");
-        const portraitFront = portraitFrame?.querySelector(".about-portrait-front");
+        const portraitBlock = document.querySelector(".about-portrait-block");
+        const portraitFrame = portraitBlock?.querySelector(".about-portrait-frame");
+        const portraitTilt = portraitBlock?.querySelector(".about-portrait-tilt");
+        const portraitBack = portraitBlock?.querySelector(".about-portrait-back");
+        const portraitFront = portraitBlock?.querySelector(".about-portrait-front");
         const portraitMotionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const portraitPointerFine = window.matchMedia("(pointer: fine)").matches;
 
-        if (portraitFrame && portraitTilt && portraitBack && portraitFront && portraitMotionOk && portraitPointerFine) {
+        if (portraitBlock && portraitFrame && portraitTilt && portraitBack && portraitFront && portraitMotionOk && portraitPointerFine) {
             const easeOut = "cubic-bezier(0.22, 1, 0.36, 1)";
             const tiltMaxY = 4;
             const tiltMaxX = 3;
@@ -2784,7 +2843,7 @@
                 portraitTilt.addEventListener("transitionend", onEnd);
             }
 
-            portraitFrame.addEventListener("mousemove", (e) => {
+            portraitBlock.addEventListener("mousemove", (e) => {
                 const rect = portraitFrame.getBoundingClientRect();
                 const nx = clamp(((e.clientX - rect.left) / rect.width) * 2 - 1, -1, 1);
                 const ny = clamp(((e.clientY - rect.top) / rect.height) * 2 - 1, -1, 1);
@@ -2792,7 +2851,7 @@
                 setPortraitPose(nx, ny);
             });
 
-            portraitFrame.addEventListener("mouseleave", resetPortraitPose);
+            portraitBlock.addEventListener("mouseleave", resetPortraitPose);
         }
 
         // Hide logo on mobile when scrolling

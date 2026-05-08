@@ -708,7 +708,7 @@
 
         <div id="burger" class="fixed right-4 md:hidden">
             <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-                <rect width="56" height="56" rx="16" fill="#FDE4DF" />
+                <rect width="56" height="56" rx="16" fill="rgba(253, 228, 223, 0.83)" />
                 <path id="burgertop" d="M13.417 17.0625H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
                 <path id="burgermiddle" d="M13.417 38.9375H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
                 <path id="burgerbottom" d="M13.417 28H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round" />
@@ -754,7 +754,7 @@
         <section id="dimme-app" class="-mt-[1.35rem] flex flex-col gap-y-10 md:-mt-[1.8rem] md:gap-y-12 xl:-mt-[1.95rem] xl:gap-y-14 2xl:-mt-[36px] scroll-mt-[120px]">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                <div class="card-badges hidden sm:flex w-full min-w-0 mb-2 md:mb-3">
                     <span class="badge">Lovable</span>
                     <span class="badge">claude</span>
                     <span class="badge">Figma</span>
@@ -764,20 +764,29 @@
                     <span class="badge">Midjourney</span>
                 </div>
 
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">Dimme. The sleep app I built for myself</h2>
+                        <div class="card-badges w-full min-w-0 mt-4 mb-2 sm:hidden">
+                            <span class="badge">Lovable</span>
+                            <span class="badge">claude</span>
+                            <span class="badge">Figma</span>
+                            <span class="badge">ElevenLabs</span>
+                            <span class="badge">Suno</span>
+                            <span class="badge">GarageBand</span>
+                            <span class="badge">Midjourney</span>
+                        </div>
                     </div>
 
                     <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Dimme. The sleep app I built for myself</h2>
 
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-2 2xl:min-w-0">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-4 md:order-2 2xl:min-w-0">
                             <p class="font-light text-5/8">Every night I had the same routine: breathing app, then meditation app, then grab my phone in the dark to start the music. Three interruptions right at the moment I was finally calming down.</p>
                             <p class="font-light text-5/8">And the voices. I went through dozens of meditation apps and couldn't find a single voice that felt right to me. Voice is deeply personal before sleep — pace, tone, accent, energy — and I had a very clear sense of what I needed. I just couldn't find it anywhere.</p>
                         </div>
 
-                        <div class="order-4 min-w-0 overflow-hidden rounded-[20px]">
+                        <div class="order-3 md:order-4 min-w-0 overflow-hidden rounded-[20px]">
                             <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/hands-dimme.png"><img src="assets/images/hands-dimme.png"
                                  alt="DimMe app — hands holding phone in low light"
                                 
@@ -797,7 +806,7 @@
                         </div>
                     </div>
 
-                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 max-md:order-5 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="space-y-3">
                             <p class="text-5/8 font-medium">What I built</p>
                             <p class="font-light text-5/8">A personal sleep app where you compose your own session: pick a breathing technique, add meditation, choose music — then start and leave your phone alone. No switching, no touching the screen in the dark.</p>
@@ -818,25 +827,32 @@
 
         <section id="project-2" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                <div class="card-badges hidden sm:flex w-full min-w-0 mb-2 md:mb-3">
                     <span class="badge">cursor</span>
                     <span class="badge">claude</span>
                     <span class="badge">figma</span>
+                    <span class="badge">recraft</span>
                 </div>
 
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">Mouth Ninja. A therapy app for my son</h2>
+                        <div class="card-badges w-full min-w-0 mt-4 mb-2 sm:hidden">
+                            <span class="badge">cursor</span>
+                            <span class="badge">claude</span>
+                            <span class="badge">figma</span>
+                            <span class="badge">recraft</span>
+                        </div>
                     </div>
 
                     <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Mouth Ninja. A therapy app for my son</h2>
 
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-4 md:order-1 2xl:min-w-0">
                             <p class="font-light text-5/8">My son's myofunctional therapist prescribed daily mouth exercises for tongue position and jaw development, twice a day, every day without exception. I'm supposed to make sure they happen. The problem: I can't watch every session, and he has exactly zero motivation to do them on his own.</p>
                         </div>
 
-                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                        <div class="order-3 md:order-3 min-w-0 overflow-hidden rounded-[20px]">
                             <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/Mouth-ninja.png"><img src="assets/images/Mouth-ninja.png"
                                  alt="Mouth Ninja app — hands holding phone in low light"
                                 
@@ -856,7 +872,7 @@
                         </div>
                     </div>
 
-                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 max-md:order-5 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="space-y-3">
                             <p class="text-5/8 font-medium">What I built</p>
                             <p class="font-light text-5/8">A simple exercise app where he opens it, sees his list for morning or evening, taps an exercise and sees himself on camera — like a mirror — with a timer running. The camera keeps his attention on what he's actually doing. Face tracking detects whether he's moving, so waiting out the timer without doing anything doesn't work.</p>
@@ -876,7 +892,7 @@
 
         <section id="project-3" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                <div class="card-badges hidden sm:flex w-full min-w-0 mb-2 md:mb-3">
                     <span class="badge">cursor</span>
                     <span class="badge">claude</span>
                     <span class="badge">chatgpt</span>
@@ -884,29 +900,36 @@
                     <span class="badge">midjourney</span>
                 </div>
 
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">I got tired of compromising. So I built it myself.</h2>
+                        <div class="card-badges w-full min-w-0 mt-4 mb-2 sm:hidden">
+                            <span class="badge">cursor</span>
+                            <span class="badge">claude</span>
+                            <span class="badge">chatgpt</span>
+                            <span class="badge">figma</span>
+                            <span class="badge">midjourney</span>
+                        </div>
                     </div>
 
                     <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">I got tired of compromising. So I built it myself.</h2>
 
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="dimme-overview-problem w-full min-w-0 space-y-8 md:space-y-10 order-1 2xl:min-w-0">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-8 md:space-y-10 order-4 md:order-1 2xl:min-w-0">
                             <div class="space-y-3">
                                 <p class="font-light text-5/8">I had a site on Squarespace. It looked like Squarespace. Constructor tools give you speed but steal your design decisions. I wanted full control, so I switched to building it myself.</p>
                                 <p class="font-light text-5/8">This entire portfolio site — designed in Figma, built in Cursor with AI assistance. Every breakpoint, every animation, exactly as designed.</p>
                             </div>
                         </div>
 
-                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                        <div class="order-3 md:order-3 min-w-0 overflow-hidden rounded-[20px]">
                             <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/screen-site.png"><img src="assets/images/screen-site.png"
                                  alt="Portfolio site screenshots"
                                  class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
                         </div>
                     </div>
 
-                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 max-md:order-5 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="space-y-3">
                             <p class="text-5/8 font-medium">How it went</p>
                             <p class="font-light text-5/8">I used Cursor as both a build tool and a learning tool. While it wrote the code I asked it to explain every decision — why this component, why this structure. I was building a site and taking a coding course at the same time, on my own codebase, in real time.</p>
@@ -923,32 +946,36 @@
 
         <section id="project-4" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="card-badges w-full min-w-0 mb-2 md:mb-3">
+                <div class="card-badges hidden sm:flex w-full min-w-0 mb-2 md:mb-3">
                     <span class="badge">Google AI Studio</span>
                     <span class="badge">claude</span>
                 </div>
 
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">Leobank — a pocket money tracker for my son</h2>
+                        <div class="card-badges w-full min-w-0 mt-4 mb-2 sm:hidden">
+                            <span class="badge">Google AI Studio</span>
+                            <span class="badge">claude</span>
+                        </div>
                     </div>
 
                     <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Leobank — a pocket money tracker for my son</h2>
 
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-4 md:order-1 2xl:min-w-0">
                             <p class="font-light text-5/8">Cash became useless in Amsterdam — everything is cards or online. But my son still earns money for things he does, and without tracking it we constantly argued about the truth. "I have 20 euros." "No, remember you spent 10 on that game." "No I didn't." Every parent knows this conversation.</p>
                             <p class="font-light text-5/8">Instead of finding an existing app I built one with him, in Google AI Studio, over breakfast at our favourite cafe. One session, one laptop, one very opinionated real user sitting right next to me.</p>
                         </div>
 
-                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                        <div class="order-3 md:order-3 min-w-0 overflow-hidden rounded-[20px]">
                             <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/leobank-main.png"><img src="assets/images/leobank-main.png"
                                  alt="Leobank app main screen"
                                  class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
                         </div>
                     </div>
 
-                    <div class="dimme-built-copy w-full min-w-0 space-y-3 md:space-y-4 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                    <div class="dimme-built-copy w-full min-w-0 space-y-3 md:space-y-4 max-md:order-5 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <p class="font-light text-5/8">What surprised me: even the simplest possible app immediately exposed real design problems. Confirmation buttons placed too close together — he kept tapping the wrong one. Labels that made sense to me meant nothing to him. And he had feature ideas I hadn't thought of at all — preset amounts, a savings goal. We fixed and added everything right there.</p>
                         <p class="font-light text-5/8">Testing with a 9-year-old is about as honest as usability testing gets. Kids don't work around problems, they just expose them.</p>
                         <p class="font-light text-5/8">He still uses it. The arguments stopped.</p>
@@ -958,7 +985,7 @@
         </section>
         <section id="project-5" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                         <h2 class="section-header w-full">The tool I got tired of waiting for.</h2>
                     </div>
@@ -966,16 +993,16 @@
                     <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The tool I got tired of waiting for.</h2>
 
                     <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-1 2xl:min-w-0">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-4 md:order-1 2xl:min-w-0">
                             <p class="font-light text-5/8">The worst moment in AI-assisted design: you've built up the perfect context in one tool, then you need to switch. Open a new chat. Start over. Explain everything again. Every reference, every constraint, every decision you've already made.</p>
                             <p class="font-light text-5/8">The pieces to solve this exist. They just don't connect. So I'm building the connection — a personal tool where project context lives once: palette, references, tone, constraints, moodboard. One button exports everything to any AI tool in the format it actually understands. A prompt for Claude or ChatGPT, a .cursorrules file for Cursor, a CLAUDE.md for Claude Code.</p>
                         </div>
 
-                        <div class="dimme-built-copy w-full min-w-0 space-y-3 md:space-y-4 order-2">
+                        <div class="dimme-built-copy w-full min-w-0 space-y-3 md:space-y-4 order-5 md:order-2">
                             <p class="font-light text-5/8">Building it now. Will open source it when it's ready.</p>
                         </div>
 
-                        <div class="order-3 min-w-0 overflow-hidden rounded-[20px]">
+                        <div class="order-3 md:order-3 min-w-0 overflow-hidden rounded-[20px]">
                             <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/coming-soon.png"><img src="assets/images/coming-soon.png"
                                  alt="Coming soon project preview"
                                  class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
