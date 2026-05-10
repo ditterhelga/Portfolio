@@ -281,10 +281,9 @@
             }
         }
 
-        @media (max-width: 639px) {
-            .about-portrait-wrap.about-portrait-wrap--tapped .about-portrait--hover {
-                opacity: 1;
-            }
+        /* Tap / coarse-pointer toggle (JS adds --tapped); not limited to xs — tablets need this too */
+        .about-portrait-wrap.about-portrait-wrap--tapped .about-portrait--hover {
+            opacity: 1;
         }
 
         /* md+: keyboard focus shows hover still (same alternate as XS tap) */
@@ -1026,10 +1025,14 @@
                 transition-delay: 0s;
             }
 
+            /* Fluid columns so row never spills past pink rules / section padding (md–2xl) */
             #cards-beyond > .card-beyond:not(.card-beyond--more) .card-description {
                 display: grid;
                 width: 100%;
-                grid-template-columns: 17.5rem 360px 80px minmax(460px, 620px) auto;
+                max-width: 100%;
+                min-width: 0;
+                box-sizing: border-box;
+                grid-template-columns: minmax(0, 11rem) minmax(0, 15rem) minmax(0, 1rem) minmax(0, 1fr) auto;
                 column-gap: 0;
                 row-gap: 0;
                 align-items: start;
@@ -1043,9 +1046,10 @@
             #cards-beyond > .card-beyond:not(.card-beyond--more) .beyond-card-title {
                 grid-column: 2;
                 margin-bottom: 0;
-                max-inline-size: 360px;
-                font-size: 42px;
-                line-height: 1.04;
+                max-inline-size: none;
+                min-width: 0;
+                font-size: clamp(2rem, 2.8vw + 1rem, 2.625rem);
+                line-height: 1.06;
                 align-self: start;
             }
 
@@ -1054,40 +1058,35 @@
                 margin: 0;
                 align-self: start;
                 width: 100%;
-                max-inline-size: 620px;
+                max-inline-size: none;
+                min-width: 0;
             }
 
             #cards-beyond > .card-beyond:not(.card-beyond--more) .card-detail {
                 grid-column: 5;
                 justify-self: end;
                 margin-top: 0;
-                margin-left: 2.25rem;
+                margin-left: 1rem;
+                margin-right: 0;
             }
 
-            /* Tablet: grid min-widths were wider than the padded column — CTA clipped past pink rules */
-            @media (max-width: 1279.98px) {
+            @media (min-width: 1280px) {
                 #cards-beyond > .card-beyond:not(.card-beyond--more) .card-description {
-                    grid-template-columns: minmax(0, 11rem) minmax(0, 15rem) 1rem minmax(0, 1fr) auto;
-                    width: 100%;
-                    max-width: 100%;
-                    min-width: 0;
-                    box-sizing: border-box;
+                    grid-template-columns: minmax(0, 17.5rem) minmax(0, 22.5rem) minmax(0, 5rem) minmax(0, 1fr) auto;
                 }
 
                 #cards-beyond > .card-beyond:not(.card-beyond--more) .beyond-card-title {
-                    max-inline-size: none;
-                    min-width: 0;
-                    font-size: clamp(2rem, 2.8vw + 1rem, 2.625rem);
-                    line-height: 1.06;
+                    font-size: 42px;
+                    line-height: 1.04;
+                    max-inline-size: 360px;
                 }
 
                 #cards-beyond > .card-beyond:not(.card-beyond--more) .card-text {
-                    max-inline-size: none;
-                    min-width: 0;
+                    max-inline-size: 620px;
                 }
 
                 #cards-beyond > .card-beyond:not(.card-beyond--more) .card-detail {
-                    margin-left: 1rem;
+                    margin-left: 2.25rem;
                 }
             }
 
@@ -1917,7 +1916,7 @@
 
         <div class="flex flex-col gap-y-8 max-sm:gap-y-6 md:gap-y-12">
             <div class="flex flex-col gap-y-12 md:flex-row md:items-center md:justify-center md:gap-x-10 md:gap-y-0 xl:gap-x-14">
-            <div class="about-portrait-wrap lqip-portrait-host max-sm:order-2 max-sm:mx-auto w-[400px] h-[400px] max-w-full md:shrink-0 rounded-[20px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0016F2]" data-lqip-ref="assets/images/About-image.png" tabindex="0" role="group" aria-label="Portrait of Olga Pertseva (focus for alternate photo)">
+            <div class="about-portrait-wrap lqip-portrait-host max-sm:order-2 max-sm:mx-auto w-[400px] h-[400px] max-w-full md:shrink-0 rounded-[20px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0016F2]" data-lqip-ref="assets/images/About-image.png" tabindex="0" role="button" aria-pressed="false" aria-label="Portrait of Olga Pertseva; tap to swap alternate photo">
                 <img src="assets/images/About-image.png"
                      alt="Olga Pertseva"
                      class="about-portrait about-portrait--base lqip-fadein"
@@ -2419,25 +2418,36 @@
             document.documentElement.classList.add('is-safari');
         }
 
-        // XS touch toggle for About portrait: tap switches base/hover stills.
+        // About portrait: pure mouse desktop uses CSS :hover only; touch / hybrid devices toggle base ↔ hover on tap.
         const aboutPortraitWrap = document.querySelector(".about-portrait-wrap");
-        const aboutPortraitHoverMq = window.matchMedia("(hover: hover) and (pointer: fine)");
+        const aboutPortraitFineHoverMq = window.matchMedia("(hover: hover) and (pointer: fine)");
+        function aboutPortraitUseTapToggle() {
+            if (!aboutPortraitFineHoverMq.matches) return true;
+            return typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0;
+        }
         if (aboutPortraitWrap) {
-            const aboutPortraitXsMq = window.matchMedia("(max-width: 639px)");
-
             const syncAboutPortraitTapState = () => {
-                if (!aboutPortraitXsMq.matches || aboutPortraitHoverMq.matches) {
+                if (!aboutPortraitUseTapToggle()) {
                     aboutPortraitWrap.classList.remove("about-portrait-wrap--tapped");
+                    aboutPortraitWrap.setAttribute("aria-pressed", "false");
                 }
             };
 
             aboutPortraitWrap.addEventListener("click", () => {
-                if (!aboutPortraitXsMq.matches || aboutPortraitHoverMq.matches) return;
-                aboutPortraitWrap.classList.toggle("about-portrait-wrap--tapped");
+                if (!aboutPortraitUseTapToggle()) return;
+                var next = !aboutPortraitWrap.classList.contains("about-portrait-wrap--tapped");
+                aboutPortraitWrap.classList.toggle("about-portrait-wrap--tapped", next);
+                aboutPortraitWrap.setAttribute("aria-pressed", next ? "true" : "false");
             });
 
-            aboutPortraitXsMq.addEventListener("change", syncAboutPortraitTapState);
-            aboutPortraitHoverMq.addEventListener("change", syncAboutPortraitTapState);
+            aboutPortraitWrap.addEventListener("keydown", (e) => {
+                if (!aboutPortraitUseTapToggle()) return;
+                if (e.key !== "Enter" && e.key !== " ") return;
+                e.preventDefault();
+                aboutPortraitWrap.click();
+            });
+
+            aboutPortraitFineHoverMq.addEventListener("change", syncAboutPortraitTapState);
             syncAboutPortraitTapState();
         }
 

@@ -208,6 +208,13 @@
             display: contents;
         }
 
+        @media (max-width: 639px) {
+            .artworks-gallery {
+                column-gap: 32px;
+                row-gap: 32px;
+            }
+        }
+
         @media (min-width: 768px) {
             .artworks-gallery {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
