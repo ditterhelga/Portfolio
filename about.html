@@ -287,6 +287,13 @@
             }
         }
 
+        /* md+: keyboard focus shows hover still (same alternate as XS tap) */
+        @media (min-width: 640px) {
+            .about-portrait-wrap:focus-visible .about-portrait--hover {
+                opacity: 1;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             .about-portrait-wrap .about-portrait--hover {
                 transition: none;
@@ -1055,6 +1062,33 @@
                 justify-self: end;
                 margin-top: 0;
                 margin-left: 2.25rem;
+            }
+
+            /* Tablet: grid min-widths were wider than the padded column — CTA clipped past pink rules */
+            @media (max-width: 1279.98px) {
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .card-description {
+                    grid-template-columns: minmax(0, 11rem) minmax(0, 15rem) 1rem minmax(0, 1fr) auto;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 0;
+                    box-sizing: border-box;
+                }
+
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .beyond-card-title {
+                    max-inline-size: none;
+                    min-width: 0;
+                    font-size: clamp(2rem, 2.8vw + 1rem, 2.625rem);
+                    line-height: 1.06;
+                }
+
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .card-text {
+                    max-inline-size: none;
+                    min-width: 0;
+                }
+
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .card-detail {
+                    margin-left: 1rem;
+                }
             }
 
             #cards-beyond > .card-beyond:not(.card-beyond--more) .work-card-cta {
@@ -1883,7 +1917,7 @@
 
         <div class="flex flex-col gap-y-8 max-sm:gap-y-6 md:gap-y-12">
             <div class="flex flex-col gap-y-12 md:flex-row md:items-center md:justify-center md:gap-x-10 md:gap-y-0 xl:gap-x-14">
-            <div class="about-portrait-wrap lqip-portrait-host max-sm:order-2 max-sm:mx-auto w-[400px] h-[400px] max-w-full md:shrink-0" data-lqip-ref="assets/images/About-image.png">
+            <div class="about-portrait-wrap lqip-portrait-host max-sm:order-2 max-sm:mx-auto w-[400px] h-[400px] max-w-full md:shrink-0 rounded-[20px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0016F2]" data-lqip-ref="assets/images/About-image.png" tabindex="0" role="group" aria-label="Portrait of Olga Pertseva (focus for alternate photo)">
                 <img src="assets/images/About-image.png"
                      alt="Olga Pertseva"
                      class="about-portrait about-portrait--base lqip-fadein"

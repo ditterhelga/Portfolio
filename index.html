@@ -1375,6 +1375,33 @@
                 margin-left: 2.25rem;
             }
 
+            /* Tablet: grid min-widths exceeded padded width — CTA clipped past pink rules */
+            @media (max-width: 1279.98px) {
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .card-description {
+                    grid-template-columns: minmax(0, 11rem) minmax(0, 15rem) 1rem minmax(0, 1fr) auto;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 0;
+                    box-sizing: border-box;
+                }
+
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .beyond-card-title {
+                    max-inline-size: none;
+                    min-width: 0;
+                    font-size: clamp(2rem, 2.8vw + 1rem, 2.625rem);
+                    line-height: 1.06;
+                }
+
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .card-text {
+                    max-inline-size: none;
+                    min-width: 0;
+                }
+
+                #cards-beyond > .card-beyond:not(.card-beyond--more) .card-detail {
+                    margin-left: 1rem;
+                }
+            }
+
             #cards-beyond > .card-beyond:not(.card-beyond--more) .work-card-cta {
                 width: 40px;
                 min-width: 40px;
