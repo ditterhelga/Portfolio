@@ -1018,13 +1018,13 @@
             }
         }
 
-        /* Sticky stack + scrub fade/scale — desktop only (see GSAP below) */
-        @media (min-width: 1280px) {
+        /* Sticky stack + scrub fade/scale — md+ (see GSAP below) */
+        @media (min-width: 48rem) {
             #work .work-cards-stack {
                 background-color: #f3f6f9;
             }
 
-            /* Gap (xl:gap-y-16 = 64px) sits between wrappers so #F3F6F9 shows through */
+            /* Gap (md:/xl: gap-y-16 = 64px) sits between wrappers so #F3F6F9 shows through */
             #work .work-cards-stack > .card-wrapper {
                 position: relative;
                 background-color: #f3f6f9 !important;
@@ -2508,7 +2508,7 @@
             </div>
         </div>
 
-        <div class="work-cards-stack flex flex-col gap-y-12 xl:gap-y-16">
+        <div class="work-cards-stack flex flex-col gap-y-12 md:gap-y-16 xl:gap-y-16">
             <div class="card-wrapper">
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
@@ -3271,10 +3271,10 @@
             tickAllIntroScrollReveals();
         }
 
-        // Work section: sticky stack, fade + scale (desktop only; demo pattern)
+        // Work section: sticky stack, fade + scale (md+; demo pattern)
         if (!reducedMotion) {
             ScrollTrigger.matchMedia({
-                "(min-width: 1280px)": function () {
+                "(min-width: 768px)": function () {
                     const wrappers = gsap.utils.toArray("#work .work-cards-stack > .card-wrapper");
                     wrappers.forEach((wrapper, index) => {
                         const surface = wrapper.querySelector(".work-card-surface");
