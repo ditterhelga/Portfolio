@@ -81,7 +81,15 @@
                 width: auto;
                 /* white logo on blue background */
                 filter: brightness(0) invert(1);
-                transition: opacity 0.3s ease, filter 0.6s ease;
+                transform-origin: left center;
+                transition: opacity 0.3s ease, filter 0.6s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                & .logo a:hover img,
+                & .logo a:focus-visible img {
+                    transform: scale(1.08);
+                }
             }
 
             & #burger {
@@ -112,12 +120,14 @@
                     transition: transform 0.4s ease;
                 }
 
+                @media (hover: hover) and (pointer: fine) {
                 & nav .menulink:hover::after {
                     transform: scaleX(1);
                 }
 
                 & nav .menulink:hover {
                     color: #FDE4DF;
+                }
                 }
 
                 & nav .menulink[aria-current="page"] {
@@ -180,9 +190,11 @@
                     transform: translateY(20px);
                 }
 
+                @media (hover: hover) and (pointer: fine) {
                 & .menulink:hover {
                     color: #FDC448;
                     transform: translateY(-5px);
+                }
                 }
 
                 & .menulink[aria-current="page"] {
@@ -209,7 +221,11 @@
             transition: border-color 0.25s ease;
         }
 
-        .contact-email-link:hover,
+        @media (hover: hover) and (pointer: fine) {
+            .contact-email-link:hover {
+                border-bottom-color: var(--color-pink-badge);
+            }
+        }
         .contact-email-link:focus-visible {
             border-bottom-color: var(--color-pink-badge);
         }
@@ -295,7 +311,15 @@
                 background-color 0.35s ease;
         }
 
-        .contact-match-cta:hover::before,
+        @media (hover: hover) and (pointer: fine) {
+            .contact-match-cta:hover::before {
+                top: 0;
+                margin-top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: var(--color-pink-badge);
+            }
+        }
         .contact-match-cta:focus-visible::before {
             top: 0;
             margin-top: 0;
@@ -340,17 +364,6 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .contact-match-cta:hover .match-cta-circle,
-        .contact-match-cta:focus-visible .match-cta-circle {
-            opacity: 0;
-        }
-
-        .contact-match-cta:hover .match-cta-send,
-        .contact-match-cta:focus-visible .match-cta-send {
-            opacity: 1;
-            transform: translateY(-50%) scale(0.84);
-        }
-
         .contact-match-cta .match-cta-label {
             position: relative;
             z-index: 1;
@@ -365,7 +378,29 @@
             transition: color 0.35s ease;
         }
 
-        .contact-match-cta:hover .match-cta-label,
+        @media (hover: hover) and (pointer: fine) {
+            .contact-match-cta:hover .match-cta-circle {
+                opacity: 0;
+            }
+
+            .contact-match-cta:hover .match-cta-send {
+                opacity: 1;
+                transform: translateY(-50%) scale(0.84);
+            }
+
+            .contact-match-cta:hover .match-cta-label {
+                color: var(--color-primary-light);
+            }
+        }
+        .contact-match-cta:focus-visible .match-cta-circle {
+            opacity: 0;
+        }
+
+        .contact-match-cta:focus-visible .match-cta-send {
+            opacity: 1;
+            transform: translateY(-50%) scale(0.84);
+        }
+
         .contact-match-cta:focus-visible .match-cta-label {
             color: var(--color-primary-light);
         }

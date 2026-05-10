@@ -93,7 +93,15 @@
             & .logo img {
                 height: 63px;
                 width: auto;
-                transition: opacity 0.3s ease, filter 0.6s ease;
+                transform-origin: left center;
+                transition: opacity 0.3s ease, filter 0.6s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                & .logo a:hover img,
+                & .logo a:focus-visible img {
+                    transform: scale(1.08);
+                }
             }
 
             & #burger {
@@ -232,8 +240,10 @@
         display: none;
     }
 
-    & .rotating-words:hover .phrases {
-        animation-play-state: paused;
+    @media (hover: hover) and (pointer: fine) {
+        & .rotating-words:hover .phrases {
+            animation-play-state: paused;
+        }
     }
 }
 
@@ -625,12 +635,14 @@
             transition: transform 1.45s cubic-bezier(0.33, 1, 0.32, 1);
         }
 
-        .section-kicker:hover .section-kicker-blob {
-            color: #0016f2;
-        }
+        @media (hover: hover) and (pointer: fine) {
+            .section-kicker:hover .section-kicker-blob {
+                color: #0016f2;
+            }
 
-        .section-kicker:hover .section-kicker-blob svg {
-            transform: rotate(720deg);
+            .section-kicker:hover .section-kicker-blob svg {
+                transform: rotate(720deg);
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -638,8 +650,10 @@
                 transition: none;
             }
 
-            .section-kicker:hover .section-kicker-blob svg {
-                transform: none;
+            @media (hover: hover) and (pointer: fine) {
+                .section-kicker:hover .section-kicker-blob svg {
+                    transform: none;
+                }
             }
         }
 
@@ -656,7 +670,12 @@
             transition: color 0.2s ease, -webkit-text-fill-color 0.2s ease;
         }
 
-        #work .card-content.group:hover h3.card-title.intro-scroll-reveal .word,
+        @media (hover: hover) and (pointer: fine) {
+            #work .card-content.group:hover h3.card-title.intro-scroll-reveal .word {
+                color: #3b47c2;
+                -webkit-text-fill-color: #3b47c2;
+            }
+        }
         #work a.work-case-card-link:has(> h3.card-title):focus-visible h3.card-title.intro-scroll-reveal .word {
             color: #3b47c2;
             -webkit-text-fill-color: #3b47c2;
@@ -737,15 +756,27 @@
                 top 0.4s cubic-bezier(0.33, 1, 0.32, 1),
                 background-color 0.35s ease;
         }
-        #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta,
+        @media (hover: hover) and (pointer: fine) {
+            #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta {
+                padding-right: 32px;
+            }
+        }
         #work .card-content.group:has(a.work-case-card-link.card-detail:focus-visible) .work-card-cta,
-        #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta,
         #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta {
             padding-right: 32px;
         }
-        #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta::before,
+        @media (hover: hover) and (pointer: fine) {
+            #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta::before,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before {
+                top: 0;
+                margin-top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: var(--color-pink-badge);
+            }
+        }
         #work .card-content.group:has(a.work-case-card-link.card-detail:focus-visible) .work-card-cta::before,
-        #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before,
         #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta::before {
             top: 0;
             margin-top: 0;
@@ -801,15 +832,21 @@
             opacity: 0;
             pointer-events: none;
         }
-        #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta-chevron,
+        @media (hover: hover) and (pointer: fine) {
+            #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta-chevron,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-chevron {
+                opacity: 0;
+            }
+            #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta-arrow,
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-arrow {
+                opacity: 1;
+            }
+        }
         #work .card-content.group:has(a.work-case-card-link.card-detail:focus-visible) .work-card-cta-chevron,
-        #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-chevron,
         #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-chevron {
             opacity: 0;
         }
-        #work .card-content.group:has(a.work-case-card-link.card-detail:hover) .work-card-cta-arrow,
         #work .card-content.group:has(a.work-case-card-link.card-detail:focus-visible) .work-card-cta-arrow,
-        #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-arrow,
         #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-arrow {
             opacity: 1;
         }
@@ -826,13 +863,32 @@
             }
         }
 
-        #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta,
+        @media (hover: hover) and (pointer: fine) {
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta {
+                padding-right: 32px;
+            }
+
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta::before {
+                top: 0;
+                margin-top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #0016F2;
+            }
+
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-chevron {
+                opacity: 1;
+            }
+
+            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-arrow {
+                opacity: 0;
+            }
+        }
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta,
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta {
             padding-right: 32px;
         }
 
-        #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta::before,
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta::before,
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta::before {
             top: 0;
@@ -842,13 +898,11 @@
             background-color: #0016F2;
         }
 
-        #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-chevron,
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta-chevron,
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta-chevron {
             opacity: 1;
         }
 
-        #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-arrow,
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta-arrow,
         #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta-arrow {
             opacity: 0;
@@ -861,27 +915,43 @@
             100% { transform: translateX(0); }
         }
 
-        #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before,
+        @media (hover: hover) and (pointer: fine) {
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before {
+                background-color: #0016F2;
+            }
+
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-chevron {
+                opacity: 1;
+            }
+
+            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-arrow {
+                opacity: 0;
+            }
+
+            #cards-beyond .card-beyond.group:hover .work-card-cta {
+                animation: beyond-cta-nudge 1.1s ease-in-out infinite;
+            }
+
+            #cards-beyond .card-beyond.group:hover .beyond-card-title {
+                color: #0016F2;
+            }
+        }
         #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta::before {
             background-color: #0016F2;
         }
 
-        #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-chevron,
         #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-chevron {
             opacity: 1;
         }
 
-        #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-arrow,
         #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-arrow {
             opacity: 0;
         }
 
-        #cards-beyond .card-beyond.group:hover .work-card-cta,
         #cards-beyond .card-beyond.group:focus-within .work-card-cta {
             animation: beyond-cta-nudge 1.1s ease-in-out infinite;
         }
 
-        #cards-beyond .card-beyond.group:hover .beyond-card-title,
         #cards-beyond .card-beyond.group:focus-within .beyond-card-title {
             color: #0016F2;
         }
@@ -891,7 +961,11 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            #cards-beyond .card-beyond.group:hover .work-card-cta,
+            @media (hover: hover) and (pointer: fine) {
+                #cards-beyond .card-beyond.group:hover .work-card-cta {
+                    animation: none;
+                }
+            }
             #cards-beyond .card-beyond.group:focus-within .work-card-cta {
                 animation: none;
             }
@@ -1246,7 +1320,15 @@
                     visibility 0s linear 0.55s;
             }
 
-            #cards-beyond > .card-beyond:not(.card-beyond--more):hover > .image-wrapper,
+            @media (hover: hover) and (pointer: fine) {
+                #cards-beyond > .card-beyond:not(.card-beyond--more):hover > .image-wrapper {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translate3d(0, -50%, 0) scale(1) rotate(-5deg);
+                    filter: blur(0);
+                    transition-delay: 0s;
+                }
+            }
             #cards-beyond > .card-beyond:not(.card-beyond--more):focus-within > .image-wrapper {
                 opacity: 1;
                 visibility: visible;
@@ -1299,12 +1381,23 @@
                 padding-right: 0;
             }
 
-            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta,
+            @media (hover: hover) and (pointer: fine) {
+                #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta {
+                    padding-right: 0;
+                }
+
+                #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before {
+                    top: 50%;
+                    margin-top: -20px;
+                    width: 40px;
+                    height: 40px;
+                    background-color: #0016F2;
+                }
+            }
             #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta {
                 padding-right: 0;
             }
 
-            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before,
             #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta::before {
                 top: 50%;
                 margin-top: -20px;
@@ -1324,7 +1417,11 @@
                 transform: none;
             }
 
-            #cards-beyond > .card-beyond:not(.card-beyond--more):hover > .image-wrapper,
+            @media (hover: hover) and (pointer: fine) {
+                #cards-beyond > .card-beyond:not(.card-beyond--more):hover > .image-wrapper {
+                    transform: none;
+                }
+            }
             #cards-beyond > .card-beyond:not(.card-beyond--more):focus-within > .image-wrapper {
                 transform: none;
             }
@@ -1383,7 +1480,11 @@
             transition: color 0.25s ease;
         }
 
-        #footer-match .footer-match-nav-links a:hover,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-nav-links a:hover {
+                color: var(--color-pink-badge) !important;
+            }
+        }
         #footer-match .footer-match-nav-links a:focus-visible {
             color: var(--color-pink-badge) !important;
         }
@@ -1406,7 +1507,11 @@
             transition: border-color 0.25s ease;
         }
 
-        #footer-match .footer-match-email a:hover,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-email a:hover {
+                border-bottom-color: var(--color-pink-badge);
+            }
+        }
         #footer-match .footer-match-email a:focus-visible {
             border-bottom-color: var(--color-pink-badge);
         }
@@ -1435,8 +1540,10 @@
                 transform: translateY(0) !important;
             }
 
-            #hero .rotating-words:hover .phrases {
-                animation: none !important;
+            @media (hover: hover) and (pointer: fine) {
+                #hero .rotating-words:hover .phrases {
+                    animation: none !important;
+                }
             }
 
             #work .card-image-frame {
@@ -1605,12 +1712,21 @@
                 width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        #footer-match .match-cta:hover,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover {
+                gap: 48px;
+            }
+        }
         #footer-match .match-cta:focus-visible {
             gap: 48px;
         }
 
-        #footer-match .match-cta:hover::before,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover::before {
+                background-color: #FDC448;
+                width: calc(100% + 18px);
+            }
+        }
         #footer-match .match-cta:focus-visible::before {
             background-color: #FDC448;
             width: calc(100% + 18px);
@@ -1650,21 +1766,6 @@
             transition: opacity 0.25s ease;
         }
 
-        #footer-match .match-cta:hover .icon-chevron,
-        #footer-match .match-cta:focus-visible .icon-chevron {
-            opacity: 0;
-        }
-
-        #footer-match .match-cta:hover .icon-send,
-        #footer-match .match-cta:focus-visible .icon-send {
-            opacity: 1;
-        }
-
-        #footer-match .match-cta:hover .match-cta-icon,
-        #footer-match .match-cta:focus-visible .match-cta-icon {
-            transform: translateX(18px);
-        }
-
         #footer-match .match-cta-label {
             position: relative;
             z-index: 1;
@@ -1688,7 +1789,35 @@
             transition: opacity 0.2s ease;
         }
 
-        #footer-match .match-cta:hover .match-cta-label::after,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover .icon-chevron {
+                opacity: 0;
+            }
+
+            #footer-match .match-cta:hover .icon-send {
+                opacity: 1;
+            }
+
+            #footer-match .match-cta:hover .match-cta-icon {
+                transform: translateX(18px);
+            }
+
+            #footer-match .match-cta:hover .match-cta-label::after {
+                opacity: 1;
+            }
+        }
+        #footer-match .match-cta:focus-visible .icon-chevron {
+            opacity: 0;
+        }
+
+        #footer-match .match-cta:focus-visible .icon-send {
+            opacity: 1;
+        }
+
+        #footer-match .match-cta:focus-visible .match-cta-icon {
+            transform: translateX(18px);
+        }
+
         #footer-match .match-cta:focus-visible .match-cta-label::after {
             opacity: 1;
         }
@@ -1742,10 +1871,12 @@
             display: block;
         }
 
-        footer.site-footer .footer-inner nav a:hover,
-        footer.site-footer .footer-inner .footer-email:hover {
-            color: #FDE4DF;
-            opacity: 1;
+        @media (hover: hover) and (pointer: fine) {
+            footer.site-footer .footer-inner nav a:hover,
+            footer.site-footer .footer-inner .footer-email:hover {
+                color: #FDE4DF;
+                opacity: 1;
+            }
         }
 
         .line-top {
@@ -1997,7 +2128,11 @@
             transition: opacity 0.25s ease;
         }
 
-        #hero .hero-mask:hover .blob-layer,
+        @media (hover: hover) and (pointer: fine) {
+            #hero .hero-mask:hover .blob-layer {
+                opacity: 1;
+            }
+        }
         #hero .hero-mask:focus-within .blob-layer {
             opacity: 1;
         }
@@ -2045,7 +2180,12 @@
             padding-right: 0.5rem;
         }
 
-        #hero .hero-mask:hover .mask-screen h1,
+        @media (hover: hover) and (pointer: fine) {
+            #hero .hero-mask:hover .mask-screen h1 {
+                color: #000;
+                -webkit-text-fill-color: #000;
+            }
+        }
         #hero .hero-mask:focus-within .mask-screen h1 {
             color: #000;
             -webkit-text-fill-color: #000;
@@ -2105,19 +2245,45 @@
 
         /* xs only: keep Beyond Work CTA buttons in their resting state (no hover/tap-stick effect) */
         @media (max-width: 767px) {
-            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta,
+            @media (hover: hover) and (pointer: fine) {
+                #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta,
+                #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta {
+                    padding-right: 0 !important;
+                    animation: none !important;
+                }
+
+                #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta::before,
+                #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before {
+                    top: 50% !important;
+                    margin-top: -20px !important;
+                    width: 40px !important;
+                    height: 40px !important;
+                    background-color: var(--color-accent-yellow) !important;
+                }
+
+                #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-chevron,
+                #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-chevron {
+                    opacity: 1 !important;
+                }
+
+                #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-arrow,
+                #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-arrow {
+                    opacity: 0 !important;
+                }
+
+                #cards-beyond .card-beyond.group:hover .beyond-card-title {
+                    color: var(--color-text-primary) !important;
+                }
+            }
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta,
-            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta,
             #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta {
                 padding-right: 0 !important;
                 animation: none !important;
             }
 
-            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta::before,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta::before,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta::before,
-            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta::before,
             #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta::before {
                 top: 50% !important;
                 margin-top: -20px !important;
@@ -2126,23 +2292,18 @@
                 background-color: var(--color-accent-yellow) !important;
             }
 
-            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-chevron,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta-chevron,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta-chevron,
-            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-chevron,
             #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-chevron {
                 opacity: 1 !important;
             }
 
-            #cards-beyond .card-beyond:not(.card-beyond--more):hover .work-card-cta-arrow,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-visible .work-card-cta-arrow,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .work-card-cta-arrow,
-            #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:hover) .work-card-cta-arrow,
             #cards-beyond .card-beyond.group:has(.beyond-card-cta-link.card-detail:focus-visible) .work-card-cta-arrow {
                 opacity: 0 !important;
             }
 
-            #cards-beyond .card-beyond.group:hover .beyond-card-title,
             #cards-beyond .card-beyond.group:focus-within .beyond-card-title {
                 color: var(--color-text-primary) !important;
             }

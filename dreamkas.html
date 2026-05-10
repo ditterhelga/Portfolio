@@ -137,7 +137,15 @@
             & .logo img {
                 height: 63px;
                 width: auto;
-                transition: opacity 0.3s ease, filter 0.6s ease;
+                transform-origin: left center;
+                transition: opacity 0.3s ease, filter 0.6s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                & .logo a:hover img,
+                & .logo a:focus-visible img {
+                    transform: scale(1.08);
+                }
             }
 
             & #burger {
@@ -167,12 +175,14 @@
         transition: transform 0.4s ease;
     }
 
+    @media (hover: hover) and (pointer: fine) {
     & nav .menulink:hover::after {
         transform: scaleX(1);
     }
 
     & nav .menulink:hover {
         color: #0016F2;
+    }
     }
 }
 
@@ -229,9 +239,11 @@
                     transform: translateY(20px);
                 }
 
+                @media (hover: hover) and (pointer: fine) {
                 & .menulink:hover {
                     color: #FDC448;
                     transform: translateY(-5px);
+                }
                 }
             }
         }
@@ -276,8 +288,10 @@
         display: none;
     }
 
-    & .rotating-words:hover .phrases {
-        animation-play-state: paused;
+    @media (hover: hover) and (pointer: fine) {
+        & .rotating-words:hover .phrases {
+            animation-play-state: paused;
+        }
     }
 }
 
@@ -426,6 +440,7 @@
                     transition: stroke 300ms, transform 300ms;
                 }
 
+                @media (hover: hover) and (pointer: fine) {
                 &:hover {
                     @apply bg-accent-yellow;
 
@@ -438,6 +453,7 @@
                     .arrow-icon {
                         stroke: var(--color-accent-yellow);
                     }
+                }
                 }
             }
         }
@@ -705,7 +721,11 @@
             transition: color 0.25s ease;
         }
 
-        #footer-match .footer-match-nav-links a:hover,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-nav-links a:hover {
+                color: var(--color-pink-badge) !important;
+            }
+        }
         #footer-match .footer-match-nav-links a:focus-visible {
             color: var(--color-pink-badge) !important;
         }
@@ -716,7 +736,12 @@
             transition: filter 0.25s ease, -webkit-filter 0.25s ease;
         }
 
-        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img {
+                -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            }
+        }
         #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:focus-visible img {
             -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
             filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
@@ -728,7 +753,11 @@
             transition: border-color 0.25s ease;
         }
 
-        #footer-match .footer-match-email a:hover,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-email a:hover {
+                border-bottom-color: var(--color-pink-badge);
+            }
+        }
         #footer-match .footer-match-email a:focus-visible {
             border-bottom-color: var(--color-pink-badge);
         }
@@ -872,12 +901,21 @@
                 width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        #footer-match .match-cta:hover,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover {
+                gap: 48px;
+            }
+        }
         #footer-match .match-cta:focus-visible {
             gap: 48px;
         }
 
-        #footer-match .match-cta:hover::before,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover::before {
+                background-color: #FDC448;
+                width: calc(100% + 18px);
+            }
+        }
         #footer-match .match-cta:focus-visible::before {
             background-color: #FDC448;
             width: calc(100% + 18px);
@@ -915,21 +953,6 @@
             transition: opacity 0.25s ease;
         }
 
-        #footer-match .match-cta:hover .icon-chevron,
-        #footer-match .match-cta:focus-visible .icon-chevron {
-            opacity: 0;
-        }
-
-        #footer-match .match-cta:hover .icon-send,
-        #footer-match .match-cta:focus-visible .icon-send {
-            opacity: 1;
-        }
-
-        #footer-match .match-cta:hover .match-cta-icon,
-        #footer-match .match-cta:focus-visible .match-cta-icon {
-            transform: translateX(18px);
-        }
-
         #footer-match .match-cta-label {
             position: relative;
             z-index: 1;
@@ -953,7 +976,35 @@
             transition: opacity 0.2s ease;
         }
 
-        #footer-match .match-cta:hover .match-cta-label::after,
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover .icon-chevron {
+                opacity: 0;
+            }
+
+            #footer-match .match-cta:hover .icon-send {
+                opacity: 1;
+            }
+
+            #footer-match .match-cta:hover .match-cta-icon {
+                transform: translateX(18px);
+            }
+
+            #footer-match .match-cta:hover .match-cta-label::after {
+                opacity: 1;
+            }
+        }
+        #footer-match .match-cta:focus-visible .icon-chevron {
+            opacity: 0;
+        }
+
+        #footer-match .match-cta:focus-visible .icon-send {
+            opacity: 1;
+        }
+
+        #footer-match .match-cta:focus-visible .match-cta-icon {
+            transform: translateX(18px);
+        }
+
         #footer-match .match-cta:focus-visible .match-cta-label::after {
             opacity: 1;
         }
@@ -1007,10 +1058,12 @@
             display: block;
         }
 
-        footer.site-footer .footer-inner nav a:hover,
-        footer.site-footer .footer-inner .footer-email:hover {
-            color: #FDE4DF;
-            opacity: 1;
+        @media (hover: hover) and (pointer: fine) {
+            footer.site-footer .footer-inner nav a:hover,
+            footer.site-footer .footer-inner .footer-email:hover {
+                color: #FDE4DF;
+                opacity: 1;
+            }
         }
 
         .line-top {
@@ -2308,7 +2361,9 @@
             transition: transform 0.4s ease;
         }
         .proj-nav-link-right::after { transform-origin: right; }
+        @media (hover: hover) and (pointer: fine) {
         .group:hover .proj-nav-link::after { transform: scaleX(1); }
+        }
 
         /* Case accordion: +1px label nudge; pink underline on hover (no vertical jump) */
         button.group > span:nth-child(2),
@@ -2336,15 +2391,19 @@
             transition: transform 0.35s ease;
             pointer-events: none;
         }
+        @media (hover: hover) and (pointer: fine) {
         .group:hover .case-acc-label::after {
             transform: scaleX(1);
+        }
         }
         @media (prefers-reduced-motion: reduce) {
             .case-acc-label::after {
                 transition: none;
             }
+            @media (hover: hover) and (pointer: fine) {
             .group:hover .case-acc-label::after {
                 transform: scaleX(1);
+            }
             }
         }
 
@@ -2410,12 +2469,20 @@
             transition: none;
         }
 
+        @media (hover: hover) and (pointer: fine) {
         #case-side-nav .case-side-nav-toggle:hover {
             background-color: transparent;
         }
 
         #case-side-nav .case-side-nav-toggle:hover .case-side-nav-toggle-icon {
             filter: brightness(0) saturate(100%) invert(15%) sepia(97%) saturate(6437%) hue-rotate(232deg) brightness(99%) contrast(118%);
+        }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+        #case-side-nav .case-side-nav-link:hover {
+            color: #0016F2;
+        }
         }
 
         #case-side-nav.is-collapsed {
@@ -2465,10 +2532,6 @@
             overflow: hidden;
             transform: translateY(0);
             transition: color 0.25s ease, opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
-        }
-
-        #case-side-nav .case-side-nav-link:hover {
-            color: #0016F2;
         }
 
         #case-side-nav .case-side-nav-link.is-active {
