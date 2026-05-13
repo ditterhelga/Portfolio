@@ -1809,16 +1809,6 @@
             padding: 0 8px;
         }
 
-        #footer-match .match-cta-label::after {
-            content: "........";
-            position: absolute;
-            left: 100%;
-            top: 0;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
         @media (hover: hover) and (pointer: fine) {
             #footer-match .match-cta:hover .icon-chevron {
                 opacity: 0;
@@ -1830,10 +1820,6 @@
 
             #footer-match .match-cta:hover .match-cta-icon {
                 transform: translateX(18px);
-            }
-
-            #footer-match .match-cta:hover .match-cta-label::after {
-                opacity: 1;
             }
         }
         #footer-match .match-cta:focus-visible .icon-chevron {
@@ -1848,10 +1834,6 @@
             transform: translateX(18px);
         }
 
-        #footer-match .match-cta:focus-visible .match-cta-label::after {
-            opacity: 1;
-        }
-
         #footer-match .match-cta:focus-visible {
             outline: 2px solid #fff;
             outline-offset: 4px;
@@ -1860,7 +1842,6 @@
         @media (prefers-reduced-motion: reduce) {
             #footer-match .match-cta,
             #footer-match .match-cta::before,
-            #footer-match .match-cta-label::after,
             #footer-match .match-cta-icon,
             #footer-match .match-cta-icon .icon-chevron,
             #footer-match .match-cta-icon .icon-send {
