@@ -685,7 +685,6 @@
             -webkit-text-fill-color: #3b47c2;
         }
 
-        #work .work-case-card--coming-soon .card-image-frame,
         #work .work-case-card--coming-soon .work-card-cta--coming-soon {
             cursor: default;
         }
@@ -694,12 +693,6 @@
             #work .work-case-card--coming-soon:hover h3.card-title.intro-scroll-reveal .word {
                 color: #0016f2;
                 -webkit-text-fill-color: #0016f2;
-            }
-
-            #work .work-case-card--coming-soon .card-image-frame:hover .card-image,
-            #work .work-case-card--coming-soon .card-image-frame:hover .card-image-overlay {
-                transform: none;
-                opacity: 0;
             }
         }
 
@@ -2546,8 +2539,8 @@
                             </div>
 
                             <div class="card-paragraph">
-                                <p class="card-text">Designing the configurator that turns a touchless gestural instrument into something musicians can understand, trust, and perform with. <span class="font-medium">Covering the full product:</span> configurator, device interaction, and the on-stage experience.</p>
-                                <p class="card-text">My most recent project. Research to working prototype, designed and built in code using an AI-assisted workflow. <span class="font-medium">Currently in user testing.</span></p>
+                                <p class="card-text">Designing the <span class="font-medium">full product experience for a touchless gestural instrument</span> — from configurator to on-stage interaction.</p>
+                                <p class="card-text">My most recent project: research to working prototype, built in code. <span class="font-medium">Currently in user testing.</span></p>
                             </div>
 
                             <div class="card-detail" aria-disabled="true">
@@ -3464,9 +3457,10 @@
             });
         }
 
-        // Work card image — "View" cursor follower
+        // Work card image — "View" / "Soon" cursor follower
         const cardViewCursor = document.querySelector(".card-view-cursor");
         const cardFrames = document.querySelectorAll("#work .card-image-frame");
+        const cardViewCursorDefaultLabel = cardViewCursor ? cardViewCursor.textContent.trim() : "VIEW";
 
         if (cardViewCursor && cardFrames.length && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
             gsap.set(cardViewCursor, { opacity: 0, scale: 0 });
@@ -3474,16 +3468,18 @@
             let isOverCard = false;
 
             cardFrames.forEach(frame => {
-                if (frame.closest(".work-case-card--coming-soon")) return;
+                const isComingSoon = Boolean(frame.closest(".work-case-card--coming-soon"));
 
                 frame.addEventListener("mouseenter", () => {
                     isOverCard = true;
                     frame.style.cursor = "none";
+                    cardViewCursor.textContent = isComingSoon ? "SOON" : cardViewCursorDefaultLabel;
                     gsap.to(cardViewCursor, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" });
                 });
                 frame.addEventListener("mouseleave", () => {
                     isOverCard = false;
                     frame.style.cursor = "";
+                    cardViewCursor.textContent = cardViewCursorDefaultLabel;
                     gsap.to(cardViewCursor, { opacity: 0, scale: 0, duration: 0.2, ease: "power2.in" });
                 });
             });
