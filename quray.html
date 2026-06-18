@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Subway — Olga Pertseva</title>
+    <title>Quray — Olga Pertseva</title>
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 
     <!-- Google Fonts -->
@@ -45,16 +45,11 @@
             --breakpoint-2xl: 96rem;
         }
 
-        /* Scrollbar-safe full-bleed: avoid transform + 100vw centering (prevents horizontal overflow / shifted gutters). */
         @utility full-bleed {
             width: 100vw;
-            max-width: none;
             position: relative;
-            left: auto;
-            transform: none;
-            margin-left: calc(50% - 50vw);
-            margin-right: calc(50% - 50vw);
-            box-sizing: border-box;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         @layer base {
@@ -63,9 +58,6 @@
                 /*width: 100%;*/
                 /*height: 100%;*/
                 /*overflow-y: scroll;*/
-                /* Full viewport width: clip 100vw/scrollbar overflow here, not on max-width body */
-                overflow-x: hidden;
-                overflow-x: clip;
             }
 
             body {
@@ -77,8 +69,7 @@
                 /*margin: 0;*/
                 color: var(--color-text-primary);
                 background: #FFFFFF;
-                /* Must stay visible: full-bleed sections extend past this max-width body */
-                overflow-x: visible;
+                overflow-x: hidden;
             }
 
             h1, h2, h3, h4, h5, h6 {
@@ -94,21 +85,15 @@
                 2xl:text-[64px]/[64px];
         }
 
-        @media (max-width: 767px) {
-            .results-mobile-tight {
-                line-height: 1.02 !important;
-            }
-        }
-
         /* Hero h1 keeps previous scale; does not use .section-header typography */
-        .subway-hero-title {
+        .quray-hero-title {
             @apply font-family-sofia font-normal
                 text-[52px]/[60px]
                 md:text-[60px]/[64px]
                 xl:text-[64px]/[64px];
         }
 
-        .subway-page-title {
+        .quray-page-title {
             @apply font-medium;
         }
 
@@ -138,7 +123,7 @@
             @media (min-width: 768px) {
     & nav .menulink {
         position: relative;
-        font-weight: 300;
+        font-weight: 400;
         font-family: var(--font-family-inter);
         transition: color 0.25s ease;
     }
@@ -699,6 +684,51 @@
             white-space: normal;
         }
 
+        #footer-match .footer-match-nav-links a {
+            transition: color 0.25s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-nav-links a:hover {
+                color: var(--color-pink-badge) !important;
+            }
+        }
+        #footer-match .footer-match-nav-links a:focus-visible {
+            color: var(--color-pink-badge) !important;
+        }
+
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
+            -webkit-filter: none;
+            filter: none;
+            transition: filter 0.25s ease, -webkit-filter 0.25s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img {
+                -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            }
+        }
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:focus-visible img {
+            -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+        }
+
+        #footer-match .footer-match-email a {
+            text-decoration: none !important;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.25s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-email a:hover {
+                border-bottom-color: var(--color-pink-badge);
+            }
+        }
+        #footer-match .footer-match-email a:focus-visible {
+            border-bottom-color: var(--color-pink-badge);
+        }
+
         /* Footer — xs: hide physics cards layer, single column, tighter padding */
         @media (max-width: 639px) {
             #footer-match.site-footer {
@@ -800,23 +830,6 @@
                 width: 32px !important;
                 height: 32px !important;
             }
-        }
-
-        #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
-            -webkit-filter: none;
-            filter: none;
-            transition: filter 0.25s ease, -webkit-filter 0.25s ease;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img {
-                -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
-                filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
-            }
-        }
-        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:focus-visible img {
-            -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
-            filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
         }
 
         /* Match CTA — physics footer (#footer-match), shared with index */
@@ -1238,23 +1251,23 @@
                 <a href="#overview" data-target="overview" class="case-side-nav-link">Context</a>
                 <a href="#my-part" data-target="my-part" class="case-side-nav-link">My Role</a>
                 <a href="#research" data-target="research" class="case-side-nav-link">Research</a>
-                <a href="#learning" data-target="learning" class="case-side-nav-link">Solution</a>
+                <a href="#ecosystem" data-target="ecosystem" class="case-side-nav-link">Solution</a>
                 <a href="#results-real-world" data-target="results-real-world" class="case-side-nav-link">Impact</a>
             </nav>
         </aside>
 
         <!-- #hero: breadcrumbs, page title (h1), hero image or video placeholder -->
         <section id="hero" class="flex flex-col">
-            <div class="subway-breadcrumbs mb-6 md:mb-4 font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
+            <div class="quray-breadcrumbs mb-6 md:mb-4 font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
                 <a class="no-underline transition-colors duration-[250ms] ease-out hover:text-[#0016F2]" href="index.html#work">Work</a>
                 <span aria-hidden="true">/</span>
-                <span class="text-[#8A8A8A]">Subway</span>
+                <span class="text-[#8A8A8A]">Quray</span>
             </div>
-            <h1 class="subway-hero-title subway-page-title">Two platforms. Zero confusion. 40% faster onboarding.</h1>
-            <div class="subway-hero-media image-block mt-10">
-                <div class="subway-hero-media-bg full-bleed overflow-hidden bg-[#1A3716] py-8 md:py-12 xl:py-[80px]">
+            <h1 class="quray-hero-title quray-page-title">Hand movement becomes music.<br>The software makes it trustworthy.</h1>
+            <div class="quray-hero-media image-block mt-10">
+                <div class="quray-hero-media-bg full-bleed overflow-hidden bg-[#1D1E2B] py-8 md:py-12 xl:py-[80px]">
                     <div class="flex w-full justify-center px-4 sm:px-8 md:px-6 2xl:px-8">
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-hero.png"><img class="w-full max-w-[1280px] rounded-[20px] object-cover xl:aspect-[1168/616] 2xl:max-w-[1440px] lqip-fadein" src="assets/images/subway-hero.png" alt="Subway Russia employee training and franchisee portal interfaces on desktop and mobile"/></div>
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-music-main.png"><img class="w-full max-w-[1280px] rounded-[20px] object-cover xl:aspect-[1168/616] 2xl:max-w-[1440px] lqip-fadein" src="assets/images/quray-music-main.png" alt="Quray gestural music instrument and configurator interface"/></div>
                     </div>
                 </div>
             </div>
@@ -1265,59 +1278,62 @@
             <div class="intro-grid flex flex-col gap-y-10 xl:grid xl:grid-cols-[minmax(0,496px)_minmax(0,704px)] xl:gap-x-6 xl:gap-y-8 xl:items-start 2xl:flex 2xl:flex-row 2xl:items-start 2xl:gap-x-16 2xl:gap-y-0">
                 <div class="intro-left flex flex-col gap-y-8 xl:contents 2xl:flex 2xl:flex-col 2xl:max-w-[688px] 2xl:shrink-0">
                     <div class="intro-logo min-w-0 xl:col-start-1 xl:row-start-1">
-                        <img class="w-[232px] h-auto" src="assets/images/subway-logo.png" alt="Subway logo"/>
+                        <img class="w-[232px] h-auto" src="assets/images/quray-logo.png" alt="Quray logo"/>
                     </div>
                     <div class="intro-description flex min-w-0 flex-col gap-y-2 text-5/8 font-light xl:col-start-1 xl:row-start-2">
-                        <p>I designed <span class="font-medium">Subway Russia's first digital platforms</span>: one to train employees and another to support franchise owners.</p>
-                        <p>They transformed scattered manuals into structured, step-by-step digital flows that helped users move from "Where do I start?" to <span class="font-medium">confident, effective work from day one</span>.</p>
+                        <p>Quray is a <span class="font-medium">touchless music controller</span>: ten sensors arc above a stone surface and track your hands in the air, turning movement into MIDI and CV — control signals for synthesizers and modular systems. The hardware was impressive enough to show at Superbooth Berlin. The software sent people home confused.</p>
+                        <p><span class="font-medium">This is a live project, published while the work happens.</span> Most case studies show the polished ending. This one shows how I actually work: the decisions, the rejected options, and what changes when real musicians test the prototype.</p>
                     </div>
                 </div>
                 <div class="intro-right metadata-block min-w-0 xl:col-start-2 xl:row-start-2 xl:max-w-[704px] xl:shrink-0 xl:self-start 2xl:max-w-[688px]">
                     <div class="metadata-grid grid grid-cols-1 gap-y-4">
                         <div class="metadata-role flex flex-col gap-y-2">
-                            <p class="text-5/8"><span class="font-medium">Role:</span> Lead UX/UI Designer. Research, information architecture, wireframing, prototyping, visual design, usability testing.</p>
+                            <p class="text-5/8"><span class="font-medium">Role:</span> Sole Product Designer — research, UX architecture, design system, working prototype in code</p>
                         </div>
                         <div class="metadata-timeline flex flex-col gap-y-2">
-                            <p class="text-5/8"><span class="font-medium">Team:</span> PMs, developers, content writers, training and methodology experts, franchise support</p>
+                            <p class="text-5/8"><span class="font-medium">Team:</span> developer, founder</p>
                         </div>
                         <div class="metadata-tools flex flex-col gap-y-2">
-                            <p class="text-5/8"><span class="font-medium">Timeline:</span> 12 months</p>
+                            <p class="text-5/8"><span class="font-medium">Timeline:</span> 2026 — ongoing</p>
                         </div>
                         <div class="metadata-impact flex flex-col gap-y-4">
                             <div class="font-medium">Impact</div>
-                            <p class="text-5/8">• <span class="font-medium">Employees:</span> <span class="font-medium text-[#146209]">40%</span> faster onboarding · <span class="font-medium text-[#146209]">60%</span> boost in successful certifications</p>
-                            <p class="text-5/8">• <span class="font-medium">Franchisees:</span> <span class="font-medium text-[#146209]">up to 30%</span> faster store launches · More autonomy in daily operations</p>
-                            <p class="text-5/8">• <span class="font-medium">HQ:</span> <span class="font-medium text-[#146209]">40%</span> fewer support requests · Lower training costs</p>
+                            <p class="text-5/8">• Reframed the brief from a UI cleanup to a product-strategy problem</p>
+                            <p class="text-5/8">• A working configurator prototype built in code — real behavior, not mockups</p>
+                            <p class="text-5/8">• Now in usability testing with target musicians, first sessions are already reshaping the product</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="subway-intro-img" data-parallax-wrap class="max-md:-mt-[1.8rem] max-md:rounded-[20px] max-md:overflow-hidden md:full-bleed xl:full-bleed 2xl:full-bleed">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-intro-main.png"><img data-parallax-image class="w-full rounded-[20px] max-md:rounded-[20px] object-cover aspect-[288/184] h-auto md:h-[504px] md:rounded-none xl:h-[600px] 2xl:h-[676px] lqip-fadein" src="assets/images/subway-intro-main.png" alt="Screens from Subway Russia's digital training and franchise platforms"/></div>
+        <section id="pos-image" class="hidden" aria-hidden="true">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/main-billfold.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] lqip-fadein" src="assets/images/main-billfold.png" alt="Billfold POS device"/></div>
         </section>
 
         <section id="overview" class="flex flex-col items-start">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 max-md:gap-y-[22px] md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                     <h2 class="section-header w-full">Overview</h2>
+                    <div class="overview-text-1 font-light text-5/8 min-w-0">
+                    <p class="min-w-0">When I joined, Quray existed as working hardware and a configurator that technically ran — a <span class="font-medium">developer tool, built by the developer for the developer.</span> Every internal parameter exposed at once, no hierarchy, no path through create, edit, save, perform. It was good enough to demo at Superbooth in Berlin, and <span class="font-medium">about as far from a product a musician could use as software can be.</span></p>
+                    </div>
                 </div>
 
                 <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Overview</h2>
 
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 md:order-1 xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 xl:col-span-1 xl:row-start-2 2xl:gap-y-[40px]">
                 <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 md:order-none 2xl:min-w-0">
-                    <p class="min-w-0">Subway Russia needed to modernize how over <span class="font-medium">6,000 employees and hundreds of franchise owners learned, onboarded, and operated their stores</span>, ensuring every location could follow the same clear standards instead of relying on outdated offline processes.</p>
+                <div class="overview-text-1 font-light text-5/8 min-w-0 hidden md:block 2xl:min-w-0">
+                    <p class="min-w-0">When I joined, Quray existed as working hardware and a configurator that technically ran — a <span class="font-medium">developer tool, built by the developer for the developer.</span> Every internal parameter exposed at once, no hierarchy, no path through create, edit, save, perform. It was good enough to demo at Superbooth in Berlin, and <span class="font-medium">about as far from a product a musician could use as software can be.</span></p>
                 </div>
 
                 <div class="overview-text-2 order-3 font-light text-5/8 min-w-0 md:order-none 2xl:min-w-0">
-                    <p class="min-w-0"><span class="font-medium">The existing approach wasn't digital:</span> it relied on thick manuals, scattered PDFs, and in-person sessions. It was inconsistent, impossible to track, and costly, leading to repeated failures, high turnover, and delayed launches.</p>
+                    <p class="min-w-0">The brief I was given was "make the interface cleaner." I didn't accept that framing — <span class="font-medium">a cleaner version of the wrong structure would still fail.</span> The real question was upstream: <span class="font-medium">how do you turn an experimental hardware system into an instrument people can understand, trust, and perform with</span>, before they've heard a single sound from it?</p>
                 </div>
                 </div>
                 </div>
@@ -1329,23 +1345,23 @@
                             xl:col-start-2 xl:row-start-2 xl:row-span-2
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <img src="assets/images/subway-keyphrase-logo.png"
-                         alt="Subway logo"
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt="Billfold"
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">I created two connected platforms, giving 400+ Subway restaurants a <span class="font-medium">simple hub for all training, resources, and progress tracking</span>, accessible from any device.</p>
+                    <p class="font-light text-5/8">The device was ready. <span class="font-medium">The software made it look broken.</span></p>
                 </div>
 
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-6 md:order-3 xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 xl:col-span-1 xl:row-start-3 2xl:gap-y-[40px]">
-                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-overview-main.png"><img src="assets/images/subway-overview-main.png"
-                     alt="Overview of Subway Russia's training hub and franchise resources on multiple devices"
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/hand-quray.png"><img src="assets/images/hand-quray.png"
+                     alt="Quray gestural controller"
                      class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
 
                 <div class="order-5 flex w-full flex-col gap-y-8 md:order-none md:-mt-[8px] md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:-mt-[16px] xl:gap-x-4 xl:gap-y-0 2xl:-mt-[24px] 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <img src="assets/images/subway-overview-side-1.png"
-                             alt="Employee onboarding and course progress in the Subway Russia training app"
-                             class="overview-img-2 hidden md:block aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-overview-side-2.png"><img src="assets/images/subway-overview-side-2.png"
-                             alt="Franchisee portal guides and operational resources for Subway store owners"
+                        <img src="assets/images/quray-connection.png"
+                             alt="Quray device connection"
+                             class="overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/Quray-hand-air.png"><img src="assets/images/Quray-hand-air.png"
+                             alt="Hand playing Quray in the air"
                              class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 xl:aspect-auto 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
                 </div>
                 </div>
@@ -1355,43 +1371,90 @@
 
         </section>
 
-        <!-- #challenge: mirrors #overview layout (text + keyphrase row, image below) -->
-        <section id="challenge" class="flex flex-col items-start gap-y-8 md:gap-y-12 xl:gap-y-14">
+        <!-- #challenge: Operational Clarity layout (text, accordion, image + keyphrase sidebar) -->
+        <section id="challenge" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:gap-y-0 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
-                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] max-md:contents xl:contents 2xl:contents">
-                <h2 class="section-header w-full max-md:order-0 max-md:mb-[1.3rem] xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Challenge</h2>
-
-                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-4 xl:gap-y-6 2xl:gap-y-[40px] xl:min-w-0 2xl:row-start-2 max-md:contents 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 max-md:order-1 2xl:min-w-0">
-                    <p class="min-w-0"><span class="font-medium">No system, high stakes.</span> I had to design from zero: no existing system, no baseline flows, and no digital learning culture. The audience was often not tech-savvy, working on mixed devices in very different store contexts. On top of this, all research and testing had to be done remotely during the pandemic.</p>
-                </div>
-                <div class="overview-text-2 font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0"><span class="font-medium">Two audiences, very different needs.</span> Employees, often in their first jobs, needed quick, motivating lessons to perform effectively from day one. Franchise owners, investing in new businesses, needed structure, reliable resources, and clear guidance to avoid costly mistakes when opening and running their stores.</p>
-                </div>
-                </div>
+                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                    <h2 class="section-header w-full">The Challenge</h2>
                 </div>
 
-                <div class="min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Challenge</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0">The instrument has no keys, no strings, no surface to touch, only buttons and a screen for stage navigation, but the playing happens in empty air above the device. Users can't see the field, can't see where zones begin and end, and can't tell whether the device sees their hands. And Quray makes no sound of its own: it's a controller, not a synthesizer. Connect it, wave a hand — and hear nothing until an external sound source is wired up. Every convention of music software onboarding breaks at exactly this point.</p>
+                </div>
+
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">The audience makes it harder. Modular musicians have watched this market fail repeatedly — technically impressive controllers with configuration software so confusing that the device ends up resold within a month. They are skeptical by experience, technically demanding, and allergic to marketing. The configurator had to earn their trust, work as a learning surface for people who don't own the hardware yet — and do it all in a domain I didn't come from.</p>
+                </div>
+                </div>
+
+                <div class="flex w-full flex-col order-4 mt-5 mb-10 max-md:order-4 max-md:mt-[1.4375rem] md:order-3 md:mt-0 md:mb-0">
+            <button type="button" id="challenge-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="challenge-acc-panel">
+                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                    <svg id="challenge-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed Insights</span></span>
+            </button>
+
+            <div id="challenge-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                <div class="min-h-0 overflow-hidden">
+                    <div id="challenge-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                            <div>
+                                <span class="font-medium">Invisible interaction</span><br/>
+                                There is nothing to look at where the music happens. The active field is a volume of air; zones have no physical edges. Every UX convention built around visible controls — affordances, hover states, direct manipulation — breaks here. The interface has to make the invisible visible, or zone setup becomes guesswork.
+                            </div>
+                            <div>
+                                <span class="font-medium">No sound of its own</span><br/>
+                                Quray is a controller, not a synthesizer. Every onboarding pattern in music software assumes the product can make a noise — connect, hear something, understand. From a new user's perspective, a silent device is a broken device. The software had to replace audio feedback with visible causality.
+                            </div>
+                            <div>
+                                <span class="font-medium">An unfamiliar domain — my personal challenge</span><br/>
+                                I don't come from the modular synth world, and in this project there was no way around that. You cannot design a MIDI/CV mapping interface without understanding what a CV voltage range actually does, why a musician cares about slew, or what happens on stage when a preset switches mid-note. So I did the unglamorous work: studied the domain until I could follow forum arguments between modular users, learned how the signal chain works end to end, and talked to musicians — not to validate screens, but to understand how they think. They don't think in settings; they think in sound, gear, and muscle memory. Until I could think a little bit like them, every design decision would have been a guess.
+                            </div>
+                            <div>
+                                <span class="font-medium">A skeptical audience, for good reasons</span><br/>
+                                The expressive-controller market is a graveyard. Enhancia closed and left users with orphaned hardware. ROLI went bankrupt twice. The repeating pattern: impressive hardware, configuration software built like a developer tool, a buyer left alone in front of complexity, and a device resold as "an expensive preset machine." The people who buy instruments like Quray have watched this happen repeatedly — they are technically demanding, allergic to marketing, and they spend half their studio time patching by choice. The challenge wasn't hiding complexity. It was making complexity earned.
+                            </div>
+                            <div>
+                                <span class="font-medium">Not just a web app</span><br/>
+                                The configurator is one half of the product. The other half is the physical device — and the interaction between the two is where products like this usually break. Connection, calibration, sync between browser and hardware, what three buttons can do on stage, what fits on a tiny monochrome screen mid-performance. I own that whole boundary, including designing the on-device screen states — a separate design challenge in 128 pixels.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
+                <div class="lqip-parallax-host min-w-0 max-md:order-2 max-md:my-6" data-lqip-ref="assets/images/challenge-billfold.png"><img src="assets/images/challenge-billfold.png"
+                     alt="Billfold challenge"
+                     class="overview-img-1 order-2 mt-0 w-full min-w-0 max-w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+                </div>
+                </div>
+
+                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:order-6 max-md:mt-2
                             max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
                             flex flex-col gap-y-6
-                            max-md:order-4 mt-8 md:mt-4 xl:mt-0
+                            md:order-3 md:mt-4 xl:mt-0
                             xl:col-start-2 xl:row-start-2 xl:row-span-2
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <img src="assets/images/subway-keyphrase-logo.png"
-                         alt="Subway logo"
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt="Billfold"
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Balancing <span class="font-medium">trust, clarity, and motivation</span>, for two very different journeys, that was the real design challenge.</p>
+                    <p class="font-light text-5/8">An invisible instrument, no sound of its own, an audience burned by every product that tried this before — and a domain I had to learn from zero.</p>
                 </div>
-
-                <img src="assets/images/subway-challenge-main.png"
-                     alt="Designing Subway Russia's training and franchise platforms for remote onboarding during the pandemic"
-                     class="max-md:order-2 mt-8 max-md:my-6 w-full min-w-0 max-w-full rounded-[20px] max-md:h-auto max-md:object-contain max-md:aspect-auto object-cover aspect-[288/184] md:aspect-auto md:object-cover md:mt-6 xl:col-start-1 xl:row-start-3 xl:mt-8 2xl:col-start-1 2xl:row-start-3 2xl:mt-[24px]"/>
-
             </div>
 
             </div>
@@ -1407,10 +1470,10 @@
                     <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
                         <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                             <div class="my-part-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0"><span class="font-medium">I led the design from start to finish,</span> shaping the vision, running research, and making sure we didn't just ship another tool, but a system <span class="font-medium">franchisees and employees could truly rely on every day.</span></p>
+                                <p class="min-w-0">I'm the sole designer on this project, everything from domain discovery to the working prototype is mine: audience research, competitive analysis, the interaction model, information architecture, the design system, the configurator build, and the full software/hardware interaction: how the device connects, calibrates, syncs, what its buttons do, and what its on-board screen shows during a performance.</p>
                             </div>
                             <div class="my-part-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0"><span class="font-medium">I collaborated with training and methodology experts</span> to translate scattered content into a clear system, <span class="font-medium">worked with PMs and developers</span> to shape strategy and refine flows, and presented decisions to stakeholders.</p>
+                                <p class="min-w-0">Quray looks smaller than the enterprise systems I've designed, but it's the same category of problem: a hardware/software ecosystem with synchronized state, a technical audience, and routing logic that has to survive stage pressure. The team is smaller, but the system isn't simpler. And it's the project where I rebuilt my workflow around AI without handing over the decisions.</p>
                             </div>
                         </div>
                     </div>
@@ -1433,24 +1496,28 @@
                     <div id="my-part-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">User research</span><br/>
-                                I interviewed employees and franchisees to uncover gaps in training, confidence, and daily workflows. This shaped where digital tools could add real value.
+                                <span class="font-medium">Research before the trade show</span><br/>
+                                I joined the project days before Superbooth in Berlin. I couldn't be there in person — so I prepared a field research script: what to ask visitors who tried the device, what to observe while they played, which assumptions to test. The founders ran it at the booth, and the results came back as the project's first real user input — including the observation that shaped the entire onboarding strategy.
                             </div>
                             <div>
-                                <span class="font-medium">Content &amp; methodology</span><br/>
-                                I partnered with Subway's trainers and methodology experts to transform offline manuals and ad-hoc materials into structured, digestible content people could actually follow.
+                                <span class="font-medium">Domain first, screens later</span><br/>
+                                I don't come from the modular synth world, so I treated that as the first thing to fix. Research was built in layers — the founders' assumptions as hypotheses, competitive analysis of every comparable controller, then real user discussion on ModWiggler, Elektronauts, and Reddit. And I talked to musicians directly — not about my screens, but about their world. I wanted to be in their skin for a while, because they think nothing like SaaS users: in sound and gear first, in parameters and numbers last. That order — understand the thinking, then design the structure — is the whole method.
                             </div>
                             <div>
-                                <span class="font-medium">UX &amp; UI design</span><br/>
-                                I created flows, wireframes, and a design system that worked across mobile and desktop, keeping usability simple for non-tech-savvy employees.
+                                <span class="font-medium">AI as a research engine — with my judgment as the filter</span><br/>
+                                I used AI seriously here, and it changed what one designer can cover. I ran large-scale deep research across the forums where this audience actually lives — ModWiggler, Elektronauts, Reddit, KVR — plus competitor teardowns, review analysis, and domain learning: MIDI implementation, CV behavior, the conventions of modular gear. Work that would have taken weeks of manual reading happened in days. But speed only matters if the output survives scrutiny, and a lot of it didn't. Every finding went through the same test: does this match how real musicians in this niche actually behave, or is it a confident generalization? I kept what was grounded, discarded what wasn't, and documented why. AI covered the ground. Critical thinking decided what was true.
                             </div>
                             <div>
-                                <span class="font-medium">Testing &amp; validation</span><br/>
-                                I built prototypes, tested them with internal users, and iterated to ensure the tools were intuitive and motivating.
+                                <span class="font-medium">Decisions logged as they happened</span><br/>
+                                Every significant decision was recorded at the moment it was made, with the alternative I rejected and why. Not reconstructed afterward for a portfolio — captured while it was fresh, including the mistakes.
                             </div>
                             <div>
-                                <span class="font-medium">Collaboration &amp; delivery</span><br/>
-                                I worked closely with PMs, developers, and the digital director to align platform strategy, refine flows, and present design decisions to stakeholders.
+                                <span class="font-medium">A real prototype, built in code</span><br/>
+                                After locking the visual direction in Figma, I built the configurator directly in code with Cursor — React, a design token system, a living styleguide. This is the part of my workflow I'd argue is a genuine competitive advantage: instead of a clickable picture, I put a working product in front of musicians. Real filters that filter, live device state, actual sync logic, every edge case behaving. The prototype that gets tested is the product that gets built — and the design system literally cannot drift from the implementation, because it is the implementation.
+                            </div>
+                            <div>
+                                <span class="font-medium">Testing now, iterating now</span><br/>
+                                The prototype is currently in usability sessions with target musicians. The next phase of this case study — what broke, what surprised me, what changed — is being written as it happens.
                             </div>
                         </div>
                     </div>
@@ -1460,8 +1527,8 @@
 
         </section>
 
-        <section id="menu-subway" data-parallax-wrap class="-mt-[38px] max-md:rounded-[20px] max-md:overflow-hidden md:-mt-[32px] xl:-mt-[51px] 2xl:-mt-[64px] md:full-bleed xl:full-bleed 2xl:full-bleed">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-transition-map.png"><img data-parallax-image class="w-full rounded-[20px] max-md:rounded-[20px] object-cover aspect-[288/184] h-auto md:aspect-auto md:h-[504px] md:rounded-none xl:h-[600px] 2xl:h-[676px] lqip-fadein" src="assets/images/subway-transition-map.png" alt="Journey map connecting Subway Russia employees, franchisees, and HQ around training and operations"/></div>
+        <section id="map-image" data-parallax-wrap class="-mt-[38px] max-md:rounded-[20px] max-md:overflow-hidden md:-mt-[32px] xl:-mt-[51px] 2xl:-mt-[64px] md:full-bleed xl:full-bleed 2xl:full-bleed">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/map-billfold.png"><img data-parallax-image class="w-full rounded-[20px] max-md:rounded-[20px] object-cover h-[300px] md:h-[504px] md:rounded-none xl:h-[600px] 2xl:h-[676px] lqip-fadein" src="assets/images/map-billfold.png" alt="Billfold system map"/></div>
         </section>
 
         <!-- #research: same layout rhythm as #my-part; my-part-style accordions x2 + image -->
@@ -1474,10 +1541,10 @@
                     <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
                         <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                             <div class="research-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">This project began with in-depth research across employees, franchisees, and internal teams <span class="font-medium">to understand how onboarding and daily operations really worked in practice, and why they often broke down.</span></p>
+                                <p class="min-w-0">I didn't know this domain, and the founder's understanding of the audience was marketing-led — "expressive, visual, for everyone." That works for a launch video and fails for a configurator. So I built research in layers: founder assumptions as hypotheses, competitive analysis, then real user discussion in the forums where this audience actually argues.</p>
                             </div>
                             <div class="research-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">I didn't just collect pain points. I wanted to see how people actually learned, how franchisees tried to pass knowledge down, and <span class="font-medium">what would make both groups feel supported instead of overwhelmed.</span></p>
+                                <p class="min-w-0">One finding reframed everything. The expressive-controller market hasn't failed on technology — it has failed on product. The pattern is always the same: impressive hardware ships with software that reads like a developer's internal tool, and the buyer never finds their way in.</p>
                             </div>
                         </div>
                     </div>
@@ -1501,20 +1568,20 @@
                             <div id="research-acc-panel-1" data-open="0" class="w-full max-w-full pt-4 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                 <div class="flex flex-col gap-y-4 font-light text-5/8">
                                     <div>
-                                        <span class="font-medium">Spoke to employees</span><br/>
-                                        Interviewed staff across different stores to see how they used current training, what confused them, and what helped.
+                                        <span class="font-medium">Layered sources, in order of trust</span><br/>
+                                        Founders' assumptions first — useful as hypotheses, never as facts. Then competitive research: gestural controllers, expressive MIDI instruments, modular tools, hardware companion apps. Then the real material: ModWiggler, Elektronauts, KVR, Reddit, long-form reviews and long-form complaints. The discipline that mattered: I moved up a layer only when the previous one raised specific questions. Competitor analysis told me which failure patterns to look for in forums; forum reading told me which founder assumptions to challenge.
                                     </div>
                                     <div>
-                                        <span class="font-medium">Observed live sessions</span><br/>
-                                        Joined a few in-person classes, which revealed how outdated and chaotic the process felt.
+                                        <span class="font-medium">AI-scaled deep research</span><br/>
+                                        I wrote targeted research briefs — one per competitor landscape, one per audience segment — specifying the exact forums, the exact products, and the exact workflows to examine, asking for direct user quotes and for patterns that differ between segments. A vague prompt returns a confident generic answer; a specific brief returns something I can interrogate. This let one designer cover a research surface that would normally take a small team.
                                     </div>
                                     <div>
-                                        <span class="font-medium">Partnered with trainers &amp; methodology experts</span><br/>
-                                        Reviewed onboarding decks and materials to spot gaps, unclear steps, and mismatches with operations.
+                                        <span class="font-medium">Filtering as the actual work</span><br/>
+                                        Not everything survived. Some AI research output drifted toward a generic "gesture controller" mental model — recommending patterns for a product that isn't Quray: wizard-style onboarding this audience explicitly rejects, interaction models the hardware doesn't support. I kept the findings that were grounded in real user behavior, discarded the rest, and documented the reasoning for every rejection. In a niche domain, a generic answer sounds convincing precisely because it's missing the logic of real users. Knowing which answers to throw away was worth more than the speed.
                                     </div>
                                     <div>
-                                        <span class="font-medium">Franchisee perspective</span><br/>
-                                        Spoke with owners to map their onboarding journey, understand the lack of structure, and see how they passed knowledge to staff without a central system.
+                                        <span class="font-medium">Field input from Superbooth</span><br/>
+                                        The research script I prepared for the Berlin booth came back with the project's single most valuable behavioral observation: people repeatedly moved their hand toward the device, expecting depth to control something. The hardware tracks a flat field — no depth axis. That gap between intuition and reality isn't a technical problem; it's an expectation problem. If onboarding doesn't teach the field's geometry explicitly, users conclude the device is broken.
                                     </div>
                                 </div>
                             </div>
@@ -1537,24 +1604,20 @@
                             <div id="research-acc-panel-2" data-open="0" class="w-full max-w-full pt-4 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                 <div class="flex flex-col gap-y-4 font-light text-5/8">
                                     <div>
-                                        <span class="font-medium">Overwhelming for new hires</span><br/>
-                                        Staff had to memorize too much at once, while managers rarely had time for one-on-one support.
+                                        <span class="font-medium">The audience wasn't who the founders thought</span><br/>
+                                        The hardware looks like it's built for dramatic stage performers. The research said the people most likely to actually buy it are modular synth enthusiasts: technically literate, financially capable, hungry for CV control no competitor offers, and deeply skeptical of anything that limits their control. This shifted real decisions: CV became a first-class feature instead of a secondary panel, and the entire mapping UX was rebuilt around their most-cited pain.
                                     </div>
                                     <div>
-                                        <span class="font-medium">No single source of truth</span><br/>
-                                        Content lived in scattered PDFs, decks, videos, and emails, leaving people to guess which version was "correct."
+                                        <span class="font-medium">One audience segment had to go</span><br/>
+                                        The founders started with three equal audiences — including sound-healing practitioners. I removed that segment, and it was the harder call because they were attached to it. The argument: the price point doesn't match the audience, there's no evidence they buy comparable devices, and designing for them would pull every decision away from the people who actually would. Designing for everyone produces a configurator for no one.
                                     </div>
                                     <div>
-                                        <span class="font-medium">Franchisees lacked a roadmap</span><br/>
-                                        Owners juggled calls, brochures, and emails, often unsure of the right steps to launch or run a store.
+                                        <span class="font-medium">The single worst pain in the workflow</span><br/>
+                                        Across every forum, one complaint repeated: manual MIDI CC lookup. Find the synth's manual, find the implementation chart, find the number, type it in, hope. Users called it "soul-crushing" and "a flow killer." This became the central UX problem of the mapping interface — and the foundation for one of the most important design decisions in the product.
                                     </div>
                                     <div>
-                                        <span class="font-medium">Digital confidence was uneven</span><br/>
-                                        Some users were comfortable with digital tools, others were intimidated by anything beyond WhatsApp.
-                                    </div>
-                                    <div>
-                                        <span class="font-medium">Training felt disconnected from reality</span><br/>
-                                        Materials didn't match the pace of running a store, making it hard to apply theory on the floor.
+                                        <span class="font-medium">No single "main user"</span><br/>
+                                        Quray has no one primary persona — the primary user depends on the surface. The configurator must satisfy modular users who care about routing precision. The physical device must protect a performer from disaster on stage. The original prototype failed partly because it collapsed those needs into one screen. Recognizing this shaped the information architecture more than any single finding.
                                     </div>
                                 </div>
                             </div>
@@ -1563,207 +1626,74 @@
                 </div>
             </div>
 
-            <div class="lqip-parallax-host min-w-0 xl:max-w-[856px] 2xl:max-w-[1048px]" data-lqip-ref="assets/images/subway-research-main.png"><img
-                src="assets/images/subway-research-main.png"
-                alt="Research synthesis from interviews with Subway employees, franchisees, and HQ about onboarding and daily workflows"
+            <div class="lqip-parallax-host min-w-0 xl:max-w-[856px] 2xl:max-w-[1048px]" data-lqip-ref="assets/images/festival-man-billfold.png"><img
+                src="assets/images/festival-man-billfold.png"
+                alt="Billfold at festival"
                 class="mt-4 w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto md:mt-12 xl:mt-8 2xl:mt-[48px] lqip-fadein"
             /></div>
 
         </section>
 
-        <section id="users-subway" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <section id="ecosystem" class="hidden flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14" aria-hidden="true">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
             <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:contents 2xl:contents">
-                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Understanding the Users</h2>
+                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Billfold Ecosystem</h2>
 
                 <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-4 xl:gap-y-6 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
                 <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">Understanding users wasn't just research, <span class="font-medium">it was about stepping into their shoes and feeling their daily struggles.</span> Employees were often teenagers in their first jobs, nervous and unsure, while franchise owners carried the weight of running an entire business.</p>
+                    <p class="min-w-0">From guests trying to buy a drink, to bartenders rushing through hundreds of orders and organizers keeping the entire event under control, <span class="font-medium">every part of the system had to work together in real time.</span> The goal was to remove friction wherever it appeared.</p>
                 </div>
                 <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">My role was to <span class="font-medium">turn these emotions into design</span>: anxiety became progress indicators, lack of time became quick access, and scattered knowledge became one source of truth. <span class="font-medium">Every feature mapped directly to a human frustration.</span></p>
+                    <p class="min-w-0">That meant <span class="font-medium">making payments effortless for guests, reducing stress and mistakes for staff, and giving organizers the visibility they never had before.</span> By unifying these perspectives, Billfold turned a chaotic process into one seamless flow.</p>
                 </div>
                 </div>
                 </div>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] mt-[32px] xl:mt-[40px] xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3">
-                    <div class="flex w-full gap-x-[24px]">
-                        <img src="assets/images/subway-users-employees.png"
-                             alt="Illustration for Subway store employees"
-                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
-                        <div class="font-medium leading-tight self-center">Employees UX Findings</div>
-                    </div>
-                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p><span class="font-medium">Instead of building skills, the process crushed motivation.</span> New hires got lost in confusing materials, failed tests, and repeated mistakes, while managers kept reteaching the same basics. Hours were lost, turnover rose, and stores paid the price in productivity and profit.</p>
-                        <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
-                            <button type="button" id="ecosystem-emp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-emp-acc-panel">
-                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                                    <svg id="ecosystem-emp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
-                            </button>
-
-                            <div id="ecosystem-emp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
-                                <div class="min-h-0 overflow-hidden">
-                                    <div id="ecosystem-emp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
-                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
-                                            <div>
-                                                <span class="font-medium">Guides without guidance</span><br/>
-                                                Training was a patchwork of scattered PDFs, printouts, and random videos. Employees didn't know how or when to use them, so training became improvised and inconsistent across stores. Mistakes weren't the exception, they were baked into the process.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Learning by copy-paste</span><br/>
-                                                With no proper system, knowledge spread informally. New staff shadowed older colleagues, picking up skipped steps and bad habits. Errors multiplied, costing the business wasted hours and inconsistent quality.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Lost experience</span><br/>
-                                                Instead of driving the business forward, senior staff spent hours re-explaining routine tasks. Valuable time that could fuel growth was lost to re-teaching.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Certification failures</span><br/>
-                                                Many employees failed tests multiple times, not from lack of ability, but from overwhelming and poorly structured materials. Each failure chipped away at confidence and motivation.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">First-job anxiety</span><br/>
-                                                For many, Subway was their first job. Fear of failure and lack of confidence made them hesitant to ask for help, slowing onboarding even more.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Digital gaps</span><br/>
-                                                In smaller towns, weak internet, outdated devices, and low digital literacy made learning harder. The system had to work for everyone, not just the tech-savvy.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">No way to measure progress</span><br/>
-                                                Without a digital platform, managers had no clear view of who was trained, who was struggling, or where mistakes occurred. Problems surfaced only after they hurt the business.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="flex w-full min-w-0 flex-col gap-y-6 md:gap-y-0 border-t py-6 md:py-0 border-[#E9E9E9] mt-[32px] xl:mt-[40px] md:flex-row md:h-[320px] md:items-center md:gap-x-[40px] xl:col-start-1 xl:row-start-3 xl:gap-x-[24px] 2xl:col-start-1 2xl:row-start-3 2xl:h-[378px] 2xl:gap-x-[140px]">
+                    <img src="assets/images/Vendor-Facing POS.png"
+                         alt="Vendor-facing POS tablet interface"
+                         class="mx-auto md:mx-0 shrink-0 object-contain bg-transparent w-[264px] h-[256px] md:w-[264px] md:h-[256px] xl:w-[344px] xl:h-[247px] 2xl:w-[376px] 2xl:h-[272px]"/>
+                    <div class="flex min-w-0 flex-col gap-y-[16px]">
+                        <div class="font-medium">Vendor-Facing POS</div>
+                        <p class="font-light text-5/8">The tablet interface used by bartenders and cashiers. Designed to be ultra-fast and error-proof so staff with little training could serve hundreds of guests without slowing down.</p>
                     </div>
                 </div>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-4 2xl:col-start-1 2xl:row-start-4">
-                    <div class="flex w-full gap-x-[24px]">
-                        <img src="assets/images/subway-users-franchisees.png"
-                             alt="Illustration for Subway franchise owners"
-                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
-                        <div class="font-medium leading-tight self-center">Franchisees UX Findings</div>
-                    </div>
-                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p><span class="font-medium">Franchisees described the journey as confusing, stressful, and lonely.</span> Steps weren't clear, updates got buried, and constant calls to HQ slowed launches, increased risks, and cost revenue on both sides.</p>
-                        <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
-                            <button type="button" id="ecosystem-fran-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-fran-acc-panel">
-                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                                    <svg id="ecosystem-fran-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
-                            </button>
-
-                            <div id="ecosystem-fran-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
-                                <div class="min-h-0 overflow-hidden">
-                                    <div id="ecosystem-fran-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
-                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
-                                            <div>
-                                                <span class="font-medium">No single source of truth</span><br/>
-                                                Franchisees juggled binders, emails, and calls to HQ. Marketing rules, compliance docs, and training materials were scattered everywhere. Important updates often got buried, leading to compliance mistakes and exposing stores to risk.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Chaotic onboarding</span><br/>
-                                                Opening a store was a maze of unclear steps with no way to track progress. Each new franchisee pieced it together differently, causing delays, last-minute surprises, and costly errors. Launches dragged by weeks, directly cutting into revenue for both owners and HQ.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Dependence on HQ</span><br/>
-                                                Every missing detail turned into another phone call. HQ was swamped with repetitive requests, while owners felt unable to move forward independently.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Overwhelmed by information</span><br/>
-                                                Even when materials existed, they were dense and hard to apply. New owners didn't know what was essential and what was "nice to know." Many defaulted to outdated promotions or improvised materials, which hurt customer experience and weakened brand trust.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Emotional toll</span><br/>
-                                                For many owners, the process felt lonely and stressful. Without clear guidance, they were never sure if they were "doing it right." That uncertainty created frustration on both sides and strained relationships with HQ.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="flex w-full min-w-0 flex-col gap-y-6 md:gap-y-0 border-t py-6 md:py-0 border-[#E9E9E9] md:flex-row md:h-[320px] md:items-center md:gap-x-[40px] xl:col-start-1 xl:row-start-4 xl:gap-x-[24px] 2xl:col-start-1 2xl:row-start-4 2xl:h-[378px] 2xl:gap-x-[140px]">
+                    <img src="assets/images/Guest-Facing Screen.png"
+                         alt="Guest-facing screen display"
+                         class="mx-auto md:mx-0 shrink-0 object-contain bg-transparent w-[264px] h-[256px] md:w-[264px] md:h-[256px] xl:w-[344px] xl:h-[247px] 2xl:w-[376px] 2xl:h-[272px]"/>
+                    <div class="flex min-w-0 flex-col gap-y-[16px]">
+                        <div class="font-medium">Guest-Facing Screen</div>
+                        <p class="font-light text-5/8">A display facing the customer that shows the order, confirms payment instantly, reduces mistakes, and gives guests confidence that every tap went through.</p>
                     </div>
                 </div>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-5 2xl:col-start-1 2xl:row-start-5">
-                    <div class="flex w-full gap-x-[24px]">
-                        <img src="assets/images/subway-users-hq.png"
-                             alt="Illustration for Subway Russia HQ teams"
-                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
-                        <div class="font-medium leading-tight self-center">Subway HQ UX Findings</div>
-                    </div>
-                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p><span class="font-medium">HQ carried the weight of broken processes every day.</span> Teams spent hours answering repeat questions and resending documents instead of focusing on growth. Valuable time and resources drained into support, making scaling slower and more expensive.</p>
-                        <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
-                            <button type="button" id="ecosystem-hqfind-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-hqfind-acc-panel">
-                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                                    <svg id="ecosystem-hqfind-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
-                            </button>
-
-                            <div id="ecosystem-hqfind-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
-                                <div class="min-h-0 overflow-hidden">
-                                    <div id="ecosystem-hqfind-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
-                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
-                                            <div>
-                                                <span class="font-medium">Support overload</span><br/>
-                                                HQ spent hours answering the same questions from dozens of stores daily. Strategic work was sidelined by repetitive support.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">No visibility into progress</span><br/>
-                                                Without insight into franchisee training, HQ only discovered gaps later, as compliance failures, inconsistent operations, or customer complaints.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Inconsistent brand execution</span><br/>
-                                                Scattered materials meant stores applied rules differently. Customers noticed, weakening trust in the brand.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Inefficient scaling</span><br/>
-                                                Each new store required hands-on support from HQ. What should have been a repeatable process became a one-off struggle, making expansion slower, more expensive, and harder to sustain.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="flex w-full min-w-0 flex-col gap-y-6 md:gap-y-0 border-t py-6 md:py-0 border-b border-[#E9E9E9] md:flex-row md:h-[320px] md:items-center md:gap-x-[40px] xl:col-start-1 xl:row-start-5 xl:gap-x-[24px] 2xl:col-start-1 2xl:row-start-5 2xl:h-[378px] 2xl:gap-x-[140px]">
+                    <img src="assets/images/Wristband Registration Kiosk.png"
+                         alt="Wristband registration kiosk"
+                         class="mx-auto md:mx-0 shrink-0 object-contain bg-transparent w-[264px] h-[256px] md:w-[264px] md:h-[256px] xl:w-[344px] xl:h-[247px] 2xl:w-[376px] 2xl:h-[272px]"/>
+                    <div class="flex min-w-0 flex-col gap-y-[16px]">
+                        <div class="font-medium">Wristband Registration Kiosk</div>
+                        <p class="font-light text-5/8">A self-service station at the entrance where guests link their bank card to an RFID wristband. This one-time setup meant no wallets or phones needed inside the event, just tap and go.</p>
                     </div>
                 </div>
 
                 <div class="min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
                             max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
                             flex flex-col gap-y-6
-                            mt-[0.4rem] md:mt-[0.8rem] xl:mt-0
+                            mt-2 md:mt-4 xl:mt-0
                             xl:col-start-2 xl:row-start-2 xl:row-span-4
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-4 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <p class="font-light text-5/8">"Before research, we saw 'employees' and 'franchisees' as abstract groups. After Olga's work, they became real people with voices and needs we couldn't ignore."</p>
-                    <div class="flex items-center gap-x-4 pt-2">
-                        <img src="assets/images/Bolotov.png"
-                             alt="Dmitry Bolotov"
-                             class="w-12 h-12 rounded-full object-cover shrink-0"/>
-                        <div class="text-[14px] leading-[20px] font-normal text-black">
-                            <div>Dmitry Bolotov</div>
-                            <div>Head Of Digital Marketing</div>
-                        </div>
-                    </div>
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt="Billfold"
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">Billfold wasn't just a single tool — it became an <span class="font-medium">ecosystem designed to keep festivals running smoothly</span> for everyone involved.</p>
                 </div>
             </div>
 
@@ -1771,41 +1701,42 @@
 
         </section>
 
-        <section id="dashboard-subway" data-parallax-wrap class="max-md:rounded-[20px] max-md:overflow-hidden md:full-bleed xl:full-bleed 2xl:full-bleed">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-transition-learning.png"><img data-parallax-image class="w-full rounded-[20px] max-md:rounded-[20px] object-cover aspect-[288/184] h-auto md:aspect-auto md:h-[504px] md:rounded-none xl:h-[600px] 2xl:h-[676px] lqip-fadein" src="assets/images/subway-transition-learning.png" alt="Employee learning experience: dashboards, courses, and progress in the Subway Russia training platform"/></div>
+        <section id="festival-girl-image" class="hidden" aria-hidden="true">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/festival-girl-billfold.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/festival-girl-billfold.png" alt="Billfold at festival"/></div>
         </section>
 
-        <section id="learning" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <section id="vendor-experience" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                    <h2 class="section-header w-full">Clear Learning Journey</h2>
+                    <h2 class="section-header w-full">The Vendor Experience</h2>
                 </div>
 
-                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Clear Learning Journey</h2>
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Vendor Experience</h2>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0">I created a guided <span class="font-medium">dashboard that replaces guesswork with clarity,</span> showing progress, upcoming exams, and next steps in one place. Employees no longer waste time searching or waiting for managers to explain what to do.</p>
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0"><span class="font-medium">For bartenders and waiters, speed was everything.</span><br/>
+At peak hours, a single extra tap or a confusing screen could slow the entire line and frustrate hundreds of guests. The vendor-facing POS had to be <span class="font-medium">simple enough to learn in minutes and reliable enough to handle non-stop orders all night.</span></p>
                 </div>
 
-                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">The courses page works as a <span class="font-medium">structured learning map</span> with visual cards, short lessons, and quick quizzes. Each module turned overwhelming manuals into steady progress and visible confidence.</p>
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">Designing for this reality meant <span class="font-medium">focusing on clarity, error-prevention, and speed above all else.</span> Every interaction was reduced to the essentials, giving staff confidence under pressure and keeping drinks flowing even in the busiest rush.</p>
                 </div>
                 </div>
 
-                <div class="flex w-full flex-col order-4 mt-5 max-md:order-4 max-md:mt-[1.58125rem] max-md:mb-[25.2px] md:order-3 md:mt-0 md:mb-0">
+                <div class="flex w-full flex-col order-4 mt-5 md:order-3 md:mt-0">
             <button type="button" id="vendor-exp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="vendor-exp-acc-panel">
                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
                     <svg id="vendor-exp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">SEE FULL IMPACT</span></span>
             </button>
 
             <div id="vendor-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -1813,24 +1744,24 @@
                     <div id="vendor-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Progress visibility</span><br/>
-                                A clear dashboard made next steps obvious and reduced uncertainty from day one.
+                                <span class="font-medium">Dual-screen hardware, split purpose</span><br/>
+                                One screen for the vendor, one for the guest. I designed each side to show only what that person needed: no shared clutter, no accidental cross-taps, no confusion about who sees what.
                             </div>
                             <div>
-                                <span class="font-medium">Structured courses</span><br/>
-                                Learning modules turned large manuals into short, achievable steps.
+                                <span class="font-medium">Large, legible interface under pressure</span><br/>
+                                Buttons sized for people working fast in loud environments. Bartenders could select items and process orders without slowing down or second-guessing the UI.
                             </div>
                             <div>
-                                <span class="font-medium">Quick feedback loops</span><br/>
-                                Assessments and progress indicators helped users improve continuously.
+                                <span class="font-medium">Two-step transaction flow</span><br/>
+                                Select items. Tap to pay. No extra confirmations in the happy path. Average transaction time: under 2 seconds.
                             </div>
                             <div>
-                                <span class="font-medium">Confidence by design</span><br/>
-                                Every screen reduced friction and reinforced that progress was possible.
+                                <span class="font-medium">Works without internet</span><br/>
+                                When Wi-Fi dropped, the POS kept running — caching transactions locally and syncing when connectivity returned. Staff saw a subtle status indicator but service never stopped.
                             </div>
                             <div>
-                                <span class="font-medium">Scalable patterns</span><br/>
-                                Reusable UI patterns kept the experience consistent across learning flows.
+                                <span class="font-medium">Protected actions for refunds and voids</span><br/>
+                                Refunds and voids were accessible but required confirmation steps, reducing the risk of accidental or unauthorized use under pressure.
                             </div>
                         </div>
                     </div>
@@ -1839,32 +1770,33 @@
                 </div>
 
                 <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                <div class="lqip-parallax-host min-w-0 max-md:order-2 max-md:my-6" data-lqip-ref="assets/images/subway-learning-main.png"><img src="assets/images/subway-learning-main.png"
-                     alt="Employee training dashboard and course modules in the Subway Russia learning platform"
-                     class="overview-img-1 order-2 mt-0 w-full min-w-0 max-w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/vendor-billfold.png"><img src="assets/images/vendor-billfold.png"
+                     alt="Vendor-facing Billfold POS"
+                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
 
-                <div class="order-5 flex w-full flex-col gap-y-8 max-md:order-5 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <img src="assets/images/subway-learning-side-1.png"
-                             alt="Employee reviewing training on a phone during a Subway shift"
-                             class="hidden md:block overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
-                        <img src="assets/images/subway-learning-side-2.png"
-                             alt="Course list and lesson detail screens in the employee onboarding flow"
-                             class="overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover"/>
+                <div class="order-5 flex w-full flex-col gap-y-8 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/barmen-phone-billfold.png"><img src="assets/images/barmen-phone-billfold.png"
+                             alt="Bartender using Billfold on phone"
+                             class="hidden md:block overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/barmen-billfold.png"><img src="assets/images/barmen-billfold.png"
+                             alt="Bartenders at Billfold POS"
+                             class="overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
                 </div>
                 </div>
                 </div>
-                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                            max-md:order-6 max-md:mt-2
+
+                <div class="order-3 max-xl:hidden min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
                             max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
                             flex flex-col gap-y-6
-                            md:order-3 md:mt-4 xl:mt-0
+                            md:order-3 md:mt-4 xl:mt-0 xl:invisible
                             xl:col-start-2 xl:row-start-2 xl:row-span-2
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <img src="assets/images/subway-keyphrase-logo.png"
-                         alt="Subway logo"
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]"
+                     aria-hidden="true">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Clear dashboards and step-by-step courses transformed scattered materials into a <span class="font-medium">simple journey where progress is visible and learning feels achievable.</span></p>
+                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
                 </div>
             </div>
 
@@ -1872,37 +1804,37 @@
 
         </section>
 
-        <section id="gamification" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <section id="guest-experience" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                    <h2 class="section-header w-full">Motivation &amp; Gamification</h2>
+                    <h2 class="section-header w-full">The Guest-Facing Screen</h2>
                 </div>
 
-                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Motivation &amp; Gamification</h2>
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Guest-Facing Screen</h2>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0">I added a <span class="font-medium">motivation layer to keep training engaging.</span> Instead of another chore, it became something people wanted to complete: with "Sub" points to collect, milestone badges to unlock, and progress worth celebrating.</p>
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0"><span class="font-medium">For guests, confidence was everything.</span> In the middle of a noisy crowd, they needed to know their order was right and their payment went through, without second-guessing or asking staff. <span class="font-medium">The customer-facing screen had to remove doubt in an environment where attention lasted only a second.</span></p>
                 </div>
 
-                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0"><span class="font-medium">Exams no longer felt overwhelming</span> with quick retakes and instant feedback. <span class="font-medium">Leaderboards introduced friendly competition</span> between stores and regions, making learning more playful and social.</p>
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">That meant showing the right information at the right time: clear totals, instant confirmation, and feedback that felt effortless. <span class="font-medium">The goal was simple — make every tap trustworthy, so guests could spend less time worrying about payments and more time enjoying the event.</span></p>
                 </div>
                 </div>
 
-                <div class="flex w-full flex-col order-4 mt-5 max-md:order-4 max-md:mt-[1.58125rem] max-md:mb-[25.2px] md:order-3 md:mt-0 md:mb-0">
+                <div class="flex w-full flex-col order-4 mt-5 md:order-3 md:mt-0">
             <button type="button" id="guest-exp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="guest-exp-acc-panel">
                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
                     <svg id="guest-exp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Features & design decisions</span></span>
             </button>
 
             <div id="guest-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -1910,24 +1842,24 @@
                     <div id="guest-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Points and rewards</span><br/>
-                                Progress linked to visible rewards made completion feel worthwhile.
+                                <span class="font-medium">Live order display</span><br/>
+                                Each item appeared in real time as the vendor added it — e.g., "Beer ×2 – $12." Guests could see exactly what they were paying for, which cut disputes before they started.
                             </div>
                             <div>
-                                <span class="font-medium">Low-friction assessments</span><br/>
-                                Quick retakes and instant feedback reduced fear and kept momentum high.
+                                <span class="font-medium">Clear, confident checkout</span><br/>
+                                The screen showed a clean total and a single prompt: "Total $24. Tap wristband to pay." After payment, a large green checkmark confirmed it instantly — no ambiguity.
                             </div>
                             <div>
-                                <span class="font-medium">Healthy competition</span><br/>
-                                Leaderboards encouraged engagement across teams and regions.
+                                <span class="font-medium">Neutral error messaging</span><br/>
+                                If a tap failed or a card was declined, the screen showed clear, calm feedback: "Card declined — try another card." Tone was treated as part of the UX. Embarrassment in a crowd makes things worse; the goal was to resolve the moment quietly.
                             </div>
                             <div>
-                                <span class="font-medium">Milestone framing</span><br/>
-                                Milestones helped users perceive progress as achievable and motivating.
+                                <span class="font-medium">Idle state promotions (Billfold Engage)</span><br/>
+                                During idle times, the screen could display sponsor promos or venue messages. I designed a banner area that appeared only when no transaction was in progress, and kept it visually quiet to avoid distracting from the main task flow.
                             </div>
                             <div>
-                                <span class="font-medium">Engaging visual language</span><br/>
-                                Friendly visuals made training feel less like a chore and more like progress.
+                                <span class="font-medium">One-tap donations (Billfold Give)</span><br/>
+                                After checkout, guests at select events could round up and donate spare change. Making it a single tap with no friction turned it into a surprisingly high opt-in — people at festivals, in a good mood, will give if you make it effortless.
                             </div>
                         </div>
                     </div>
@@ -1936,33 +1868,33 @@
                 </div>
 
                 <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                <div class="lqip-parallax-host min-w-0 max-md:order-2 max-md:my-6" data-lqip-ref="assets/images/subway-gamification-main.png"><img src="assets/images/subway-gamification-main.png"
-                     alt="Gamification in training: Sub points, badges, and exam feedback in the employee app"
-                     class="overview-img-1 order-2 mt-0 w-full min-w-0 max-w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/customer-pos-billfold.png"><img src="assets/images/customer-pos-billfold.png"
+                     alt="Guest-facing Billfold customer POS screen"
+                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
 
-                <div class="order-5 flex w-full flex-col gap-y-8 max-md:order-5 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[1fr_400px] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-gamification-side-1.png"><img src="assets/images/subway-gamification-side-1.png"
-                             alt="Regional leaderboards encouraging friendly competition between Subway stores"
-                             class="overview-img-2 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
-                        <div class="lqip-parallax-host min-w-0 hidden md:block" data-lqip-ref="assets/images/subway-gamification-side-2.png"><img src="assets/images/subway-gamification-side-2.png"
-                             alt="Milestone rewards and quick exam retakes with instant feedback"
-                             class="hidden md:block overview-img-3 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
+                <div class="order-5 flex w-full flex-col gap-y-8 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                        <img src="assets/images/bar-billfold.png"
+                             alt="Bar environment with Billfold"
+                             class="overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/customer-billfold.png"><img src="assets/images/customer-billfold.png"
+                             alt="Guest using Billfold customer-facing screen"
+                             class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
                 </div>
                 </div>
                 </div>
 
-                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                            max-md:order-6 max-md:mt-2
+                <div class="order-3 max-xl:hidden min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
                             max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
                             flex flex-col gap-y-6
-                            md:order-3 md:mt-4 xl:mt-0
+                            md:order-3 md:mt-4 xl:mt-0 xl:invisible
                             xl:col-start-2 xl:row-start-2 xl:row-span-2
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <img src="assets/images/subway-keyphrase-logo.png"
-                         alt="Subway logo"
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]"
+                     aria-hidden="true">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">When progress feels visible and rewarded, people keep going. <span class="font-medium">Gamification made learning simple, engaging, and satisfying to complete.</span></p>
+                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
                 </div>
             </div>
 
@@ -1970,41 +1902,37 @@
 
         </section>
 
-        <section id="employee-office-image" data-parallax-wrap class="max-md:rounded-[20px] max-md:overflow-hidden md:full-bleed xl:full-bleed 2xl:full-bleed">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/employee-office-subway.png"><img data-parallax-image class="w-full rounded-[20px] max-md:rounded-[20px] object-cover aspect-[288/184] h-auto md:aspect-auto md:h-[504px] md:rounded-none xl:h-[600px] 2xl:h-[676px] lqip-fadein" src="assets/images/employee-office-subway.png" alt="Subway restaurant staff collaborating during daily operations"/></div>
-        </section>
-
-        <section id="operations" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <section id="kiosk-experience" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                    <h2 class="section-header w-full">Operational Clarity</h2>
+                    <h2 class="section-header w-full">The Guest Journey: Check-In Kiosks</h2>
                 </div>
 
-                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Operational Clarity</h2>
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Guest Journey: Check-In Kiosks</h2>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0">Without the system, <span class="font-medium">opening a new store felt like solving a puzzle without the picture.</span> Instructions were buried in scattered PDFs, long email chains, and phone calls to HQ. Franchisees lost weeks chasing answers and never felt sure what step came next.</p>
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0"><span class="font-medium">The first impression of any event happens at the gate.</span> Guests arriving with excitement don't want to stand in another long line just to set up a wristband. The self-check-in kiosk had to make registration quick, intuitive, and foolproof, so thousands of people could flow through without bottlenecks.</p>
                 </div>
 
-                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">The platform became a single source of truth with a comprehensive knowledge base, practical courses, and live webinars all in one place. <span class="font-medium">Franchisees could finally find answers without calling HQ and move through openings with confidence.</span></p>
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">The design challenge was to guide distracted guests through a one-time setup in under 20 seconds. Clear instructions, simple steps, and instant feedback made it possible. <span class="font-medium">Once their card was linked to the RFID wristband, guests could put wallets and phones away and just tap to pay.</span></p>
                 </div>
                 </div>
 
-                <div class="flex w-full flex-col order-4 mt-5 mb-10 max-md:order-4 max-md:mt-[1.4375rem] md:order-3 md:mt-0 md:mb-0">
+                <div class="flex w-full flex-col order-4 mt-5 md:order-3 md:mt-0">
             <button type="button" id="kiosk-exp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="kiosk-exp-acc-panel">
                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
                     <svg id="kiosk-exp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">See Full Impact</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Features & design decisions</span></span>
             </button>
 
             <div id="kiosk-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -2012,20 +1940,20 @@
                     <div id="kiosk-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Single source of truth</span><br/>
-                                Consolidated resources and guidance in one platform.
+                                <span class="font-medium">Minimal steps, maximum flow</span><br/>
+                                Tap wristband → swipe or insert card (or use Apple/Google Pay) → optional: enter phone/email for a receipt → done. Most guests were through in under 30 seconds.
                             </div>
                             <div>
-                                <span class="font-medium">Step-by-step guidance</span><br/>
-                                Clear flows reduced uncertainty across store opening and operations.
+                                <span class="font-medium">Clarity at every step</span><br/>
+                                Progress indicators ("Step 2 of 3") told guests the flow was short. Icons: a tapping wristband, a card, made each action self-explanatory. The confirmation screen told guests their wristband was now their wallet.
                             </div>
                             <div>
-                                <span class="font-medium">Practical enablement</span><br/>
-                                Courses and webinars turned policy into actionable daily practice.
+                                <span class="font-medium">Designed for difficult environments</span><br/>
+                                Kiosks had to work in direct sunlight and at night, for guests who might not speak English. Language selection was offered upfront. The UI used simple phrasing, large text, and universal icons to remove any dependence on reading.
                             </div>
                             <div>
-                                <span class="font-medium">Reduced support dependency</span><br/>
-                                Better self-service meant fewer calls to HQ and faster decisions.
+                                <span class="font-medium">No single point of failure</span><br/>
+                                Knowing check-in could become a bottleneck itself, we designed for multiple kiosks in parallel and roaming staff with handheld versions running identical software. My flows had to handle someone starting at a kiosk and finishing with staff assistance.
                             </div>
                         </div>
                     </div>
@@ -2033,70 +1961,39 @@
             </div>
                 </div>
 
-                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
-                <div class="lqip-parallax-host min-w-0 max-md:order-2 max-md:my-6" data-lqip-ref="assets/images/subway-operations-main.png"><img src="assets/images/subway-operations-main.png"
-                     alt="Franchisee portal: knowledge base, courses, and webinars for store opening and daily operations"
-                     class="overview-img-1 order-2 mt-0 w-full min-w-0 max-w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/kiosk-billfold.png"><img src="assets/images/kiosk-billfold.png"
+                     alt="Billfold check-in kiosk"
+                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+
+                <div class="order-5 flex w-full flex-col gap-y-8 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                        <img src="assets/images/kiosk-billfold-img.png"
+                             alt="Billfold kiosk interface detail"
+                             class="overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/man-kiosk-billfold.png"><img src="assets/images/man-kiosk-billfold.png"
+                             alt="Guest using Billfold check-in kiosk"
+                             class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
+                </div>
                 </div>
                 </div>
 
-                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                            max-md:order-6 max-md:mt-2
+                <div class="order-3 max-xl:hidden min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
                             max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
                             flex flex-col gap-y-6
-                            md:order-3 md:mt-4 xl:mt-0
+                            md:order-3 md:mt-4 xl:mt-0 xl:invisible
                             xl:col-start-2 xl:row-start-2 xl:row-span-2
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <p class="font-light text-5/8">"The portal guided me step by step through opening my store — every answer I needed was right there."</p>
-                    <div class="flex items-center gap-x-4 pt-2">
-                        <img src="assets/images/vasiliy.png"
-                             alt="Vasiliy Semyonov"
-                             class="w-12 h-12 rounded-full object-cover shrink-0"/>
-                        <div class="text-[14px] leading-[20px] font-normal text-black">
-                            <div>Vasiliy Semyonov</div>
-                            <div>Franchisee</div>
-                        </div>
-                    </div>
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]"
+                     aria-hidden="true">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
                 </div>
             </div>
 
             </div>
 
-        </section>
-
-        <section id="branding" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
-            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
-                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                        <h2 class="section-header w-full">One Brand, One Standard</h2>
-                    </div>
-
-                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">One Brand, One Standard</h2>
-
-                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                            <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
-                                <p class="min-w-0">Each store once interpreted brand standards differently. Marketing materials, training quality, and compliance <span class="font-medium">varied from region to region, leading to a fragmented customer experience.</span></p>
-                            </div>
-
-                            <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
-                                <p class="min-w-0">The platform <span class="font-medium">ensured every franchisee had access to the same guidelines, campaigns, and training.</span> Standards were unified, so no matter the location, customers experienced the same brand quality and service.</p>
-                            </div>
-                        </div>
-
-                        <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
-                            <img src="assets/images/subway-branding-main.png"
-                                 alt="Subway branding standards"
-                                 class="overview-img-1 order-4 max-md:order-2 mt-0 w-full min-w-0 max-w-full rounded-[20px] max-md:my-6 max-md:h-auto max-md:object-contain max-md:aspect-auto object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="branding-long-image" data-parallax-wrap class="max-md:rounded-[20px] max-md:overflow-hidden md:full-bleed xl:full-bleed 2xl:full-bleed">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-branding-long.png"><img data-parallax-image class="w-full rounded-[20px] max-md:rounded-[20px] object-cover aspect-[288/184] h-auto md:aspect-auto md:h-[504px] md:rounded-none xl:h-[600px] 2xl:h-[676px] lqip-fadein" src="assets/images/subway-branding-long.png" alt="Subway branding in use"/></div>
         </section>
 
         <section id="results-real-world" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
@@ -2106,30 +2003,30 @@
             <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                    <h2 class="section-header w-full max-md:leading-[1.02] results-mobile-tight">Results for Employees:<br/>From Overload to Confidence</h2>
+                    <h2 class="section-header w-full">Results in the Real World</h2>
                 </div>
 
-                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Results for Employees:<br/>From Overload to Confidence</h2>
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Results in the Real World</h2>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                 <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0">Before, onboarding dragged on for weeks, with managers repeating the same explanations and new hires left guessing. With the new platform, learning became self-paced and structured — <span class="font-medium">employees could move quickly through lessons and arrive on shift prepared.</span></p>
+                    <p class="min-w-0">Billfold grew from a fragile prototype into the <span class="font-medium">payment backbone of major festivals and stadiums</span>, built to handle the moments when thousands of guests order at once. Even under peak demand, <span class="font-medium">transactions cleared in under 2 seconds</span>, and sales continued seamlessly through network drops thanks to offline resilience. <span class="font-medium">Bartenders finally could focus on serving and guests on enjoying the night.</span></p>
                 </div>
 
                 <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">Onboarding time dropped by <span class="font-medium">40%</span>, and successful certification rates rose by over <span class="font-medium">60%</span>. Progress tracking built confidence, <span class="font-medium">overall training costs fell by a third.</span> Managers no longer had to repeat basics, saving hours each week.</p>
+                    <p class="min-w-0">The business impact was undeniable: <span class="font-medium">guests spent up to 60% more, transactions increased by 23%</span>, and organizers reported double-digit revenue growth after switching to Billfold. Tips doubled, queues shrank, and vendors finally had a system they could trust under pressure. <span class="font-medium">Today, it’s still running at large events worldwide</span>, a direct result of design choices made to balance speed, clarity, and resilience.</p>
                 </div>
                 </div>
 
-                <div class="flex w-full flex-col order-4 mt-5 mb-8 max-md:mt-[0.9375rem] max-md:mb-6 md:order-3 md:mt-0 md:mb-0">
+                <div class="flex w-full flex-col order-4 mt-5 max-[639px]:mb-8 md:order-3 md:mt-0">
             <button type="button" id="results-real-world-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="results-real-world-acc-panel">
                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
                     <svg id="results-real-world-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">IMPACT IN DETAILS</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">SEE FULL IMPACT</span></span>
             </button>
 
             <div id="results-real-world-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -2137,36 +2034,28 @@
                     <div id="results-real-world-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Faster onboarding</span><br/>
-                                Training time dropped by ~40%, letting employees get onto the floor weeks sooner and reducing lost productivity.
+                                <span class="font-medium">Faster service at scale</span><br/>
+                                Transactions that once took ~1 minute on traditional card readers dropped to under 2 seconds with RFID. At peak hours, bartenders could process more than 200 orders per hour, shrinking bar lines and keeping guests in the show instead of stuck in queues.
                             </div>
                             <div>
-                                <span class="font-medium">Higher certification success</span><br/>
-                                Pass rates rose by 60%, cutting down re-tests and boosting overall training efficiency.
+                                <span class="font-medium">Higher spending per guest</span><br/>
+                                When payment is invisible, people spend more. Guests no longer worried about wallets, phones, or failed card swipes. Clear on-screen confirmations made every tap trustworthy. Per-person spend rose up to 60% at some venues, and RFID users spent over 2× more than card users at large festivals.
                             </div>
                             <div>
-                                <span class="font-medium">Lower training costs</span><br/>
-                                Digital certification reduced expenses by a third, replacing repetitive manual checks.
+                                <span class="font-medium">Learned in minutes. Relied on all night.</span><br/>
+                                Most POS systems come with a training manual. This one didn&rsquo;t need one. Staff picked it up in their first shift, and because the interface was error-proof and the flow minimal, they could run hundreds of orders confidently without slowing down or second-guessing the screen.
                             </div>
                             <div>
-                                <span class="font-medium">Manager relief</span><br/>
-                                Freed up hours each week as managers no longer had to reteach basics, focusing instead on coaching and performance.
+                                <span class="font-medium">Tips doubled for vendors</span><br/>
+                                Staff not only served faster — they earned more. Seamless checkout made tipping effortless, and bartenders saw their tips double on average. A better UX flow had a direct impact on take-home pay.
                             </div>
                             <div>
-                                <span class="font-medium">Consistent knowledge</span><br/>
-                                Standardized onboarding ensured every store followed the same playbook, reducing costly errors.
+                                <span class="font-medium">Revenue growth for organizers</span><br/>
+                                Faster throughput, more transactions, higher per-guest spend — the combination drove up to 50% higher total revenue at major events. For organizers, switching to Billfold wasn't just a UX upgrade, it was a business decision that showed in the numbers.
                             </div>
                             <div>
-                                <span class="font-medium">Confidence on day one</span><br/>
-                                Clear progress tracking gave new hires visible milestones, lowering anxiety and turnover risk.
-                            </div>
-                            <div>
-                                <span class="font-medium">Engagement that lasts</span><br/>
-                                Gamified features like badges and leaderboards turned training from a chore into a motivator.
-                            </div>
-                            <div>
-                                <span class="font-medium">Scalable system</span><br/>
-                                A digital platform that worked across devices and regions, allowing Subway to train thousands without extra effort.
+                                <span class="font-medium">Reliable even when Wi-Fi wasn't</span><br/>
+                                When the network dropped, the POS kept running. Transactions were cached locally and synced automatically when connectivity returned — 99% offline success rate. No lost sales during failures, and real-time dashboards gave organizers visibility across every vendor the moment service resumed.
                             </div>
                         </div>
                     </div>
@@ -2174,220 +2063,50 @@
             </div>
                 </div>
 
-                <img src="assets/images/subway-results-main.png"
-                     alt="Impact metrics: faster employee onboarding, higher certification rates, and lower training costs"
-                     class="order-2 w-full rounded-[20px] object-contain md:hidden"/>
+                <picture class="order-2 md:hidden">
+                    <source media="(max-width: 639px)" srcset="assets/images/results-billfold-mobile.png"/>
+                    <img src="assets/images/results-billfold.png"
+                         alt="Billfold results and impact"
+                         class="py-8 w-full rounded-[20px] object-contain"/>
+                </picture>
 
                 <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
                 <div class="order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <div class="lqip-parallax-host min-w-0 hidden md:block" data-lqip-ref="assets/images/subway-results-side-1.png"><img src="assets/images/subway-results-side-1.png"
-                             alt="Training outcomes and certification success across Subway Russia stores"
-                             class="block md:block w-full shrink-0 rounded-[20px] object-cover aspect-[288/184] md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
-                        <img src="assets/images/subway-results-main.png"
-                             alt="Impact metrics: faster employee onboarding, higher certification rates, and lower training costs"
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/festival-pos-billfold.png"><img src="assets/images/festival-pos-billfold.png"
+                             alt="Festival POS with Billfold"
+                             class="hidden md:block w-full shrink-0 rounded-[20px] object-cover aspect-[288/184] md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
+                        <img src="assets/images/results-billfold.png"
+                             alt="Billfold results and impact"
                              class="hidden w-full rounded-[20px] object-contain md:block md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 xl:aspect-auto 2xl:h-[400px] 2xl:w-full"/>
                 </div>
                 </div>
                 </div>
 
-            </div>
-
-            </div>
-
-        </section>
-
-        <section id="results-hq-franchisees" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
-            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
-                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                        <h2 class="section-header w-full max-md:leading-[1.02] results-mobile-tight">Results for HQ and Franchisees:<br/>From Uncertainty to Control</h2>
-                    </div>
-
-                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Results for HQ and Franchisees:<br/>From Uncertainty to Control</h2>
-
-                    <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                            <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
-                                <p class="min-w-0">With all resources in one place, franchisees could finally stop chasing scattered answers and focus on running their business. <span class="font-medium">Store launches became up to 30% faster,</span> and everyday operations felt smoother and more predictable.</p>
-                            </div>
-
-                            <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
-                                <p class="min-w-0">At the same time, HQ saw <span class="font-medium">support requests drop by 40%</span>, saving hundreds of hours. Instead of fielding repetitive questions, teams could focus on higher-value work like marketing, growth programs, and supporting more franchisees at scale.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex w-full flex-col order-4 mt-5 mb-8 max-md:mt-[0.9375rem] max-md:mb-6 md:order-3 md:mt-0 md:mb-0">
-                            <button type="button" id="results-hq-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="results-hq-acc-panel">
-                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                                    <svg id="results-hq-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">impact in details</span></span>
-                            </button>
-
-                            <div id="results-hq-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
-                                <div class="min-h-0 overflow-hidden">
-                                    <div id="results-hq-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100">
-                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
-                                            <div>
-                                                <span class="font-medium">Centralized resources</span><br/>
-                                                Replaced scattered PDFs, emails, and outdated files with a single hub where everything was always up to date.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Step-by-step guidance</span><br/>
-                                                Gave owners a clear roadmap for opening and running stores, making launches smoother and more predictable.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Live and ongoing support</span><br/>
-                                                Webinars and online courses replaced one-off phone calls, helping owners stay aligned with brand updates.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Independence from HQ</span><br/>
-                                                Most answers became self-service, reducing back-and-forth calls and giving owners more control.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Consistency at scale</span><br/>
-                                                Ensured every new store opened with the same level of quality and compliance, no matter the region.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Support overload reduced</span><br/>
-                                                Repetitive questions dropped as franchisees found answers in the portal, freeing HQ staff for strategic work.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Clear visibility</span><br/>
-                                                HQ could track progress across stores, spotting gaps before they became compliance issues.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Brand and operations aligned</span><br/>
-                                                Standardized resources meant stores applied rules consistently, protecting brand trust.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Efficient scaling</span><br/>
-                                                New store openings became repeatable instead of one-off struggles, making expansion faster and more sustainable.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <img src="assets/images/subway-results-main-2.png"
-                             alt="Franchisee and HQ impact: faster store launches and fewer support requests"
-                             class="order-2 w-full rounded-[20px] object-contain md:hidden"/>
-
-                        <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                            <div class="order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                                <div class="lqip-parallax-host min-w-0 hidden md:block" data-lqip-ref="assets/images/subway-results-side-2.png"><img src="assets/images/subway-results-side-2.png"
-                                     alt="Centralized resources and guidance for franchise owners and HQ support teams"
-                                     class="block md:block w-full shrink-0 rounded-[20px] object-cover aspect-[288/184] md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
-                                <img src="assets/images/subway-results-main-2.png"
-                                     alt="Franchisee and HQ impact: faster store launches and fewer support requests"
-                                     class="hidden w-full rounded-[20px] object-contain md:block md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 xl:aspect-auto 2xl:h-[400px] 2xl:w-full"/>
-                            </div>
-                        </div>
-                    </div>
+                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            md:order-3 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-2
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt="Billfold"
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
                 </div>
             </div>
 
-        </section>
-
-        <section id="reflections" class="mb-[16px] md:mb-0 xl:mb-[16px] 2xl:mb-0">
-            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
-                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                        <h2 class="section-header w-full">Reflections &amp; Learnings</h2>
-                    </div>
-
-                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Reflections &amp; Learnings</h2>
-
-                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                            <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
-                                <p class="min-w-0">I’ve always believed <span class="font-medium">design is about helping people.</span> Not in an abstract sense, but in the small, everyday ways that make work less frustrating and more meaningful. For me, <span class="font-medium">the best projects are the ones where I can take away friction, make someone’s job easier, or give them the confidence to grow.</span></p>
-                            </div>
-
-                            <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
-                                <p class="min-w-0">Subway showed me that design goes deeper than tasks and screens — it shapes trust, motivation, and culture. Supporting employees while giving franchisees confidence wasn’t just a design challenge, <span class="font-medium">it reminded me why I love this work: to make jobs easier and workplaces stronger.</span></p>
-                            </div>
-                        </div>
-
-                        <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
-                            <div class="lqip-parallax-host min-w-0 max-md:order-2 max-md:my-6" data-lqip-ref="assets/images/girl-food-subway.png"><img src="assets/images/girl-food-subway.png"
-                                 alt="Subway team member serving guests — design aimed at frontline confidence and consistency"
-                                 class="overview-img-1 order-2 mt-0 w-full min-w-0 max-w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
-                        </div>
-
-                        <div class="flex w-full flex-col order-4 mt-5 max-md:mb-[34px] max-md:order-4 max-md:mt-[calc(1.375rem*1.1)] md:order-3 md:mt-0 md:mb-0">
-                            <button type="button" id="reflections-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="reflections-acc-panel">
-                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                                    <svg id="reflections-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">More reflections</span></span>
-                            </button>
-
-                            <div id="reflections-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
-                                <div class="min-h-0 overflow-hidden">
-                                    <div id="reflections-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
-                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
-                                            <div>
-                                                <span class="font-medium">Designing for real people, not just roles</span><br/>
-                                                Frontline employees had very different needs from HQ managers. Seeing their daily struggles taught me to design beyond "personas" and focus on lived experience.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Motivation is as important as usability</span><br/>
-                                                A usable tool isn't enough if people don't feel encouraged to use it. Leaderboards, streaks, and small wins showed me how design can shape behavior and keep people engaged.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Simplicity is harder than complexity</span><br/>
-                                                Onboarding looked like "just training modules," but making them clear, consistent, and motivating across hundreds of stores was a complex puzzle - and a rewarding one.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Cross-functional teamwork makes or breaks impact</span><br/>
-                                                This project wouldn't work without aligning content, training, and development. I learned how to translate business language into design decisions everyone could rally around.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Design influences culture, not just tasks</span><br/>
-                                                By reducing confusion and supporting trust between employees and HQ, design played a role in how people felt about their jobs. That's the kind of impact I want to keep creating.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                                max-md:order-6 max-md:mt-2
-                                max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
-                                flex flex-col gap-y-6
-                                md:order-3 md:mt-4 xl:mt-0
-                                xl:col-start-2 xl:row-start-2 xl:row-span-1
-                                2xl:col-start-2 2xl:row-start-2 2xl:row-span-1 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                                2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                        <img src="assets/images/subway-keyphrase-logo.png"
-                             alt="Subway logo"
-                             class="h-[56px] w-[30px] shrink-0"/>
-                        <p class="font-light text-5/8">Helping others feel confident turned out to be <span class="font-medium">the most rewarding part.</span></p>
-                    </div>
-                </div>
             </div>
 
             <script>
                 (function () {
                     var idConfigs = [
+                        { btnId: 'challenge-acc-btn',        wrapId: 'challenge-acc-panel-wrap',        panelId: 'challenge-acc-panel',        arrowId: 'challenge-acc-arrow' },
                         { btnId: 'my-part-acc-btn',           wrapId: 'my-part-acc-panel-wrap',           panelId: 'my-part-acc-panel',           arrowId: 'my-part-acc-arrow' },
-                        { btnId: 'ecosystem-emp-acc-btn',      wrapId: 'ecosystem-emp-acc-panel-wrap',      panelId: 'ecosystem-emp-acc-panel',      arrowId: 'ecosystem-emp-acc-arrow' },
-                        { btnId: 'ecosystem-fran-acc-btn',     wrapId: 'ecosystem-fran-acc-panel-wrap',     panelId: 'ecosystem-fran-acc-panel',     arrowId: 'ecosystem-fran-acc-arrow' },
-                        { btnId: 'ecosystem-hqfind-acc-btn',   wrapId: 'ecosystem-hqfind-acc-panel-wrap',   panelId: 'ecosystem-hqfind-acc-panel',   arrowId: 'ecosystem-hqfind-acc-arrow' },
                         { btnId: 'vendor-exp-acc-btn',         wrapId: 'vendor-exp-acc-panel-wrap',         panelId: 'vendor-exp-acc-panel',         arrowId: 'vendor-exp-acc-arrow' },
                         { btnId: 'guest-exp-acc-btn',          wrapId: 'guest-exp-acc-panel-wrap',          panelId: 'guest-exp-acc-panel',          arrowId: 'guest-exp-acc-arrow' },
                         { btnId: 'kiosk-exp-acc-btn',          wrapId: 'kiosk-exp-acc-panel-wrap',          panelId: 'kiosk-exp-acc-panel',          arrowId: 'kiosk-exp-acc-arrow' },
                         { btnId: 'results-real-world-acc-btn', wrapId: 'results-real-world-acc-panel-wrap', panelId: 'results-real-world-acc-panel', arrowId: 'results-real-world-acc-arrow' },
-                        { btnId: 'results-hq-acc-btn',         wrapId: 'results-hq-acc-panel-wrap',         panelId: 'results-hq-acc-panel',         arrowId: 'results-hq-acc-arrow' },
-                        { btnId: 'reflections-acc-btn',        wrapId: 'reflections-acc-panel-wrap',        panelId: 'reflections-acc-panel',        arrowId: 'reflections-acc-arrow' },
                     ].map(function (cfg) {
                         return {
                             btn:   document.getElementById(cfg.btnId),
@@ -2429,8 +2148,90 @@
             </script>
         </section>
 
+        <section id="give-image">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/give-billfold.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/give-billfold.png" alt="Billfold Give feature"/></div>
+        </section>
+
+        <section id="reflections" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 mb-[80px] xl:mb-[120px]">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:contents 2xl:contents">
+                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Reflections &amp; Growth</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0"><span class="font-medium">Billfold pushed me to design for real-world chaos, not polished screens.</span> Working remotely and solo, I had to move fast, trust my decisions, and make them work for bartenders with 30-second training and guests who barely looked at the UI.</p>
+                </div>
+                <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0">What mattered most were the small wins: one clearer total, one fewer tap, one steadier flow, and lines shrank, staff exhaled, sales climbed. It proved to me that the <span class="font-medium">best design shows its value under pressure, where clarity makes the biggest difference.</span></p>
+                </div>
+                </div>
+                </div>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] mt-[32px] xl:mt-[40px] xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/icons/mountain.svg"
+                             alt=""
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Growing Through Constraints</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p>Because I couldn't be on-site, <span class="font-medium">I had to adapt my research approach, relying on staff videos, real-time feedback loops, and rapid iterations with engineers in the field.</span></p>
+                        <p>It wasn't always perfect, but it taught me to stay curious, flexible, and resourceful.</p>
+                        <p>At the same time, working as the only designer in a startup pushed me to <span class="font-medium">grow in resilience and autonomy:</span> trusting my instincts, making fast decisions, and defending them to a cross-functional team that needed results, not just polished screens.</p>
+                    </div>
+                </div>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-4 2xl:col-start-1 2xl:row-start-4">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/icons/brain.svg"
+                             alt=""
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Thinking Beyond Interfaces</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p><span class="font-medium">I got a crash course in designing hardware and software together,</span> aligning screen logic with RFID behavior, and understanding how even a 1-second delay could break trust.</p>
+                        <p>That experience pushed me to <span class="font-medium">think less about individual screens and more about the system as a whole:</span> how devices, flows, and infrastructure connect to shape the user experience.</p>
+                    </div>
+                </div>
+
+                <div class="grid w-full min-w-0 gap-y-6 border-t border-b border-[#E9E9E9] pt-[48px] pb-[48px] md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-5 2xl:col-start-1 2xl:row-start-5">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/icons/puzzle.svg"
+                             alt=""
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Connecting UX to Business</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p><span class="font-medium">I saw first-hand how UX drives business metrics.</span></p>
+                        <p>Faster flows and clearer screens didn't just feel better, they increased revenue, enabled tens of thousands of extra transactions, and gave venues confidence in a system they could rely on.</p>
+                        <p><span class="font-medium">Design wasn't decoration here, it was directly tied to dollars, scale, and trust.</span></p>
+                    </div>
+                </div>
+
+                <div class="min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            mt-2 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-4
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-4 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt="Billfold"
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8"><span class="font-medium">When design removes friction, everyone wins:</span> staff feel supported, guests stay engaged, and the business sees the difference in the numbers.</p>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
         <!-- #next-project: previous / next project navigation -->
-        <section id="next-project" class="-mt-[1.35rem] md:-mt-[1.8rem] xl:-mt-[1.95rem] 2xl:-mt-[36px] flex flex-col gap-y-6 md:gap-y-8 mb-0">
+        <section id="next-project" class="flex flex-col gap-y-6 md:gap-y-8 mb-[-120px] md:mb-[-80px] xl:mb-[-104px] 2xl:mb-[-120px]">
             <nav class="next-project-nav flex flex-col gap-y-6 sm:flex-row sm:items-center sm:justify-between sm:gap-x-8" aria-label="Adjacent projects">
                 <a class="next-project-link next-project-prev card-detail no-underline" href="#"></a>
                 <a class="next-project-link next-project-next card-detail no-underline sm:text-right" href="#"></a>
@@ -2508,7 +2309,7 @@
             background: #FFFFFF;
             border: 1px solid #DEE6F5;
             border-radius: 20px;
-            z-index: 0;
+            z-index: 1;
             opacity: 0;
             --case-nav-overlap-opacity: 1;
             pointer-events: none;
@@ -2671,8 +2472,8 @@
             z-index: 4;
         }
 
-        #menu-subway,
-        #menu-subway img {
+        #map-image,
+        #map-image img {
             position: relative;
             z-index: 3;
         }
@@ -2685,7 +2486,7 @@
     </style>
     <div class="full-bleed bg-[#FFF2D7] h-[128px] flex items-center px-6 sm:px-8 md:px-10 xl:px-0 2xl:px-0">
         <div class="w-full max-w-[1280px] 2xl:max-w-[1440px] mx-auto flex items-center justify-between xl:px-6 2xl:px-0">
-            <a href="quray.html" class="flex items-center gap-x-[16px] no-underline group" aria-label="Previous project: Quray">
+            <a href="dreamkas.html" class="flex items-center gap-x-[16px] no-underline group" aria-label="Previous project: Dreamkas POS">
                 <span class="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-full bg-[#0007B2] transition-all duration-300 ease-out group-hover:bg-accent-yellow group-hover:scale-110">
                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 13L1 7L7 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#0007B2] transition-colors duration-300"/>
@@ -2693,7 +2494,7 @@
                 </span>
                 <span class="proj-nav-link font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark"><span class="min-[500px]:hidden">PREV</span><span class="hidden min-[500px]:inline">Previous Project</span></span>
             </a>
-            <a href="billfold.html" class="flex items-center gap-x-[16px] no-underline group" aria-label="Next project: Billfold POS">
+            <a href="subway.html" class="flex items-center gap-x-[16px] no-underline group" aria-label="Next project: Subway">
                 <span class="proj-nav-link proj-nav-link-right font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Next<span class="hidden min-[500px]:inline"> Project</span></span>
                 <span class="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-full bg-[#0007B2] transition-all duration-300 ease-out group-hover:bg-accent-yellow group-hover:scale-110">
                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2706,7 +2507,7 @@
 
     <div class="flex flex-col">
 
-    <footer id="footer-match" class="site-footer" style="
+    <footer id="footer-match" class="site-footer full-bleed" style="
   position: relative;
   background: #0016F2;
   height: 920px;
@@ -2829,7 +2630,7 @@
 
 </footer>
 
-        <section class="footer-year-strip" aria-label="Site colophon" style="
+        <section class="footer-year-strip full-bleed" aria-label="Site colophon" style="
           position: relative;
           width: 100vw;
           left: 50%;
@@ -2851,7 +2652,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         gsap.registerPlugin(ScrollTrigger);
-        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         const menuTween = gsap.timeline({paused: true})
             .to(".menulink", {
@@ -2904,6 +2704,8 @@
             });
         });
 
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
         if (!reducedMotion) {
             const parallaxNarrow = window.matchMedia("(max-width: 767px)");
             const parallaxImages = gsap.utils.toArray("[data-parallax-image]");
@@ -2936,14 +2738,14 @@
         const overviewCard = overviewSection ? overviewSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
         const reflectionsSection = document.getElementById("reflections");
         const reflectionsCard = reflectionsSection ? reflectionsSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
-        const sectionIds = ["overview", "my-part", "research", "learning", "results-real-world"];
+        const sectionIds = ["overview", "my-part", "research", "ecosystem", "results-real-world"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
         const sideNavIndicator = sideNav ? sideNav.querySelector(".case-side-nav-indicator") : null;
         const sideNavToggle = document.getElementById("case-side-nav-toggle");
         const sideNavMenu = document.getElementById("case-side-nav-menu");
         const overlapBlockers = Array.from(document.querySelectorAll(
-            '#menu-subway, #menu-subway img, [data-parallax-wrap], [data-parallax-wrap] img, main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3, main [class*="bg-[#ECF1F4]"]'
+            '#map-image, #map-image img, [data-parallax-wrap], [data-parallax-wrap] img, main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3, main [class*="bg-[#ECF1F4]"]'
         ));
 
         if (sideNav && overviewSection && overviewCard && reflectionsSection && sideNavLinks.length) {
@@ -3053,7 +2855,7 @@
                         const targetNode = document.getElementById(targetId);
                         if (!targetNode) return;
                         const targetTop = absTop(targetNode) - SCROLL_OFFSET;
-                        const useKeyphraseLanding = targetId === "users-subway" || targetId === "results-real-world";
+                        const useKeyphraseLanding = targetId === "ecosystem" || targetId === "results-real-world";
                         if (!useKeyphraseLanding) {
                             pendingAnchorDocTop = null;
                             pendingAnchorUntil = 0;
@@ -3087,7 +2889,7 @@
             }
 
             function getSectionKeyphraseAnchorTop(sectionId) {
-                if (sectionId !== "users-subway" && sectionId !== "results-real-world") return null;
+                if (sectionId !== "ecosystem" && sectionId !== "results-real-world") return null;
                 const targetSection = document.getElementById(sectionId);
                 if (!targetSection) return null;
                 const localCard = targetSection.querySelector('div[class*="bg-[#ECF1F4]"]');

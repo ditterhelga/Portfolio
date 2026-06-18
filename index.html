@@ -684,6 +684,29 @@
             color: #3b47c2;
             -webkit-text-fill-color: #3b47c2;
         }
+
+        #work .work-case-card--coming-soon .card-image-frame,
+        #work .work-case-card--coming-soon .work-card-cta--coming-soon {
+            cursor: default;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #work .work-case-card--coming-soon:hover h3.card-title.intro-scroll-reveal .word {
+                color: #0016f2;
+                -webkit-text-fill-color: #0016f2;
+            }
+
+            #work .work-case-card--coming-soon .card-image-frame:hover .card-image,
+            #work .work-case-card--coming-soon .card-image-frame:hover .card-image-overlay {
+                transform: none;
+                opacity: 0;
+            }
+        }
+
+        #work .work-card-cta--coming-soon {
+            pointer-events: none;
+        }
+
         #cards-beyond .beyond-card-cta-link {
             cursor: default;
         }
@@ -1053,6 +1076,10 @@
 
             #work .work-cards-stack > .card-wrapper:nth-child(4) {
                 z-index: 4;
+            }
+
+            #work .work-cards-stack > .card-wrapper:nth-child(5) {
+                z-index: 5;
             }
 
             /* Shell: fixed 722px slot; page-colored so area around scaled .work-card-surface isn’t white */
@@ -2499,6 +2526,53 @@
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
+                        <span class="badge">Product design</span>
+                        <span class="badge">Music hardware & software</span>
+                        <span class="badge">Startup</span>
+                    </div>
+
+                    <div class="group card-content work-case-card--coming-soon">
+                        <div class="block w-full shrink-0 sm:w-auto sm:max-w-full">
+                            <div class="card-image-frame">
+                                <div class="card-image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/Quray-main.png">
+                                    <img class="card-image lqip-fadein" src="assets/images/Quray-main.png" alt="Quray Project" loading="lazy"/>
+                                </div>
+                                <div class="card-image-overlay" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                        <div class="card-description">
+                            <div class="block w-fit max-w-full">
+                                <h3 class="card-title intro-scroll-reveal">Quray</h3>
+                            </div>
+
+                            <div class="card-paragraph">
+                                <p class="card-text">Designing the configurator that turns a touchless gestural instrument into something musicians can understand, trust, and perform with. <span class="font-medium">Covering the full product:</span> configurator, device interaction, and the on-stage experience.</p>
+                                <p class="card-text">My most recent project. Research to working prototype, designed and built in code using an AI-assisted workflow. <span class="font-medium">Currently in user testing.</span></p>
+                            </div>
+
+                            <div class="card-detail" aria-disabled="true">
+                                <span class="work-card-cta work-card-cta--coming-soon">
+                                <span class="work-card-cta-icon" aria-hidden="true">
+                                    <svg class="work-card-cta-chevron" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M22 18L28.25 24.25L22 30.5" stroke="white" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <img class="work-card-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
+                                </span>
+                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">STORY COMING SOON</span></span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-wrapper">
+                <div class="card">
+                    <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
+                    <div class="card-badges">
                         <span class="badge">End-to-end ux design</span>
                         <span class="badge">Restaurant training and operations</span>
                     </div>
@@ -3266,6 +3340,8 @@
                         const surface = wrapper.querySelector(".work-card-surface");
                         if (!surface) return;
 
+                        wrapper.style.zIndex = String(index + 1);
+
                         if (index === wrappers.length - 1) {
                             gsap.set(surface, { opacity: 1, scale: 1 });
                             return;
@@ -3398,6 +3474,8 @@
             let isOverCard = false;
 
             cardFrames.forEach(frame => {
+                if (frame.closest(".work-case-card--coming-soon")) return;
+
                 frame.addEventListener("mouseenter", () => {
                     isOverCard = true;
                     frame.style.cursor = "none";
