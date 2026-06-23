@@ -1159,6 +1159,93 @@
             }
         }
 
+        /* Comparison slider: before/after configurator */
+        .quray-image-caption {
+            font-family: var(--font-family-inter);
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 28px;
+            font-style: italic;
+            color: #8A8A8A;
+        }
+
+        .comparison-slider {
+            --radius-lg: 20px;
+            --text-sm: 0.875rem;
+            --split: 50;
+            position: relative;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+            cursor: ew-resize;
+        }
+
+        .comparison-slider__image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: unset;
+            pointer-events: none;
+        }
+
+        .comparison-slider__image--after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            clip-path: inset(0 0 0 calc(var(--split) * 1%));
+        }
+
+        .comparison-slider__divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(var(--split) * 1%);
+            width: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .comparison-slider__handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            transform: translate(-50%, -50%);
+            cursor: ew-resize;
+            pointer-events: auto;
+            z-index: 3;
+        }
+
+        .comparison-slider__label {
+            position: absolute;
+            top: 16px;
+            font-size: var(--text-sm);
+            color: #fff;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .comparison-slider__label--before {
+            left: 16px;
+        }
+
+        .comparison-slider__label--after {
+            right: 16px;
+        }
+
         
 
         /* ── Footer horizontal padding — matches page content column at every breakpoint ── */
@@ -1248,11 +1335,12 @@
             </button>
             <nav id="case-side-nav-menu">
                 <span class="case-side-nav-indicator" aria-hidden="true"></span>
-                <a href="#overview" data-target="overview" class="case-side-nav-link">Context</a>
-                <a href="#my-part" data-target="my-part" class="case-side-nav-link">My Role</a>
+                <a href="#context" data-target="context" class="case-side-nav-link">Context</a>
+                <a href="#my-role" data-target="my-role" class="case-side-nav-link">My Role</a>
                 <a href="#research" data-target="research" class="case-side-nav-link">Research</a>
-                <a href="#ecosystem" data-target="ecosystem" class="case-side-nav-link">Solution</a>
-                <a href="#results-real-world" data-target="results-real-world" class="case-side-nav-link">Impact</a>
+                <a href="#architecture" data-target="architecture" class="case-side-nav-link">Architecture</a>
+                <a href="#prototype" data-target="prototype" class="case-side-nav-link">Prototype</a>
+                <a href="#reflections" data-target="reflections" class="case-side-nav-link">Reflections</a>
             </nav>
         </aside>
 
@@ -1263,7 +1351,7 @@
                 <span aria-hidden="true">/</span>
                 <span class="text-[#8A8A8A]">Quray</span>
             </div>
-            <h1 class="quray-hero-title quray-page-title">Hand movement becomes music. The configurator makes it playable.</h1>
+            <h1 class="quray-hero-title quray-page-title">Played in the air. Trusted through the software.</h1>
             <div class="quray-hero-media image-block mt-10">
                 <div class="quray-hero-media-bg full-bleed overflow-hidden bg-[#1D1E2B] py-8 md:py-12 xl:py-[80px]">
                     <div class="flex w-full justify-center px-4 sm:px-8 md:px-6 2xl:px-8">
@@ -1281,14 +1369,14 @@
                         <img class="w-[232px] h-auto" src="assets/images/quray-logo.png" alt="Quray logo"/>
                     </div>
                     <div class="intro-description flex min-w-0 flex-col gap-y-2 text-5/8 font-light xl:col-start-1 xl:row-start-2">
-                        <p><span class="font-medium">Quray is a touchless music controller:</span> ten sensors track your hands in the air and <span class="font-medium">turn movement into MIDI and CV</span>, control signals for synthesizers and modular systems. The hardware was already impressive. The software experience wasn't.</p>
-                        <p>This is an in-progress case study. <span class="font-medium">The product is still being designed and tested, so the focus here is on the work completed so far:</span> the research, the architecture, the prototype, the decisions made, and the assumptions still being tested.</p>
+                        <p><span class="font-medium">Quray is a touchless music controller:</span> ten sensors track your hands in the air and turn movement into MIDI and CV, control signals for synthesizers and modular systems. <span class="font-medium">The hardware was already impressive. The software experience wasn't.</span></p>
+                        <p>Quray is still in progress, so I do not want to pretend the story is closed. <span class="font-medium">This case study shows the decisions that moved the product from a developer interface to a working prototype.</span> The next update will come from user testing.</p>
                     </div>
                 </div>
-                <div class="intro-right metadata-block min-w-0 xl:col-start-2 xl:row-start-2 xl:max-w-[704px] xl:shrink-0 xl:self-start 2xl:max-w-[688px]">
+                <div class="intro-right metadata-block min-w-0 font-light xl:col-start-2 xl:row-start-2 xl:max-w-[704px] xl:shrink-0 xl:self-start 2xl:max-w-[688px]">
                     <div class="metadata-grid grid grid-cols-1 gap-y-4">
                         <div class="metadata-role flex flex-col gap-y-2">
-                            <p class="text-5/8"><span class="font-medium">Role:</span> Sole Product Designer — research, UX architecture, design system, working prototype in code</p>
+                            <p class="text-5/8"><span class="font-medium">Role:</span> Sole Product Designer: research, UX architecture, design system, working prototype in code</p>
                         </div>
                         <div class="metadata-timeline flex flex-col gap-y-2">
                             <p class="text-5/8"><span class="font-medium">Team:</span> developer, founder</p>
@@ -1298,11 +1386,10 @@
                         </div>
                         <div class="metadata-impact flex flex-col gap-y-4">
                             <div class="font-medium">Impact</div>
-                            <p class="text-5/8">• Turned a developer tool into a structured product experience</p>
-                            <p class="text-5/8">• Researched an unfamiliar technical domain and translated it into a usable product structure</p>
-                            <p class="text-5/8">• Designed the configurator architecture, interaction model, design system, and prototype</p>
-                            <p class="text-5/8">• Built the prototype directly in code with an AI-assisted workflow</p>
-                            <p class="text-5/8">• Currently testing with musicians and using the results to shape the next iteration</p>
+                            <p class="text-5/8">• Turned a developer tool into a product with a library, a sync model, and a stage-safe performance view</p>
+                            <p class="text-5/8">• Went deep enough into an unfamiliar domain to reframe the brief</p>
+                            <p class="text-5/8">• Defined the product's information architecture from scratch</p>
+                            <p class="text-5/8">• Built a working prototype in code that's now in usability testing</p>
                         </div>
                     </div>
                 </div>
@@ -1310,10 +1397,10 @@
         </section>
 
         <section id="pos-image">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/djs-dont-dance-no-more.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/djs-dont-dance-no-more.png" alt="Musicians and live performance context"/></div>
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-glowing.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/quray-glowing.png" alt="Quray device glowing"/></div>
         </section>
 
-        <section id="overview" class="flex flex-col items-start">
+        <section id="context" class="flex flex-col items-start">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
@@ -1321,21 +1408,18 @@
 
                 <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
                     <h2 class="section-header w-full">Overview</h2>
-                    <div class="overview-text-1 font-light text-5/8 min-w-0">
-                    <p class="min-w-0">When I joined, <span class="font-medium">Quray was not an idea on paper</span>. The hardware had already been shown at <span class="font-medium">Superbooth Berlin</span> and was impressive enough to get attention. What was missing was the <span class="font-medium">product layer</span> around it: how presets live, how they sync to the device, what gets edited, what gets saved, and what is safe to perform with.</p>
-                    </div>
                 </div>
 
                 <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Overview</h2>
 
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 md:order-1 xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 xl:col-span-1 xl:row-start-2 2xl:gap-y-[40px]">
                 <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 hidden md:block 2xl:min-w-0">
-                    <p class="min-w-0">When I joined, <span class="font-medium">Quray was not an idea on paper</span>. The hardware had already been shown at <span class="font-medium">Superbooth Berlin</span> and was impressive enough to get attention. What was missing was the <span class="font-medium">product layer</span> around it: how presets live, how they sync to the device, what gets edited, what gets saved, and what is safe to perform with.</p>
+                <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0">When I joined, Quray was not an idea on paper. <span class="font-medium">The hardware had already been shown at Superbooth Berlin</span> and was impressive enough to get attention. But the software had not caught up with the instrument yet.</p>
                 </div>
 
                 <div class="overview-text-2 order-3 font-light text-5/8 min-w-0 md:order-none 2xl:min-w-0">
-                    <p class="min-w-0">The brief was framed as a <span class="font-medium">UI cleanup</span>. I treated it as a <span class="font-medium">product architecture problem</span>. Before changing the interface, I had to define the configurator's actual role: <span class="font-medium">not just an editor, but the bridge between invisible hand movement</span>, external sound, and a physical device used under performance pressure.</p>
+                    <p class="min-w-0">The interface was only the visible symptom. <span class="font-medium">The real work was defining the system behind it:</span> how invisible gesture, preset logic, and device state stop being separate technical pieces and start behaving like an instrument.</p>
                 </div>
                 </div>
                 </div>
@@ -1348,9 +1432,9 @@
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
                     <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt="Billfold"
+                         alt=""
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">The job became to design the <span class="font-medium">missing product layer</span>: the structure and feedback that let a musician move from an experimental device to a <span class="font-medium">playable instrument</span>.</p>
+                    <p class="font-light text-5/8">Quray was already strong as hardware. The work was <span class="font-medium">to make it understandable as a product.</span></p>
                 </div>
 
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-6 md:order-3 xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 xl:col-span-1 xl:row-start-3 2xl:gap-y-[40px]">
@@ -1389,11 +1473,11 @@
                 <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                 <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0">Quray's <span class="font-medium">core interaction is invisible</span>. The device has buttons and a screen for stage navigation, but the playing happens in empty air above it. Users <span class="font-medium">can't see the field</span> and can't tell whether their movement is being tracked. And because Quray is a controller, not a synthesizer, it makes no sound on its own. A new user can do everything right and <span class="font-medium">still hear nothing</span>.</p>
+                    <p class="min-w-0">Quray is played in empty air, and <span class="font-medium">nothing about that is visible.</span> The device has buttons and a screen for stage navigation, but the actual playing surface has no physical edges. Users <span class="font-medium">can't see the field</span> and can't tell whether their movement is being tracked. And because Quray is a controller, not a synthesizer, <span class="font-medium">it makes no sound on its own</span>. A new user can do everything right and still hear nothing.</p>
                 </div>
 
                 <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">The audience made the problem harder. They have watched <span class="font-medium">too many expressive controllers</span> <span class="font-medium">fail at the software layer</span> and they are skeptical by experience, technically demanding, and precise about control. I also didn't come from this world, so I couldn't just start drawing screens. I had to learn enough to make decisions that <span class="font-medium">weren't guesses</span>.</p>
+                    <p class="min-w-0">The audience made the problem harder. They have watched <span class="font-medium">too many expressive controllers arrive as impressive hardware and then leave buyers alone with software that made no sense.</span> So they are skeptical for good reasons. If the logic is vague, they notice immediately, and they expect control when the product touches their setup.</p>
                 </div>
                 </div>
 
@@ -1413,27 +1497,27 @@
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
                                 <span class="font-medium">Invisible interaction</span><br/>
-                                There is nothing to look at where the music happens. The active field is a volume of air above the device, and zones have no physical edges. Each zone can trigger a note, control a parameter, or send a CV signal, but the user cannot see where the field starts, where one zone ends, or whether their hand is in the right place. The interface had to become the place where they could see the field, and learn how the invisible instrument behaves.
+                                There is nothing to look at where the music happens. The active field is a volume of air above the device, and zones have no physical edges. Each zone can trigger a note, control a parameter, or send a CV signal, but the user cannot see where the field starts, where one zone ends, or whether their hand is in the right place. The interface had to show the field geometry before asking anyone to configure it.
                             </div>
                             <div>
                                 <span class="font-medium">No sound of its own</span><br/>
-                                Quray is a controller, not a synthesizer. It only produces control signals, so the user has to connect external gear and configure the mappings before anything can be heard. That makes the first-use problem harder: silence can mean "nothing is connected," "the mapping is wrong," "the synth is not responding," or "the device is not tracking." The software had to replace that uncertainty with visible causality.
+                                Quray is a controller, not a synthesizer. It only produces control signals, so the user has to connect external gear and configure the mappings before anything can be heard. That makes the first-use problem harder: silence can mean four different things: nothing connected, wrong mapping, dead synth, lost tracking, and the user has no way to tell which. The software had to show cause and effect on screen instead.
                             </div>
                             <div>
-                                <span class="font-medium">A complex configuration model</span><br/>
-                                Before Quray can feel playable, the user has to understand the model behind it: presets, zones, mappings, MIDI, CV, device memory, save state, and sync. None of these concepts can be hidden completely, because this audience needs control. The challenge was to make the structure visible without turning the interface back into a developer panel.
+                                <span class="font-medium">No shortcuts on the mental model</span><br/>
+                                Before Quray can feel playable, the user has to build a mental model: presets contain zones, zones have mappings, mappings route to Note, MIDI, or CV, everything has a save state, and the device has its own memory that doesn't automatically match the browser. None of this can be hidden — this audience needs to see and control the full structure. The structure had to stay visible and inspectable without looking like a settings dump.
                             </div>
                             <div>
                                 <span class="font-medium">A skeptical audience, for good reasons</span><br/>
-                                The expressive-controller market is a graveyard. Enhancia closed and left users with orphaned hardware. ROLI went through bankruptcy and restructuring. The repeating pattern is familiar: impressive hardware, a convincing demo, configuration software built like a developer tool, and a buyer left alone in front of complexity. That is how an expressive instrument becomes "an expensive preset machine." The people who buy instruments like Quray have watched this happen repeatedly. They are not scared of configuration. They patch modular systems for fun. The problem starts when the software feels like someone else's internal logic: you can change values, but you do not really know what they mean, what they affect, or whether the result will survive outside the browser.
+                                The expressive-controller market is a graveyard. Enhancia closed and left users with devices that had no support. ROLI went through bankruptcy and restructuring. The pattern repeats: impressive hardware, a convincing demo, configuration software built like a developer tool, and a buyer left alone in front of complexity. That is how an expressive instrument ends up barely used and resold — what modular forum users have started calling "a very expensive preset machine." The people who buy instruments like Quray have watched this happen repeatedly. They are not scared of configuration. They patch modular systems for fun. The problem starts when the software feels like someone else's internal logic: you can change values, but you never quite know what they mean, what breaks if you're wrong, or whether any of it survives outside the browser.
                             </div>
                             <div>
                                 <span class="font-medium">Not just a web app</span><br/>
-                                The configurator is one half of the product. The other half is the physical device, and the difficult part is the relationship between them. What is saved in the browser, what is stored on the device, what happens during calibration, what the hardware buttons do on stage, and what can fit on a tiny monochrome screen during a performance. I own that whole boundary, including the on-device screen states, which became a separate design challenge in 128 pixels.
+                                The configurator is one half of the product. The other half is the physical device, and the difficult part is the relationship between them: which state lives in the browser, which lives on the device, what the hardware buttons do on stage, and what can actually fit on a monochrome screen mid-performance. I own that whole boundary, including the on-device screen states, which became a separate design challenge in 128 pixels.
                             </div>
                             <div>
                                 <span class="font-medium">An unfamiliar domain, my personal challenge</span><br/>
-                                I did not come from the music technology world, and in this project there was no way around that. You cannot design a MIDI/CV mapping interface without understanding what a CV voltage range actually does, why V/Oct matters for pitch, or what happens on stage when a preset switches mid-note. So I did the unglamorous work: studied the domain until I could follow forum arguments between modular users, learned how the signal chain works end to end, and talked to musicians, not to validate screens, but to understand how they think. They don't think in settings; they think in sound, gear, and muscle memory. Until I could think a little bit like them, every design decision would have been a guess.
+                                I did not come from the music technology world, and in this project there was no way around that. You cannot design a MIDI/CV mapping interface without understanding what a CV voltage range actually does, why V/Oct matters for pitch, or what happens on stage when a preset switches mid-note. So I started there: studied the domain until I could follow forum arguments between modular users, learned how the signal chain works end to end, and talked to musicians, not to validate screens, but to understand how they think. They don't think in settings; they think in sound, gear, and muscle memory. Until I could follow that logic, every design decision would have been a guess.
                             </div>
                         </div>
                     </div>
@@ -1442,9 +1526,23 @@
                 </div>
 
                 <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
-                <div class="lqip-parallax-host min-w-0 max-md:order-2 max-md:my-6" data-lqip-ref="assets/images/challenge-billfold.png"><img src="assets/images/challenge-billfold.png"
-                     alt="Billfold challenge"
-                     class="overview-img-1 order-2 mt-0 w-full min-w-0 max-w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+                <div class="flex w-full flex-col order-2 mt-0 min-w-0 max-w-full max-md:order-2 max-md:my-6 md:order-none">
+                <div class="comparison-slider w-full" style="--split: 50">
+                    <img class="comparison-slider__image comparison-slider__image--before" src="assets/images/configurator-before.png" alt="Quray configurator before redesign"/>
+                    <img class="comparison-slider__image comparison-slider__image--after" src="assets/images/configurator-after.png" alt="Quray configurator after redesign"/>
+                    <div class="comparison-slider__divider" aria-hidden="true">
+                        <div class="comparison-slider__handle" role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M6 10L2 10M2 10L5 7M2 10L5 13" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="comparison-slider__label comparison-slider__label--before">Before</span>
+                    <span class="comparison-slider__label comparison-slider__label--after">After</span>
+                </div>
+                <p class="quray-image-caption mt-4">This is a working product prototype, not a clickable mockup — <a href="https://quray-configurator.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-inherit underline decoration-[#8A8A8A] underline-offset-2 hover:text-[#0016F2] hover:decoration-[#0016F2]">try it here</a></p>
+                </div>
                 </div>
                 </div>
 
@@ -1457,9 +1555,9 @@
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
                     <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt="Billfold"
+                         alt=""
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">The hard part was not making the interface cleaner.<br/>It was making a <span class="font-medium">complex instrument configurable</span>.</p>
+                    <p class="font-light text-5/8">Cleaning up the interface was the easy part.<br/><span class="font-medium">Making the instrument make sense — that was the problem.</span></p>
                 </div>
             </div>
 
@@ -1467,7 +1565,7 @@
 
         </section>
 
-<section id="my-part" class="flex flex-col gap-y-0 pb-[26px] md:pb-[29px] xl:pb-[38px] 2xl:pb-[43px]">
+<section id="my-role" class="flex flex-col gap-y-0 pb-[12px] md:pb-[14px] xl:pb-[18px] 2xl:pb-[20px]">
             <div class="flex w-full max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:max-w-[856px] 2xl:max-w-[1048px]">
             <h2 class="section-header w-full">My Part in This</h2>
 
@@ -1476,10 +1574,10 @@
                     <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
                         <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                             <div class="my-part-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">I'm the sole designer on this project, everything from domain discovery to the working prototype is mine: audience research, competitive analysis, the interaction model, information architecture, the design system, the configurator build, and the full software/hardware interaction: how the device connects, calibrates, syncs, what its buttons do, and what its on-board screen shows during a performance.</p>
+                                <p class="min-w-0">I'm the sole designer on this project. <span class="font-medium">My work covers the configurator end to end</span>: research, product architecture, interaction design, design system, and the working prototype in code. The scope also includes the <span class="font-medium">product logic between the web app and the physical device</span>: how the browser, the device, and the stage controls work as one system.</p>
                             </div>
                             <div class="my-part-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">Quray looks smaller than the enterprise systems I've designed, but it's the same category of problem: a hardware/software ecosystem with synchronized state, a technical audience, and routing logic that has to survive stage pressure. The team is smaller, but the system isn't simpler. And it's the project where I rebuilt my workflow around AI without handing over the decisions.</p>
+                                <p class="min-w-0">Quray looks smaller than the enterprise systems I've designed before, <span class="font-medium">but it belongs to the same category of problem</span>: a technical product with synchronized state, complex logic, and users who cannot afford ambiguity. <span class="font-medium">It is also the project where I rebuilt my workflow around AI</span>, using it to move faster without handing over the product decisions.</p>
                             </div>
                         </div>
                     </div>
@@ -1503,27 +1601,27 @@
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
                                 <span class="font-medium">Research before the trade show</span><br/>
-                                I joined the project days before Superbooth in Berlin. I couldn't be there in person — so I prepared a field research script: what to ask visitors who tried the device, what to observe while they played, which assumptions to test. The founders ran it at the booth, and the results came back as the project's first real user input — including the observation that shaped the entire onboarding strategy.
+                                I joined the project days before Superbooth Berlin. I couldn't be there in person, so I prepared a field research script for the founders to use at the booth. The point was not to collect polite reactions, but to notice where people stopped understanding the product. The founders ran it during the event, and the results came back as the project's first real user input, including the observation that shaped the onboarding strategy.
                             </div>
                             <div>
                                 <span class="font-medium">Domain first, screens later</span><br/>
-                                I don't come from the modular synth world, so I treated that as the first thing to fix. Research was built in layers — the founders' assumptions as hypotheses, competitive analysis of every comparable controller, then real user discussion on ModWiggler, Elektronauts, and Reddit. And I talked to musicians directly — not about my screens, but about their world. I wanted to be in their skin for a while, because they think nothing like SaaS users: in sound and gear first, in parameters and numbers last. That order — understand the thinking, then design the structure — is the whole method.
+                                I don't come from the music world, so I treated that as the first thing to fix. I started by learning how this world works: MIDI, CV, modular setups, routing, device memory, and the way musicians talk about control. I moved through sources in order of trust: founders' assumptions first as hypotheses, then comparable controllers, then the forums where this audience actually argues.<span class="case-acc-para-gap">I also talked to musicians directly, not about my screens, but about their world. I wanted to understand what felt obvious to them and completely invisible to me. They were not thinking like SaaS users choosing settings. They were thinking through sound, gear, habits, and what their hands already know. Until I understood the logic of the instrument, the interface would only be a cleaner version of my own guesses.</span>
                             </div>
                             <div>
-                                <span class="font-medium">AI as a research engine — with my judgment as the filter</span><br/>
-                                I used AI seriously here, and it changed what one designer can cover. I ran large-scale deep research across the forums where this audience actually lives — ModWiggler, Elektronauts, Reddit, KVR — plus competitor teardowns, review analysis, and domain learning: MIDI implementation, CV behavior, the conventions of modular gear. Work that would have taken weeks of manual reading happened in days. But speed only matters if the output survives scrutiny, and a lot of it didn't. Every finding went through the same test: does this match how real musicians in this niche actually behave, or is it a confident generalization? I kept what was grounded, discarded what wasn't, and documented why. AI covered the ground. Critical thinking decided what was true.
+                                <span class="font-medium">AI as a research engine, judgment as the filter</span><br/>
+                                I used AI seriously here. The domain was too wide to enter slowly: hardware logic, market history, competitor failures, forum language, all at once. AI helped me move through that material fast enough to keep designing.<span class="case-acc-para-gap">The useful part was not that AI "found answers." It helped me stay in conversation with the material: comparing sources, sharpening questions from forum discussions, stress-testing ideas before spending time on them. When something sounded too neat, I treated that as a warning sign. The final decisions still had to make sense for this hardware and for musicians who would immediately notice if the logic was fake.</span>
                             </div>
                             <div>
                                 <span class="font-medium">Decisions logged as they happened</span><br/>
-                                Every significant decision was recorded at the moment it was made, with the alternative I rejected and why. Not reconstructed afterward for a portfolio — captured while it was fresh, including the mistakes.
+                                I documented decisions while they were still fresh. This project changed quickly and I did not want to invent a clean story afterward. When I changed direction, I wrote down why. When something looked good in the abstract but failed in the prototype, I kept that too. The notes became part of the design process, not a portfolio exercise done at the end.
                             </div>
                             <div>
                                 <span class="font-medium">A real prototype, built in code</span><br/>
-                                After locking the visual direction in Figma, I built the configurator directly in code with Cursor — React, a design token system, a living styleguide. This is the part of my workflow I'd argue is a genuine competitive advantage: instead of a clickable picture, I put a working product in front of musicians. Real filters that filter, live device state, actual sync logic, every edge case behaving. The prototype that gets tested is the product that gets built — and the design system literally cannot drift from the implementation, because it is the implementation.
+                                After locking the visual direction in Figma, I built the configurator directly in code with Cursor: React, a design token system, and a living styleguide. This is the part I would not go back from. Instead of putting a clickable picture in front of musicians, I put something in front of them that behaves.<span class="case-acc-para-gap">That matters for this project. A static prototype can show the layout, but it cannot show whether the model makes sense once the editor state, sync logic, and device memory start interacting. Building in code made the weak parts visible earlier. It also meant the design system could not drift away from implementation, because the prototype was already using the same components and tokens.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Testing now, iterating now</span><br/>
-                                The prototype is currently in usability sessions with target musicians. The next phase of this case study — what broke, what surprised me, what changed — is being written as it happens.
+                                <span class="font-medium">What comes next</span><br/>
+                                The prototype is now being tested with target musicians. This case study will continue from there. The next part is what I actually care about: where musicians got lost, where they didn't, and what changed because of that.
                             </div>
                         </div>
                     </div>
@@ -1533,7 +1631,7 @@
 
         </section>
 
-        <section id="map-image">
+        <section id="map-image" class="-mt-[28px] md:-mt-[24px] xl:-mt-[36px] 2xl:-mt-[48px]">
             <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-hand-play.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/quray-hand-play.png" alt="Hand playing Quray"/></div>
         </section>
 
@@ -1547,10 +1645,10 @@
                     <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
                         <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                             <div class="research-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">I didn't know this domain, and the founder's understanding of the audience was marketing-led — "expressive, visual, for everyone." That works for a launch video and fails for a configurator. So I built research in layers: founder assumptions as hypotheses, competitive analysis, then real user discussion in the forums where this audience actually argues.</p>
+                                <p class="min-w-0">I started with research because I didn't know the domain. <span class="font-medium">The founder's view of the audience was still very broad:</span> expressive, visual, open to everyone. That made sense for explaining why the device was exciting, but it was too vague for the configurator. <span class="font-medium">The software had to support a more specific moment:</span> a musician sitting with their own gear and trying to understand whether Quray could become part of their setup.</p>
                             </div>
                             <div class="research-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">One finding reframed everything. The expressive-controller market hasn't failed on technology — it has failed on product. The pattern is always the same: impressive hardware ships with software that reads like a developer's internal tool, and the buyer never finds their way in.</p>
+                                <p class="min-w-0"><span class="font-medium">Every comparable product lost people at the same moment</span>: not at the demo, but afterwards, when the buyer was alone with the software and it started to feel like someone else's internal logic. <span class="font-medium">That's when impressive devices stop being instruments and start collecting dust.</span> That was the problem I needed to design against — and it changed what I thought I was building.</p>
                             </div>
                         </div>
                     </div>
@@ -1575,19 +1673,19 @@
                                 <div class="flex flex-col gap-y-4 font-light text-5/8">
                                     <div>
                                         <span class="font-medium">Layered sources, in order of trust</span><br/>
-                                        Founders' assumptions first — useful as hypotheses, never as facts. Then competitive research: gestural controllers, expressive MIDI instruments, modular tools, hardware companion apps. Then the real material: ModWiggler, Elektronauts, KVR, Reddit, long-form reviews and long-form complaints. The discipline that mattered: I moved up a layer only when the previous one raised specific questions. Competitor analysis told me which failure patterns to look for in forums; forum reading told me which founder assumptions to challenge.
+                                        I did not treat the founders' assumptions as wrong, but I also did not treat them as facts. They became the starting point: reasonable hypotheses, worth testing. I needed to see how the product held up against what this audience already owned, and how it landed with people outside the team's story.<span class="case-acc-para-gap">The more useful material came from places where musicians were not trying to be polite: ModWiggler, Elektronauts, Reddit, KVR, long reviews, and complaint threads. Competitor research told me what failure patterns to look for. Forum reading showed me what this audience cared enough to argue about.</span>
                                     </div>
                                     <div>
                                         <span class="font-medium">AI-scaled deep research</span><br/>
-                                        I wrote targeted research briefs — one per competitor landscape, one per audience segment — specifying the exact forums, the exact products, and the exact workflows to examine, asking for direct user quotes and for patterns that differ between segments. A vague prompt returns a confident generic answer; a specific brief returns something I can interrogate. This let one designer cover a research surface that would normally take a small team.
+                                        AI made this research possible at the scale I needed. I used it to move through a lot of unfamiliar material quickly, but only after writing tight research briefs. Each brief had to be specific enough to keep the output close to Quray, whether I was mapping a competitor, an audience segment, or a technical question I needed to understand before designing around it.<span class="case-acc-para-gap">The difference was in the prompt quality. A vague prompt gave me a polished summary that sounded plausible and was not very useful. A specific brief gave me something I could actually work with. It surfaced disagreements between users, recurring complaints, and promises that looked good in demos but collapsed in real use. AI did not replace the research judgment, but it let one designer cover more ground without pretending the domain was simple.</span>
                                     </div>
                                     <div>
                                         <span class="font-medium">Filtering as the actual work</span><br/>
-                                        Not everything survived. Some AI research output drifted toward a generic "gesture controller" mental model — recommending patterns for a product that isn't Quray: wizard-style onboarding this audience explicitly rejects, interaction models the hardware doesn't support. I kept the findings that were grounded in real user behavior, discarded the rest, and documented the reasoning for every rejection. In a niche domain, a generic answer sounds convincing precisely because it's missing the logic of real users. Knowing which answers to throw away was worth more than the speed.
+                                        Not everything survived. Some AI research output drifted toward a generic "gesture controller" mental model, recommending patterns for a product that was not Quray. The most obvious example was wizard-style onboarding: clean, friendly, and completely wrong for an audience that does not want the instrument to hide its logic.<span class="case-acc-para-gap">I kept the findings that were grounded in real user behavior and discarded the rest. For every rejection, I documented why it did not fit the hardware, the audience, or the way Quray would actually be used. In a niche domain, a generic answer can sound convincing precisely because it is missing the logic of real users. Knowing which answers to throw away was worth more than the speed.</span>
                                     </div>
                                     <div>
-                                        <span class="font-medium">Field input from Superbooth</span><br/>
-                                        The research script I prepared for the Berlin booth came back with the project's single most valuable behavioral observation: people repeatedly moved their hand toward the device, expecting depth to control something. The hardware tracks a flat field — no depth axis. That gap between intuition and reality isn't a technical problem; it's an expectation problem. If onboarding doesn't teach the field's geometry explicitly, users conclude the device is broken.
+                                        <span class="font-medium">What Superbooth revealed</span><br/>
+                                        The field script I prepared for Superbooth gave the project its first real audience signal. When people played with the device, the reaction was strong — the hardware created exactly the kind of curiosity Quray needed.<span class="case-acc-para-gap">That confidence did not survive contact with the existing configurator. When people looked at the interface, the reaction shifted from "I want to try this" to something closer to "just set it up for me." For an expressive instrument, that is a bad place to land.</span><span class="case-acc-para-gap">One smaller observation stuck: some visitors moved their hand toward the device expecting depth to control something — Quray tracks a flat field. Natural gesture, no response, device feels broken. The same problem in miniature.</span>
                                     </div>
                                 </div>
                             </div>
@@ -1610,20 +1708,32 @@
                             <div id="research-acc-panel-2" data-open="0" class="w-full max-w-full pt-4 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                 <div class="flex flex-col gap-y-4 font-light text-5/8">
                                     <div>
-                                        <span class="font-medium">The audience wasn't who the founders thought</span><br/>
-                                        The hardware looks like it's built for dramatic stage performers. The research said the people most likely to actually buy it are modular synth enthusiasts: technically literate, financially capable, hungry for CV control no competitor offers, and deeply skeptical of anything that limits their control. This shifted real decisions: CV became a first-class feature instead of a secondary panel, and the entire mapping UX was rebuilt around their most-cited pain.
+                                        <span class="font-medium">The audience was narrower than the launch story</span><br/>
+                                        The device looked like it could be for almost anyone interested in movement and sound, and research made that framing too soft for the configurator. It also mattered that Quray was not a cheap experimental gadget. The people most likely to configure it seriously were modular synth users and experimental electronic musicians, because they already spend time building their own systems and have a reason to care about CV, routing, and repeatable control.<span class="case-acc-para-gap">That made the configurator's job clearer. It did not need to make Quray feel accessible to everyone. It needed to feel like a serious tool for people who already understand gear and want control.</span>
                                     </div>
                                     <div>
-                                        <span class="font-medium">One audience segment had to go</span><br/>
-                                        The founders started with three equal audiences — including sound-healing practitioners. I removed that segment, and it was the harder call because they were attached to it. The argument: the price point doesn't match the audience, there's no evidence they buy comparable devices, and designing for them would pull every decision away from the people who actually would. Designing for everyone produces a configurator for no one.
+                                        <span class="font-medium">Different surfaces serve different users</span><br/>
+                                        One useful correction was that Quray does not have one clean "main user." The website can sell the visual performance value. The physical device has to protect someone on stage. The configurator has to satisfy the person doing the detailed setup before the performance ever happens.<span class="case-acc-para-gap">That helped me stop forcing every need into one screen. The Library, Device view, and Editor each had to answer a different question, because the user is in a different mode in each place.</span>
                                     </div>
                                     <div>
-                                        <span class="font-medium">The single worst pain in the workflow</span><br/>
-                                        Across every forum, one complaint repeated: manual MIDI CC lookup. Find the synth's manual, find the implementation chart, find the number, type it in, hope. Users called it "soul-crushing" and "a flow killer." This became the central UX problem of the mapping interface — and the foundation for one of the most important design decisions in the product.
+                                        <span class="font-medium">CV could not stay secondary</span><br/>
+                                        The original interface treated CV as something close to an advanced extra, but the research made that feel wrong for the audience Quray needed to reach. For modular users, CV is one of the main reasons Quray is interesting at all, and if it feels vague or hidden, the product immediately loses credibility.<span class="case-acc-para-gap">That affected the mapping model. CV needed the same seriousness as MIDI, with visible ranges, polarity, and behavior that feels inspectable instead of decorative.</span>
                                     </div>
                                     <div>
-                                        <span class="font-medium">No single "main user"</span><br/>
-                                        Quray has no one primary persona — the primary user depends on the surface. The configurator must satisfy modular users who care about routing precision. The physical device must protect a performer from disaster on stage. The original prototype failed partly because it collapsed those needs into one screen. Recognizing this shaped the information architecture more than any single finding.
+                                        <span class="font-medium">Manual MIDI CC lookup was the clearest workflow pain</span><br/>
+                                        One of the most concrete pain points was the way musicians often have to connect software to hardware. Many synthesizers expose their controls through MIDI CC numbers. In practice, that means the user has to find a synth's implementation chart, look up which number controls the thing they want, type that number into the editor, and then check whether it behaves as expected.<span class="case-acc-para-gap">That is boring, technical translation work, not creative control. It became one of the strongest arguments for a semantic mapping layer. Instead of asking the user to start with "CC74," the interface can start with "Filter Cutoff" and keep the raw number underneath for people who want it. The power stays available, but the user no longer has to carry the whole translation in their head.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">Trust is a product feature here</span><br/>
+                                        People in this market have seen too much hardware become useless because the software disappeared, stopped working, or never made the device easy to maintain. That changes how you design basic states. "Saved," "synced," and "on the device" cannot be vague labels. They are trust signals.<span class="case-acc-para-gap">This is why the configurator needed a clear relationship between the browser library and the physical device. A musician should understand whether a preset is only in the web app, already stored on Quray, or still waiting to be synced before they disconnect the computer.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">One audience segment had to stop driving decisions</span><br/>
+                                        The founder's early audience model included experiential creatives, such as sound-healing practitioners, movement artists, and people interested in the sensory side of sound. They were drawn to the magic of the device, but the research did not support them as a primary audience for an expensive instrument that still required serious configuration.<span class="case-acc-para-gap">That segment also pulled the product toward a softer and more simplified experience, while the strongest audience needed almost the opposite: visible logic, precise control, and confidence around setup. Removing that segment from the core audience protected the product from being designed around people who might like the concept but were unlikely to become serious users.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">"Configure and run" became the core workflow</span><br/>
+                                        A repeated pattern in the research was that musicians do not necessarily want the computer involved forever. Many want to configure the instrument, save the setup to hardware, and then perform without the web app becoming another fragile part of the rig.<span class="case-acc-para-gap">That made the Device view more than a storage screen. It had to show what is actually loaded on Quray and whether the current device state can be trusted before someone walks away from the computer.</span>
                                     </div>
                                 </div>
                             </div>
@@ -1640,78 +1750,7 @@
 
         </section>
 
-        <section id="ecosystem" class="hidden flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14" aria-hidden="true">
-
-            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
-
-                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:contents 2xl:contents">
-                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Billfold Ecosystem</h2>
-
-                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-4 xl:gap-y-6 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">From guests trying to buy a drink, to bartenders rushing through hundreds of orders and organizers keeping the entire event under control, <span class="font-medium">every part of the system had to work together in real time.</span> The goal was to remove friction wherever it appeared.</p>
-                </div>
-                <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">That meant <span class="font-medium">making payments effortless for guests, reducing stress and mistakes for staff, and giving organizers the visibility they never had before.</span> By unifying these perspectives, Billfold turned a chaotic process into one seamless flow.</p>
-                </div>
-                </div>
-                </div>
-
-                <div class="flex w-full min-w-0 flex-col gap-y-6 md:gap-y-0 border-t py-6 md:py-0 border-[#E9E9E9] mt-[32px] xl:mt-[40px] md:flex-row md:h-[320px] md:items-center md:gap-x-[40px] xl:col-start-1 xl:row-start-3 xl:gap-x-[24px] 2xl:col-start-1 2xl:row-start-3 2xl:h-[378px] 2xl:gap-x-[140px]">
-                    <img src="assets/images/Vendor-Facing POS.png"
-                         alt="Vendor-facing POS tablet interface"
-                         class="mx-auto md:mx-0 shrink-0 object-contain bg-transparent w-[264px] h-[256px] md:w-[264px] md:h-[256px] xl:w-[344px] xl:h-[247px] 2xl:w-[376px] 2xl:h-[272px]"/>
-                    <div class="flex min-w-0 flex-col gap-y-[16px]">
-                        <div class="font-medium">Vendor-Facing POS</div>
-                        <p class="font-light text-5/8">The tablet interface used by bartenders and cashiers. Designed to be ultra-fast and error-proof so staff with little training could serve hundreds of guests without slowing down.</p>
-                    </div>
-                </div>
-
-                <div class="flex w-full min-w-0 flex-col gap-y-6 md:gap-y-0 border-t py-6 md:py-0 border-[#E9E9E9] md:flex-row md:h-[320px] md:items-center md:gap-x-[40px] xl:col-start-1 xl:row-start-4 xl:gap-x-[24px] 2xl:col-start-1 2xl:row-start-4 2xl:h-[378px] 2xl:gap-x-[140px]">
-                    <img src="assets/images/Guest-Facing Screen.png"
-                         alt="Guest-facing screen display"
-                         class="mx-auto md:mx-0 shrink-0 object-contain bg-transparent w-[264px] h-[256px] md:w-[264px] md:h-[256px] xl:w-[344px] xl:h-[247px] 2xl:w-[376px] 2xl:h-[272px]"/>
-                    <div class="flex min-w-0 flex-col gap-y-[16px]">
-                        <div class="font-medium">Guest-Facing Screen</div>
-                        <p class="font-light text-5/8">A display facing the customer that shows the order, confirms payment instantly, reduces mistakes, and gives guests confidence that every tap went through.</p>
-                    </div>
-                </div>
-
-                <div class="flex w-full min-w-0 flex-col gap-y-6 md:gap-y-0 border-t py-6 md:py-0 border-b border-[#E9E9E9] md:flex-row md:h-[320px] md:items-center md:gap-x-[40px] xl:col-start-1 xl:row-start-5 xl:gap-x-[24px] 2xl:col-start-1 2xl:row-start-5 2xl:h-[378px] 2xl:gap-x-[140px]">
-                    <img src="assets/images/Wristband Registration Kiosk.png"
-                         alt="Wristband registration kiosk"
-                         class="mx-auto md:mx-0 shrink-0 object-contain bg-transparent w-[264px] h-[256px] md:w-[264px] md:h-[256px] xl:w-[344px] xl:h-[247px] 2xl:w-[376px] 2xl:h-[272px]"/>
-                    <div class="flex min-w-0 flex-col gap-y-[16px]">
-                        <div class="font-medium">Wristband Registration Kiosk</div>
-                        <p class="font-light text-5/8">A self-service station at the entrance where guests link their bank card to an RFID wristband. This one-time setup meant no wallets or phones needed inside the event, just tap and go.</p>
-                    </div>
-                </div>
-
-                <div class="min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
-                            flex flex-col gap-y-6
-                            mt-2 md:mt-4 xl:mt-0
-                            xl:col-start-2 xl:row-start-2 xl:row-span-4
-                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-4 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt="Billfold"
-                         class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Billfold wasn't just a single tool — it became an <span class="font-medium">ecosystem designed to keep festivals running smoothly</span> for everyone involved.</p>
-                </div>
-            </div>
-
-            </div>
-
-        </section>
-
-        <section id="festival-girl-image" class="hidden" aria-hidden="true">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/festival-girl-billfold.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/festival-girl-billfold.png" alt="Billfold at festival"/></div>
-        </section>
-
-        <section id="users-quray" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <section id="users" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
@@ -1722,10 +1761,10 @@
 
                 <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-4 xl:gap-y-6 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
                 <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">Quray doesn't have one user — it has different primary users on different surfaces. The person dazzled by the device on stage isn't necessarily the person who'll sit down and route CV outputs. The configurator's job is to serve the second group without alienating the first. Getting that wrong is exactly how the original one screen tried to please everyone and served no one.</p>
+                    <p class="min-w-0">Quray <span class="font-medium">did not have one clean user type</span>. At first glance, the product looks like something made for performance: a person moving their hands above an unusual object while the audience sees gesture become control. <span class="font-medium">Research made that picture more complicated.</span> The person impressed by Quray on stage is not always the person who will later sit down and build a preset from scratch.</p>
                 </div>
                 <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">So I defined who drives which decision. Modular and experimental musicians drive the configurator — they need depth, control, and trust. Live performers drive the device and stage behavior — they need safety and readability under pressure. Naming that split was the difference between designing for a real person and designing for an average of three.</p>
+                    <p class="min-w-0">So I stopped treating the audience as one average musician. <span class="font-medium">The configurator needed to serve the setup work, while the device had to stay safe under performance pressure.</span> The website could still sell the visual magic of the instrument, but the software had to be built for people who would notice immediately if the logic underneath was vague.</p>
                 </div>
                 </div>
                 </div>
@@ -1738,7 +1777,7 @@
                         <div class="font-medium leading-tight self-center">Modular synth enthusiasts</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p>The configurator's core user. Technically literate, often working in engineering or audio, comfortable spending €300–500 on a single module — so Quray's price isn't a barrier if the device feels serious. They don't reject complexity; they reject arbitrary complexity.</p>
+                        <p>The configurator's core audience. Technically literate, used to spending real money on small pieces of gear, and comfortable building systems most people would find unreasonable. Quray interested them because it offered touchless CV control — not because it promised to make music easy.</p>
                         <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
                             <button type="button" id="ecosystem-emp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-emp-acc-panel">
                                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
@@ -1754,32 +1793,7 @@
                                     <div id="ecosystem-emp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                                             <div>
-                                                <span class="font-medium">Guides without guidance</span><br/>
-                                                Training was a patchwork of scattered PDFs, printouts, and random videos. Employees didn't know how or when to use them, so training became improvised and inconsistent across stores. Mistakes weren't the exception, they were baked into the process.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Learning by copy-paste</span><br/>
-                                                With no proper system, knowledge spread informally. New staff shadowed older colleagues, picking up skipped steps and bad habits. Errors multiplied, costing the business wasted hours and inconsistent quality.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Lost experience</span><br/>
-                                                Instead of driving the business forward, senior staff spent hours re-explaining routine tasks. Valuable time that could fuel growth was lost to re-teaching.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Certification failures</span><br/>
-                                                Many employees failed tests multiple times, not from lack of ability, but from overwhelming and poorly structured materials. Each failure chipped away at confidence and motivation.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">First-job anxiety</span><br/>
-                                                For many, Subway was their first job. Fear of failure and lack of confidence made them hesitant to ask for help, slowing onboarding even more.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Digital gaps</span><br/>
-                                                In smaller towns, weak internet, outdated devices, and low digital literacy made learning harder. The system had to work for everyone, not just the tech-savvy.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">No way to measure progress</span><br/>
-                                                Without a digital platform, managers had no clear view of who was trained, who was struggling, or where mistakes occurred. Problems surfaced only after they hurt the business.
+                                                For this group, the danger was not complexity itself. They already choose complexity every time they patch a modular system. The problem starts when the complexity feels arbitrary: hidden device state, vague CV behavior, unclear sync, or a friendly interface that removes the control they expected to have.<span class="case-acc-para-gap">That shaped the configurator more than any visual preference. It had to show what was happening, make the system state visible, and let experienced users stay in control without forcing beginners through a fake "easy mode."</span>
                                             </div>
                                         </div>
                                     </div>
@@ -1797,7 +1811,7 @@
                         <div class="font-medium leading-tight self-center">Experimental electronic musicians</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p>The creative core. Ambient, noise, improv, Max/MSP and TouchDesigner users — they overlap with modular users but aren't identical. They tolerate ambiguity if it produces interesting results, but they still need the system stable enough to become an instrument rather than a one-time experiment.</p>
+                        <p>They overlap with modular users but aren't identical. They're more interested in what Quray can become: strange control, unstable textures, movement that produces something a keyboard or a knob wouldn't. They can tolerate ambiguity, as long as the result is interesting enough to return to.</p>
                         <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
                             <button type="button" id="ecosystem-fran-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-fran-acc-panel">
                                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
@@ -1813,24 +1827,7 @@
                                     <div id="ecosystem-fran-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                                             <div>
-                                                <span class="font-medium">No single source of truth</span><br/>
-                                                Franchisees juggled binders, emails, and calls to HQ. Marketing rules, compliance docs, and training materials were scattered everywhere. Important updates often got buried, leading to compliance mistakes and exposing stores to risk.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Chaotic onboarding</span><br/>
-                                                Opening a store was a maze of unclear steps with no way to track progress. Each new franchisee pieced it together differently, causing delays, last-minute surprises, and costly errors. Launches dragged by weeks, directly cutting into revenue for both owners and HQ.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Dependence on HQ</span><br/>
-                                                Every missing detail turned into another phone call. HQ was swamped with repetitive requests, while owners felt unable to move forward independently.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Overwhelmed by information</span><br/>
-                                                Even when materials existed, they were dense and hard to apply. New owners didn't know what was essential and what was "nice to know." Many defaulted to outdated promotions or improvised materials, which hurt customer experience and weakened brand trust.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Emotional toll</span><br/>
-                                                For many owners, the process felt lonely and stressful. Without clear guidance, they were never sure if they were "doing it right." That uncertainty created frustration on both sides and strained relationships with HQ.
+                                                This audience helped me keep the zone model flexible. A neat beginner template would have made the product easier to explain, but it would also have reduced the thing that makes Quray interesting: the ability to shape space into a personal playing surface.<span class="case-acc-para-gap">For them, the editor had to support exploration without turning every change into technical admin. That is part of why the mapping model needed names, previews, and defaults, not only raw parameters.</span>
                                             </div>
                                         </div>
                                     </div>
@@ -1848,7 +1845,7 @@
                         <div class="font-medium leading-tight self-center">Live performers</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p>The stage user — and the one with the most to lose. On stage, the priority isn't depth, it's survival: switch presets without cutting off a note, see what's current and what's next at a glance, kill all sound instantly when something goes wrong. They think in setlists, not databases. This group is why the device has a performance context separate from editing, and why "don't break the performer" overrode almost every other convenience.</p>
+                        <p>Often the same modular or experimental users in a different moment. Someone who can tolerate complexity at home cannot tolerate surprise on stage. That distinction changed how I thought about the device: performance needed its own logic, because a live context has different consequences.</p>
                         <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
                             <button type="button" id="ecosystem-hqfind-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-hqfind-acc-panel">
                                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
@@ -1864,20 +1861,7 @@
                                     <div id="ecosystem-hqfind-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                                             <div>
-                                                <span class="font-medium">Support overload</span><br/>
-                                                HQ spent hours answering the same questions from dozens of stores daily. Strategic work was sidelined by repetitive support.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">No visibility into progress</span><br/>
-                                                Without insight into franchisee training, HQ only discovered gaps later, as compliance failures, inconsistent operations, or customer complaints.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Inconsistent brand execution</span><br/>
-                                                Scattered materials meant stores applied rules differently. Customers noticed, weakening trust in the brand.
-                                            </div>
-                                            <div>
-                                                <span class="font-medium">Inefficient scaling</span><br/>
-                                                Each new store required hands-on support from HQ. What should have been a repeatable process became a one-off struggle, making expansion slower, more expensive, and harder to sustain.
+                                                On stage, Quray has to behave like reliable hardware. A performer needs to understand the current state before touching anything, especially when presets, zones, and outputs can change what the audience hears.<span class="case-acc-para-gap">This is why performance behavior could not live only inside the web app. The physical device had to communicate enough on its own: what is loaded, what is active, and whether an action is safe. It also shaped preset switching: changing state while a hand is still in the field is exactly the kind of surprise a performer cannot afford.</span>
                                             </div>
                                         </div>
                                     </div>
@@ -1894,15 +1878,9 @@
                             xl:col-start-2 xl:row-start-2 xl:row-span-4
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-4 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
-                    <p class="font-light text-5/8">"Before research, we saw 'employees' and 'franchisees' as abstract groups. After Olga's work, they became real people with voices and needs we couldn't ignore."</p>
-                    <div class="flex items-center gap-x-4 pt-2">
-                        <img src="assets/images/Bolotov.png"
-                             alt="Dmitry Bolotov"
-                             class="w-12 h-12 rounded-full object-cover shrink-0"/>
-                        <div class="text-[14px] leading-[20px] font-normal text-black">
-                            <div>Dmitry Bolotov</div>
-                            <div>Head Of Digital Marketing</div>
-                        </div>
+                    <p class="font-light text-5/8">"I refuse to buy modules with hidden modes or secret handshake button combo bullshit."</p>
+                    <div class="text-[14px] leading-[20px] font-normal text-black">
+                        <div>— Reddit, r/modular</div>
                     </div>
                 </div>
             </div>
@@ -1911,7 +1889,7 @@
 
         </section>
 
-        <section id="vendor-experience" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <section id="architecture" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
@@ -1926,11 +1904,11 @@
                 <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                 <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0">The original tool had no structure to clean up — it had to be invented. Everything lived on one screen. There was no library, so anything you created loaded straight onto the device. No sets, no way to group presets for a show. No way to reorder what's on the hardware, and no real sync — the browser and the device just assumed they agreed. Before drawing anything, I had to define the product's spine: where work lives, what loads onto the device, how the two stay in sync. None of these concepts existed.</p>
+                    <p class="min-w-0">The original configurator did not need another pass of visual cleanup. <span class="font-medium">The deeper problem was that the product model was still missing.</span> Work happened in the browser, but part of that work was supposed to end up on the hardware, and the old interface blurred that line. <span class="font-medium">A musician could build a preset and still have to guess what would survive outside the browser.</span> For a hardware instrument, that is not a small UI problem, but the moment where trust starts to break.</p>
                 </div>
 
                 <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">I didn't lock that structure early. I sketched a first version, saw how many guesses it contained, and made a method decision: build the six task flows first and let the architecture prove itself against real scenarios — connecting, calibrating, building a preset, performing, recovering. The final structure came out far from my first sketch, which is exactly why I didn't commit to the sketch. Designing the flows before the architecture meant the users' reality shaped it, not my assumptions.</p>
+                    <p class="min-w-0">Before committing to screens, <span class="font-medium">I used task flows to put the architecture under pressure.</span> Each flow had a diagram with tables underneath for the behavior the diagram alone could not show: how the interface responds and what the system has to handle underneath. <span class="font-medium">I tested the structure against real scenarios</span>: device disconnects mid-session, a preset has unsynced changes, someone is preparing for a show. If the logic held there, it was worth keeping.</p>
                 </div>
                 </div>
 
@@ -1941,7 +1919,7 @@
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">SEE FULL IMPACT</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Key decisions</span></span>
             </button>
 
             <div id="vendor-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -1949,24 +1927,32 @@
                     <div id="vendor-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Dual-screen hardware, split purpose</span><br/>
-                                One screen for the vendor, one for the guest. I designed each side to show only what that person needed: no shared clutter, no accidental cross-taps, no confusion about who sees what.
+                                <span class="font-medium">The flow documents became the architecture tool</span><br/>
+                                I did not want to lock the product structure from a single sitemap. The first sketch looked plausible, but it still had too many guesses. So I built the architecture through task flows instead.<span class="case-acc-para-gap">The format became part of the design work. Each flow had one diagram for the user journey, then separate tables for what the interface does, what the system does, how failures recover, and which questions were still open. That separation made the document useful to the team, not just to me. The founder could focus on product decisions, the developer could focus on system behavior, and I could keep testing whether the structure actually held together.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Large, legible interface under pressure</span><br/>
-                                Buttons sized for people working fast in loud environments. Bartenders could select items and process orders without slowing down or second-guessing the UI.
+                                <span class="font-medium">Library, Device, and Editor became separate surfaces</span><br/>
+                                The original tool treated configuration as one large surface. Research and flows made it clear that the product needed three different places with different jobs. The split became practical. The Library handles the ongoing collection, the Editor handles the work of making a preset playable, and the Device view answers the physical question: what is actually ready on Quray?<span class="case-acc-para-gap">That separation changed the whole product model. The browser library and the physical device could no longer be treated as if they were the same place. A musician needed to understand the difference between editing a preset in the web app and having that version safely available on the hardware.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Two-step transaction flow</span><br/>
-                                Select items. Tap to pay. No extra confirmations in the happy path. Average transaction time: under 2 seconds.
+                                <span class="font-medium">Sets are not folders</span><br/>
+                                A set is not just a folder for presets. It is closer to a show-ready sequence. That changed how I thought about the Device screen, because a performer is not browsing on stage in the same way they browse a library at home.<span class="case-acc-para-gap">The Device view moved toward setlist logic. Order became the main thing on the screen. Management controls had to stay quieter than they were in the Library. The same preset can exist in more than one context, but those contexts do not mean the same thing. The architecture had to respect that instead of flattening everything into one list.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Works without internet</span><br/>
-                                When Wi-Fi dropped, the POS kept running — caching transactions locally and syncing when connectivity returned. Staff saw a subtle status indicator but service never stopped.
+                                <span class="font-medium">"CC74" became "Filter Cutoff"</span><br/>
+                                The raw protocol asks for a CC number. That is technically correct, but it turns the interface into homework. A musician who wants to control a filter should not have to leave the product, find a synth implementation chart, look up the right number, and come back hoping they typed it correctly.<span class="case-acc-para-gap">So I changed the mapping model around connected devices. The configurator can know which synths or modules are connected to Quray, show their parameter categories, and let the user choose something human, like "Filter Cutoff" or "OSC Waveform." The CC number still exists underneath for people who want precision, but the main workflow starts from the musical intention, not from a raw protocol value.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Protected actions for refunds and voids</span><br/>
-                                Refunds and voids were accessible but required confirmation steps, reducing the risk of accidental or unauthorized use under pressure.
+                                <span class="font-medium">Sync, save, and trust became separate problems</span><br/>
+                                The original model blurred two different questions: "Is my work saved?" and "Is this version already on the device?" For a hardware musician, that difference matters. They can spend hours shaping a preset, and the fear is not abstract. The fear is opening the product later, on another computer or tablet, and realizing the work only existed in one browser.<span class="case-acc-para-gap">That is why I pushed for optional authorization, even though it added product and technical work the founders initially wanted to avoid. First use still should not be blocked by an account. A musician should be able to connect Quray, try the interface, and hear the idea before signing up. But once they start making something real, the product needs a way to protect that work beyond local browser storage.</span><span class="case-acc-para-gap">Sync had to stay separate from saving. Saving protects the preset as work. Sync sends a version to the physical device. Once that distinction was clear, the interface could show calmer states: autosaved work, unsynced changes, empty states, and errors that explain what happened instead of leaving the user to guess.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Factory preset before blank canvas</span><br/>
+                                A blank project is a natural developer default, but it is a weak first experience for expressive hardware. If the user connects a device, waves a hand, and gets nothing meaningful back, confidence disappears before configuration even begins.<span class="case-acc-para-gap">That is why first use needed to start with a working factory preset. The user should feel the instrument respond before being asked to build anything. Configuration comes after confidence, not before it.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">One hardware idea came from thinking through the software</span><br/>
+                                One product decision came from mapping the performance flows, not from the configurator itself. I saw a risk the interface alone could not solve: if a preset changes while a hand is still active in the field, a note can cut off or a parameter can jump.<span class="case-acc-para-gap">Quray has information most controllers do not have. It knows when hands are still inside the field. So I proposed a safer behavior for the device itself: the next preset can arm first, then complete the switch only after the hands leave. That is not just a UI detail. It is a product behavior that connects research, hardware logic, and performance safety.</span>
                             </div>
                         </div>
                     </div>
@@ -1975,96 +1961,92 @@
                 </div>
 
                 <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/vendor-billfold.png"><img src="assets/images/vendor-billfold.png"
-                     alt="Vendor-facing Billfold POS"
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/library-quray.png"><img src="assets/images/library-quray.png"
+                     alt="Quray configurator library"
                      class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
 
                 <div class="order-5 flex w-full flex-col gap-y-8 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/barmen-phone-billfold.png"><img src="assets/images/barmen-phone-billfold.png"
-                             alt="Bartender using Billfold on phone"
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/setup-quray.png"><img src="assets/images/setup-quray.png"
+                             alt="Quray setup workflow"
                              class="hidden md:block overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/barmen-billfold.png"><img src="assets/images/barmen-billfold.png"
-                             alt="Bartenders at Billfold POS"
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/sets-quray.png"><img src="assets/images/sets-quray.png"
+                             alt="Quray sets in the library"
                              class="overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
                 </div>
                 </div>
                 </div>
 
-                <div class="order-3 max-xl:hidden min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
-                            flex flex-col gap-y-6
-                            md:order-3 md:mt-4 xl:mt-0 xl:invisible
-                            xl:col-start-2 xl:row-start-2 xl:row-span-2
-                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]"
-                     aria-hidden="true">
-                    <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt=""
-                         class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
-                </div>
             </div>
 
             </div>
 
         </section>
 
-        <section id="guest-experience" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <!-- #prototype: Building in Code -->
+        <section id="prototype" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
 
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
 
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                    <h2 class="section-header w-full">The Guest-Facing Screen</h2>
+                    <h2 class="section-header w-full">Building in Code</h2>
                 </div>
 
-                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Guest-Facing Screen</h2>
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Building in Code</h2>
 
-                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
                 <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0"><span class="font-medium">For guests, confidence was everything.</span> In the middle of a noisy crowd, they needed to know their order was right and their payment went through, without second-guessing or asking staff. <span class="font-medium">The customer-facing screen had to remove doubt in an environment where attention lasted only a second.</span></p>
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0">Quray does not need many screens to become difficult. <span class="font-medium">It has only a few main surfaces, but every surface carries state:</span> connection, calibration, sync, device memory, presets, zones, mappings. <span class="font-medium">In Figma, most of that would be theatre</span> — drawn states that pretend to depend on each other without actually doing it.</p>
                 </div>
 
-                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">That meant showing the right information at the right time: clear totals, instant confirmation, and feedback that felt effortless. <span class="font-medium">The goal was simple — make every tap trustworthy, so guests could spend less time worrying about payments and more time enjoying the event.</span></p>
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">So I made a deliberate choice. <span class="font-medium">I used Figma to lock the visual language on a few key screens, then moved into code while the product model was still being shaped.</span> The prototype started showing me where the design was still pretending to be simpler than it was.</p>
                 </div>
                 </div>
 
-                <div class="flex w-full flex-col order-4 mt-5 md:order-3 md:mt-0">
-            <button type="button" id="guest-exp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="guest-exp-acc-panel">
+                <div class="flex w-full flex-col order-4 mt-5 mb-10 max-md:order-4 max-md:mt-[1.4375rem] md:order-3 md:mt-0 md:mb-0">
+            <button type="button" id="challenge-2-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="challenge-2-acc-panel">
                 <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                    <svg id="guest-exp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <svg id="challenge-2-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Features & design decisions</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">How I actually built it</span></span>
             </button>
 
-            <div id="guest-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+            <div id="challenge-2-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
                 <div class="min-h-0 overflow-hidden">
-                    <div id="guest-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                    <div id="challenge-2-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                         <div class="flex flex-col gap-y-4 font-light text-5/8">
                             <div>
-                                <span class="font-medium">Live order display</span><br/>
-                                Each item appeared in real time as the vendor added it — e.g., "Beer ×2 – $12." Guests could see exactly what they were paying for, which cut disputes before they started.
+                                <span class="font-medium">Code after Figma, not instead of it</span><br/>
+                                Figma was the right place to find the visual direction: density, tone, spacing, the overall feel of the instrument. A few key screens were enough. After that point, Figma started losing value — Quray needed live state, not more pictures of state.<span class="case-acc-para-gap">Code forced the design to behave, not just look resolved.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Clear, confident checkout</span><br/>
-                                The screen showed a clean total and a single prompt: "Total $24. Tap wristband to pay." After payment, a large green checkmark confirmed it instantly — no ambiguity.
+                                <span class="font-medium">A token system built as a contract</span><br/>
+                                Tokens are named by role, not by colour value or location. A status colour is not "orange" — it is the colour for a progress state. A background token is not "dark purple" — it is a surface level in the hierarchy.<span class="case-acc-para-gap">That mattered because Quray still needed room to change visually, and the developer should never have to guess which grey or radius belongs where. The system made visual decisions explicit instead of leaving them scattered through components.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Neutral error messaging</span><br/>
-                                If a tap failed or a card was declined, the screen showed clear, calm feedback: "Card declined — try another card." Tone was treated as part of the UX. Embarrassment in a crowd makes things worse; the goal was to resolve the moment quietly.
+                                <span class="font-medium">Rules that kept AI inside the product</span><br/>
+                                I wrote Cursor rules for decisions the AI could not infer: the token discipline, the component style, the fact that this is not a generic SaaS dashboard. Short rules on purpose — long rules become decoration.<span class="case-acc-para-gap">The useful ones prevent the same mistake from happening twice: no hardcoded values, use existing components before inventing new ones, update the styleguide when a new pattern appears.</span>
                             </div>
                             <div>
-                                <span class="font-medium">Idle state promotions (Billfold Engage)</span><br/>
-                                During idle times, the screen could display sponsor promos or venue messages. I designed a banner area that appeared only when no transaction was in progress, and kept it visually quiet to avoid distracting from the main task flow.
+                                <span class="font-medium">A living styleguide, not a document</span><br/>
+                                The styleguide is a route inside the prototype. It imports real components and reads real tokens — it cannot become a static document that slowly lies.<span class="case-acc-para-gap">It let me see states side by side: connected, disconnected, modified, failed, empty. Small inconsistencies became easier to catch because a component could not hide inside one screen.</span>
                             </div>
                             <div>
-                                <span class="font-medium">One-tap donations (Billfold Give)</span><br/>
-                                After checkout, guests at select events could round up and donate spare change. Making it a single tap with no friction turned it into a surprisingly high opt-in — people at festivals, in a good mood, will give if you make it effortless.
+                                <span class="font-medium">The Device screen changed when I built it</span><br/>
+                                At first it was tempting to design the Device screen like another library: rows, metadata, status chips, management controls. Once I built it, that felt wrong.<span class="case-acc-para-gap">The Device screen is not where a musician browses everything they own — it is where they prepare what will actually be on Quray. The visual language moved toward a setlist: large sequence numbers, bare rows, fewer controls competing with the performance order.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Sync became simpler after it became worse</span><br/>
+                                The first sync model was too quiet: one button, not enough explanation of what it would do. Then I overcorrected and added per-item update actions — which made every modified preset look like it needed its own decision.<span class="case-acc-para-gap">The better version was one clear action with better surrounding information. Building the screen made the confusion visible earlier than a static mockup would have.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">The fan canvas had its own rules</span><br/>
+                                The central fan is drawn on HTML Canvas, not built from normal DOM components. That made the prototype more realistic, but also less forgiving: the zones, labels, and hit areas had to be rendered manually, and visual tokens had to reach canvas drawing code through a helper instead of ordinary CSS classes.<span class="case-acc-para-gap">It was a small technical constraint with a real design consequence. The editor could not just look consistent. It had to stay consistent across two rendering systems.</span>
                             </div>
                         </div>
                     </div>
@@ -2072,222 +2054,22 @@
             </div>
                 </div>
 
-                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/customer-pos-billfold.png"><img src="assets/images/customer-pos-billfold.png"
-                     alt="Guest-facing Billfold customer POS screen"
-                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
-
-                <div class="order-5 flex w-full flex-col gap-y-8 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <img src="assets/images/bar-billfold.png"
-                             alt="Bar environment with Billfold"
-                             class="overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/customer-billfold.png"><img src="assets/images/customer-billfold.png"
-                             alt="Guest using Billfold customer-facing screen"
-                             class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
-                </div>
-                </div>
-                </div>
-
-                <div class="order-3 max-xl:hidden min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
-                            flex flex-col gap-y-6
-                            md:order-3 md:mt-4 xl:mt-0 xl:invisible
-                            xl:col-start-2 xl:row-start-2 xl:row-span-2
-                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]"
-                     aria-hidden="true">
-                    <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt=""
-                         class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
-                </div>
-            </div>
-
-            </div>
-
-        </section>
-
-        <section id="kiosk-experience" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
-
-            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
-
-                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                    <h2 class="section-header w-full">The Guest Journey: Check-In Kiosks</h2>
-                </div>
-
-                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Guest Journey: Check-In Kiosks</h2>
-
-                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
-                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0"><span class="font-medium">The first impression of any event happens at the gate.</span> Guests arriving with excitement don't want to stand in another long line just to set up a wristband. The self-check-in kiosk had to make registration quick, intuitive, and foolproof, so thousands of people could flow through without bottlenecks.</p>
-                </div>
-
-                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">The design challenge was to guide distracted guests through a one-time setup in under 20 seconds. Clear instructions, simple steps, and instant feedback made it possible. <span class="font-medium">Once their card was linked to the RFID wristband, guests could put wallets and phones away and just tap to pay.</span></p>
-                </div>
-                </div>
-
-                <div class="flex w-full flex-col order-4 mt-5 md:order-3 md:mt-0">
-            <button type="button" id="kiosk-exp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="kiosk-exp-acc-panel">
-                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                    <svg id="kiosk-exp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Features & design decisions</span></span>
-            </button>
-
-            <div id="kiosk-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
-                <div class="min-h-0 overflow-hidden">
-                    <div id="kiosk-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
-                        <div class="flex flex-col gap-y-4 font-light text-5/8">
-                            <div>
-                                <span class="font-medium">Minimal steps, maximum flow</span><br/>
-                                Tap wristband → swipe or insert card (or use Apple/Google Pay) → optional: enter phone/email for a receipt → done. Most guests were through in under 30 seconds.
-                            </div>
-                            <div>
-                                <span class="font-medium">Clarity at every step</span><br/>
-                                Progress indicators ("Step 2 of 3") told guests the flow was short. Icons: a tapping wristband, a card, made each action self-explanatory. The confirmation screen told guests their wristband was now their wallet.
-                            </div>
-                            <div>
-                                <span class="font-medium">Designed for difficult environments</span><br/>
-                                Kiosks had to work in direct sunlight and at night, for guests who might not speak English. Language selection was offered upfront. The UI used simple phrasing, large text, and universal icons to remove any dependence on reading.
-                            </div>
-                            <div>
-                                <span class="font-medium">No single point of failure</span><br/>
-                                Knowing check-in could become a bottleneck itself, we designed for multiple kiosks in parallel and roaming staff with handheld versions running identical software. My flows had to handle someone starting at a kiosk and finishing with staff assistance.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                </div>
-
-                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/kiosk-billfold.png"><img src="assets/images/kiosk-billfold.png"
-                     alt="Billfold check-in kiosk"
-                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
-
-                <div class="order-5 flex w-full flex-col gap-y-8 md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] md:order-5 mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <img src="assets/images/kiosk-billfold-img.png"
-                             alt="Billfold kiosk interface detail"
-                             class="overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/man-kiosk-billfold.png"><img src="assets/images/man-kiosk-billfold.png"
-                             alt="Guest using Billfold check-in kiosk"
-                             class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
-                </div>
-                </div>
-                </div>
-
-                <div class="order-3 max-xl:hidden min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
-                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
-                            flex flex-col gap-y-6
-                            md:order-3 md:mt-4 xl:mt-0 xl:invisible
-                            xl:col-start-2 xl:row-start-2 xl:row-span-2
-                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
-                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]"
-                     aria-hidden="true">
-                    <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt=""
-                         class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
-                </div>
-            </div>
-
-            </div>
-
-        </section>
-
-        <section id="results-real-world" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
-
-            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-
-            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
-
-                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                    <h2 class="section-header w-full">Results in the Real World</h2>
-                </div>
-
-                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Results in the Real World</h2>
-
-                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
-                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
-                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
-                    <p class="min-w-0">Billfold grew from a fragile prototype into the <span class="font-medium">payment backbone of major festivals and stadiums</span>, built to handle the moments when thousands of guests order at once. Even under peak demand, <span class="font-medium">transactions cleared in under 2 seconds</span>, and sales continued seamlessly through network drops thanks to offline resilience. <span class="font-medium">Bartenders finally could focus on serving and guests on enjoying the night.</span></p>
-                </div>
-
-                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
-                    <p class="min-w-0">The business impact was undeniable: <span class="font-medium">guests spent up to 60% more, transactions increased by 23%</span>, and organizers reported double-digit revenue growth after switching to Billfold. Tips doubled, queues shrank, and vendors finally had a system they could trust under pressure. <span class="font-medium">Today, it’s still running at large events worldwide</span>, a direct result of design choices made to balance speed, clarity, and resilience.</p>
-                </div>
-                </div>
-
-                <div class="flex w-full flex-col order-4 mt-5 max-[639px]:mb-8 md:order-3 md:mt-0">
-            <button type="button" id="results-real-world-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="results-real-world-acc-panel">
-                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
-                    <svg id="results-real-world-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">SEE FULL IMPACT</span></span>
-            </button>
-
-            <div id="results-real-world-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
-                <div class="min-h-0 overflow-hidden">
-                    <div id="results-real-world-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
-                        <div class="flex flex-col gap-y-4 font-light text-5/8">
-                            <div>
-                                <span class="font-medium">Faster service at scale</span><br/>
-                                Transactions that once took ~1 minute on traditional card readers dropped to under 2 seconds with RFID. At peak hours, bartenders could process more than 200 orders per hour, shrinking bar lines and keeping guests in the show instead of stuck in queues.
-                            </div>
-                            <div>
-                                <span class="font-medium">Higher spending per guest</span><br/>
-                                When payment is invisible, people spend more. Guests no longer worried about wallets, phones, or failed card swipes. Clear on-screen confirmations made every tap trustworthy. Per-person spend rose up to 60% at some venues, and RFID users spent over 2× more than card users at large festivals.
-                            </div>
-                            <div>
-                                <span class="font-medium">Learned in minutes. Relied on all night.</span><br/>
-                                Most POS systems come with a training manual. This one didn&rsquo;t need one. Staff picked it up in their first shift, and because the interface was error-proof and the flow minimal, they could run hundreds of orders confidently without slowing down or second-guessing the screen.
-                            </div>
-                            <div>
-                                <span class="font-medium">Tips doubled for vendors</span><br/>
-                                Staff not only served faster — they earned more. Seamless checkout made tipping effortless, and bartenders saw their tips double on average. A better UX flow had a direct impact on take-home pay.
-                            </div>
-                            <div>
-                                <span class="font-medium">Revenue growth for organizers</span><br/>
-                                Faster throughput, more transactions, higher per-guest spend — the combination drove up to 50% higher total revenue at major events. For organizers, switching to Billfold wasn't just a UX upgrade, it was a business decision that showed in the numbers.
-                            </div>
-                            <div>
-                                <span class="font-medium">Reliable even when Wi-Fi wasn't</span><br/>
-                                When the network dropped, the POS kept running. Transactions were cached locally and synced automatically when connectivity returned — 99% offline success rate. No lost sales during failures, and real-time dashboards gave organizers visibility across every vendor the moment service resumed.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                </div>
-
-                <picture class="order-2 md:hidden">
-                    <source media="(max-width: 639px)" srcset="assets/images/results-billfold-mobile.png"/>
-                    <img src="assets/images/results-billfold.png"
-                         alt="Billfold results and impact"
-                         class="py-8 w-full rounded-[20px] object-contain"/>
-                </picture>
-
-                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
-                <div class="order-5 flex w-full flex-col gap-y-8 md:order-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
-                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/festival-pos-billfold.png"><img src="assets/images/festival-pos-billfold.png"
-                             alt="Festival POS with Billfold"
-                             class="hidden md:block w-full shrink-0 rounded-[20px] object-cover aspect-[288/184] md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
-                        <img src="assets/images/results-billfold.png"
-                             alt="Billfold results and impact"
-                             class="hidden w-full rounded-[20px] object-contain md:block md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 xl:aspect-auto 2xl:h-[400px] 2xl:w-full"/>
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
+                <div class="flex w-full flex-col order-2 mt-0 min-w-0 max-w-full max-md:order-2 max-md:my-6 md:order-none">
+                <video class="order-2 mt-0 block w-full h-auto rounded-[20px] md:order-none 2xl:w-full"
+                       src="assets/videos/quray-configurator-video.mov"
+                       autoplay
+                       loop
+                       muted
+                       playsinline
+                       aria-label="Quray configurator prototype"></video>
+                <p class="quray-image-caption mt-4">This is a working product prototype, not a clickable mockup — <a href="https://quray-configurator.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-inherit underline decoration-[#8A8A8A] underline-offset-2 hover:text-[#0016F2] hover:decoration-[#0016F2]">try it here</a></p>
                 </div>
                 </div>
                 </div>
 
                 <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:order-6 max-md:mt-2
                             max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
                             flex flex-col gap-y-6
                             md:order-3 md:mt-4 xl:mt-0
@@ -2295,26 +2077,112 @@
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
                     <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt="Billfold"
+                         alt=""
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Billfold proved that when payments run smoothly, everything else follows: <span class="font-medium">faster lines, calmer staff, and happier guests.</span></p>
+                    <p class="font-light text-5/8">The speed came from AI.<br/><span class="font-medium">The judgement came from fifteen years of seeing where products break.</span></p>
                 </div>
             </div>
 
             </div>
 
+        </section>
+
+        <!-- #prototype-evolution: Designed to evolve -->
+        <section id="prototype-evolution" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                    <h2 class="section-header w-full">Designed to evolve</h2>
+                </div>
+
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Designed to evolve</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0">The configurator works, and the visual direction is intentional, but it is not the final visual layer. <span class="font-medium">Before investing in typographic refinement or brand-level detail, the product needed to prove that the logic holds.</span> Good UX in this space is rare enough that clarity matters more than polish. At this stage, <span class="font-medium">making the interface more impressive mattered less than making it clear enough for musicians to test</span> Quray's real behavior, not my visual ambition.</p>
+                </div>
+
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">The token architecture <span class="font-medium">was planned before the first component was built.</span> Cursor rules kept that discipline through the build: new components had to use existing tokens, reuse existing patterns where possible, and keep the styleguide updated with the product. <span class="font-medium">The styleguide grew with the product and imports real components, not screenshots.</span> The next visual pass has a real system underneath it, so refinement can happen without rebuilding the product.</p>
+                </div>
+                </div>
+
+                <div class="flex w-full flex-col order-4 mt-5 mb-10 max-md:order-4 max-md:mt-[1.4375rem] md:order-3 md:mt-0 md:mb-0">
+            <button type="button" id="built-to-change-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="built-to-change-acc-panel">
+                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                    <svg id="built-to-change-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">What comes next</span></span>
+            </button>
+
+            <div id="built-to-change-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                <div class="min-h-0 overflow-hidden">
+                    <div id="built-to-change-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                            <div>
+                                <span class="font-medium">Usability testing — already in progress</span><br/>
+                                The prototype is being tested with musicians now. At this stage, I am watching for the places where the product model survives first contact, and the places where it still needs clearer feedback. That material is shaping the next iteration, and findings will be added here as the work continues.
+                            </div>
+                            <div>
+                                <span class="font-medium">The on-device screen</span><br/>
+                                The physical device has a small monochrome screen — navigation, preset switching, status, performance safety — and designing it is a separate problem still ahead. No hover states, no scrolling, no room for ambiguity when a performer glances down mid-set. That work starts once the configurator logic is stable enough to know what the device actually needs to say.
+                            </div>
+                            <div>
+                                <span class="font-medium">The visual layer</span><br/>
+                                The current palette and type were chosen to be clear enough to test against, not to be final. Once the product logic is validated, the visual identity gets a proper pass. The token system was built for exactly that moment.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
+                <div class="flex w-full flex-col order-2 mt-0 min-w-0 max-w-full max-md:order-2 max-md:my-6 md:order-none">
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-styleguide.png"><img src="assets/images/quray-styleguide.png"
+                     alt="Quray living styleguide"
+                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+                <p class="quray-image-caption mt-4">A live styleguide inside the prototype: real tokens, components, and the states the product needs to keep consistent as it changes.</p>
+                </div>
+                </div>
+                </div>
+
+                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:order-6 max-md:mt-2
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            md:order-3 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-2
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">The visual layer can still change because <span class="font-medium">the structure underneath already knows how to.</span></p>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
             <script>
                 (function () {
                     var idConfigs = [
                         { btnId: 'challenge-acc-btn',        wrapId: 'challenge-acc-panel-wrap',        panelId: 'challenge-acc-panel',        arrowId: 'challenge-acc-arrow' },
+                        { btnId: 'challenge-2-acc-btn',       wrapId: 'challenge-2-acc-panel-wrap',       panelId: 'challenge-2-acc-panel',       arrowId: 'challenge-2-acc-arrow' },
+                        { btnId: 'built-to-change-acc-btn',   wrapId: 'built-to-change-acc-panel-wrap',   panelId: 'built-to-change-acc-panel',   arrowId: 'built-to-change-acc-arrow' },
                         { btnId: 'my-part-acc-btn',           wrapId: 'my-part-acc-panel-wrap',           panelId: 'my-part-acc-panel',           arrowId: 'my-part-acc-arrow' },
                         { btnId: 'ecosystem-emp-acc-btn',      wrapId: 'ecosystem-emp-acc-panel-wrap',      panelId: 'ecosystem-emp-acc-panel',      arrowId: 'ecosystem-emp-acc-arrow' },
                         { btnId: 'ecosystem-fran-acc-btn',     wrapId: 'ecosystem-fran-acc-panel-wrap',     panelId: 'ecosystem-fran-acc-panel',     arrowId: 'ecosystem-fran-acc-arrow' },
                         { btnId: 'ecosystem-hqfind-acc-btn',   wrapId: 'ecosystem-hqfind-acc-panel-wrap',   panelId: 'ecosystem-hqfind-acc-panel',   arrowId: 'ecosystem-hqfind-acc-arrow' },
                         { btnId: 'vendor-exp-acc-btn',         wrapId: 'vendor-exp-acc-panel-wrap',         panelId: 'vendor-exp-acc-panel',         arrowId: 'vendor-exp-acc-arrow' },
-                        { btnId: 'guest-exp-acc-btn',          wrapId: 'guest-exp-acc-panel-wrap',          panelId: 'guest-exp-acc-panel',          arrowId: 'guest-exp-acc-arrow' },
-                        { btnId: 'kiosk-exp-acc-btn',          wrapId: 'kiosk-exp-acc-panel-wrap',          panelId: 'kiosk-exp-acc-panel',          arrowId: 'kiosk-exp-acc-arrow' },
-                        { btnId: 'results-real-world-acc-btn', wrapId: 'results-real-world-acc-panel-wrap', panelId: 'results-real-world-acc-panel', arrowId: 'results-real-world-acc-arrow' },
                     ].map(function (cfg) {
                         return {
                             btn:   document.getElementById(cfg.btnId),
@@ -2354,10 +2222,9 @@
                     });
                 })();
             </script>
-        </section>
 
         <section id="give-image">
-            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/give-billfold.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/give-billfold.png" alt="Billfold Give feature"/></div>
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/djs-dont-dance-no-more.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/djs-dont-dance-no-more.png" alt="Musicians and live performance context"/></div>
         </section>
 
         <section id="reflections" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 mb-[80px] xl:mb-[120px]">
@@ -2367,14 +2234,14 @@
             <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
 
                 <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:contents 2xl:contents">
-                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Reflections &amp; Growth</h2>
+                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Notes from the middle</h2>
 
                 <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
                 <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0"><span class="font-medium">Billfold pushed me to design for real-world chaos, not polished screens.</span> Working remotely and solo, I had to move fast, trust my decisions, and make them work for bartenders with 30-second training and guests who barely looked at the UI.</p>
+                    <p class="min-w-0">Quray is still in progress, so I do not want to end this case study with a polished "final result" that does not exist yet. At this stage, the more honest ending is about the way the project tested my process. I had to learn enough of the domain to make decisions, not just style the interface, and keep checking where a screen decision would affect the hardware or the musician using it.</p>
                 </div>
                 <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">What mattered most were the small wins: one clearer total, one fewer tap, one steadier flow, and lines shrank, staff exhaled, sales climbed. It proved to me that the <span class="font-medium">best design shows its value under pressure, where clarity makes the biggest difference.</span></p>
+                    <p class="min-w-0">I came into Quray from years of designing internal tools, SaaS products, and operational software. That background helped, but it also had limits I hadn't expected. Quray isn't a dashboard — it's an instrument, and its interface has to work outside the browser. In that context, an unclear state isn't just confusing. It can mean silence when there should be sound, or a wrong note in front of an audience.</p>
                 </div>
                 </div>
                 </div>
@@ -2384,39 +2251,34 @@
                         <img src="assets/icons/mountain.svg"
                              alt=""
                              class="w-[88px] h-[88px] shrink-0 object-contain"/>
-                        <div class="font-medium leading-tight self-center">Growing Through Constraints</div>
+                        <div class="font-medium leading-tight self-center">Domain first, interface second</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p>Because I couldn't be on-site, <span class="font-medium">I had to adapt my research approach, relying on staff videos, real-time feedback loops, and rapid iterations with engineers in the field.</span></p>
-                        <p>It wasn't always perfect, but it taught me to stay curious, flexible, and resourceful.</p>
-                        <p>At the same time, working as the only designer in a startup pushed me to <span class="font-medium">grow in resilience and autonomy:</span> trusting my instincts, making fast decisions, and defending them to a cross-functional team that needed results, not just polished screens.</p>
+                        <p>Quray reminded me that domain learning is not a warm-up before design. If I do not understand why V/Oct, CV behavior, sync state, or preset switching matters to a musician, I can only make the configurator look cleaner. The interface becomes useful only when that knowledge starts changing the product logic.</p>
                     </div>
                 </div>
 
                 <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-4 2xl:col-start-1 2xl:row-start-4">
                     <div class="flex w-full gap-x-[24px]">
-                        <img src="assets/icons/brain.svg"
+                        <img src="assets/icons/puzzle.svg"
                              alt=""
                              class="w-[88px] h-[88px] shrink-0 object-contain"/>
-                        <div class="font-medium leading-tight self-center">Thinking Beyond Interfaces</div>
+                        <div class="font-medium leading-tight self-center">Beyond the configurator</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p><span class="font-medium">I got a crash course in designing hardware and software together,</span> aligning screen logic with RFID behavior, and understanding how even a 1-second delay could break trust.</p>
-                        <p>That experience pushed me to <span class="font-medium">think less about individual screens and more about the system as a whole:</span> how devices, flows, and infrastructure connect to shape the user experience.</p>
+                        <p>Quray could not be solved as a web app alone. The same logic had to work across the configurator, the physical device, the small screen, and the performance context. If those parts disagree, the musician stops trusting the instrument. For me, the real design work was keeping the whole product coherent.</p>
                     </div>
                 </div>
 
                 <div class="grid w-full min-w-0 gap-y-6 border-t border-b border-[#E9E9E9] pt-[48px] pb-[48px] md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-5 2xl:col-start-1 2xl:row-start-5">
                     <div class="flex w-full gap-x-[24px]">
-                        <img src="assets/icons/puzzle.svg"
+                        <img src="assets/icons/brain.svg"
                              alt=""
                              class="w-[88px] h-[88px] shrink-0 object-contain"/>
-                        <div class="font-medium leading-tight self-center">Connecting UX to Business</div>
+                        <div class="font-medium leading-tight self-center">AI changed the pace</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p><span class="font-medium">I saw first-hand how UX drives business metrics.</span></p>
-                        <p>Faster flows and clearer screens didn't just feel better, they increased revenue, enabled tens of thousands of extra transactions, and gave venues confidence in a system they could rely on.</p>
-                        <p><span class="font-medium">Design wasn't decoration here, it was directly tied to dollars, scale, and trust.</span></p>
+                        <p>I used AI to move faster through research and to test interface ideas in code much earlier than I normally could. But the output only became useful after I questioned it. Generic answers, neat summaries, and good-looking components still had to be checked against Quray's logic. The speed changed. The judgement stayed mine.</p>
                     </div>
                 </div>
 
@@ -2428,9 +2290,9 @@
                             2xl:col-start-2 2xl:row-start-2 2xl:row-span-4 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
                             2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
                     <img src="assets/images/logo-billfold-keyphrase.png"
-                         alt="Billfold"
+                         alt=""
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8"><span class="font-medium">When design removes friction, everyone wins:</span> staff feel supported, guests stay engaged, and the business sees the difference in the numbers.</p>
+                    <p class="font-light text-5/8">Quray reminded me why I'm drawn to complex products. You cannot fix them from the surface. I like the point where the mess underneath starts to become a system someone else can actually use.</p>
                 </div>
             </div>
 
@@ -2471,6 +2333,10 @@
         button.group > span:nth-child(2),
         div.group.flex.items-center > span:nth-child(2) {
             transform: translateY(1px);
+        }
+        .case-acc-para-gap {
+            display: block;
+            margin-top: 0.625rem;
         }
         .case-acc-label {
             position: relative;
@@ -2852,7 +2718,65 @@
     </div>
 
 <script>
+    function initComparisonSlider() {
+        document.querySelectorAll(".comparison-slider").forEach((slider) => {
+            if (slider.dataset.comparisonInit === "true") return;
+            slider.dataset.comparisonInit = "true";
+
+            const handle = slider.querySelector(".comparison-slider__handle");
+            let dragging = false;
+
+            function setSplit(clientX) {
+                const rect = slider.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const split = Math.min(100, Math.max(0, (x / rect.width) * 100));
+                slider.style.setProperty("--split", String(split));
+                if (handle) {
+                    handle.setAttribute("aria-valuenow", String(Math.round(split)));
+                }
+            }
+
+            function onPointerMove(clientX) {
+                if (!dragging) return;
+                setSplit(clientX);
+            }
+
+            function stopDragging() {
+                dragging = false;
+            }
+
+            slider.addEventListener("mousedown", (event) => {
+                dragging = true;
+                setSplit(event.clientX);
+                event.preventDefault();
+            });
+
+            slider.addEventListener("touchstart", (event) => {
+                dragging = true;
+                if (event.touches[0]) {
+                    setSplit(event.touches[0].clientX);
+                }
+            }, { passive: true });
+
+            window.addEventListener("mousemove", (event) => {
+                onPointerMove(event.clientX);
+            });
+
+            window.addEventListener("mouseup", stopDragging);
+
+            window.addEventListener("touchmove", (event) => {
+                if (event.touches[0]) {
+                    onPointerMove(event.touches[0].clientX);
+                }
+            }, { passive: true });
+
+            window.addEventListener("touchend", stopDragging);
+            window.addEventListener("touchcancel", stopDragging);
+        });
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
+        initComparisonSlider();
         gsap.registerPlugin(ScrollTrigger);
 
         const menuTween = gsap.timeline({paused: true})
@@ -2936,21 +2860,21 @@
         }
 
         const sideNav = document.getElementById("case-side-nav");
-        const overviewSection = document.getElementById("overview");
-        const overviewCard = overviewSection ? overviewSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
+        const contextSection = document.getElementById("context");
+        const contextCard = contextSection ? contextSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
         const reflectionsSection = document.getElementById("reflections");
         const reflectionsCard = reflectionsSection ? reflectionsSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
-        const sectionIds = ["overview", "my-part", "research", "ecosystem", "results-real-world"];
+        const sectionIds = ["context", "my-role", "research", "architecture", "prototype", "reflections"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
         const sideNavIndicator = sideNav ? sideNav.querySelector(".case-side-nav-indicator") : null;
         const sideNavToggle = document.getElementById("case-side-nav-toggle");
         const sideNavMenu = document.getElementById("case-side-nav-menu");
         const overlapBlockers = Array.from(document.querySelectorAll(
-            '#map-image, #map-image img, [data-parallax-wrap], [data-parallax-wrap] img, main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3, main [class*="bg-[#ECF1F4]"]'
+            '#map-image, #map-image img, [data-parallax-wrap], [data-parallax-wrap] img, main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3, main .comparison-slider, main [class*="bg-[#ECF1F4]"]'
         ));
 
-        if (sideNav && overviewSection && overviewCard && reflectionsSection && sideNavLinks.length) {
+        if (sideNav && contextSection && contextCard && reflectionsSection && sideNavLinks.length) {
             const STICKY_OFFSET = 120;
             const SCROLL_OFFSET = 120;
             const INITIAL_GAP = 48;
@@ -2973,7 +2897,7 @@
 
             function setActiveLink(scrollY) {
                 const markerY = scrollY + window.innerHeight * 0.35;
-                let activeId = "overview";
+                let activeId = "context";
                 sectionNodes.forEach((node) => {
                     if (node && absTop(node) <= markerY) {
                         activeId = node.id;
@@ -2999,8 +2923,8 @@
 
             function ensureInitialized() {
                 if (initialized) return;
-                const cardTop = absTop(overviewCard);
-                initialDocTop = cardTop + overviewCard.offsetHeight + INITIAL_GAP;
+                const cardTop = absTop(contextCard);
+                initialDocTop = cardTop + contextCard.offsetHeight + INITIAL_GAP;
                 initialized = true;
             }
 
@@ -3057,7 +2981,7 @@
                         const targetNode = document.getElementById(targetId);
                         if (!targetNode) return;
                         const targetTop = absTop(targetNode) - SCROLL_OFFSET;
-                        const useKeyphraseLanding = targetId === "users-quray" || targetId === "ecosystem" || targetId === "results-real-world";
+                        const useKeyphraseLanding = targetId === "users";
                         if (!useKeyphraseLanding) {
                             pendingAnchorDocTop = null;
                             pendingAnchorUntil = 0;
@@ -3091,7 +3015,7 @@
             }
 
             function getSectionKeyphraseAnchorTop(sectionId) {
-                if (sectionId !== "users-quray" && sectionId !== "ecosystem" && sectionId !== "results-real-world") return null;
+                if (sectionId !== "users") return null;
                 const targetSection = document.getElementById(sectionId);
                 if (!targetSection) return null;
                 const localCard = targetSection.querySelector('div[class*="bg-[#ECF1F4]"]');
@@ -3128,8 +3052,8 @@
                 }
 
                 const scrollY = window.scrollY || window.pageYOffset;
-                const overviewTop = absTop(overviewSection);
-                const startThreshold = overviewTop - SCROLL_OFFSET;
+                const contextTop = absTop(contextSection);
+                const startThreshold = contextTop - SCROLL_OFFSET;
                 const shouldShow = scrollY >= startThreshold;
 
                 if (!shouldShow) {
@@ -3149,7 +3073,7 @@
                     sideNav.classList.add("is-visible");
                 }
 
-                const cardRect = overviewCard.getBoundingClientRect();
+                const cardRect = contextCard.getBoundingClientRect();
                 const navHeight = sideNav.offsetHeight;
                 const reflectionsTop = absTop(reflectionsSection);
                 const reflectionsStop = reflectionsCard
