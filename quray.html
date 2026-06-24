@@ -1370,7 +1370,7 @@
                     </div>
                     <div class="intro-description flex min-w-0 flex-col gap-y-2 text-5/8 font-light xl:col-start-1 xl:row-start-2">
                         <p><span class="font-medium">Quray is a touchless music controller:</span> ten sensors track your hands in the air and turn movement into MIDI and CV, control signals for synthesizers and modular systems. <span class="font-medium">The hardware was already impressive. The software experience wasn't.</span></p>
-                        <p>Quray is still in progress, so I do not want to pretend the story is closed. <span class="font-medium">This case study shows the decisions that moved the product from a developer interface to a working prototype.</span> The next update will come from user testing.</p>
+                        <p><span class="font-medium">Quray is still in progress</span>, so I do not want to pretend the story is closed. <span class="font-medium">This case study shows the decisions that moved the product from a developer interface to a working prototype.</span> The next update will come from user testing.</p>
                     </div>
                 </div>
                 <div class="intro-right metadata-block min-w-0 font-light xl:col-start-2 xl:row-start-2 xl:max-w-[704px] xl:shrink-0 xl:self-start 2xl:max-w-[688px]">
@@ -1509,7 +1509,7 @@
                             </div>
                             <div>
                                 <span class="font-medium">A skeptical audience, for good reasons</span><br/>
-                                The expressive-controller market is a graveyard. Enhancia closed and left users with devices that had no support. ROLI went through bankruptcy and restructuring. The pattern repeats: impressive hardware, a convincing demo, configuration software built like a developer tool, and a buyer left alone in front of complexity. That is how an expressive instrument ends up barely used and resold — what modular forum users have started calling "a very expensive preset machine." The people who buy instruments like Quray have watched this happen repeatedly. They are not scared of configuration. They patch modular systems for fun. The problem starts when the software feels like someone else's internal logic: you can change values, but you never quite know what they mean, what breaks if you're wrong, or whether any of it survives outside the browser.
+                                The expressive-controller market is a graveyard. Enhancia closed and left users with devices that had no support. ROLI went through bankruptcy and restructuring. The pattern repeats: impressive hardware, a convincing demo, configuration software built like a developer tool, and a buyer left alone in front of complexity. That is how an expressive instrument ends up barely used and resold — what modular forum users have started calling "a very expensive preset machine." The people who buy instruments like Quray have watched this happen repeatedly. Configuration itself was not the issue. Modular users patch complex systems for fun. What frustrates them is software that lets them change values without making the logic, consequences, or device state clear.
                             </div>
                             <div>
                                 <span class="font-medium">Not just a web app</span><br/>
@@ -1541,7 +1541,7 @@
                     <span class="comparison-slider__label comparison-slider__label--before">Before</span>
                     <span class="comparison-slider__label comparison-slider__label--after">After</span>
                 </div>
-                <p class="quray-image-caption mt-4">This is a working product prototype, not a clickable mockup — <a href="https://quray-configurator.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-inherit underline decoration-[#8A8A8A] underline-offset-2 hover:text-[#0016F2] hover:decoration-[#0016F2]">try it here</a></p>
+                <p class="quray-image-caption mt-4">Left: Original configurator. Right: Editor screen redesign</p>
                 </div>
                 </div>
                 </div>
@@ -1645,10 +1645,10 @@
                     <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
                         <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
                             <div class="research-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0">I started with research because I didn't know the domain. <span class="font-medium">The founder's view of the audience was still very broad:</span> expressive, visual, open to everyone. That made sense for explaining why the device was exciting, but it was too vague for the configurator. <span class="font-medium">The software had to support a more specific moment:</span> a musician sitting with their own gear and trying to understand whether Quray could become part of their setup.</p>
+                                <p class="min-w-0">Quray was outside my usual domain, so research was not a formality. <span class="font-medium">The founder's view of the audience was very broad:</span> expressive, visual, open to everyone. That made sense for explaining why the device was exciting, but it was too vague for the configurator. <span class="font-medium">The software had to support a more specific moment:</span> a musician sitting with their own gear and trying to understand whether Quray could become part of their setup.</p>
                             </div>
                             <div class="research-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                                <p class="min-w-0"><span class="font-medium">Every comparable product lost people at the same moment</span>: not at the demo, but afterwards, when the buyer was alone with the software and it started to feel like someone else's internal logic. <span class="font-medium">That's when impressive devices stop being instruments and start collecting dust.</span> That was the problem I needed to design against — and it changed what I thought I was building.</p>
+                                <p class="min-w-0"><span class="font-medium">Every comparable product lost people at the same moment</span>: not at the demo, but afterwards, when the buyer was alone with the software and it started to feel like someone else's internal logic. <span class="font-medium">That's when impressive devices stop being instruments and start collecting dust.</span> I needed to design against that failure pattern, and it changed what I thought I was building.</p>
                             </div>
                         </div>
                     </div>
@@ -1685,7 +1685,7 @@
                                     </div>
                                     <div>
                                         <span class="font-medium">What Superbooth revealed</span><br/>
-                                        The field script I prepared for Superbooth gave the project its first real audience signal. When people played with the device, the reaction was strong — the hardware created exactly the kind of curiosity Quray needed.<span class="case-acc-para-gap">That confidence did not survive contact with the existing configurator. When people looked at the interface, the reaction shifted from "I want to try this" to something closer to "just set it up for me." For an expressive instrument, that is a bad place to land.</span><span class="case-acc-para-gap">One smaller observation stuck: some visitors moved their hand toward the device expecting depth to control something — Quray tracks a flat field. Natural gesture, no response, device feels broken. The same problem in miniature.</span>
+                                        The field script I prepared for Superbooth gave the project its first real audience signal. When people played with the device, the reaction was strong — the hardware created exactly the kind of curiosity Quray needed.<span class="case-acc-para-gap">That confidence did not survive contact with the existing configurator. When people looked at the interface, the reaction shifted from "I want to try this" to something closer to "just set it up for me." For an expressive instrument, that is a bad place to land.</span><span class="case-acc-para-gap">One smaller observation stuck: some visitors moved their hand toward the device expecting depth to control something — Quray tracks a flat field. A natural gesture produced no visible response, so the device felt broken even when it was working. It was the larger product problem in miniature.</span>
                                     </div>
                                 </div>
                             </div>
@@ -1708,7 +1708,7 @@
                             <div id="research-acc-panel-2" data-open="0" class="w-full max-w-full pt-4 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
                                 <div class="flex flex-col gap-y-4 font-light text-5/8">
                                     <div>
-                                        <span class="font-medium">The audience was narrower than the launch story</span><br/>
+                                        <span class="font-medium">The configurator needed a sharper audience</span><br/>
                                         The device looked like it could be for almost anyone interested in movement and sound, and research made that framing too soft for the configurator. It also mattered that Quray was not a cheap experimental gadget. The people most likely to configure it seriously were modular synth users and experimental electronic musicians, because they already spend time building their own systems and have a reason to care about CV, routing, and repeatable control.<span class="case-acc-para-gap">That made the configurator's job clearer. It did not need to make Quray feel accessible to everyone. It needed to feel like a serious tool for people who already understand gear and want control.</span>
                                     </div>
                                     <div>
@@ -2148,7 +2148,7 @@
                 <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-styleguide.png"><img src="assets/images/quray-styleguide.png"
                      alt="Quray living styleguide"
                      class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
-                <p class="quray-image-caption mt-4">A live styleguide inside the prototype: real tokens, components, and the states the product needs to keep consistent as it changes.</p>
+                <p class="quray-image-caption mt-4">A styleguide inside the prototype: real tokens, components, and the states the product needs to keep consistent as it changes.</p>
                 </div>
                 </div>
                 </div>
@@ -2238,10 +2238,10 @@
 
                 <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
                 <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">Quray is still in progress, so I do not want to end this case study with a polished "final result" that does not exist yet. At this stage, the more honest ending is about the way the project tested my process. I had to learn enough of the domain to make decisions, not just style the interface, and keep checking where a screen decision would affect the hardware or the musician using it.</p>
+                    <p class="min-w-0"><span class="font-medium">Quray is still in progress</span>, so I do not want to end this case study with a polished "final result" that does not exist yet. <span class="font-medium">At this stage, the more honest ending is about the way the project tested my process.</span> I had to learn enough of the domain to make decisions, not just style the interface, and keep checking where a screen decision would affect the hardware or the musician using it.</p>
                 </div>
                 <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
-                    <p class="min-w-0">I came into Quray from years of designing internal tools, SaaS products, and operational software. That background helped, but it also had limits I hadn't expected. Quray isn't a dashboard — it's an instrument, and its interface has to work outside the browser. In that context, an unclear state isn't just confusing. It can mean silence when there should be sound, or a wrong note in front of an audience.</p>
+                    <p class="min-w-0">I came into Quray from years of designing internal tools, SaaS products, and operational software. That background helped, but it also had limits I hadn't expected. <span class="font-medium">Quray isn't a dashboard — it's an instrument, and its interface has to work outside the browser.</span> In that context, an unclear state isn't just confusing. It can mean silence when there should be sound, or a wrong note in front of an audience.</p>
                 </div>
                 </div>
                 </div>
@@ -2254,7 +2254,7 @@
                         <div class="font-medium leading-tight self-center">Domain first, interface second</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p>Quray reminded me that domain learning is not a warm-up before design. If I do not understand why V/Oct, CV behavior, sync state, or preset switching matters to a musician, I can only make the configurator look cleaner. The interface becomes useful only when that knowledge starts changing the product logic.</p>
+                        <p>Quray reminded me that domain learning is not a warm-up before design. If I do not understand why V/Oct, CV behavior, sync state, or preset switching matters to a musician, I can only make the configurator look cleaner. <span class="font-medium">The interface becomes useful only when that knowledge starts changing the product logic.</span></p>
                     </div>
                 </div>
 
@@ -2266,7 +2266,7 @@
                         <div class="font-medium leading-tight self-center">Beyond the configurator</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p>Quray could not be solved as a web app alone. The same logic had to work across the configurator, the physical device, the small screen, and the performance context. If those parts disagree, the musician stops trusting the instrument. For me, the real design work was keeping the whole product coherent.</p>
+                        <p>Quray could not be solved as a web app alone. The same logic had to work across the configurator, the physical device, the small screen, and the performance context. <span class="font-medium">If those parts disagree, the musician stops trusting the instrument.</span> For me, the real design work was keeping the whole product coherent.</p>
                     </div>
                 </div>
 
@@ -2278,7 +2278,7 @@
                         <div class="font-medium leading-tight self-center">AI changed the pace</div>
                     </div>
                     <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
-                        <p>I used AI to move faster through research and to test interface ideas in code much earlier than I normally could. But the output only became useful after I questioned it. Generic answers, neat summaries, and good-looking components still had to be checked against Quray's logic. The speed changed. The judgement stayed mine.</p>
+                        <p>I used AI to move faster through research and to test interface ideas in code much earlier than I normally could. <span class="font-medium">But the output only became useful after I questioned it.</span> Generic answers, neat summaries, and good-looking components still had to be checked against Quray's logic. <span class="font-medium">The speed changed. The judgement stayed mine.</span></p>
                     </div>
                 </div>
 
@@ -2292,7 +2292,7 @@
                     <img src="assets/images/logo-billfold-keyphrase.png"
                          alt=""
                          class="h-[56px] w-[30px] shrink-0"/>
-                    <p class="font-light text-5/8">Quray reminded me why I'm drawn to complex products. You cannot fix them from the surface. I like the point where the mess underneath starts to become a system someone else can actually use.</p>
+                    <p class="font-light text-5/8">Quray reminded me why <span class="font-medium">I'm drawn to complex products.</span> You cannot fix them from the surface. <span class="font-medium">I like the point where the mess underneath starts to become a system</span> someone else can actually use.</p>
                 </div>
             </div>
 
