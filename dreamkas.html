@@ -3,6 +3,18 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        #case-side-nav[hidden] { display: none !important; }
+        #case-side-nav:not(.is-visible) {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        @media (max-width: 767px) {
+            header:not(.menu-open) nav { display: none !important; }
+            header.menu-open nav { display: flex !important; }
+        }
+    </style>
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <title>Dreamkas — Olga Pertseva</title>
@@ -1276,7 +1288,7 @@
     </header>
 
 <main class="flex flex-col gap-y-18 md:gap-y-24 xl:gap-y-26 2xl:gap-y-[120px] mt-16 md:mt-18 xl:mt-18 2xl:mt-22">
-        <aside id="case-side-nav" class="hidden xl:block" aria-label="Case study sections">
+        <aside id="case-side-nav" hidden aria-label="Case study sections">
             <button type="button" id="case-side-nav-toggle" class="case-side-nav-toggle" aria-expanded="true" aria-controls="case-side-nav-menu" aria-label="Toggle section navigation">
                 <img src="assets/images/arrow-down.svg" alt="" aria-hidden="true" class="case-side-nav-toggle-icon"/>
             </button>
@@ -2400,17 +2412,20 @@
             border-radius: 20px;
             z-index: 1;
             opacity: 0;
+            visibility: hidden;
             --case-nav-overlap-opacity: 1;
             pointer-events: none;
             transform: translateY(12px);
-            transition: opacity 0.55s ease, transform 0.55s ease, height 0.25s ease, padding 0.25s ease;
+            transition: opacity 0.55s ease, transform 0.55s ease, visibility 0s linear 0.55s, height 0.25s ease, padding 0.25s ease;
             box-sizing: border-box;
         }
 
         #case-side-nav.is-visible {
             opacity: var(--case-nav-overlap-opacity);
+            visibility: visible;
             pointer-events: auto;
             transform: translateY(0);
+            transition: opacity 0.55s ease, transform 0.55s ease, visibility 0s linear 0s, height 0.25s ease, padding 0.25s ease;
         }
 
         #case-side-nav nav {
@@ -3016,6 +3031,7 @@
                 ticking = false;
                 if (window.innerWidth < 1280) {
                     sideNav.classList.remove("is-visible");
+                    sideNav.hidden = true;
                     visible = false;
                     initialized = false;
                     return;
@@ -3028,6 +3044,7 @@
 
                 if (!shouldShow) {
                     sideNav.classList.remove("is-visible");
+                    sideNav.hidden = true;
                     visible = false;
                     initialized = false;
                     pendingAnchorDocTop = null;
@@ -3037,11 +3054,7 @@
                 }
 
                 ensureInitialized();
-
-                if (!visible) {
-                    visible = true;
-                    sideNav.classList.add("is-visible");
-                }
+                sideNav.hidden = false;
 
                 const cardRect = overviewCard.getBoundingClientRect();
                 const navHeight = sideNav.offsetHeight;
@@ -3069,6 +3082,10 @@
                 sideNav.style.left = cardRect.left + "px";
                 sideNav.style.top = (navDocTop - scrollY) + "px";
                 sideNav.style.setProperty("--case-nav-overlap-opacity", String(getOverlapOpacity()));
+                if (!visible) {
+                    visible = true;
+                    sideNav.classList.add("is-visible");
+                }
             }
 
             function requestUpdate() {

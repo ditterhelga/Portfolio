@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        .card-view-cursor[hidden],
+        .hero-cursor[hidden] {
+            display: none !important;
+        }
+        .card-view-cursor:not(.is-ready) {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        @media (max-width: 767px) {
+            header:not(.menu-open) nav { display: none !important; }
+            header.menu-open nav { display: flex !important; }
+        }
+    </style>
 
     <title>Olga Pertseva - Product Designer</title>
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
@@ -3396,20 +3411,20 @@
 
             heroMask.addEventListener("mouseenter", () => {
                 isOverHeroMask = true;
-                if (heroCursor) heroCursor.style.display = "block";
+                if (heroCursor) heroCursor.hidden = false;
                 heroMask.style.cursor = "none";
             });
 
             heroMask.addEventListener("mouseleave", () => {
                 isOverHeroMask = false;
-                if (heroCursor) heroCursor.style.display = "none";
+                if (heroCursor) heroCursor.hidden = true;
                 heroMask.style.cursor = "";
             });
 
             // Safety net: if scrolling/tab changes skip mouseleave, hide the custom cursor.
             const hideHeroCursor = () => {
                 isOverHeroMask = false;
-                if (heroCursor) heroCursor.style.display = "none";
+                if (heroCursor) heroCursor.hidden = true;
                 heroMask.style.cursor = "";
             };
             window.addEventListener("scroll", hideHeroCursor, { passive: true });
@@ -3425,7 +3440,7 @@
                     const inside = e.clientX >= r.left && e.clientX <= r.right &&
                                    e.clientY >= r.top  && e.clientY <= r.bottom;
                     if (!inside) {
-                        if (heroCursor) heroCursor.style.display = "none";
+                        if (heroCursor) heroCursor.hidden = true;
                         heroMask.style.cursor = "";
                         return;
                     }
@@ -3463,7 +3478,9 @@
         const cardViewCursorDefaultLabel = cardViewCursor ? cardViewCursor.textContent.trim() : "VIEW";
 
         if (cardViewCursor && cardFrames.length && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            cardViewCursor.hidden = false;
             gsap.set(cardViewCursor, { opacity: 0, scale: 0 });
+            cardViewCursor.classList.add("is-ready");
 
             let isOverCard = false;
 
@@ -3510,8 +3527,8 @@
 
     });
 </script>
-<div class="hero-cursor"></div>
-<div class="card-view-cursor">VIEW</div>
+<div class="hero-cursor" hidden aria-hidden="true"></div>
+<div class="card-view-cursor" hidden aria-hidden="true">VIEW</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 <script>
 (function () {
