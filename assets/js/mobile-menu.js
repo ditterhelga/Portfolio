@@ -14,7 +14,7 @@
 
     function lockMenuScroll() {
         if (!isMobileMenuViewport()) return;
-        if (document.documentElement.classList.contains("mobile-menu-active")) return;
+        if (document.documentElement.classList.contains("stop-scrolling")) return;
 
         scrollY = window.scrollY || document.documentElement.scrollTop || 0;
         document.documentElement.classList.add("mobile-menu-active", "stop-scrolling");
@@ -31,32 +31,8 @@
             touchBlocker = null;
         }
 
-        var staleOverlay = document.getElementById("peppered-menu-overlay");
-        if (staleOverlay && staleOverlay.parentNode) {
-            staleOverlay.parentNode.removeChild(staleOverlay);
-        }
-
-        document.documentElement.style.position = "";
-        document.documentElement.style.top = "";
-        document.documentElement.style.left = "";
-        document.documentElement.style.right = "";
-        document.documentElement.style.width = "";
-        document.documentElement.style.height = "";
-        document.documentElement.style.backgroundColor = "";
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.left = "";
-        document.body.style.right = "";
-        document.body.style.width = "";
-        document.body.style.height = "";
-        document.body.style.overflow = "";
-        document.body.style.touchAction = "";
-
         requestAnimationFrame(function () {
             window.scrollTo(0, scrollY);
-            window.scrollTo(0, scrollY + 1);
-            window.scrollTo(0, scrollY);
-            void document.documentElement.offsetHeight;
         });
     }
 
@@ -67,20 +43,9 @@
     }
 
     function closeMobileMenu(header, menuTween) {
+        if (menuTween) menuTween.reverse();
         if (header) header.classList.remove("menu-open");
         unlockMenuScroll();
-        if (menuTween) menuTween.reverse();
-
-        // Force Safari iOS to discard the stale fixed-position compositing layer
-        if (header) {
-            header.style.transform = "translateZ(0)";
-            requestAnimationFrame(function () {
-                requestAnimationFrame(function () {
-                    header.style.transform = "";
-                    void header.offsetHeight;
-                });
-            });
-        }
     }
 
     window.pepperedLockMenuScroll = lockMenuScroll;
@@ -88,9 +53,4 @@
     window.pepperedOpenMobileMenu = openMobileMenu;
     window.pepperedCloseMobileMenu = closeMobileMenu;
     window.__pepperedMobileMenu = true;
-
-    var staleOverlay = document.getElementById("peppered-menu-overlay");
-    if (staleOverlay && staleOverlay.parentNode) {
-        staleOverlay.parentNode.removeChild(staleOverlay);
-    }
 })();
