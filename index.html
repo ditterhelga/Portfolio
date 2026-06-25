@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFFFFF" />
     <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <style>
         .card-view-cursor[hidden],
@@ -72,9 +73,6 @@
         @layer base {
             html {
                 @apply flex justify-center;
-                /* White root canvas so the iOS status-bar/safe-area region at the
-                   top reads white instead of the body gradient's light-blue fallback. */
-                background-color: #FFFFFF;
                 /*position: absolute;*/
                 /*width: 100%;*/
                 /*height: 100%;*/
