@@ -36,6 +36,16 @@
         });
     }
 
+    function repaintViewport() {
+        document.documentElement.style.backgroundColor = "#ffffff";
+        document.body.style.backgroundColor = "#ffffff";
+        void document.documentElement.offsetHeight;
+        requestAnimationFrame(function () {
+            document.documentElement.style.backgroundColor = "";
+            document.body.style.backgroundColor = "";
+        });
+    }
+
     function openMobileMenu(header, menuTween) {
         if (header) header.classList.add("menu-open");
         if (menuTween) menuTween.restart();
@@ -44,8 +54,15 @@
 
     function closeMobileMenu(header, menuTween) {
         if (menuTween) menuTween.reverse();
-        if (header) header.classList.remove("menu-open");
+        if (header) {
+            header.style.backgroundColor = "#ffffff";
+            header.classList.remove("menu-open");
+            requestAnimationFrame(function () {
+                header.style.backgroundColor = "";
+            });
+        }
         unlockMenuScroll();
+        repaintViewport();
     }
 
     window.pepperedLockMenuScroll = lockMenuScroll;
