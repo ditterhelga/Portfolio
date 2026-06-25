@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <style>
         #case-side-nav[hidden] { display: none !important; }
         #case-side-nav:not(.is-visible) {
@@ -36,6 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="assets/js/global-lenis.js" defer></script>
+    <script src="assets/js/mobile-menu.js" defer></script>
     <script src="assets/js/img-lqip.js" defer></script>
 
     <style type="text/tailwindcss">
@@ -1437,7 +1439,7 @@
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">How I Approached It</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">My Role in Detail</span></span>
             </button>
 
             <div id="my-part-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
@@ -2887,19 +2889,20 @@
         if (burger && header) {
             burger.addEventListener("click", (event) => {
                 event.stopPropagation();
-                document.body.parentElement.classList.toggle('stop-scrolling');
                 header.classList.toggle("menu-open");
                 if (!isMenuOpen) {
                     menuTween.restart();
+                    window.pepperedLockMenuScroll();
                 } else {
                     menuTween.reverse();
+                    window.pepperedUnlockMenuScroll();
                 }
                 isMenuOpen = !isMenuOpen;
             });
             document.querySelectorAll('header nav .menulink').forEach((link) => {
                 link.addEventListener('click', () => {
                     if (isMenuOpen) {
-                        document.body.parentElement.classList.remove('stop-scrolling');
+                        window.pepperedUnlockMenuScroll();
                         menuTween.reverse();
                         header.classList.remove('menu-open');
                         isMenuOpen = false;

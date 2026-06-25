@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <style>
         #case-side-nav[hidden] { display: none !important; }
         #case-side-nav:not(.is-visible) {
@@ -37,6 +38,7 @@
     <script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="assets/js/global-lenis.js" defer></script>
+    <script src="assets/js/mobile-menu.js" defer></script>
     <script src="assets/js/img-lqip.js" defer></script>
 
     <style type="text/tailwindcss">
@@ -1435,7 +1437,7 @@
                         <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
-                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">HOW I APPROACHED IT</span></span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">My Role in Detail</span></span>
             </button>
             <div id="my-part-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
                 <div class="min-h-0 overflow-hidden">
@@ -1837,7 +1839,7 @@
                         <img src="assets/images/dreamkas-alco.png" alt="" class="block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 2xl:h-[400px] 2xl:w-full 2xl:object-cover"/>
                 </div>
                 </div>
-                <div class="order-3 invisible pointer-events-none min-w-0 w-full rounded-[20px] bg-[#ECF1F4] max-md:hidden px-[56px] pt-[56px] pb-[64px] flex flex-col gap-y-6 md:order-3 md:mt-4 xl:mt-0 xl:col-start-2 xl:row-start-2 xl:row-span-2 2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6 2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]" aria-hidden="true">
+                <div class="order-3 hidden min-w-0 w-full rounded-[20px] bg-[#ECF1F4] px-[56px] pt-[56px] pb-[64px] pointer-events-none xl:invisible xl:flex xl:flex-col xl:gap-y-6 xl:mt-0 xl:col-start-2 xl:row-start-2 xl:row-span-2 2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6 2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]" aria-hidden="true">
                     <img src="assets/images/dreamkas-keyphrase-logo copy.png" alt="" class="h-[56px] w-auto max-w-[200px] shrink-0 object-contain object-left"/>
                     <p class="font-light text-5/8">Reliability had to live <span class="font-medium">behind the scenes</span>, where shoppers never looked.</p>
                 </div>
@@ -2154,7 +2156,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="order-4 min-w-0 w-full rounded-[20px] bg-[#ECF1F4] max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px] flex flex-col gap-y-6 md:order-2 md:mt-4 xl:mt-0 xl:col-start-2 2xl:col-start-2 2xl:row-start-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6 2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <div class="order-4 min-w-0 w-full rounded-[20px] bg-[#ECF1F4] max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px] flex flex-col gap-y-6 md:order-2 md:mt-4 xl:mt-0 xl:col-start-2 xl:row-start-2 xl:row-span-2 2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6 2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
                         <img src="assets/images/dreamkas-keyphrase-logo copy.png" alt="" class="h-[56px] w-auto max-w-[200px] shrink-0 object-contain object-left"/>
                         <p class="font-light text-5/8"><span class="font-medium">Impact feels different when it reaches the people you care about. </span>My family and friends in Russia use these systems every day, effortlessly and without thinking. Knowing that something I designed became part of ordinary life&hellip; <span class="font-medium">that&rsquo;s the kind of impact I&rsquo;m most proud of.</span></p>
                     </div>
@@ -2777,19 +2779,20 @@
         if (burger && header) {
             burger.addEventListener("click", (event) => {
                 event.stopPropagation();
-                document.body.parentElement.classList.toggle('stop-scrolling');
                 header.classList.toggle("menu-open");
                 if (!isMenuOpen) {
                     menuTween.restart();
+                    window.pepperedLockMenuScroll();
                 } else {
                     menuTween.reverse();
+                    window.pepperedUnlockMenuScroll();
                 }
                 isMenuOpen = !isMenuOpen;
             });
             document.querySelectorAll('header nav .menulink').forEach((link) => {
                 link.addEventListener('click', () => {
                     if (isMenuOpen) {
-                        document.body.parentElement.classList.remove('stop-scrolling');
+                        window.pepperedUnlockMenuScroll();
                         menuTween.reverse();
                         header.classList.remove('menu-open');
                         isMenuOpen = false;

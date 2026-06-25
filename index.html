@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <style>
         .card-view-cursor[hidden],
         .hero-cursor[hidden] {
@@ -39,6 +40,7 @@
     <script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="assets/js/global-lenis.js" defer></script>
+    <script src="assets/js/mobile-menu.js" defer></script>
     <script src="assets/js/img-lqip.js" defer></script>
 
     <style type="text/tailwindcss">
@@ -2530,7 +2532,7 @@
         </div>
 
         <div class="work-cards-stack flex flex-col gap-y-12 md:gap-y-16 xl:gap-y-16">
-            <div class="card-wrapper">
+            <div class="card-wrapper" id="work-quray">
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
@@ -3084,14 +3086,14 @@
 
         document.querySelector("#burger").addEventListener("click", (event) => {
             event.stopPropagation();
-
-            document.body.parentElement.classList.toggle('stop-scrolling');
             header.classList.toggle("menu-open");
             if (!isMenuOpen) {
                 menuTween.restart();
+                window.pepperedLockMenuScroll();
                 // gsap.set("body", {overflowY: "hidden"});
             } else {
                 menuTween.reverse();
+                window.pepperedUnlockMenuScroll();
                 // gsap.set("body", {overflowY: "auto"});
             }
             isMenuOpen = !isMenuOpen;
@@ -3100,7 +3102,7 @@
         document.querySelectorAll('header nav .menulink').forEach((link) => {
             link.addEventListener('click', () => {
                 if (isMenuOpen) {
-                    document.body.parentElement.classList.remove('stop-scrolling');
+                    window.pepperedUnlockMenuScroll();
                     menuTween.reverse();
                     // setTimeout(() => {
                     header.classList.remove('menu-open');
@@ -3111,6 +3113,27 @@
             });
         });
         // End Burger setup
+
+        function isMobileWorkAnchor() {
+            return window.matchMedia("(max-width: 767px)").matches;
+        }
+
+        document.querySelectorAll('a[href="#work"]').forEach((link) => {
+            link.addEventListener("click", (event) => {
+                if (!isMobileWorkAnchor()) return;
+                const target = document.getElementById("work-quray");
+                if (!target) return;
+                event.preventDefault();
+                if (typeof window.__pepperedLenisScrollTo === "function") {
+                    window.__pepperedLenisScrollTo(target, {});
+                } else {
+                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                if (window.history && typeof window.history.pushState === "function") {
+                    window.history.pushState(null, "", "#work-quray");
+                }
+            });
+        });
 
         // About portrait: face / hand parallax + subtle 3D tilt toward cursor
         const portraitBlock = document.querySelector(".about-portrait-block");
