@@ -1,0 +1,54 @@
+/* Mobile menu backdrop + scroll lock (xs/md) */
+#peppered-menu-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #0016f2;
+    z-index: 40;
+    pointer-events: none;
+}
+
+#peppered-menu-backdrop.is-active {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    html.stop-scrolling {
+        overflow: hidden !important;
+        overscroll-behavior: none;
+    }
+
+    html.stop-scrolling body {
+        overflow: hidden !important;
+        touch-action: none;
+    }
+
+    /*
+     * Blue lives on #peppered-menu-backdrop only (removed from DOM on close).
+     * Header stays full-screen for nav layout but transparent — avoids iOS
+     * compositor ghosts from a fixed blue header layer after close.
+     */
+    header.menu-open {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin: 0 !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        z-index: 50 !important;
+        pointer-events: auto !important;
+    }
+}
