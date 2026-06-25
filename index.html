@@ -3086,16 +3086,15 @@
 
         document.querySelector("#burger").addEventListener("click", (event) => {
             event.stopPropagation();
-            header.classList.toggle("menu-open");
             if (!isMenuOpen) {
+                header.classList.add("menu-open");
                 menuTween.restart();
                 window.pepperedLockMenuScroll();
-                // gsap.set("body", {overflowY: "hidden"});
-            } else {
-                menuTween.reverse();
+                            } else {
                 window.pepperedUnlockMenuScroll();
-                // gsap.set("body", {overflowY: "auto"});
-            }
+                menuTween.reverse();
+                header.classList.remove("menu-open");
+                            }
             isMenuOpen = !isMenuOpen;
         });
         // Close menu when a menu link is clicked

@@ -2779,14 +2779,15 @@
         if (burger && header) {
             burger.addEventListener("click", (event) => {
                 event.stopPropagation();
-                header.classList.toggle("menu-open");
                 if (!isMenuOpen) {
+                    header.classList.add("menu-open");
                     menuTween.restart();
                     window.pepperedLockMenuScroll();
-                } else {
-                    menuTween.reverse();
+                                } else {
                     window.pepperedUnlockMenuScroll();
-                }
+                    menuTween.reverse();
+                    header.classList.remove("menu-open");
+                                    }
                 isMenuOpen = !isMenuOpen;
             });
             document.querySelectorAll('header nav .menulink').forEach((link) => {
