@@ -3087,26 +3087,17 @@
         document.querySelector("#burger").addEventListener("click", (event) => {
             event.stopPropagation();
             if (!isMenuOpen) {
-                header.classList.add("menu-open");
-                menuTween.restart();
-                window.pepperedLockMenuScroll();
+                window.pepperedOpenMobileMenu(header, menuTween);
                             } else {
-                window.pepperedUnlockMenuScroll();
-                menuTween.reverse();
-                header.classList.remove("menu-open");
-                            }
+                window.pepperedCloseMobileMenu(header, menuTween);
+                    }
             isMenuOpen = !isMenuOpen;
         });
         // Close menu when a menu link is clicked
         document.querySelectorAll('header nav .menulink').forEach((link) => {
             link.addEventListener('click', () => {
                 if (isMenuOpen) {
-                    window.pepperedUnlockMenuScroll();
-                    menuTween.reverse();
-                    // setTimeout(() => {
-                    header.classList.remove('menu-open');
-                    // }, 200);
-                    // gsap.set('body', {overflowY: 'auto'});
+                    window.pepperedCloseMobileMenu(header, menuTween);
                     isMenuOpen = false;
                 }
             });

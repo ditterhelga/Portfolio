@@ -1240,23 +1240,17 @@
             burger.addEventListener("click", (event) => {
                 event.stopPropagation();
                 if (!isMenuOpen) {
-                    header.classList.add("menu-open");
-                    menuTween.restart();
-                    window.pepperedLockMenuScroll();
+                    window.pepperedOpenMobileMenu(header, menuTween);
                 } else {
-                    window.pepperedUnlockMenuScroll();
-                    menuTween.reverse();
-                    header.classList.remove("menu-open");
-                }
+                    window.pepperedCloseMobileMenu(header, menuTween);
+                    }
                 isMenuOpen = !isMenuOpen;
             });
 
             document.querySelectorAll("header nav .menulink").forEach((link) => {
                 link.addEventListener("click", () => {
                     if (!isMenuOpen) return;
-                    window.pepperedUnlockMenuScroll();
-                    menuTween.reverse();
-                    header.classList.remove("menu-open");
+                    window.pepperedCloseMobileMenu(header, menuTween);
                     isMenuOpen = false;
                 });
             });
