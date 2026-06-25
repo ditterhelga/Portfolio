@@ -70,6 +70,17 @@
         if (header) header.classList.remove("menu-open");
         unlockMenuScroll();
         if (menuTween) menuTween.reverse();
+
+        // Force Safari iOS to discard the stale fixed-position compositing layer
+        if (header) {
+            header.style.transform = "translateZ(0)";
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    header.style.transform = "";
+                    void header.offsetHeight;
+                });
+            });
+        }
     }
 
     window.pepperedLockMenuScroll = lockMenuScroll;
