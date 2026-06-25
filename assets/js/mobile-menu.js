@@ -31,9 +31,15 @@
         var backdrop = document.getElementById("peppered-menu-backdrop");
         if (!backdrop) return;
         backdrop.classList.remove("is-active");
-        if (backdrop.parentNode) {
-            backdrop.parentNode.removeChild(backdrop);
-        }
+
+        // Keep the node in the DOM (see mobile-menu.css). Nudge a transform on
+        // the backdrop's own layer to force iOS Safari to re-tile the regions it
+        // covered, so no blue ghost strips remain in the top/bottom toolbar areas.
+        backdrop.style.transform = "translateZ(0)";
+        void backdrop.offsetHeight;
+        requestAnimationFrame(function () {
+            backdrop.style.transform = "";
+        });
     }
 
     function lockMenuScroll() {

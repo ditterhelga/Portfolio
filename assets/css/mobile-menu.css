@@ -1,6 +1,5 @@
 /* Mobile menu backdrop + scroll lock (xs/md) */
 #peppered-menu-backdrop {
-    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -12,10 +11,22 @@
     background: #0016f2;
     z-index: 40;
     pointer-events: none;
+    /*
+     * Stay in the DOM permanently and hide via opacity rather than display/
+     * removeChild. Destroying this fixed full-screen layer on close races iOS
+     * Safari's toolbar restore and leaves blue ghost strips top & bottom.
+     * Keeping the compositor layer alive lets it repaint cleanly to transparent.
+     */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+    will-change: opacity;
 }
 
 #peppered-menu-backdrop.is-active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease;
 }
 
 @media (max-width: 767px) {
