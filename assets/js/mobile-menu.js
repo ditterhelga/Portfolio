@@ -2,7 +2,6 @@
     if (window.__pepperedMobileMenu) return;
 
     var scrollY = 0;
-    var overlay = null;
     var touchBlocker = null;
 
     function isMobileMenuViewport() {
@@ -13,38 +12,28 @@
         event.preventDefault();
     }
 
-    function ensureOverlay() {
-        if (overlay && overlay.isConnected) return overlay;
-        overlay = document.createElement("div");
-        overlay.id = "peppered-menu-overlay";
-        overlay.setAttribute("aria-hidden", "true");
-        document.documentElement.appendChild(overlay);
-        return overlay;
-    }
-
     function lockMenuScroll() {
         if (!isMobileMenuViewport()) return;
         if (document.documentElement.classList.contains("mobile-menu-active")) return;
 
         scrollY = window.scrollY || document.documentElement.scrollTop || 0;
         document.documentElement.classList.add("mobile-menu-active", "stop-scrolling");
-        ensureOverlay().classList.add("is-visible");
 
         touchBlocker = preventTouchMove;
         document.addEventListener("touchmove", touchBlocker, { passive: false });
     }
 
     function unlockMenuScroll() {
-        var el = document.getElementById("peppered-menu-overlay");
-        if (el) {
-            el.classList.remove("is-visible");
-        }
-
         document.documentElement.classList.remove("mobile-menu-active", "stop-scrolling");
 
         if (touchBlocker) {
             document.removeEventListener("touchmove", touchBlocker, { passive: false });
             touchBlocker = null;
+        }
+
+        var staleOverlay = document.getElementById("peppered-menu-overlay");
+        if (staleOverlay && staleOverlay.parentNode) {
+            staleOverlay.parentNode.removeChild(staleOverlay);
         }
 
         document.documentElement.style.position = "";
@@ -65,13 +54,9 @@
 
         requestAnimationFrame(function () {
             window.scrollTo(0, scrollY);
+            window.scrollTo(0, scrollY + 1);
+            window.scrollTo(0, scrollY);
             void document.documentElement.offsetHeight;
-            requestAnimationFrame(function () {
-                if (el && el.parentNode) {
-                    el.parentNode.removeChild(el);
-                }
-                overlay = null;
-            });
         });
     }
 
@@ -92,4 +77,9 @@
     window.pepperedOpenMobileMenu = openMobileMenu;
     window.pepperedCloseMobileMenu = closeMobileMenu;
     window.__pepperedMobileMenu = true;
+
+    var staleOverlay = document.getElementById("peppered-menu-overlay");
+    if (staleOverlay && staleOverlay.parentNode) {
+        staleOverlay.parentNode.removeChild(staleOverlay);
+    }
 })();
