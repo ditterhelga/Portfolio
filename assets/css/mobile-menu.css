@@ -19,12 +19,14 @@
      */
     opacity: 0;
     visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
     will-change: opacity;
 }
 
 #peppered-menu-backdrop.is-active {
     opacity: 1;
     visibility: visible;
+    transition: opacity 0.2s ease;
 }
 
 @media (max-width: 767px) {
