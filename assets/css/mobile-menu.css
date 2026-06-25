@@ -25,7 +25,7 @@
     }
 
     /* Close button: same spot open or closed (matches header pt-8 + right-4) */
-    #burger {
+    header.menu-open #burger {
         position: fixed !important;
         top: 2rem !important;
         right: 1rem !important;
