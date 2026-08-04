@@ -9,7 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
@@ -36,6 +36,7 @@
         @theme {
             --font-family-sofia: 'Sofia Sans Condensed', sans-serif;
             --font-family-inter: 'Inter', sans-serif;
+            --font-family-albert: 'Albert Sans', sans-serif;
             --color-text-primary: #302F2F;
             --color-primary-dark: #3B47C2;
             --color-primary-light: #0016F2;
@@ -89,6 +90,77 @@
                 }
             }
 
+
+            & .logo {
+                display: flex;
+                align-items: center;
+            }
+
+            & .logo a {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                text-decoration: none;
+                color: inherit;
+            }
+
+            & .logo-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                line-height: 1.15;
+                transform: translateY(4px);
+            }
+
+            & .logo-name {
+                font-family: var(--font-family-albert);
+                font-weight: 400;
+                font-size: 30px;
+                color: var(--color-primary-dark);
+                text-decoration: none;
+            }
+
+            & .logo-role {
+                font-family: var(--font-family-inter);
+                font-weight: 400;
+                font-size: 16px;
+                color: var(--color-primary-dark);
+                text-decoration: none;
+            }
+
+            @media (max-width: 767px) {
+                & .logo-role {
+                    display: none;
+                }
+            }
+
+
+            & nav > a[aria-label="LinkedIn"] {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 0;
+                text-decoration: none;
+            }
+
+            & nav > a[aria-label="LinkedIn"] img {
+                -webkit-filter: none;
+                filter: none;
+                transition: filter 0.25s ease, -webkit-filter 0.25s ease;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                & nav > a[aria-label="LinkedIn"]:hover img {
+                    -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                    filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                }
+            }
+
+            & nav > a[aria-label="LinkedIn"]:focus-visible img {
+                -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            }
+
             & #burger {
                 @apply z-20;
                 cursor: pointer;
@@ -137,6 +209,25 @@
                 & .logo img {
                     filter: brightness(0) invert(1);
                 }
+
+                & .logo-name,
+                & .logo-role {
+                    color: #ffffff;
+                }
+
+                & nav > a[aria-label="LinkedIn"] {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                & nav > a[aria-label="LinkedIn"] img {
+                    -webkit-filter: brightness(0) invert(1);
+                    filter: brightness(0) invert(1);
+                }
+
 
                 & > #burger {
                     @apply right-4;
@@ -529,15 +620,23 @@
             <div class="flex justify-between w-full">
                 <div id="logo" class="logo">
                     <a href="index.html">
-                        <img src="assets/images/logo.svg" alt="Olga Pertseva" />
+                        <img src="assets/images/logo.svg" alt="Olga Pertseva"/>
+                        <span class="logo-text">
+                            <span class="logo-name">Olga Pertseva</span>
+                            <span class="logo-role">Senior product designer</span>
+                        </span>
                     </a>
                 </div>
 
                 <nav class="hidden flex-col w-full justify-center md:flex md:flex-row md:gap-x-16 md:w-auto md:ml-auto items-center">
                     <a href="index.html#work" class="menulink">Work</a>
+                    <a href="experiments.html?from=index" class="menulink">Play</a>
                     <a href="about.html" class="menulink">About</a>
                     <a href="contact.html" class="menulink">Contact</a>
                     <a href="assets/docs/Olga_Pertseva_Product_Designer_2026.pdf" class="menulink" target="_blank" rel="noopener noreferrer">Resume</a>
+                    <a href="https://www.linkedin.com/in/olga-pertseva/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <img src="assets/icons/linkedin-icon.svg" alt="" width="24" height="24"/>
+                    </a>
                 </nav>
             </div>
 

@@ -27,7 +27,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
           rel="stylesheet">
 
     <!-- Tailwind -->
@@ -48,6 +48,7 @@
         @theme {
             --font-family-sofia: 'Sofia Sans Condensed', sans-serif;
             --font-family-inter: 'Inter', sans-serif;
+            --font-family-albert: 'Albert Sans', sans-serif;
 
             --color-text-primary: #302F2F;
             --color-primary-dark: #3B47C2;
@@ -123,6 +124,77 @@
                 }
             }
 
+
+            & .logo {
+                display: flex;
+                align-items: center;
+            }
+
+            & .logo a {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                text-decoration: none;
+                color: inherit;
+            }
+
+            & .logo-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                line-height: 1.15;
+                transform: translateY(4px);
+            }
+
+            & .logo-name {
+                font-family: var(--font-family-albert);
+                font-weight: 400;
+                font-size: 30px;
+                color: var(--color-primary-dark);
+                text-decoration: none;
+            }
+
+            & .logo-role {
+                font-family: var(--font-family-inter);
+                font-weight: 400;
+                font-size: 16px;
+                color: var(--color-primary-dark);
+                text-decoration: none;
+            }
+
+            @media (max-width: 767px) {
+                & .logo-role {
+                    display: none;
+                }
+            }
+
+
+            & nav > a[aria-label="LinkedIn"] {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 0;
+                text-decoration: none;
+            }
+
+            & nav > a[aria-label="LinkedIn"] img {
+                -webkit-filter: none;
+                filter: none;
+                transition: filter 0.25s ease, -webkit-filter 0.25s ease;
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                & nav > a[aria-label="LinkedIn"]:hover img {
+                    -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                    filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                }
+            }
+
+            & nav > a[aria-label="LinkedIn"]:focus-visible img {
+                -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            }
+
             & #burger {
                 @apply z-20;
                 cursor: pointer;
@@ -174,6 +246,25 @@
                 & .logo img {
                     filter: brightness(0) invert(1);
                 }
+
+                & .logo-name,
+                & .logo-role {
+                    color: #ffffff;
+                }
+
+                & nav > a[aria-label="LinkedIn"] {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                & nav > a[aria-label="LinkedIn"] img {
+                    -webkit-filter: brightness(0) invert(1);
+                    filter: brightness(0) invert(1);
+                }
+
 
                 & > #burger {
                     @apply right-4;
@@ -267,23 +358,14 @@
 }
 
 @keyframes rotate-words {
-    0%, 12.5% {
+    0%, 28% {
         transform: translateY(0);
     }
-    17.5%, 30% {
+    33.333%, 61.333% {
         transform: translateY(calc(-1 * var(--rotate-row)));
     }
-    35%, 47.5% {
+    66.666%, 94.666% {
         transform: translateY(calc(-2 * var(--rotate-row)));
-    }
-    52.5%, 65% {
-        transform: translateY(calc(-3 * var(--rotate-row)));
-    }
-    70%, 82.5% {
-        transform: translateY(calc(-4 * var(--rotate-row)));
-    }
-    87.5%, 95% {
-        transform: translateY(calc(-5 * var(--rotate-row)));
     }
     100% {
         transform: translateY(0);
@@ -337,19 +419,11 @@
             }
 
             .rotating-words .phrases > span:nth-child(2) {
-                animation-delay: 3s;
+                animation-delay: 5s;
             }
 
             .rotating-words .phrases > span:nth-child(3) {
-                animation-delay: 6s;
-            }
-
-            .rotating-words .phrases > span:nth-child(4) {
-                animation-delay: 9s;
-            }
-
-            .rotating-words .phrases > span:nth-child(5) {
-                animation-delay: 12s;
+                animation-delay: 10s;
             }
 
             @keyframes wordReveal {
@@ -363,12 +437,12 @@
                     transform: translateY(0);
                     letter-spacing: -0.02em;
                 }
-                30% {
+                28% {
                     opacity: 1;
                     transform: translateY(0);
                     letter-spacing: -0.02em;
                 }
-                36% {
+                33.333% {
                     opacity: 0;
                     transform: translateY(-18px);
                     letter-spacing: -0.02em;
@@ -464,7 +538,6 @@
                 position: relative;
                 isolation: isolate;
                 flex-shrink: 0;
-                cursor: pointer;
                 @apply max-w-none
                 w-[152px]
                 -mt-40
@@ -499,10 +572,11 @@
                 will-change: transform;
             }
 
-            /* Slightly larger than frame so parallax/tilt stay inside the clip (square mask is only on the frame). */
+            /* Minimal overscan for parallax. Front cutout is scaled down so the
+               crown isn't flush with the frame — the source PNG has no headroom. */
             .about-portrait-stack {
                 position: absolute;
-                inset: -9%;
+                inset: -4%;
                 width: auto;
                 height: auto;
                 transform-style: preserve-3d;
@@ -514,7 +588,7 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                object-position: 50% 45%;
+                object-position: 50% 40%;
                 max-width: none;
                 pointer-events: none;
                 user-select: none;
@@ -524,58 +598,13 @@
 
             .about-portrait-back {
                 z-index: 1;
-                transform: scale(1.03);
+                transform: scale(1);
             }
 
             .about-portrait-front {
                 z-index: 2;
-                transform: scale(1.03);
-            }
-
-            .about-portrait-caption-tray {
-                overflow: hidden;
-                max-height: 0;
-                margin-top: 0;
-                transition:
-                    max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                    margin-top 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            }
-
-            .about-portrait-caption-inner {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 16px 20px;
-                background-color: rgba(253, 228, 223, 0.6);
-                border-radius: 20px;
-                color: rgba(0, 22, 242, 0.7);
-                font-family: var(--font-family-inter);
-                font-size: 1.125rem;
-                line-height: 1.75rem;
-                font-weight: 300;
-                font-style: italic;
-                text-align: center;
-                transform: translateY(-100%);
-                transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-                will-change: transform;
-            }
-
-            .about-portrait-block:hover .about-portrait-caption-tray,
-            .about-portrait-block:focus-within .about-portrait-caption-tray {
-                max-height: 12rem;
-                margin-top: 8px;
-            }
-
-            .about-portrait-block:hover .about-portrait-caption-inner,
-            .about-portrait-block:focus-within .about-portrait-caption-inner {
-                transform: translateY(0);
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                .about-portrait-caption-tray,
-                .about-portrait-caption-inner {
-                    transition: none;
-                }
+                transform: scale(0.98);
+                transform-origin: 50% 40%;
             }
 
         }
@@ -597,6 +626,91 @@
             & .badge {
                 @apply rounded-full bg-pink-badge text-blue-light uppercase !text-lg font-family-sofia font-normal py-1 px-5;
             }
+        }
+
+        @utility hero-badges {
+            @apply flex flex-row flex-wrap;
+            gap: 16px;
+            list-style: none;
+            /* pills → h1: 48px mobile, 64px md+ */
+            margin: 0 0 48px;
+            padding: 0;
+
+            @media (min-width: 768px) {
+                margin-bottom: 64px;
+            }
+
+            & .hero-badge {
+                @apply inline-flex items-center rounded-full uppercase !text-lg font-family-sofia font-normal text-blue-light;
+                box-sizing: border-box;
+                height: 44px;
+                padding: 8px 24px;
+                background: #FFF2D7;
+                flex-shrink: 0;
+                white-space: nowrap;
+                line-height: 1;
+            }
+
+            /* Long domain pill: own full-width row on narrow screens — don't shrink type */
+            @media (max-width: 767px) {
+                & .hero-badge--domains {
+                    flex: 1 1 100%;
+                    max-width: 100%;
+                }
+            }
+        }
+
+        /*
+         * Header → pills: 72px below md, 96px from md up.
+         * Parent gap is gap-y-18 (72) / md:gap-y-24 (96) / xl:gap-y-26 (104).
+         * Hero → about: tighten only this pair (shared gap-y left alone).
+         * #about also has xl:mt-5 (1.25rem) — fold that into the xl math.
+         */
+        #hero {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Pull #about up toward #hero without touching other section gaps */
+        #hero + #about {
+            margin-top: calc(48px - 4.5rem); /* 48 − gap-y-18 */
+        }
+
+        @media (min-width: 768px) {
+            #hero {
+                margin-top: 0; /* gap-y-24 already 96px */
+            }
+
+            #hero + #about {
+                margin-top: calc(64px - 6rem); /* 64 − gap-y-24 */
+            }
+        }
+
+        @media (min-width: 1280px) {
+            #hero {
+                margin-top: calc(96px - 6.5rem); /* 96 − gap-y-26 */
+            }
+
+            #hero + #about {
+                /* overrides #about xl:mt-5; 104 gap + this = 72 */
+                margin-top: calc(72px - 6.5rem);
+            }
+        }
+
+        /* Dutch flag mark + 8px gap before the label */
+        .hero-badges .hero-badge-flag {
+            display: inline-flex !important;
+            flex-shrink: 0;
+            line-height: 0;
+            margin-right: 8px !important;
+        }
+
+        .hero-badges .hero-badge-flag svg {
+            display: block;
+            width: 18px;
+            height: 12px;
+            border-radius: 1px;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
         }
 
         @utility card-title {
@@ -1196,6 +1310,28 @@
             object-fit: cover;
             object-position: center;
             display: block;
+        }
+
+        /* Quray card video: no parallax, keep intrinsic aspect (1600×1034) */
+        #work .card-image-frame--native {
+            height: auto !important;
+            aspect-ratio: 1600 / 1034 !important;
+            max-height: none !important;
+        }
+
+        #work .card-image-frame--native .card-image--native {
+            position: relative;
+            inset: auto;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #work .card-image-frame--native:hover .card-image--native {
+                transform: none;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -2370,14 +2506,22 @@
             <div id="logo" class="logo">
                 <a href="index.html">
                     <img src="assets/images/logo.svg" alt="Olga Pertseva"/>
+                    <span class="logo-text">
+                        <span class="logo-name">Olga Pertseva</span>
+                        <span class="logo-role">Senior product designer</span>
+                    </span>
                 </a>
             </div>
 
             <nav class="hidden flex-col w-full justify-center md:flex md:flex-row md:gap-x-16 md:w-auto md:ml-auto items-center">
                 <a href="#work"    class="menulink">Work</a>
+                <a href="experiments.html?from=index" class="menulink">Play</a>
                 <a href="about.html"   class="menulink">About</a>
                 <a href="contact.html" class="menulink">Contact</a>
                 <a href="assets/docs/Olga_Pertseva_Product_Designer_2026.pdf" class="menulink" target="_blank" rel="noopener noreferrer">Resume</a>
+                <a href="https://www.linkedin.com/in/olga-pertseva/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <img src="assets/icons/linkedin-icon.svg" alt="" width="24" height="24"/>
+                </a>
             </nav>
         </div>
 
@@ -2391,7 +2535,22 @@
         </div>
     </header>
 
-    <section id="hero" class="flex items-center xl:mt-14">
+    <section id="hero" class="flex flex-col items-stretch">
+        <ul class="hero-badges" role="list" aria-label="Profile summary">
+            <li class="hero-badge">10+ Years</li>
+            <li class="hero-badge hero-badge--domains">POS · Payments · B2B SaaS · Internal Tools</li>
+            <li class="hero-badge">MSc Computer Engineering</li>
+            <li class="hero-badge hero-badge--flag">
+                <span class="hero-badge-flag" aria-hidden="true">
+                    <svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                        <rect width="18" height="4" y="0" fill="#AE1C28"/>
+                        <rect width="18" height="4" y="4" fill="#FFFFFF"/>
+                        <rect width="18" height="4" y="8" fill="#21468B"/>
+                    </svg>
+                </span><span class="hero-badge-loc">Amsterdam · EU Work Permit</span>
+            </li>
+        </ul>
+
         <div class="hero-title w-full">
             <div class="hero-mask">
                 <div class="blob-layer" aria-hidden="true">
@@ -2416,14 +2575,11 @@
     <span class="inline-block leading-none">With</span>
     <div class="hero-rotating-wrap">
         <div class="rotating-words">
-            <span class="sizer">researcher's instincts</span>
+            <span class="sizer">an architect's logic</span>
             <span class="phrases">
-                <span>engineer's brain</span>
-                <span>artist's eye</span>
-                <span>Builder's hands</span>
-                <span>architect's logic</span>
-                <span>researcher's instincts</span>
-                <span>listener's ear</span>
+                <span>an engineer's brain</span>
+                <span>an architect's logic</span>
+                <span>a builder's hands</span>
             </span>
         </div>
     </div>
@@ -2442,7 +2598,7 @@
                     that people enjoy using — bringing calm to busy environments and giving people the confidence to do their jobs well.</p>
             </div>
 
-            <a href="about.html" class="button-about no-underline text-inherit" aria-label="About me">
+            <a href="about.html" class="button-about no-underline text-inherit" aria-label="About me" hidden>
                 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="en" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
                     <title>Circular Text Path</title>
                     <defs>
@@ -2485,25 +2641,20 @@
                     <div class="about-portrait-tilt">
                         <div class="about-portrait-stack">
                             <img class="about-portrait-layer about-portrait-back"
-                                 src="assets/images/me-pepper-back.png"
+                                 src="assets/images/Olga-pertseva-back.png"
                                  alt=""
-                                 width="384"
-                                 height="384"
+                                 width="1010"
+                                 height="1010"
                                  decoding="async"
                                  aria-hidden="true"/>
                             <img class="about-portrait-layer about-portrait-front"
-                                 src="assets/images/me-pepper-front.png"
+                                 src="assets/images/Olga-pertseva-front.png"
                                  alt="Olga Pertseva"
-                                 width="384"
-                                 height="384"
+                                 width="1010"
+                                 height="1010"
                                  decoding="async"/>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="about-portrait-caption-tray" aria-hidden="true">
-                <div class="about-portrait-caption-inner">
-                    <span>Why peppers? My surname means pepper. Obviously.</span>
                 </div>
             </div>
         </div>
@@ -2543,11 +2694,19 @@
                     </div>
 
                     <div class="group card-content">
-                        <a href="quray.html" class="work-case-card-link block w-full shrink-0 sm:w-auto sm:max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" aria-label="Open Quray case study — project image">
-                            <div class="card-image-frame">
-                                <div class="card-image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/Quray-main.png">
-                                    <img class="card-image lqip-fadein" src="assets/images/Quray-main.png" alt="Quray Project" loading="lazy"/>
-                                </div>
+                        <a href="quray.html" class="work-case-card-link block w-full shrink-0 sm:w-auto sm:max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" aria-label="Open Quray case study — project video">
+                            <div class="card-image-frame card-image-frame--native">
+                                <video class="card-image card-image--native"
+                                       src="assets/videos/Quray-main.mov"
+                                       poster="assets/images/Quray-main.png"
+                                       autoplay
+                                       loop
+                                       muted
+                                       playsinline
+                                       preload="metadata"
+                                       width="1600"
+                                       height="1034"
+                                       aria-label="Quray Project"></video>
                                 <div class="card-image-overlay" aria-hidden="true"></div>
                             </div>
                         </a>
@@ -2562,52 +2721,6 @@
                             </div>
 
                             <a href="quray.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
-                                <span class="work-card-cta">
-                                <span class="work-card-cta-icon" aria-hidden="true">
-                                    <svg class="work-card-cta-chevron" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M22 18L28.25 24.25L22 30.5" stroke="white" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <img class="work-card-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
-                                </span>
-                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">Dive into the case</span></span>
-                                </span>
-                            </a>
-
-                        </div>
-                    </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card-wrapper">
-                <div class="card">
-                    <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
-                    <div class="card-badges">
-                        <span class="badge">End-to-end ux design</span>
-                        <span class="badge">Restaurant training and operations</span>
-                    </div>
-
-                    <div class="group card-content">
-                        <a href="subway.html" class="work-case-card-link block w-full shrink-0 sm:w-auto sm:max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" aria-label="Open Subway case study — project image">
-                            <div class="card-image-frame">
-                                <div class="card-image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/subway-main.png">
-                                    <img class="card-image lqip-fadein" src="assets/images/subway-main.png" alt="Subway Project" loading="lazy"/>
-                                </div>
-                                <div class="card-image-overlay" aria-hidden="true"></div>
-                            </div>
-                        </a>
-                        <div class="card-description">
-                            <a href="subway.html" class="work-case-card-link block w-fit max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
-                                <h3 class="card-title intro-scroll-reveal">Subway</h3>
-                            </a>
-
-                            <div class="card-paragraph">
-                                <p class="card-text">Led the design of two platforms that simplify employee learning and support franchisees from launch to growth.</p>
-                                <p class="card-text"><b>Impact:</b> <span class="font-medium">40%</span> faster employee onboarding • <span class="font-medium">60%</span> higher certification completion • <span class="font-medium">up to 30%</span> faster store launches • significant reduction in franchisee support calls.</p>
-                            </div>
-
-                            <a href="subway.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
                                 <span class="work-card-cta">
                                 <span class="work-card-cta-icon" aria-hidden="true">
                                     <svg class="work-card-cta-chevron" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -2708,6 +2821,52 @@
                                 <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">Dive into the case</span></span>
                                 </span>
                             </a>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-wrapper">
+                <div class="card">
+                    <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
+                    <div class="card-badges">
+                        <span class="badge">End-to-end ux design</span>
+                        <span class="badge">Restaurant training and operations</span>
+                    </div>
+
+                    <div class="group card-content">
+                        <a href="subway.html" class="work-case-card-link block w-full shrink-0 sm:w-auto sm:max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" aria-label="Open Subway case study — project image">
+                            <div class="card-image-frame">
+                                <div class="card-image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/subway-main.png">
+                                    <img class="card-image lqip-fadein" src="assets/images/subway-main.png" alt="Subway Project" loading="lazy"/>
+                                </div>
+                                <div class="card-image-overlay" aria-hidden="true"></div>
+                            </div>
+                        </a>
+                        <div class="card-description">
+                            <a href="subway.html" class="work-case-card-link block w-fit max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
+                                <h3 class="card-title intro-scroll-reveal">Subway</h3>
+                            </a>
+
+                            <div class="card-paragraph">
+                                <p class="card-text">Led the design of two platforms that simplify employee learning and support franchisees from launch to growth.</p>
+                                <p class="card-text"><b>Impact:</b> <span class="font-medium">40%</span> faster employee onboarding • <span class="font-medium">60%</span> higher certification completion • <span class="font-medium">up to 30%</span> faster store launches • significant reduction in franchisee support calls.</p>
+                            </div>
+
+                            <a href="subway.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
+                                <span class="work-card-cta">
+                                <span class="work-card-cta-icon" aria-hidden="true">
+                                    <svg class="work-card-cta-chevron" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M22 18L28.25 24.25L22 30.5" stroke="white" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <img class="work-card-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
+                                </span>
+                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">Dive into the case</span></span>
+                                </span>
+                            </a>
+
                         </div>
                     </div>
                     </div>
@@ -3141,7 +3300,8 @@
             const tiltMaxX = 3;
             const parallaxBack = 2.5;
             const parallaxFront = 3.5;
-            const layerScale = 1.03;
+            const layerScaleBack = 1;
+            const layerScaleFront = 0.98;
 
             function clamp(n, lo, hi) {
                 return Math.min(hi, Math.max(lo, n));
@@ -3158,9 +3318,9 @@
                 const ry = nx * tiltMaxY;
                 portraitTilt.style.transform = `perspective(880px) rotateX(${rx}deg) rotateY(${ry}deg)`;
                 portraitBack.style.transform =
-                    `translate3d(${nx * -parallaxBack}px, ${ny * -parallaxBack * 0.9}px, 0) scale(${layerScale})`;
+                    `translate3d(${nx * -parallaxBack}px, ${ny * -parallaxBack * 0.9}px, 0) scale(${layerScaleBack})`;
                 portraitFront.style.transform =
-                    `translate3d(${nx * parallaxFront}px, ${ny * parallaxFront * 0.9}px, 0) scale(${layerScale})`;
+                    `translate3d(${nx * parallaxFront}px, ${ny * parallaxFront * 0.9}px, 0) scale(${layerScaleFront})`;
             }
 
             function resetPortraitPose() {
@@ -3168,8 +3328,8 @@
                 portraitBack.style.transition = `transform 0.5s ${easeOut}`;
                 portraitFront.style.transition = `transform 0.5s ${easeOut}`;
                 portraitTilt.style.transform = "perspective(880px) rotateX(0deg) rotateY(0deg)";
-                portraitBack.style.transform = `translate3d(0, 0, 0) scale(${layerScale})`;
-                portraitFront.style.transform = `translate3d(0, 0, 0) scale(${layerScale})`;
+                portraitBack.style.transform = `translate3d(0, 0, 0) scale(${layerScaleBack})`;
+                portraitFront.style.transform = `translate3d(0, 0, 0) scale(${layerScaleFront})`;
                 const onEnd = (e) => {
                     if (e.propertyName !== "transform") return;
                     portraitTilt.removeEventListener("transitionend", onEnd);
