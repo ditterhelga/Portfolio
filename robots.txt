@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /quray-old.html
+Disallow: /index-old.html

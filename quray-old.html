@@ -1,0 +1,3370 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://peppered.design/quray.html">
+    <link rel="stylesheet" href="assets/css/mobile-menu.css">
+    <style>
+        #case-side-nav[hidden] { display: none !important; }
+        #case-side-nav:not(.is-visible) {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        @media (max-width: 767px) {
+            header:not(.menu-open) nav { display: none !important; }
+            header.menu-open nav { display: flex !important; }
+        }
+    </style>
+
+    <title>Quray — Olga Pertseva</title>
+    <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+    <!-- tools -->
+    <script src="https://cdn.jsdelivr.net/npm/es-toolkit@%5E1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
+    <script src="assets/js/global-lenis.js" defer></script>
+    <script src="assets/js/mobile-menu.js" defer></script>
+    <script src="assets/js/img-lqip.js" defer></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            --font-family-sofia: 'Sofia Sans Condensed', sans-serif;
+            --font-family-inter: 'Inter', sans-serif;
+
+            --color-text-primary: #302F2F;
+            --color-primary-dark: #3B47C2;
+            --color-primary-light: #0016F2;
+            --color-pink-badge: #FDE4DF;
+            --color-blue-light: #8891D6;
+            --color-blue-dark: #040989;
+            --color-accent-yellow: #FDC448;
+
+            --bg-color: 216, 29%, 97%;
+
+            --breakpoint-xs: 20rem;
+            --breakpoint-2xl: 96rem;
+        }
+
+        @utility full-bleed {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @layer base {
+            html {
+                /*position: absolute;*/
+                /*width: 100%;*/
+                /*height: 100%;*/
+                /*overflow-y: scroll;*/
+            }
+
+            body {
+                font-family: var(--font-family-inter);
+                font-size: 1.25rem;
+                line-height: 2rem;
+                letter-spacing: 0px;
+                font-weight: 400;
+                /*margin: 0;*/
+                color: var(--color-text-primary);
+                background: #FFFFFF;
+                overflow-x: hidden;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Sofia Sans Condensed', sans-serif;
+            }
+        }
+
+        .section-header {
+            @apply font-family-sofia font-normal
+                text-[48px]/[56px]
+                md:text-[60px]/[64px]
+                xl:text-[64px]/[64px]
+                2xl:text-[64px]/[64px];
+        }
+
+        /* Hero h1 keeps previous scale; does not use .section-header typography */
+        .quray-hero-title {
+            @apply font-family-sofia font-normal
+                text-[52px]/[60px]
+                md:text-[60px]/[64px]
+                xl:text-[64px]/[64px];
+        }
+
+        .quray-page-title {
+            @apply font-medium;
+        }
+
+        header {
+            @apply flex z-10;
+            /*py-8 md:py-13*/
+
+            & .logo img {
+                height: 63px;
+                width: auto;
+                transform-origin: left center;
+                transition: opacity 0.3s ease, filter 0.6s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                & .logo a:hover img,
+                & .logo a:focus-visible img {
+                    transform: scale(1.08);
+                }
+            }
+
+            & #burger {
+                @apply z-20;
+                cursor: pointer;
+            }
+
+            @media (min-width: 768px) {
+    & nav .menulink {
+        position: relative;
+        font-weight: 400;
+        font-family: var(--font-family-inter);
+        transition: color 0.25s ease;
+    }
+
+    & nav .menulink::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 3px;
+        background-color: #FDE4DF;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+    & nav .menulink:hover::after {
+        transform: scaleX(1);
+    }
+
+    & nav .menulink:hover {
+        color: #0016F2;
+    }
+    }
+}
+
+            &.menu-open {
+                @apply fixed h-screen w-screen px-4 z-50 md:px-12;
+                inset: 0;
+
+                background: #0016F2;
+
+                /* ensure content becomes visible when menu is open */
+                & .logo, nav {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
+                & .logo img {
+                    filter: brightness(0) invert(1);
+                }
+
+                & > #burger {
+                    @apply right-4;
+
+                    & svg rect {
+                        fill: rgba(255, 255, 255, 0.2);
+                    }
+
+                    & svg path {
+                        stroke: white;
+                    }
+                }
+
+                & > div {
+                    @apply flex-col;
+
+                    & > nav {
+                        @apply flex flex-col justify-center gap-y-8 h-screen;
+
+                        & a {
+                            @apply w-full md:h-full text-center;
+                        }
+                    }
+                }
+
+                & .menulink {
+                    font-family: 'Sofia Sans Condensed', sans-serif;
+                    font-size: 4rem;
+                    font-weight: 500;
+                    color: white;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    letter-spacing: -0.02em;
+                    transition: transform 0.3s ease, color 0.3s ease;
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                @media (hover: hover) and (pointer: fine) {
+                & .menulink:hover {
+                    color: #FDC448;
+                    transform: translateY(-5px);
+                }
+                }
+            }
+        }
+
+        #hero {
+    & .line-bottom {
+        --rotate-row: 1em;
+    }
+
+    @media (min-width: 48rem) {
+        & .line-bottom {
+            --rotate-row: calc(5em / 4.75);
+        }
+    }
+
+    & .hero-rotating-wrap {
+        display: inline-block;
+        vertical-align: bottom;
+    }
+
+    & .rotating-words {
+        position: relative;
+        height: var(--rotate-row);
+        line-height: inherit;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: bottom;
+    }
+
+    & .phrases {
+        display: block;
+        animation: rotate-words 8s infinite ease-in-out;
+    }
+
+    & .phrases span {
+        display: block;
+        height: var(--rotate-row);
+        line-height: inherit;
+    }
+
+    & .sizer {
+        display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        & .rotating-words:hover .phrases {
+            animation-play-state: paused;
+        }
+    }
+}
+
+@keyframes rotate-words {
+    0%, 20% {
+        transform: translateY(0);
+    }
+    25%, 45% {
+        transform: translateY(calc(-1 * var(--rotate-row)));
+    }
+    50%, 85% {
+        transform: translateY(calc(-2 * var(--rotate-row))); /* держим empath */
+    }
+    90% {
+        transform: translateY(0); /* быстрый возврат */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+        #about {
+            @apply flex
+            flex-col
+            gap-y-6
+            md:gap-y-8
+            xl:mt-5
+            xl:flex-row-reverse
+            xl:gap-x-14
+            2xl:gap-x-20;
+
+
+            .rotating-words {
+                position: relative;
+                display: inline-block;
+                white-space: nowrap;
+            }
+
+            .rotating-words .sizer {
+                visibility: hidden;
+                white-space: nowrap;
+            }
+
+            .rotating-words .phrases {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .rotating-words .phrases > span {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                letter-spacing: 0.02em;
+                display: block;
+                font-weight: 700;
+                color: #4B57C8;
+                opacity: 0;
+                animation: wordReveal 9s infinite;
+            }
+
+            .rotating-words .phrases > span:nth-child(1) {
+                animation-delay: 0s;
+            }
+
+            .rotating-words .phrases > span:nth-child(2) {
+                animation-delay: 3s;
+            }
+
+            .rotating-words .phrases > span:nth-child(3) {
+                animation-delay: 6s;
+            }
+
+            @keyframes wordReveal {
+                0% {
+                    opacity: 0;
+                    transform: translateY(24px);
+                    letter-spacing: 0.02em;
+                }
+                8% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    letter-spacing: -0.02em;
+                }
+                30% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    letter-spacing: -0.02em;
+                }
+                36% {
+                    opacity: 0;
+                    transform: translateY(-18px);
+                    letter-spacing: -0.02em;
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-18px);
+                    letter-spacing: -0.02em;
+                }
+            }
+
+            .button-about {
+                /*relative*/
+                @apply  inline-flex
+                border-none
+                bg-primary-dark
+                rounded-full
+                w-[120px] h-[120px]
+                mt-4
+                ml-40
+                md:w-[150px] md:h-[150px]
+                md:mt-11.25
+                md:ml-62
+                xl:mt-0
+                xl:ml-0
+                cursor-pointer
+                text-white;
+                /*overflow: hidden;*/
+                /*position: relative;*/
+                /*display: inline-flex;*/
+                align-items: center;
+                justify-content: center;
+                transition: background 300ms, transform 200ms;
+                font-weight: 600;
+                font-family: 'Sofia Sans Condensed', sans-serif;
+
+                text {
+                    fill: white;
+                    font-size: 64px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    animation: rotate 25s linear infinite;
+                    transform-origin: center;
+                }
+
+                .text-circle {
+                    transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+                    transform-origin: center;
+                }
+
+                .arrow-icon {
+                    stroke-width: 10;
+                    stroke: var(--color-primary-dark);
+                    transition: stroke 300ms, transform 300ms;
+                }
+
+                @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    @apply bg-accent-yellow;
+
+                    transform: scale(1.2);
+
+                    .text-circle {
+                        transform: rotate(90deg);
+                    }
+
+                    .arrow-icon {
+                        stroke: var(--color-accent-yellow);
+                    }
+                }
+                }
+            }
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @utility card-content {
+            @apply flex flex-col gap-8 items-center sm:flex-row-reverse
+            2xl:gap-x-16;
+        }
+
+        @utility card-badges {
+            @apply flex flex-row flex-wrap gap-4 justify-items-start;
+
+            & .badge {
+                @apply rounded-full bg-pink-badge text-blue-light uppercase !text-lg font-family-sofia font-normal py-1 px-5;
+            }
+        }
+
+        @utility card-title {
+            @apply text-primary-dark font-family-sofia font-normal text-7xl tracking-[-2px]
+            xl:mb-5
+            2xl:text-[102px];
+        }
+
+        .card-description {
+            @apply flex flex-col gap-y-4
+            xl:w-[564px] xl:shrink-0 xl:gap-y-0;
+        }
+
+        .card-paragraph {
+            @apply flex flex-col gap-y-2
+            xl:mb-10;
+        }
+
+        .card-text {
+            @apply font-light;
+        }
+
+        .card-detail {
+            @apply flex
+            flex-row
+            items-center
+            gap-x-4
+            mt-2
+            xl:mt-0
+            uppercase
+            font-family-sofia
+            text-primary-dark
+            font-normal
+            text-[1.5rem]/6
+            tracking-wider;
+        }
+
+        .card-wrapper {
+            @apply xs:max-xl:full-bleed xl:rounded-[20px] bg-white;
+        }
+
+        /* Work cards: padding lives on .work-card-surface so outer .card can stay a neutral shell */
+        #work .work-cards-stack .card {
+            padding: 0 !important;
+            gap: 0 !important;
+        }
+
+        /* Match page grey so scaled cards don’t sit on a white “slot” (Tailwind bg-white on .card-wrapper) */
+        #work {
+            background-color: #f3f6f9;
+        }
+
+        /* Pull Beyond block up by half the main column gap (gap-y-18 / md:24 / xl:26) */
+        #work + .full-bleed {
+            margin-top: -2.25rem;
+        }
+
+        @media (min-width: 48rem) {
+            #work + .full-bleed {
+                margin-top: -3rem;
+            }
+        }
+
+        @media (min-width: 80rem) {
+            #work + .full-bleed {
+                margin-top: -3.25rem;
+            }
+        }
+
+        /* Sticky stack + scrub fade/scale — desktop only (see GSAP below) */
+        @media (min-width: 1280px) {
+            #work .work-cards-stack {
+                background-color: #f3f6f9;
+            }
+
+            /* Gap (xl:gap-y-16 = 64px) sits between wrappers so #F3F6F9 shows through */
+            #work .work-cards-stack > .card-wrapper {
+                position: relative;
+                background-color: #f3f6f9 !important;
+                border-radius: 0;
+            }
+
+            #work .work-cards-stack > .card-wrapper:last-of-type {
+                padding-bottom: calc(5vh + 56px);
+            }
+
+            #work .work-cards-stack > .card-wrapper:nth-child(1) {
+                z-index: 1;
+            }
+
+            #work .work-cards-stack > .card-wrapper:nth-child(2) {
+                z-index: 2;
+            }
+
+            #work .work-cards-stack > .card-wrapper:nth-child(3) {
+                z-index: 3;
+            }
+
+            #work .work-cards-stack > .card-wrapper:nth-child(4) {
+                z-index: 4;
+            }
+
+            /* Shell: fixed 722px slot; page-colored so area around scaled .work-card-surface isn’t white */
+            #work .work-cards-stack .card {
+                background-color: #f3f6f9 !important;
+                border-radius: 0;
+                box-sizing: border-box;
+                height: 722px;
+                min-height: 722px;
+                max-height: 722px;
+                overflow: visible;
+            }
+
+            #work .work-cards-stack .work-card-surface {
+                background-color: #fff;
+                border-radius: 20px;
+                box-sizing: border-box;
+                width: 100%;
+                height: 722px;
+                min-height: 722px;
+                max-height: 722px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+                /* Shrink toward overlap with next card (bottom pinned) so top/sides stay readable */
+                transform-origin: 50% 100%;
+                will-change: transform, opacity;
+                /* Lifts the front card slightly; scales with transform on the same layer */
+                box-shadow: 0 -4px 20px rgba(227, 233, 239, 0.4);
+            }
+
+            /* GSAP ScrollTrigger pin wrapper (when present) */
+            #work .pin-spacer {
+                background-color: #f3f6f9 !important;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            #work .work-cards-stack > .card-wrapper {
+                background-color: #f3f6f9 !important;
+            }
+            #work .work-cards-stack .card {
+                max-width: 100% !important;
+                height: 900px;
+                min-height: 900px;
+                max-height: 900px;
+            }
+            #work .work-cards-stack .work-card-surface {
+                height: auto !important;
+                min-height: unset !important;
+                max-height: unset !important;
+            }
+        }
+
+        .card {
+            @apply flex flex-col max-w-[1280px]
+            mx-auto
+            px-4 sm:px-8
+            pt-14 sm:pt-16
+            pb-12 sm:pb-13
+            gap-y-10
+            xl:max-w-[1216px] xl:px-20 xl:pt-20 xl:pb-[104px] xl:gap-y-14
+            2xl:max-w-full 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px] 2xl:gap-y-14;
+        }
+
+        .card-image {
+            @apply rounded-[20px] w-full object-cover
+            aspect-[1.25]
+            md:aspect-[0.84] md:max-w-[322px]
+            xl:aspect-auto xl:h-[400px] xl:w-[460px] xl:max-w-[460px] xl:shrink-0
+            2xl:h-[488px] 2xl:w-[576px] 2xl:max-w-[576px];
+        }
+
+
+        /* Main-xl: beyond-card-xl — gap 32px between image/tag/body/CTA; grid gap-x 48, gap-y 72; column 584px */
+        #cards-beyond {
+            @apply flex flex-col gap-y-12 md:gap-y-14
+            xl:grid xl:grid-cols-2 xl:gap-x-12 xl:gap-y-[72px]
+            2xl:gap-x-16 2xl:gap-y-16;
+
+            & > .card-beyond {
+                @apply flex w-full max-w-full flex-col items-start gap-y-8;
+
+                & > .image-wrapper {
+                    @apply overflow-hidden
+                    rounded-[20px]
+                    w-full
+                    h-[380px]
+                    shrink-0;
+
+                    & > img {
+                        @apply w-full h-full
+                        object-cover object-center
+                    }
+                }
+
+                & .card-description {
+                    @apply flex w-full flex-col items-start gap-y-8 text-left;
+                }
+
+                & .card-description p {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 20px;
+                    line-height: 32px;
+                    font-weight: 400;
+                }
+
+                & .card-detail {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        .triag-cut {
+            clip-path: polygon(0 0, 50% 10.416%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        /* Footer grid — md widths: wrap long lines + column gap so copy doesn’t overlap nav */
+        
+
+        #footer-match .footer-match-main .footer-match-copy {
+            min-width: 0;
+            max-width: 700px;
+        }
+
+        @media (min-width: 80rem) {
+            #footer-match .footer-match-main .footer-match-copy {
+                max-width: 880px;
+            }
+        }
+
+        @media (min-width: 96rem) {
+            #footer-match .footer-match-main .footer-match-copy {
+                max-width: 1048px;
+            }
+        }
+
+        #footer-match .footer-match-main .footer-match-blurb,
+        #footer-match .footer-match-main .footer-match-email {
+            white-space: normal;
+        }
+
+        #footer-match .footer-match-nav-links a {
+            transition: color 0.25s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-nav-links a:hover {
+                color: var(--color-pink-badge) !important;
+            }
+        }
+        #footer-match .footer-match-nav-links a:focus-visible {
+            color: var(--color-pink-badge) !important;
+        }
+
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
+            -webkit-filter: none;
+            filter: none;
+            transition: filter 0.25s ease, -webkit-filter 0.25s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:hover img {
+                -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+                filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            }
+        }
+        #footer-match .footer-match-nav > a[aria-label="LinkedIn"]:focus-visible img {
+            -webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+            filter: brightness(0) saturate(100%) invert(84%) sepia(20%) saturate(1588%) hue-rotate(337deg) brightness(104%) contrast(98%);
+        }
+
+        #footer-match .footer-match-email a {
+            text-decoration: none !important;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.25s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .footer-match-email a:hover {
+                border-bottom-color: var(--color-pink-badge);
+            }
+        }
+        #footer-match .footer-match-email a:focus-visible {
+            border-bottom-color: var(--color-pink-badge);
+        }
+
+        /* Footer — xs: hide physics cards layer, single column, tighter padding */
+        @media (max-width: 639px) {
+            #footer-match.site-footer {
+                height: auto !important;
+                min-height: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
+            #footer-match > img[aria-hidden="true"] {
+                opacity: 0.05 !important;
+            }
+
+            #footer-gg-root {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
+                grid-template-columns: 1fr !important;
+                padding: 3.75rem 1.25rem 0 !important;
+                row-gap: 2rem !important;
+                column-gap: 0 !important;
+            }
+
+            #footer-match .footer-match-heading {
+                font-size: clamp(3rem, 15vw, 4.75rem) !important;
+                line-height: 0.92 !important;
+                margin-bottom: 1.5rem !important;
+                padding-top: 0.75rem !important;
+                white-space: normal !important;
+            }
+
+            /* Same as body copy on case cards / Beyond Work (Inter 20 / 32) */
+            #footer-match .footer-match-main .footer-match-blurb {
+                font-size: 20px !important;
+                line-height: 32px !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            #footer-match .footer-match-main .footer-match-email {
+                font-size: 20px !important;
+                line-height: 32px !important;
+                margin-bottom: 2.75rem !important;
+            }
+
+            #footer-match .match-cta {
+                margin-top: 0 !important;
+            }
+
+            #footer-match .match-cta-label {
+                font-size: 24px !important;
+                line-height: 24px !important;
+            }
+
+            #footer-match .footer-match-nav {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+                gap: 1rem !important;
+                flex-wrap: nowrap !important;
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+                margin-top: 0.5rem !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.18);
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            #footer-match .footer-match-nav-links {
+                display: flex !important;
+                flex-direction: column !important;
+                flex-wrap: nowrap !important;
+                align-items: flex-start !important;
+                gap: 1.75rem !important;
+                flex: 0 1 auto !important;
+                min-width: 0 !important;
+                width: 100% !important;
+                justify-content: flex-start !important;
+            }
+
+            #footer-match .footer-match-nav-links a {
+                font-size: 20px !important;
+                line-height: 1.2 !important;
+                flex: 0 0 auto !important;
+                width: fit-content !important;
+                max-width: 100% !important;
+                text-align: left !important;
+            }
+
+            #footer-match .footer-match-nav > a[aria-label="LinkedIn"] {
+                display: flex !important;
+                align-self: flex-start !important;
+                margin-top: 1.5rem !important;
+            }
+
+            #footer-match .footer-match-nav > a[aria-label="LinkedIn"] img {
+                width: 32px !important;
+                height: 32px !important;
+            }
+        }
+
+        /* Match CTA — physics footer (#footer-match), shared with index */
+        /* Match CTA — pill button */
+        #footer-match .match-cta {
+            position: relative;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+            height: 64px;
+            width: fit-content;
+            max-width: 100%;
+            padding: 8px 8px 8px 36px;
+            border-radius: 100px;
+            box-sizing: border-box;
+            cursor: pointer;
+            pointer-events: auto;
+            text-decoration: none;
+            overflow: visible;
+            transition: gap 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #footer-match .match-cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 100px;
+            background-color: #FDE4DF;
+            z-index: 0;
+            transition:
+                background-color 0.35s cubic-bezier(0.33, 1, 0.32, 1),
+                width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover {
+                gap: 48px;
+            }
+        }
+        #footer-match .match-cta:focus-visible {
+            gap: 48px;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover::before {
+                background-color: #FDC448;
+                width: calc(100% + 18px);
+            }
+        }
+        #footer-match .match-cta:focus-visible::before {
+            background-color: #FDC448;
+            width: calc(100% + 18px);
+        }
+
+        #footer-match .match-cta-icon {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            flex-shrink: 0;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #footer-match .match-cta-icon .icon-chevron {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.25s ease;
+        }
+
+        #footer-match .match-cta-icon .icon-send {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        #footer-match .match-cta-label {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-family-sofia);
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #0016F2;
+            padding: 0 8px;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            #footer-match .match-cta:hover .icon-chevron {
+                opacity: 0;
+            }
+
+            #footer-match .match-cta:hover .icon-send {
+                opacity: 1;
+            }
+
+            #footer-match .match-cta:hover .match-cta-icon {
+                transform: translateX(18px);
+            }
+        }
+        #footer-match .match-cta:focus-visible .icon-chevron {
+            opacity: 0;
+        }
+
+        #footer-match .match-cta:focus-visible .icon-send {
+            opacity: 1;
+        }
+
+        #footer-match .match-cta:focus-visible .match-cta-icon {
+            transform: translateX(18px);
+        }
+
+        #footer-match .match-cta:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #footer-match .match-cta,
+            #footer-match .match-cta::before,
+            #footer-match .match-cta-icon,
+            #footer-match .match-cta-icon .icon-chevron,
+            #footer-match .match-cta-icon .icon-send {
+                transition: none;
+            }
+        }
+
+        footer.site-footer .footer-inner a,
+        footer.site-footer .footer-inner .footer-email {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            line-height: 32px;
+            font-weight: 300;
+            letter-spacing: 0;
+        }
+
+        footer.site-footer .footer-inner nav {
+            display: flex;
+            align-items: center;
+            min-height: 32px;
+        }
+
+        footer.site-footer .footer-inner nav a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            transition: color 0.3s ease;
+        }
+
+        footer.site-footer .footer-inner .footer-email {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            transition: color 0.3s ease;
+        }
+
+        footer.site-footer .footer-inner .footer-contact img {
+            display: block;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            footer.site-footer .footer-inner nav a:hover,
+            footer.site-footer .footer-inner .footer-email:hover {
+                color: #FDE4DF;
+                opacity: 1;
+            }
+        }
+
+        .line-top {
+            background: linear-gradient(
+                90deg,
+                #E8C76D 0%,
+                #A7B4E8 10%,
+                #6C8BE8 20%,
+                #5573DD 30%,
+                #4C62D1 40%,
+                #4E5AC8 50%,
+                #5152BF 60%,
+                #554CB6 65%,
+                #5A47AD 70%,
+                #5F42A4 75%,
+                #643D9B 80%,
+                #693892 85%,
+                #6E3389 90%,
+                #732E80 95%,
+                #782977 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .line-bottom {
+            color: #2834B8;
+        }
+
+        /* ── Hero blob-mask effect ─────────────────────────────────────── */
+        .hero-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #2834B8;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+            top: 0;
+            left: 0;
+        }
+
+        #hero .hero-mask {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        /* Blob layer: #2834B8 base so text reads as dark blue at rest */
+        #hero .blob-layer {
+            position: absolute;
+            inset: 0;
+            background: #2834B8;
+            pointer-events: none;
+        }
+
+        #hero .blob-layer .blob {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            will-change: transform;
+        }
+
+        /* bottom layer – largest, bright blue */
+        #hero .blob-1 {
+            width: 690px; height: 690px;
+            margin: -345px 0 0 -345px;
+            background: #0A43FF;
+        }
+
+        /* middle layer – pink */
+        #hero .blob-2 {
+            width: 420px; height: 420px;
+            margin: -210px 0 0 -210px;
+            background: #FDE4DF;
+        }
+
+        /* top layer – yellow, smallest */
+        #hero .blob-3 {
+            width: 260px; height: 260px;
+            margin: -130px 0 0 -130px;
+            background: #FDC448;
+        }
+
+        /* Screen overlay: gradient matches page bg so it's invisible outside text */
+        #hero .mask-screen {
+            position: relative;
+            background: #FFFFFF;
+            background-attachment: fixed;
+            mix-blend-mode: screen;
+        }
+
+        #hero .mask-screen h1 {
+            color: #000;
+            -webkit-text-fill-color: #000;
+            padding-right: 0.5rem;
+        }
+        /* ─────────────────────────────────────────────────────────────── */
+
+        /* LQIP: tiny JPEG placeholder until full image loads */
+        .lqip-parallax-host {
+            background-image: var(--lqip);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        [data-parallax-wrap] .lqip-parallax-host {
+            border-radius: 0;
+            overflow: visible;
+        }
+
+        .lqip-parallax-host > img.lqip-fadein {
+            display: block;
+            opacity: 0;
+            transition: opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .lqip-parallax-host > img.lqip-fadein.lqip-loaded {
+            opacity: 1;
+        }
+
+        /* Remove LQIP layer after load — bg “cover” vs img “object-cover” often misaligned (blurry strip on top/bottom). */
+        .lqip-parallax-host:has(> img.lqip-fadein.lqip-loaded) {
+            background-image: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .lqip-parallax-host > img.lqip-fadein {
+                transition: none;
+            }
+        }
+
+        @media (max-width: 639px) {
+            [data-parallax-wrap] .lqip-parallax-host,
+            [data-parallax-wrap] [data-parallax-image] {
+                transform: none !important;
+                will-change: auto !important;
+            }
+        }
+
+        /* Comparison slider: before/after configurator */
+        .quray-image-caption {
+            font-family: var(--font-family-inter);
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 28px;
+            font-style: italic;
+            color: #8A8A8A;
+        }
+
+        .comparison-slider {
+            --radius-lg: 20px;
+            --text-sm: 0.875rem;
+            --split: 50;
+            position: relative;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+            cursor: ew-resize;
+        }
+
+        .comparison-slider__image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: unset;
+            pointer-events: none;
+        }
+
+        .comparison-slider__image--after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            clip-path: inset(0 0 0 calc(var(--split) * 1%));
+        }
+
+        .comparison-slider__divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(var(--split) * 1%);
+            width: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .comparison-slider__handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            transform: translate(-50%, -50%);
+            cursor: ew-resize;
+            pointer-events: auto;
+            z-index: 3;
+        }
+
+        .comparison-slider__label {
+            position: absolute;
+            top: 16px;
+            font-size: var(--text-sm);
+            color: #fff;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .comparison-slider__label--before {
+            left: 16px;
+        }
+
+        .comparison-slider__label--after {
+            right: 16px;
+        }
+
+        
+
+        /* ── Footer horizontal padding — matches page content column at every breakpoint ── */
+        #footer-match .footer-match-main {
+            column-gap: clamp(2.5rem, 6vw, 5rem);
+            row-gap: 2rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            #footer-match .footer-match-main {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            #footer-match .footer-match-main {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2));
+                padding-right: max(2rem, calc((100vw - 1440px) / 2));
+            }
+        }
+
+        /* Colophon — same horizontal inset as footer-match-main */
+        .footer-year-strip {
+            justify-content: flex-start !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            box-sizing: border-box;
+        }
+
+        .footer-year-strip span {
+            text-align: left !important;
+        }
+
+        @media (min-width: 640px) {
+            .footer-year-strip {
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
+            }
+        }
+
+        @media (min-width: 1536px) {
+            .footer-year-strip {
+                padding-left: max(2rem, calc((100vw - 1440px) / 2)) !important;
+                padding-right: max(2rem, calc((100vw - 1440px) / 2)) !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col w-full max-w-[1280px] 2xl:max-w-[1440px] mx-auto">
+
+<div class="flex flex-col px-4 sm:px-8 md:px-6 2xl:px-0">
+
+    <header class="flex pt-8 xl:pt-16">
+        <div class="flex justify-between w-full">
+            <div id="logo" class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="Olga Pertseva"/>
+                </a>
+            </div>
+
+            <nav class="hidden flex-col w-full justify-center md:flex md:flex-row md:gap-x-16 md:w-auto md:ml-auto items-center">
+                <a href="index.html#work"    class="menulink">Work</a>
+                <a href="about.html"   class="menulink">About</a>
+                <a href="contact.html" class="menulink">Contact</a>
+                <a href="assets/docs/Olga_Pertseva_Product_Designer_2026.pdf" class="menulink" target="_blank" rel="noopener noreferrer">Resume</a>
+            </nav>
+        </div>
+
+        <div id="burger" class="fixed right-4 md:hidden">
+            <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+                <rect width="56" height="56" rx="16" fill="rgba(253, 228, 223, 0.83)"/>
+                <path id="burgertop" d="M13.417 17.0625H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
+                <path id="burgermiddle" d="M13.417 38.9375H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
+                <path id="burgerbottom" d="M13.417 28H42.5837" stroke="#363CCC" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </header>
+
+<main class="flex flex-col gap-y-18 md:gap-y-24 xl:gap-y-26 2xl:gap-y-[120px] mt-16 md:mt-18 xl:mt-18 2xl:mt-22">
+        <aside id="case-side-nav" hidden aria-label="Case study sections">
+            <button type="button" id="case-side-nav-toggle" class="case-side-nav-toggle" aria-expanded="true" aria-controls="case-side-nav-menu" aria-label="Toggle section navigation">
+                <img src="assets/images/arrow-down.svg" alt="" aria-hidden="true" class="case-side-nav-toggle-icon"/>
+            </button>
+            <nav id="case-side-nav-menu">
+                <span class="case-side-nav-indicator" aria-hidden="true"></span>
+                <a href="#context" data-target="context" class="case-side-nav-link">Context</a>
+                <a href="#my-role" data-target="my-role" class="case-side-nav-link">My Role</a>
+                <a href="#research" data-target="research" class="case-side-nav-link">Research</a>
+                <a href="#architecture" data-target="architecture" class="case-side-nav-link">Architecture</a>
+                <a href="#prototype" data-target="prototype" class="case-side-nav-link">Prototype</a>
+                <a href="#reflections" data-target="reflections" class="case-side-nav-link">Reflections</a>
+            </nav>
+        </aside>
+
+        <!-- #hero: breadcrumbs, page title (h1), hero image or video placeholder -->
+        <section id="hero" class="flex flex-col">
+            <div class="quray-breadcrumbs mb-6 md:mb-4 font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
+                <a class="no-underline transition-colors duration-[250ms] ease-out hover:text-[#0016F2]" href="index.html#work">Work</a>
+                <span aria-hidden="true">/</span>
+                <span class="text-[#8A8A8A]">Quray</span>
+            </div>
+            <h1 class="quray-hero-title quray-page-title">Played in the air. Trusted through the software.</h1>
+            <div class="quray-hero-media image-block mt-10">
+                <div class="quray-hero-media-bg full-bleed overflow-hidden bg-[#1D1E2B] py-8 md:py-12 xl:py-[80px]">
+                    <div class="flex w-full justify-center px-4 sm:px-8 md:px-6 2xl:px-8">
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-music-main.png"><img class="w-full max-w-[1280px] rounded-[20px] object-cover xl:aspect-[1168/616] 2xl:max-w-[1440px] lqip-fadein" src="assets/images/quray-music-main.png" alt="Quray gestural music instrument and configurator interface"/></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- #intro: left — logo + description; right — metadata (role, timeline, tools); below — large image -->
+        <section id="intro" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 bg-white">
+            <div class="intro-grid flex flex-col gap-y-10 xl:grid xl:grid-cols-[minmax(0,496px)_minmax(0,704px)] xl:gap-x-6 xl:gap-y-8 xl:items-start 2xl:flex 2xl:flex-row 2xl:items-start 2xl:gap-x-16 2xl:gap-y-0">
+                <div class="intro-left flex flex-col gap-y-8 xl:contents 2xl:flex 2xl:flex-col 2xl:max-w-[688px] 2xl:shrink-0">
+                    <div class="intro-logo min-w-0 xl:col-start-1 xl:row-start-1">
+                        <img class="w-[232px] h-auto" src="assets/images/quray-logo.png" alt="Quray logo"/>
+                    </div>
+                    <div class="intro-description flex min-w-0 flex-col gap-y-2 text-5/8 font-light xl:col-start-1 xl:row-start-2">
+                        <p><span class="font-medium">Quray is a touchless music controller:</span> ten sensors track your hands in the air and turn movement into MIDI and CV, control signals for synthesizers and modular systems. <span class="font-medium">The hardware was already impressive. The software experience wasn't.</span></p>
+                        <p><span class="font-medium">Quray is still in progress</span>, so I do not want to pretend the story is closed. <span class="font-medium">This case study shows the decisions that moved the product from a developer interface to a working prototype.</span> The next update will come from user testing.</p>
+                    </div>
+                </div>
+                <div class="intro-right metadata-block min-w-0 font-light xl:col-start-2 xl:row-start-2 xl:max-w-[704px] xl:shrink-0 xl:self-start 2xl:max-w-[688px]">
+                    <div class="metadata-grid grid grid-cols-1 gap-y-4">
+                        <div class="metadata-role flex flex-col gap-y-2">
+                            <p class="text-5/8"><span class="font-medium">Role:</span> Sole Product Designer: research, UX architecture, design system, working prototype in code</p>
+                        </div>
+                        <div class="metadata-timeline flex flex-col gap-y-2">
+                            <p class="text-5/8"><span class="font-medium">Team:</span> developer, founder</p>
+                        </div>
+                        <div class="metadata-tools flex flex-col gap-y-2">
+                            <p class="text-5/8"><span class="font-medium">Timeline:</span> 2026 — ongoing</p>
+                        </div>
+                        <div class="metadata-impact flex flex-col gap-y-4">
+                            <div class="font-medium">Impact</div>
+                            <p class="text-5/8">• Turned a developer tool into a product with a library, a sync model, and a stage-safe performance view</p>
+                            <p class="text-5/8">• Went deep enough into an unfamiliar domain to reframe the brief</p>
+                            <p class="text-5/8">• Defined the product's information architecture from scratch</p>
+                            <p class="text-5/8">• Built a working prototype in code that's now in usability testing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pos-image">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-glowing.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/quray-glowing.png" alt="Quray device glowing"/></div>
+        </section>
+
+        <section id="context" class="flex flex-col items-start">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                    <h2 class="section-header w-full">Overview</h2>
+                </div>
+
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Overview</h2>
+
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 md:order-1 xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 xl:col-span-1 xl:row-start-2 2xl:gap-y-[40px]">
+                <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0">When I joined, Quray was not an idea on paper. <span class="font-medium">The hardware had already been shown at Superbooth Berlin</span> and was impressive enough to get attention. But the software had not caught up with the instrument yet.</p>
+                </div>
+
+                <div class="overview-text-2 order-3 font-light text-5/8 min-w-0 md:order-none 2xl:min-w-0">
+                    <p class="min-w-0">The interface was only the visible symptom. <span class="font-medium">The real work was defining the system behind it:</span> how invisible gesture, preset logic, and device state stop being separate technical pieces and start behaving like an instrument.</p>
+                </div>
+                </div>
+                </div>
+
+                <div class="order-4 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            md:order-2 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-2
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">Quray was already strong as hardware. The work was <span class="font-medium">to make it understandable as a product.</span></p>
+                </div>
+
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-6 md:order-3 xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 xl:col-span-1 xl:row-start-3 2xl:gap-y-[40px]">
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/hand-quray.png"><img src="assets/images/hand-quray.png"
+                     alt="Quray gestural controller"
+                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
+
+                <div class="order-5 flex w-full flex-col gap-y-8 md:order-none md:-mt-[8px] md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:-mt-[16px] xl:gap-x-4 xl:gap-y-0 2xl:-mt-[24px] 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                        <img src="assets/images/quray-connection.png"
+                             alt="Quray device connection"
+                             class="overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none"/>
+                        <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/Quray-hand-air.png"><img src="assets/images/Quray-hand-air.png"
+                             alt="Hand playing Quray in the air"
+                             class="hidden md:block overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 xl:aspect-auto 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
+                </div>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
+        <!-- #challenge: Operational Clarity layout (text, accordion, image + keyphrase sidebar) -->
+        <section id="challenge" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                    <h2 class="section-header w-full">The Challenge</h2>
+                </div>
+
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The Challenge</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0">Quray is played in empty air, and <span class="font-medium">nothing about that is visible.</span> The device has buttons and a screen for stage navigation, but the actual playing surface has no physical edges. Users <span class="font-medium">can't see the field</span> and can't tell whether their movement is being tracked. And because Quray is a controller, not a synthesizer, <span class="font-medium">it makes no sound on its own</span>. A new user can do everything right and still hear nothing.</p>
+                </div>
+
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">The audience made the problem harder. They have watched <span class="font-medium">too many expressive controllers arrive as impressive hardware and then leave buyers alone with software that made no sense.</span> So they are skeptical for good reasons. If the logic is vague, they notice immediately, and they expect control when the product touches their setup.</p>
+                </div>
+                </div>
+
+                <div class="flex w-full flex-col order-4 mt-5 mb-10 max-md:order-4 max-md:mt-[1.4375rem] md:order-3 md:mt-0 md:mb-0">
+            <button type="button" id="challenge-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="challenge-acc-panel">
+                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                    <svg id="challenge-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed Insights</span></span>
+            </button>
+
+            <div id="challenge-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                <div class="min-h-0 overflow-hidden">
+                    <div id="challenge-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                            <div>
+                                <span class="font-medium">Invisible interaction</span><br/>
+                                There is nothing to look at where the music happens. The active field is a volume of air above the device, and zones have no physical edges. Each zone can trigger a note, control a parameter, or send a CV signal, but the user cannot see where the field starts, where one zone ends, or whether their hand is in the right place. The interface had to show the field geometry before asking anyone to configure it.
+                            </div>
+                            <div>
+                                <span class="font-medium">No sound of its own</span><br/>
+                                Quray is a controller, not a synthesizer. It only produces control signals, so the user has to connect external gear and configure the mappings before anything can be heard. That makes the first-use problem harder: silence can mean four different things: nothing connected, wrong mapping, dead synth, lost tracking, and the user has no way to tell which. The software had to show cause and effect on screen instead.
+                            </div>
+                            <div>
+                                <span class="font-medium">No shortcuts on the mental model</span><br/>
+                                Before Quray can feel playable, the user has to build a mental model: presets contain zones, zones have mappings, mappings route to Note, MIDI, or CV, everything has a save state, and the device has its own memory that doesn't automatically match the browser. None of this can be hidden — this audience needs to see and control the full structure. The structure had to stay visible and inspectable without looking like a settings dump.
+                            </div>
+                            <div>
+                                <span class="font-medium">A skeptical audience, for good reasons</span><br/>
+                                The expressive-controller market is a graveyard. Enhancia closed and left users with devices that had no support. ROLI went through bankruptcy and restructuring. The pattern repeats: impressive hardware, a convincing demo, configuration software built like a developer tool, and a buyer left alone in front of complexity. That is how an expressive instrument ends up barely used and resold — what modular forum users have started calling "a very expensive preset machine." The people who buy instruments like Quray have watched this happen repeatedly. Configuration itself was not the issue. Modular users patch complex systems for fun. What frustrates them is software that lets them change values without making the logic, consequences, or device state clear.
+                            </div>
+                            <div>
+                                <span class="font-medium">Not just a web app</span><br/>
+                                The configurator is one half of the product. The other half is the physical device, and the difficult part is the relationship between them: which state lives in the browser, which lives on the device, what the hardware buttons do on stage, and what can actually fit on a monochrome screen mid-performance. I own that whole boundary, including the on-device screen states, which became a separate design challenge in 128 pixels.
+                            </div>
+                            <div>
+                                <span class="font-medium">An unfamiliar domain, my personal challenge</span><br/>
+                                I did not come from the music technology world, and in this project there was no way around that. You cannot design a MIDI/CV mapping interface without understanding what a CV voltage range actually does, why V/Oct matters for pitch, or what happens on stage when a preset switches mid-note. So I started there: studied the domain until I could follow forum arguments between modular users, learned how the signal chain works end to end, and talked to musicians, not to validate screens, but to understand how they think. They don't think in settings; they think in sound, gear, and muscle memory. Until I could follow that logic, every design decision would have been a guess.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
+                <div class="flex w-full flex-col order-2 mt-0 min-w-0 max-w-full max-md:order-2 max-md:my-6 md:order-none">
+                <div class="comparison-slider w-full" style="--split: 50">
+                    <img class="comparison-slider__image comparison-slider__image--before" src="assets/images/configurator-before.png" alt="Quray configurator before redesign"/>
+                    <img class="comparison-slider__image comparison-slider__image--after" src="assets/images/configurator-after.png" alt="Quray configurator after redesign"/>
+                    <div class="comparison-slider__divider" aria-hidden="true">
+                        <div class="comparison-slider__handle" role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M6 10L2 10M2 10L5 7M2 10L5 13" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 10L18 10M18 10L15 7M18 10L15 13" stroke="#1a1a2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="comparison-slider__label comparison-slider__label--before">Before</span>
+                    <span class="comparison-slider__label comparison-slider__label--after">After</span>
+                </div>
+                <p class="quray-image-caption mt-4">Left: Original configurator. Right: Editor screen redesign</p>
+                </div>
+                </div>
+                </div>
+
+                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:order-6 max-md:mt-2
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            md:order-3 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-2
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">Cleaning up the interface was the easy part.<br/><span class="font-medium">Making the instrument make sense — that was the problem.</span></p>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
+<section id="my-role" class="flex flex-col gap-y-0 pb-[12px] md:pb-[14px] xl:pb-[18px] 2xl:pb-[20px]">
+            <div class="flex w-full max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:max-w-[856px] 2xl:max-w-[1048px]">
+            <h2 class="section-header w-full">My Part in This</h2>
+
+            <div class="w-full max-w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] overflow-hidden md:flex md:flex-col">
+                    <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
+                        <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                            <div class="my-part-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
+                                <p class="min-w-0">I'm the sole designer on this project. <span class="font-medium">My work covers the configurator end to end</span>: research, product architecture, interaction design, design system, and the working prototype in code. The scope also includes the <span class="font-medium">product logic between the web app and the physical device</span>: how the browser, the device, and the stage controls work as one system.</p>
+                            </div>
+                            <div class="my-part-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
+                                <p class="min-w-0">Quray looks smaller than the enterprise systems I've designed before, <span class="font-medium">but it belongs to the same category of problem</span>: a technical product with synchronized state, complex logic, and users who cannot afford ambiguity. <span class="font-medium">It is also the project where I rebuilt my workflow around AI</span>, using it to move faster without handing over the product decisions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="mt-10 flex w-full flex-col md:mt-12 xl:mt-14">
+            <button type="button" id="my-part-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="my-part-acc-panel">
+                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                    <svg id="my-part-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">My Role in Detail</span></span>
+            </button>
+
+            <div id="my-part-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                <div class="min-h-0 overflow-hidden">
+                    <div id="my-part-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                            <div>
+                                <span class="font-medium">Research before the trade show</span><br/>
+                                I joined the project days before Superbooth Berlin. I couldn't be there in person, so I prepared a field research script for the founders to use at the booth. The point was not to collect polite reactions, but to notice where people stopped understanding the product. The founders ran it during the event, and the results came back as the project's first real user input, including the observation that shaped the onboarding strategy.
+                            </div>
+                            <div>
+                                <span class="font-medium">Domain first, screens later</span><br/>
+                                I don't come from the music world, so I treated that as the first thing to fix. I started by learning how this world works: MIDI, CV, modular setups, routing, device memory, and the way musicians talk about control. I moved through sources in order of trust: founders' assumptions first as hypotheses, then comparable controllers, then the forums where this audience actually argues.<span class="case-acc-para-gap">I also talked to musicians directly, not about my screens, but about their world. I wanted to understand what felt obvious to them and completely invisible to me. They were not thinking like SaaS users choosing settings. They were thinking through sound, gear, habits, and what their hands already know. Until I understood the logic of the instrument, the interface would only be a cleaner version of my own guesses.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">AI as a research engine, judgment as the filter</span><br/>
+                                I used AI seriously here. The domain was too wide to enter slowly: hardware logic, market history, competitor failures, forum language, all at once. AI helped me move through that material fast enough to keep designing.<span class="case-acc-para-gap">The useful part was not that AI "found answers." It helped me stay in conversation with the material: comparing sources, sharpening questions from forum discussions, stress-testing ideas before spending time on them. When something sounded too neat, I treated that as a warning sign. The final decisions still had to make sense for this hardware and for musicians who would immediately notice if the logic was fake.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Decisions logged as they happened</span><br/>
+                                I documented decisions while they were still fresh. This project changed quickly and I did not want to invent a clean story afterward. When I changed direction, I wrote down why. When something looked good in the abstract but failed in the prototype, I kept that too. The notes became part of the design process, not a portfolio exercise done at the end.
+                            </div>
+                            <div>
+                                <span class="font-medium">A real prototype, built in code</span><br/>
+                                After locking the visual direction in Figma, I built the configurator directly in code with Cursor: React, a design token system, and a living styleguide. This is the part I would not go back from. Instead of putting a clickable picture in front of musicians, I put something in front of them that behaves.<span class="case-acc-para-gap">That matters for this project. A static prototype can show the layout, but it cannot show whether the model makes sense once the editor state, sync logic, and device memory start interacting. Building in code made the weak parts visible earlier. It also meant the design system could not drift away from implementation, because the prototype was already using the same components and tokens.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">What comes next</span><br/>
+                                The prototype is now being tested with target musicians. This case study will continue from there. The next part is what I actually care about: where musicians got lost, where they didn't, and what changed because of that.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </section>
+
+        <section id="map-image" class="-mt-[28px] md:-mt-[24px] xl:-mt-[36px] 2xl:-mt-[48px]">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-hand-play.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/quray-hand-play.png" alt="Hand playing Quray"/></div>
+        </section>
+
+        <!-- #research: same layout rhythm as #my-part; my-part-style accordions x2 + image -->
+        <section id="research" class="flex flex-col gap-y-0 -mt-2 md:mt-0">
+            <div class="flex w-full max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:max-w-[856px] 2xl:max-w-[1048px]">
+            <h2 class="section-header w-full">Research & Discovery</h2>
+
+            <div class="w-full max-w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] overflow-hidden md:flex md:flex-col">
+                    <div class="max-md:contents md:contents xl:flex xl:min-w-0 xl:flex-col xl:gap-y-8 2xl:gap-y-[40px]">
+                        <div class="max-md:contents md:contents xl:contents 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                            <div class="research-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
+                                <p class="min-w-0">Quray was outside my usual domain, so research was not a formality. <span class="font-medium">The founder's view of the audience was very broad:</span> expressive, visual, open to everyone. That made sense for explaining why the device was exciting, but it was too vague for the configurator. <span class="font-medium">The software had to support a more specific moment:</span> a musician sitting with their own gear and trying to understand whether Quray could become part of their setup.</p>
+                            </div>
+                            <div class="research-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
+                                <p class="min-w-0"><span class="font-medium">Every comparable product lost people at the same moment</span>: not at the demo, but afterwards, when the buyer was alone with the software and it started to feel like someone else's internal logic. <span class="font-medium">That's when impressive devices stop being instruments and start collecting dust.</span> I needed to design against that failure pattern, and it changed what I thought I was building.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="mt-10 flex w-full max-w-full flex-col gap-y-6 md:mt-12 xl:mt-14 xl:gap-y-10 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                <div class="flex w-full flex-col gap-y-6">
+                    <button type="button" data-research-acc-btn class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="research-acc-panel-1">
+                        <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                            <svg data-research-acc-arrow class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">How I approached research</span></span>
+                    </button>
+
+                    <div id="research-acc-panel-1-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                        <div class="min-h-0 overflow-hidden">
+                            <div id="research-acc-panel-1" data-open="0" class="w-full max-w-full pt-4 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                                <div class="flex flex-col gap-y-4 font-light text-5/8">
+                                    <div>
+                                        <span class="font-medium">Layered sources, in order of trust</span><br/>
+                                        I did not treat the founders' assumptions as wrong, but I also did not treat them as facts. They became the starting point: reasonable hypotheses, worth testing. I needed to see how the product held up against what this audience already owned, and how it landed with people outside the team's story.<span class="case-acc-para-gap">The more useful material came from places where musicians were not trying to be polite: ModWiggler, Elektronauts, Reddit, KVR, long reviews, and complaint threads. Competitor research told me what failure patterns to look for. Forum reading showed me what this audience cared enough to argue about.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">AI-scaled deep research</span><br/>
+                                        AI made this research possible at the scale I needed. I used it to move through a lot of unfamiliar material quickly, but only after writing tight research briefs. Each brief had to be specific enough to keep the output close to Quray, whether I was mapping a competitor, an audience segment, or a technical question I needed to understand before designing around it.<span class="case-acc-para-gap">The difference was in the prompt quality. A vague prompt gave me a polished summary that sounded plausible and was not very useful. A specific brief gave me something I could actually work with. It surfaced disagreements between users, recurring complaints, and promises that looked good in demos but collapsed in real use. AI did not replace the research judgment, but it let one designer cover more ground without pretending the domain was simple.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">Filtering as the actual work</span><br/>
+                                        Not everything survived. Some AI research output drifted toward a generic "gesture controller" mental model, recommending patterns for a product that was not Quray. The most obvious example was wizard-style onboarding: clean, friendly, and completely wrong for an audience that does not want the instrument to hide its logic.<span class="case-acc-para-gap">I kept the findings that were grounded in real user behavior and discarded the rest. For every rejection, I documented why it did not fit the hardware, the audience, or the way Quray would actually be used. In a niche domain, a generic answer can sound convincing precisely because it is missing the logic of real users. Knowing which answers to throw away was worth more than the speed.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">What Superbooth revealed</span><br/>
+                                        The field script I prepared for Superbooth gave the project its first real audience signal. When people played with the device, the reaction was strong — the hardware created exactly the kind of curiosity Quray needed.<span class="case-acc-para-gap">That confidence did not survive contact with the existing configurator. When people looked at the interface, the reaction shifted from "I want to try this" to something closer to "just set it up for me." For an expressive instrument, that is a bad place to land.</span><span class="case-acc-para-gap">One smaller observation stuck: some visitors moved their hand toward the device expecting depth to control something — Quray tracks a flat field. A natural gesture produced no visible response, so the device felt broken even when it was working. It was the larger product problem in miniature.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full flex-col gap-y-6">
+                    <button type="button" data-research-acc-btn class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="research-acc-panel-2">
+                        <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                            <svg data-research-acc-arrow class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">What I discovered</span></span>
+                    </button>
+
+                    <div id="research-acc-panel-2-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                        <div class="min-h-0 overflow-hidden">
+                            <div id="research-acc-panel-2" data-open="0" class="w-full max-w-full pt-4 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                                <div class="flex flex-col gap-y-4 font-light text-5/8">
+                                    <div>
+                                        <span class="font-medium">The configurator needed a sharper audience</span><br/>
+                                        The device looked like it could be for almost anyone interested in movement and sound, and research made that framing too soft for the configurator. It also mattered that Quray was not a cheap experimental gadget. The people most likely to configure it seriously were modular synth users and experimental electronic musicians, because they already spend time building their own systems and have a reason to care about CV, routing, and repeatable control.<span class="case-acc-para-gap">That made the configurator's job clearer. It did not need to make Quray feel accessible to everyone. It needed to feel like a serious tool for people who already understand gear and want control.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">Different surfaces serve different users</span><br/>
+                                        One useful correction was that Quray does not have one clean "main user." The website can sell the visual performance value. The physical device has to protect someone on stage. The configurator has to satisfy the person doing the detailed setup before the performance ever happens.<span class="case-acc-para-gap">That helped me stop forcing every need into one screen. The Library, Device view, and Editor each had to answer a different question, because the user is in a different mode in each place.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">CV could not stay secondary</span><br/>
+                                        The original interface treated CV as something close to an advanced extra, but the research made that feel wrong for the audience Quray needed to reach. For modular users, CV is one of the main reasons Quray is interesting at all, and if it feels vague or hidden, the product immediately loses credibility.<span class="case-acc-para-gap">That affected the mapping model. CV needed the same seriousness as MIDI, with visible ranges, polarity, and behavior that feels inspectable instead of decorative.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">Manual MIDI CC lookup was the clearest workflow pain</span><br/>
+                                        One of the most concrete pain points was the way musicians often have to connect software to hardware. Many synthesizers expose their controls through MIDI CC numbers. In practice, that means the user has to find a synth's implementation chart, look up which number controls the thing they want, type that number into the editor, and then check whether it behaves as expected.<span class="case-acc-para-gap">That is boring, technical translation work, not creative control. It became one of the strongest arguments for a semantic mapping layer. Instead of asking the user to start with "CC74," the interface can start with "Filter Cutoff" and keep the raw number underneath for people who want it. The power stays available, but the user no longer has to carry the whole translation in their head.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">Trust is a product feature here</span><br/>
+                                        People in this market have seen too much hardware become useless because the software disappeared, stopped working, or never made the device easy to maintain. That changes how you design basic states. "Saved," "synced," and "on the device" cannot be vague labels. They are trust signals.<span class="case-acc-para-gap">This is why the configurator needed a clear relationship between the browser library and the physical device. A musician should understand whether a preset is only in the web app, already stored on Quray, or still waiting to be synced before they disconnect the computer.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">One audience segment had to stop driving decisions</span><br/>
+                                        The founder's early audience model included experiential creatives, such as sound-healing practitioners, movement artists, and people interested in the sensory side of sound. They were drawn to the magic of the device, but the research did not support them as a primary audience for an expensive instrument that still required serious configuration.<span class="case-acc-para-gap">That segment also pulled the product toward a softer and more simplified experience, while the strongest audience needed almost the opposite: visible logic, precise control, and confidence around setup. Removing that segment from the core audience protected the product from being designed around people who might like the concept but were unlikely to become serious users.</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium">"Configure and run" became the core workflow</span><br/>
+                                        A repeated pattern in the research was that musicians do not necessarily want the computer involved forever. Many want to configure the instrument, save the setup to hardware, and then perform without the web app becoming another fragile part of the rig.<span class="case-acc-para-gap">That made the Device view more than a storage screen. It had to show what is actually loaded on Quray and whether the current device state can be trusted before someone walks away from the computer.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lqip-parallax-host min-w-0 xl:max-w-[856px] 2xl:max-w-[1048px]" data-lqip-ref="assets/images/modular-synt.png"><img
+                src="assets/images/modular-synt.png"
+                alt="Modular synthesizer setup"
+                class="mt-4 w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto md:mt-12 xl:mt-8 2xl:mt-[48px] lqip-fadein"
+            /></div>
+
+        </section>
+
+        <section id="users" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:contents 2xl:contents">
+                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Understanding the Users</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-4 xl:gap-y-6 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0">Quray <span class="font-medium">did not have one clean user type</span>. At first glance, the product looks like something made for performance: a person moving their hands above an unusual object while the audience sees gesture become control. <span class="font-medium">Research made that picture more complicated.</span> The person impressed by Quray on stage is not always the person who will later sit down and build a preset from scratch.</p>
+                </div>
+                <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0">So I stopped treating the audience as one average musician. <span class="font-medium">The configurator needed to serve the setup work, while the device had to stay safe under performance pressure.</span> The website could still sell the visual magic of the instrument, but the software had to be built for people who would notice immediately if the logic underneath was vague.</p>
+                </div>
+                </div>
+                </div>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] mt-[32px] xl:mt-[40px] xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/images/quray-users-modular.png"
+                             alt="Illustration for modular synth enthusiasts"
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Modular synth enthusiasts</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p>The configurator's core audience. Technically literate, used to spending real money on small pieces of gear, and comfortable building systems most people would find unreasonable. Quray interested them because it offered touchless CV control — not because it promised to make music easy.</p>
+                        <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
+                            <button type="button" id="ecosystem-emp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-emp-acc-panel">
+                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                                    <svg id="ecosystem-emp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
+                            </button>
+
+                            <div id="ecosystem-emp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                                <div class="min-h-0 overflow-hidden">
+                                    <div id="ecosystem-emp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                                            <div>
+                                                For this group, the danger was not complexity itself. They already choose complexity every time they patch a modular system. The problem starts when the complexity feels arbitrary: hidden device state, vague CV behavior, unclear sync, or a friendly interface that removes the control they expected to have.<span class="case-acc-para-gap">That shaped the configurator more than any visual preference. It had to show what was happening, make the system state visible, and let experienced users stay in control without forcing beginners through a fake "easy mode."</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-4 2xl:col-start-1 2xl:row-start-4">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/images/quray-users-elecrtonic.png"
+                             alt="Illustration for experimental electronic musicians"
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Experimental electronic musicians</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p>They overlap with modular users but aren't identical. They're more interested in what Quray can become: strange control, unstable textures, movement that produces something a keyboard or a knob wouldn't. They can tolerate ambiguity, as long as the result is interesting enough to return to.</p>
+                        <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
+                            <button type="button" id="ecosystem-fran-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-fran-acc-panel">
+                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                                    <svg id="ecosystem-fran-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
+                            </button>
+
+                            <div id="ecosystem-fran-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                                <div class="min-h-0 overflow-hidden">
+                                    <div id="ecosystem-fran-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                                            <div>
+                                                This audience helped me keep the zone model flexible. A neat beginner template would have made the product easier to explain, but it would also have reduced the thing that makes Quray interesting: the ability to shape space into a personal playing surface.<span class="case-acc-para-gap">For them, the editor had to support exploration without turning every change into technical admin. That is part of why the mapping model needed names, previews, and defaults, not only raw parameters.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-5 2xl:col-start-1 2xl:row-start-5">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/images/quray-users-live.png"
+                             alt="Illustration for live performers"
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Live performers</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p>Often the same modular or experimental users in a different moment. Someone who can tolerate complexity at home cannot tolerate surprise on stage. That distinction changed how I thought about the device: performance needed its own logic, because a live context has different consequences.</p>
+                        <div class="flex w-full flex-col mt-5 max-md:mt-[1.375rem]">
+                            <button type="button" id="ecosystem-hqfind-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="ecosystem-hqfind-acc-panel">
+                                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                                    <svg id="ecosystem-hqfind-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Detailed insights</span></span>
+                            </button>
+
+                            <div id="ecosystem-hqfind-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                                <div class="min-h-0 overflow-hidden">
+                                    <div id="ecosystem-hqfind-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                                            <div>
+                                                On stage, Quray has to behave like reliable hardware. A performer needs to understand the current state before touching anything, especially when presets, zones, and outputs can change what the audience hears.<span class="case-acc-para-gap">This is why performance behavior could not live only inside the web app. The physical device had to communicate enough on its own: what is loaded, what is active, and whether an action is safe. It also shaped preset switching: changing state while a hand is still in the field is exactly the kind of surprise a performer cannot afford.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            mt-[0.4rem] md:mt-[0.8rem] xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-4
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-4 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <p class="font-light text-5/8">"I refuse to buy modules with hidden modes or secret handshake button combo bullshit."</p>
+                    <div class="text-[14px] leading-[20px] font-normal text-black">
+                        <div>— Reddit, r/modular</div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
+        <section id="architecture" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                    <h2 class="section-header w-full">From Research to Architecture</h2>
+                </div>
+
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">From Research to Architecture</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0">The original configurator did not need another pass of visual cleanup. <span class="font-medium">The deeper problem was that the product model was still missing.</span> Work happened in the browser, but part of that work was supposed to end up on the hardware, and the old interface blurred that line. <span class="font-medium">A musician could build a preset and still have to guess what would survive outside the browser.</span> For a hardware instrument, that is not a small UI problem, but the moment where trust starts to break.</p>
+                </div>
+
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">Before committing to screens, <span class="font-medium">I used task flows to put the architecture under pressure.</span> Each flow had a diagram with tables underneath for the behavior the diagram alone could not show: how the interface responds and what the system has to handle underneath. <span class="font-medium">I tested the structure against real scenarios</span>: device disconnects mid-session, a preset has unsynced changes, someone is preparing for a show. If the logic held there, it was worth keeping.</p>
+                </div>
+                </div>
+
+                <div class="flex w-full flex-col order-4 mt-5 md:order-3 md:mt-0">
+            <button type="button" id="vendor-exp-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="vendor-exp-acc-panel">
+                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                    <svg id="vendor-exp-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Key decisions</span></span>
+            </button>
+
+            <div id="vendor-exp-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                <div class="min-h-0 overflow-hidden">
+                    <div id="vendor-exp-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                            <div>
+                                <span class="font-medium">The flow documents became the architecture tool</span><br/>
+                                I did not want to lock the product structure from a single sitemap. The first sketch looked plausible, but it still had too many guesses. So I built the architecture through task flows instead.<span class="case-acc-para-gap">The format became part of the design work. Each flow had one diagram for the user journey, then separate tables for what the interface does, what the system does, how failures recover, and which questions were still open. That separation made the document useful to the team, not just to me. The founder could focus on product decisions, the developer could focus on system behavior, and I could keep testing whether the structure actually held together.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Library, Device, and Editor became separate surfaces</span><br/>
+                                The original tool treated configuration as one large surface. Research and flows made it clear that the product needed three different places with different jobs. The split became practical. The Library handles the ongoing collection, the Editor handles the work of making a preset playable, and the Device view answers the physical question: what is actually ready on Quray?<span class="case-acc-para-gap">That separation changed the whole product model. The browser library and the physical device could no longer be treated as if they were the same place. A musician needed to understand the difference between editing a preset in the web app and having that version safely available on the hardware.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Sets are not folders</span><br/>
+                                A set is not just a folder for presets. It is closer to a show-ready sequence. That changed how I thought about the Device screen, because a performer is not browsing on stage in the same way they browse a library at home.<span class="case-acc-para-gap">The Device view moved toward setlist logic. Order became the main thing on the screen. Management controls had to stay quieter than they were in the Library. The same preset can exist in more than one context, but those contexts do not mean the same thing. The architecture had to respect that instead of flattening everything into one list.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">"CC74" became "Filter Cutoff"</span><br/>
+                                The raw protocol asks for a CC number. That is technically correct, but it turns the interface into homework. A musician who wants to control a filter should not have to leave the product, find a synth implementation chart, look up the right number, and come back hoping they typed it correctly.<span class="case-acc-para-gap">So I changed the mapping model around connected devices. The configurator can know which synths or modules are connected to Quray, show their parameter categories, and let the user choose something human, like "Filter Cutoff" or "OSC Waveform." The CC number still exists underneath for people who want precision, but the main workflow starts from the musical intention, not from a raw protocol value.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Sync, save, and trust became separate problems</span><br/>
+                                The original model blurred two different questions: "Is my work saved?" and "Is this version already on the device?" For a hardware musician, that difference matters. They can spend hours shaping a preset, and the fear is not abstract. The fear is opening the product later, on another computer or tablet, and realizing the work only existed in one browser.<span class="case-acc-para-gap">That is why I pushed for optional authorization, even though it added product and technical work the founders initially wanted to avoid. First use still should not be blocked by an account. A musician should be able to connect Quray, try the interface, and hear the idea before signing up. But once they start making something real, the product needs a way to protect that work beyond local browser storage.</span><span class="case-acc-para-gap">Sync had to stay separate from saving. Saving protects the preset as work. Sync sends a version to the physical device. Once that distinction was clear, the interface could show calmer states: autosaved work, unsynced changes, empty states, and errors that explain what happened instead of leaving the user to guess.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Factory preset before blank canvas</span><br/>
+                                A blank project is a natural developer default, but it is a weak first experience for expressive hardware. If the user connects a device, waves a hand, and gets nothing meaningful back, confidence disappears before configuration even begins.<span class="case-acc-para-gap">That is why first use needed to start with a working factory preset. The user should feel the instrument respond before being asked to build anything. Configuration comes after confidence, not before it.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">One hardware idea came from thinking through the software</span><br/>
+                                One product decision came from mapping the performance flows, not from the configurator itself. I saw a risk the interface alone could not solve: if a preset changes while a hand is still active in the field, a note can cut off or a parameter can jump.<span class="case-acc-para-gap">Quray has information most controllers do not have. It knows when hands are still inside the field. So I proposed a safer behavior for the device itself: the next preset can arm first, then complete the switch only after the hands leave. That is not just a UI detail. It is a product behavior that connects research, hardware logic, and performance safety.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:gap-y-[16px] md:order-4 xl:gap-y-[16px] 2xl:gap-y-[16px]">
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/library-quray.png"><img src="assets/images/library-quray.png"
+                     alt="Quray configurator library"
+                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+
+                <div class="order-5 flex w-full flex-col gap-y-8 md:order-none md:gap-y-[16px] xl:gap-y-[16px] 2xl:gap-y-[16px] mt-5 md:mt-0 md:grid md:w-full md:grid-cols-2 md:gap-x-4 md:gap-y-0 xl:flex xl:flex-row xl:gap-x-4 xl:gap-y-0 xl:mt-0 2xl:grid 2xl:w-full 2xl:grid-cols-[400px_1fr] 2xl:gap-x-[16px] 2xl:gap-y-0">
+                        <div class="lqip-parallax-host min-w-0 xl:flex-none xl:w-[328px] 2xl:w-[400px]" data-lqip-ref="assets/images/setup-quray.png"><img src="assets/images/setup-quray.png"
+                             alt="Quray setup workflow"
+                             class="hidden md:block overview-img-2 aspect-[288/184] w-full shrink-0 rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:w-[328px] xl:flex-none xl:aspect-square 2xl:h-[400px] 2xl:w-[400px] 2xl:flex-none lqip-fadein"/></div>
+                        <div class="lqip-parallax-host min-w-0 xl:flex-1 xl:min-w-0" data-lqip-ref="assets/images/sets-quray.png"><img src="assets/images/sets-quray.png"
+                             alt="Quray sets in the library"
+                             class="overview-img-3 aspect-[288/184] w-full rounded-[20px] object-cover md:w-full md:min-w-0 md:aspect-[1048/656] xl:h-[328px] xl:flex-1 xl:min-w-0 xl:aspect-auto 2xl:h-[400px] 2xl:w-full 2xl:object-cover lqip-fadein"/></div>
+                </div>
+                <p class="quray-image-caption order-6 mt-4 md:order-none">One of the flows, shown here as an example. <a href="https://whimsical.com/olga6695/flow-05-create-new-preset-zone-editor-CnrYjxqSBZ2LtqWX8TWkmN" target="_blank" rel="noopener noreferrer" class="text-inherit underline decoration-[#8A8A8A] underline-offset-2 hover:text-[#0016F2] hover:decoration-[#0016F2]">Open in Whimsical</a></p>
+                </div>
+                </div>
+
+            </div>
+
+            </div>
+
+        </section>
+
+        <!-- #prototype: Building in Code -->
+        <section id="prototype" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                    <h2 class="section-header w-full">Building in Code</h2>
+                </div>
+
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Building in Code</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0">Quray does not need many screens to become difficult. <span class="font-medium">It has only a few main surfaces, but every surface carries state:</span> connection, calibration, sync, device memory, presets, zones, mappings. <span class="font-medium">In Figma, most of that would be theatre</span> — drawn states that pretend to depend on each other without actually doing it.</p>
+                </div>
+
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">So I made a deliberate choice. <span class="font-medium">I used Figma to lock the visual language on a few key screens, then moved into code while the product model was still being shaped.</span> The prototype started showing me where the design was still pretending to be simpler than it was.</p>
+                </div>
+                </div>
+
+                <div class="flex w-full flex-col order-4 mt-5 mb-10 max-md:order-4 max-md:mt-[1.4375rem] md:order-3 md:mt-0 md:mb-0">
+            <button type="button" id="challenge-2-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="challenge-2-acc-panel">
+                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                    <svg id="challenge-2-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">How I actually built it</span></span>
+            </button>
+
+            <div id="challenge-2-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                <div class="min-h-0 overflow-hidden">
+                    <div id="challenge-2-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                            <div>
+                                <span class="font-medium">Code after Figma, not instead of it</span><br/>
+                                Figma was the right place to find the visual direction: density, tone, spacing, the overall feel of the instrument. A few key screens were enough. After that point, Figma started losing value — Quray needed live state, not more pictures of state.<span class="case-acc-para-gap">Code forced the design to behave, not just look resolved.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">A token system built as a contract</span><br/>
+                                Tokens are named by role, not by colour value or location. A status colour is not "orange" — it is the colour for a progress state. A background token is not "dark purple" — it is a surface level in the hierarchy.<span class="case-acc-para-gap">That mattered because Quray still needed room to change visually, and the developer should never have to guess which grey or radius belongs where. The system made visual decisions explicit instead of leaving them scattered through components.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Rules that kept AI inside the product</span><br/>
+                                I wrote Cursor rules for decisions the AI could not infer: the token discipline, the component style, the fact that this is not a generic SaaS dashboard. Short rules on purpose — long rules become decoration.<span class="case-acc-para-gap">The useful ones prevent the same mistake from happening twice: no hardcoded values, use existing components before inventing new ones, update the styleguide when a new pattern appears.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">A living styleguide, not a document</span><br/>
+                                The styleguide is a route inside the prototype. It imports real components and reads real tokens — it cannot become a static document that slowly lies.<span class="case-acc-para-gap">It let me see states side by side: connected, disconnected, modified, failed, empty. Small inconsistencies became easier to catch because a component could not hide inside one screen.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">The Device screen changed when I built it</span><br/>
+                                At first it was tempting to design the Device screen like another library: rows, metadata, status chips, management controls. Once I built it, that felt wrong.<span class="case-acc-para-gap">The Device screen is not where a musician browses everything they own — it is where they prepare what will actually be on Quray. The visual language moved toward a setlist: large sequence numbers, bare rows, fewer controls competing with the performance order.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">Sync became simpler after it became worse</span><br/>
+                                The first sync model was too quiet: one button, not enough explanation of what it would do. Then I overcorrected and added per-item update actions — which made every modified preset look like it needed its own decision.<span class="case-acc-para-gap">The better version was one clear action with better surrounding information. Building the screen made the confusion visible earlier than a static mockup would have.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium">The fan canvas had its own rules</span><br/>
+                                The central fan is drawn on HTML Canvas, not built from normal DOM components. That made the prototype more realistic, but also less forgiving: the zones, labels, and hit areas had to be rendered manually, and visual tokens had to reach canvas drawing code through a helper instead of ordinary CSS classes.<span class="case-acc-para-gap">It was a small technical constraint with a real design consequence. The editor could not just look consistent. It had to stay consistent across two rendering systems.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
+                <div class="flex w-full flex-col order-2 mt-0 min-w-0 max-w-full max-md:order-2 max-md:my-6 md:order-none">
+                <video class="mt-0 block w-full h-auto rounded-[20px] 2xl:w-full"
+                       src="assets/videos/quray-configurator-video.mov"
+                       autoplay
+                       loop
+                       muted
+                       playsinline
+                       aria-label="Quray configurator prototype"></video>
+                <p class="quray-image-caption mt-4">This is a working product prototype, not a clickable mockup.</p>
+                </div>
+                </div>
+                </div>
+
+                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:order-6 max-md:mt-2
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            md:order-3 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-2
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">The speed came from AI.<br/><span class="font-medium">The judgement came from fifteen years of seeing where products break.</span></p>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
+        <!-- #prototype-evolution: Designed to evolve -->
+        <section id="prototype-evolution" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                    <h2 class="section-header w-full">Designed to evolve</h2>
+                </div>
+
+                <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Designed to evolve</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                <div class="max-md:contents md:flex md:flex-col md:gap-y-4 xl:flex-col xl:gap-y-6 2xl:gap-y-[40px] 2xl:grid 2xl:w-full 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 block order-1 max-md:order-1 md:order-1 2xl:min-w-0">
+                    <p class="min-w-0">The configurator works, and the visual direction is intentional, but it is not the final visual layer. <span class="font-medium">Before investing in typographic refinement or brand-level detail, the product needed to prove that the logic holds.</span> Good UX in this space is rare enough that clarity matters more than polish. At this stage, <span class="font-medium">making the interface more impressive mattered less than making it clear enough for musicians to test</span> Quray's real behavior, not my visual ambition.</p>
+                </div>
+
+                <div class="overview-text-2 order-3 block font-light text-5/8 min-w-0 max-md:order-3 md:order-2 2xl:min-w-0">
+                    <p class="min-w-0">The token architecture <span class="font-medium">was planned before the first component was built.</span> Cursor rules kept that discipline through the build: new components had to use existing tokens, reuse existing patterns where possible, and keep the styleguide updated with the product. <span class="font-medium">The styleguide grew with the product and imports real components, not screenshots.</span> The next visual pass has a real system underneath it, so refinement can happen without rebuilding the product.</p>
+                </div>
+                </div>
+
+                <div class="flex w-full flex-col order-4 mt-5 mb-10 max-md:order-4 max-md:mt-[1.4375rem] md:order-3 md:mt-0 md:mb-0">
+            <button type="button" id="built-to-change-acc-btn" class="group flex cursor-pointer items-center gap-x-[14px] border-0 bg-transparent p-0 text-left" aria-expanded="false" aria-controls="built-to-change-acc-panel">
+                <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-accent-yellow transition-colors duration-300 ease-out group-hover:bg-primary-light" aria-hidden="true">
+                    <svg id="built-to-change-acc-arrow" class="h-6 w-6 shrink-0 transition-transform duration-300 ease-out" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17 12L13 16L9 12" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="case-acc-label-wrap flex min-h-[34px] items-center"><span class="case-acc-label font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">What comes next</span></span>
+            </button>
+
+            <div id="built-to-change-acc-panel-wrap" data-open="0" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out data-[open=1]:grid-rows-[1fr]">
+                <div class="min-h-0 overflow-hidden">
+                    <div id="built-to-change-acc-panel" data-open="0" class="w-full max-w-full pt-10 pb-12 border-b border-[#E9E9E9] opacity-0 transition-opacity duration-300 ease-out data-[open=1]:opacity-100 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="flex flex-col gap-y-4 font-light text-5/8">
+                            <div>
+                                <span class="font-medium">Usability testing — already in progress</span><br/>
+                                The prototype is being tested with musicians now. At this stage, I am watching for the places where the product model survives first contact, and the places where it still needs clearer feedback. That material is shaping the next iteration, and findings will be added here as the work continues.
+                            </div>
+                            <div>
+                                <span class="font-medium">The on-device screen</span><br/>
+                                The physical device has a small monochrome screen — navigation, preset switching, status, performance safety — and designing it is a separate problem still ahead. No hover states, no scrolling, no room for ambiguity when a performer glances down mid-set. That work starts once the configurator logic is stable enough to know what the device actually needs to say.
+                            </div>
+                            <div>
+                                <span class="font-medium">The visual layer</span><br/>
+                                The current palette and type were chosen to be clear enough to test against, not to be final. Once the product logic is validated, the visual identity gets a proper pass. The token system was built for exactly that moment.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <div class="max-md:contents md:flex md:w-full md:min-w-0 md:flex-col md:order-4">
+                <div class="flex w-full flex-col order-2 mt-0 min-w-0 max-w-full max-md:order-2 max-md:my-6 md:order-none">
+                <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/quray-styleguide.png"><img src="assets/images/quray-styleguide.png"
+                     alt="Quray living styleguide"
+                     class="overview-img-1 order-2 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:order-none md:aspect-[1048/656] xl:aspect-[1048/656] 2xl:w-full lqip-fadein"/></div>
+                <p class="quray-image-caption mt-4">A styleguide inside the prototype: real tokens, components, and the states the product needs to keep consistent as it changes.</p>
+                </div>
+                </div>
+                </div>
+
+                <div class="order-3 min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:order-6 max-md:mt-2
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            md:order-3 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-2
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-2 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">The visual layer can still change because <span class="font-medium">the structure underneath already knows how to.</span></p>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
+            <script>
+                (function () {
+                    var idConfigs = [
+                        { btnId: 'challenge-acc-btn',        wrapId: 'challenge-acc-panel-wrap',        panelId: 'challenge-acc-panel',        arrowId: 'challenge-acc-arrow' },
+                        { btnId: 'challenge-2-acc-btn',       wrapId: 'challenge-2-acc-panel-wrap',       panelId: 'challenge-2-acc-panel',       arrowId: 'challenge-2-acc-arrow' },
+                        { btnId: 'built-to-change-acc-btn',   wrapId: 'built-to-change-acc-panel-wrap',   panelId: 'built-to-change-acc-panel',   arrowId: 'built-to-change-acc-arrow' },
+                        { btnId: 'my-part-acc-btn',           wrapId: 'my-part-acc-panel-wrap',           panelId: 'my-part-acc-panel',           arrowId: 'my-part-acc-arrow' },
+                        { btnId: 'ecosystem-emp-acc-btn',      wrapId: 'ecosystem-emp-acc-panel-wrap',      panelId: 'ecosystem-emp-acc-panel',      arrowId: 'ecosystem-emp-acc-arrow' },
+                        { btnId: 'ecosystem-fran-acc-btn',     wrapId: 'ecosystem-fran-acc-panel-wrap',     panelId: 'ecosystem-fran-acc-panel',     arrowId: 'ecosystem-fran-acc-arrow' },
+                        { btnId: 'ecosystem-hqfind-acc-btn',   wrapId: 'ecosystem-hqfind-acc-panel-wrap',   panelId: 'ecosystem-hqfind-acc-panel',   arrowId: 'ecosystem-hqfind-acc-arrow' },
+                        { btnId: 'vendor-exp-acc-btn',         wrapId: 'vendor-exp-acc-panel-wrap',         panelId: 'vendor-exp-acc-panel',         arrowId: 'vendor-exp-acc-arrow' },
+                    ].map(function (cfg) {
+                        return {
+                            btn:   document.getElementById(cfg.btnId),
+                            wrap:  document.getElementById(cfg.wrapId),
+                            panel: document.getElementById(cfg.panelId),
+                            arrow: document.getElementById(cfg.arrowId)
+                        };
+                    }).filter(function (item) { return item.btn && item.wrap && item.panel; });
+
+                    var researchItems = Array.from(document.querySelectorAll('#research [data-research-acc-btn]')).map(function (btn) {
+                        var panelId = btn.getAttribute('aria-controls');
+                        return {
+                            btn:   btn,
+                            wrap:  document.getElementById(panelId + '-wrap'),
+                            panel: document.getElementById(panelId),
+                            arrow: btn.querySelector('[data-research-acc-arrow]')
+                        };
+                    }).filter(function (item) { return item.btn && item.wrap && item.panel; });
+
+                    var accordions = idConfigs.concat(researchItems);
+
+                    function setAccordionState(item, isOpen) {
+                        item.btn.setAttribute('aria-expanded', String(isOpen));
+                        item.wrap.setAttribute('data-open', isOpen ? '1' : '0');
+                        item.panel.setAttribute('data-open', isOpen ? '1' : '0');
+                        if (item.arrow) item.arrow.classList.toggle('rotate-180', isOpen);
+                    }
+
+                    accordions.forEach(function (item) {
+                        item.btn.addEventListener('click', function () {
+                            var willOpen = item.btn.getAttribute('aria-expanded') !== 'true';
+                            accordions.forEach(function (other) { setAccordionState(other, false); });
+                            if (willOpen) {
+                                setAccordionState(item, true);
+                            }
+                        });
+                    });
+                })();
+            </script>
+
+        <section id="give-image">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/djs-dont-dance-no-more.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] md:aspect-auto lqip-fadein" src="assets/images/djs-dont-dance-no-more.png" alt="Musicians and live performance context"/></div>
+        </section>
+
+        <section id="reflections" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 mb-[80px] xl:mb-[120px]">
+
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+
+            <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+
+                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:contents 2xl:contents">
+                <h2 class="section-header w-full xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Notes from the middle</h2>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] xl:col-start-1 xl:row-start-2 xl:min-w-0 2xl:col-start-1 2xl:row-start-2 2xl:grid 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] 2xl:gap-y-0">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0"><span class="font-medium">Quray is still in progress</span>, so I do not want to end this case study with a polished "final result" that does not exist yet. <span class="font-medium">At this stage, the more honest ending is about the way the project tested my process.</span> I had to learn enough of the domain to make decisions, not just style the interface, and keep checking where a screen decision would affect the hardware or the musician using it.</p>
+                </div>
+                <div class="overview-text-2 font-light text-5/8 min-w-0 2xl:min-w-0">
+                    <p class="min-w-0">I came into Quray from years of designing internal tools, SaaS products, and operational software. That background helped, but it also had limits I hadn't expected. <span class="font-medium">Quray isn't a dashboard — it's an instrument, and its interface has to work outside the browser.</span> In that context, an unclear state isn't just confusing. It can mean silence when there should be sound, or a wrong note in front of an audience.</p>
+                </div>
+                </div>
+                </div>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] mt-[32px] xl:mt-[40px] xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/icons/mountain.svg"
+                             alt=""
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Domain first, interface second</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p>Quray reminded me that domain learning is not a warm-up before design. If I do not understand why V/Oct, CV behavior, sync state, or preset switching matters to a musician, I can only make the configurator look cleaner. <span class="font-medium">The interface becomes useful only when that knowledge starts changing the product logic.</span></p>
+                    </div>
+                </div>
+
+                <div class="flex w-full min-w-0 flex-col gap-y-6 border-t border-[#E9E9E9] pt-[48px] pb-[48px] md:grid md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-4 2xl:col-start-1 2xl:row-start-4">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/icons/puzzle.svg"
+                             alt=""
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">Beyond the configurator</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p>Quray could not be solved as a web app alone. The same logic had to work across the configurator, the physical device, the small screen, and the performance context. <span class="font-medium">If those parts disagree, the musician stops trusting the instrument.</span> For me, the real design work was keeping the whole product coherent.</p>
+                    </div>
+                </div>
+
+                <div class="grid w-full min-w-0 gap-y-6 border-t border-b border-[#E9E9E9] pt-[48px] pb-[48px] md:grid-cols-[320px_1fr] md:gap-x-[40px] md:items-start xl:grid-cols-[360px_1fr] 2xl:grid-cols-[504px_504px] 2xl:gap-x-[40px] xl:col-start-1 xl:row-start-5 2xl:col-start-1 2xl:row-start-5">
+                    <div class="flex w-full gap-x-[24px]">
+                        <img src="assets/icons/brain.svg"
+                             alt=""
+                             class="w-[88px] h-[88px] shrink-0 object-contain"/>
+                        <div class="font-medium leading-tight self-center">AI changed the pace</div>
+                    </div>
+                    <div class="flex min-w-0 w-full flex-col gap-y-[16px] font-light text-5/8">
+                        <p>I used AI to move faster through research and to test interface ideas in code much earlier than I normally could. <span class="font-medium">But the output only became useful after I questioned it.</span> Generic answers, neat summaries, and good-looking components still had to be checked against Quray's logic. <span class="font-medium">The speed changed. The judgement stayed mine.</span></p>
+                    </div>
+                </div>
+
+                <div class="min-w-0 w-full rounded-[20px] bg-[#ECF1F4]
+                            max-md:px-[40px] max-md:pt-[48px] max-md:pb-[56px] px-[56px] pt-[56px] pb-[64px]
+                            flex flex-col gap-y-6
+                            mt-2 md:mt-4 xl:mt-0
+                            xl:col-start-2 xl:row-start-2 xl:row-span-4
+                            2xl:col-start-2 2xl:row-start-2 2xl:row-span-4 2xl:w-[352px] 2xl:min-w-[352px] 2xl:shrink-0 2xl:flex-none 2xl:grid 2xl:grid-cols-1 2xl:gap-y-6
+                            2xl:px-[56px] 2xl:pt-[56px] 2xl:pb-[64px]">
+                    <img src="assets/images/logo-billfold-keyphrase.png"
+                         alt=""
+                         class="h-[56px] w-[30px] shrink-0"/>
+                    <p class="font-light text-5/8">Quray reminded me why <span class="font-medium">I'm drawn to complex products.</span> You cannot fix them from the surface. <span class="font-medium">I like the point where the mess underneath starts to become a system</span> someone else can actually use.</p>
+                </div>
+            </div>
+
+            </div>
+
+        </section>
+
+        <!-- #next-project: previous / next project navigation -->
+        <section id="next-project" class="flex flex-col gap-y-6 md:gap-y-8 mb-[-120px] md:mb-[-80px] xl:mb-[-104px] 2xl:mb-[-120px]">
+            <nav class="next-project-nav flex flex-col gap-y-6 sm:flex-row sm:items-center sm:justify-between sm:gap-x-8" aria-label="Adjacent projects">
+                <a class="next-project-link next-project-prev card-detail no-underline" href="#"></a>
+                <a class="next-project-link next-project-next card-detail no-underline sm:text-right" href="#"></a>
+            </nav>
+        </section>
+
+    </main>
+
+</div>
+
+    <style>
+        .proj-nav-link { position: relative; }
+        .proj-nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: -7px;
+            width: 100%; height: 3px;
+            background-color: var(--color-accent-yellow);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .proj-nav-link-right::after { transform-origin: right; }
+        @media (hover: hover) and (pointer: fine) {
+        .group:hover .proj-nav-link::after { transform: scaleX(1); }
+        }
+
+        /* Case accordion: +1px label nudge; pink underline on hover (no vertical jump) */
+        button.group > span:nth-child(2),
+        div.group.flex.items-center > span:nth-child(2) {
+            transform: translateY(1px);
+        }
+        .case-acc-para-gap {
+            display: block;
+            margin-top: 0.625rem;
+        }
+        .case-acc-label {
+            position: relative;
+            display: inline-block;
+        }
+        .case-acc-label::after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            margin-top: 2px;
+            width: 100%;
+            height: 3px;
+            z-index: 1;
+            background-color: #FDE4DF;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.35s ease;
+            pointer-events: none;
+        }
+        @media (hover: hover) and (pointer: fine) {
+        .group:hover .case-acc-label::after {
+            transform: scaleX(1);
+        }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .case-acc-label::after {
+                transition: none;
+            }
+            @media (hover: hover) and (pointer: fine) {
+            .group:hover .case-acc-label::after {
+                transform: scaleX(1);
+            }
+            }
+        }
+
+        #case-side-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            padding: 48px 56px 56px 56px;
+            background: #FFFFFF;
+            border: 1px solid #DEE6F5;
+            border-radius: 20px;
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            --case-nav-overlap-opacity: 1;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition: opacity 0.55s ease, transform 0.55s ease, visibility 0s linear 0.55s, height 0.25s ease, padding 0.25s ease;
+            box-sizing: border-box;
+        }
+
+        #case-side-nav.is-visible {
+            opacity: var(--case-nav-overlap-opacity);
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+            transition: opacity 0.55s ease, transform 0.55s ease, visibility 0s linear 0s, height 0.25s ease, padding 0.25s ease;
+        }
+
+        #case-side-nav nav {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
+            max-height: 420px;
+            overflow: visible;
+        }
+
+        #case-side-nav .case-side-nav-toggle {
+            position: absolute;
+            top: 64px;
+            right: 56px;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            cursor: pointer;
+            transition: color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+            z-index: 2;
+            padding: 0;
+            transform: translateY(-50%);
+        }
+
+        #case-side-nav .case-side-nav-toggle-icon {
+            width: 16px;
+            height: 22px;
+            display: block;
+            opacity: 1;
+            filter: none;
+            transition: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+        #case-side-nav .case-side-nav-toggle:hover {
+            background-color: transparent;
+        }
+
+        #case-side-nav .case-side-nav-toggle:hover .case-side-nav-toggle-icon {
+            filter: brightness(0) saturate(100%) invert(15%) sepia(97%) saturate(6437%) hue-rotate(232deg) brightness(99%) contrast(118%);
+        }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+        #case-side-nav .case-side-nav-link:hover {
+            color: #0016F2;
+        }
+        }
+
+        #case-side-nav.is-collapsed {
+            padding: 24px 56px;
+        }
+
+        #case-side-nav.is-collapsed nav {
+            opacity: 1;
+            max-height: 32px;
+            transform: translateY(0);
+            gap: 0;
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-toggle {
+            top: 40px;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-indicator {
+            opacity: 0 !important;
+        }
+
+        #case-side-nav .case-side-nav-indicator {
+            position: absolute;
+            left: -57px;
+            top: 0;
+            width: 6px;
+            height: 40px;
+            border-radius: 3px;
+            background: var(--color-accent-yellow);
+            transform: translateY(0);
+            opacity: 0;
+            transition: transform 0.35s ease, opacity 0.2s ease;
+            will-change: transform;
+        }
+
+        #case-side-nav .case-side-nav-link {
+            position: relative;
+            display: block;
+            font-size: 1.25rem;
+            line-height: 2rem;
+            font-weight: 300;
+            color: #667284;
+            text-decoration: none;
+            opacity: 1;
+            max-height: 40px;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: color 0.25s ease, opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
+        }
+
+        #case-side-nav .case-side-nav-link.is-active {
+            color: #0016F2;
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-link {
+            opacity: 0;
+            max-height: 0;
+            pointer-events: none;
+            transform: translateY(-4px);
+        }
+
+        #case-side-nav.is-collapsed .case-side-nav-link.is-active {
+            color: #667284;
+            opacity: 1;
+            max-height: 40px;
+            pointer-events: auto;
+            transform: translateY(0);
+            padding-right: 32px;
+        }
+
+        main img,
+        main [class*="bg-[#ECF1F4]"] {
+            position: relative;
+            z-index: 2;
+        }
+
+        [data-parallax-wrap] {
+            overflow: hidden;
+            position: relative;
+            z-index: 4;
+        }
+
+        @media (min-width: 768px) {
+            [data-parallax-image] {
+                will-change: transform;
+                transform: scale(1.08);
+                transform-origin: center;
+            }
+        }
+
+        [data-parallax-image] {
+            position: relative;
+            z-index: 4;
+        }
+
+        @media (min-width: 1536px) {
+            #case-side-nav {
+                width: 352px;
+            }
+        }
+    </style>
+    <div class="full-bleed bg-[#FFF2D7] h-[128px] flex items-center px-6 sm:px-8 md:px-10 xl:px-0 2xl:px-0">
+        <div class="w-full max-w-[1280px] 2xl:max-w-[1440px] mx-auto flex items-center justify-between xl:px-6 2xl:px-0">
+            <a href="dreamkas.html" class="flex items-center gap-x-[16px] no-underline group" aria-label="Previous project: Dreamkas POS">
+                <span class="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-full bg-[#0007B2] transition-all duration-300 ease-out group-hover:bg-accent-yellow group-hover:scale-110">
+                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 13L1 7L7 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#0007B2] transition-colors duration-300"/>
+                    </svg>
+                </span>
+                <span class="proj-nav-link font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark"><span class="min-[500px]:hidden">PREV</span><span class="hidden min-[500px]:inline">Previous Project</span></span>
+            </a>
+            <a href="subway.html" class="flex items-center gap-x-[16px] no-underline group" aria-label="Next project: Subway">
+                <span class="proj-nav-link proj-nav-link-right font-family-sofia text-[1.5rem] font-normal uppercase leading-none tracking-wider text-primary-dark">Next<span class="hidden min-[500px]:inline"> Project</span></span>
+                <span class="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-full bg-[#0007B2] transition-all duration-300 ease-out group-hover:bg-accent-yellow group-hover:scale-110">
+                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L7 7L1 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-[#0007B2] transition-colors duration-300"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="flex flex-col">
+
+    <footer id="footer-match" class="site-footer full-bleed" style="
+  position: relative;
+  background: #0016F2;
+  height: 920px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+">
+
+  <!-- Ghost logo decoration: logo.svg, white at 10% opacity, H=1076px, overflows the footer and gets clipped by overflow:hidden -->
+  <img
+    src="assets/images/logo.svg"
+    aria-hidden="true"
+    style="
+      position: absolute;
+      right: calc(-4% + 128px);
+      top: 50%;
+      transform: translateY(-50%);
+      height: 1076px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.10;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+    "
+  />
+
+  <!-- Physics card DOM layer (cards rendered here by JS) -->
+  <div id="footer-gg-root" style="
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 5;
+  "></div>
+
+  <!-- Text content (above physics hit canvas so links stay clickable) -->
+  <div class="footer-match-main" style="
+    position: relative;
+    z-index: 15;
+    padding-top: 114px; padding-bottom: 200px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    pointer-events: none;
+    flex-shrink: 0;
+  ">
+    <div class="footer-match-copy" style="pointer-events: auto; user-select: text; -webkit-user-select: text;">
+      <h2 class="footer-match-heading" style="
+        font-family: 'Sofia Sans Condensed', sans-serif;
+        font-size: 104px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        margin-bottom: 28px;
+        white-space: normal;
+      ">Still reading?<br>That's a good sign.</h2>
+
+      <p style="
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+        font-weight: 300;
+        color: #ffffff;
+        line-height: 1.6;
+        margin-bottom: 32px;
+      " class="footer-match-blurb">I'm currently looking for a product designer role where complexity is a feature, not a problem. If you're building something that needs to work for real people in real conditions — I'd love to talk.</p>
+
+      <p style="
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+        font-weight: 300;
+        color: #ffffff;
+        line-height: 1.6;
+        margin-bottom: 64px;
+      " class="footer-match-email">Reach me at <a href="mailto:hello@peppered.design" style="color:#FDE4DF;text-decoration:none;font-weight:300;pointer-events:auto;">hello@peppered.design</a> — or just hit the button. I don't bite.</p>
+
+      <a href="contact.html" class="match-cta no-underline">
+        <span class="match-cta-label">Let's talk</span>
+        <span class="match-cta-icon" aria-hidden="true">
+          <span class="icon-chevron">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 4L13 10L7 16" stroke="#0016F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <img class="icon-send" src="assets/images/send-icon.svg" alt=""/>
+        </span>
+      </a>
+    </div>
+
+    <!-- Nav -->
+    <nav class="footer-match-nav" style="
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+      padding-top: 4px;
+      pointer-events: auto;
+    ">
+      <div class="footer-match-nav-links" style="display: flex; flex-direction: column; align-items: flex-end; gap: 16px;">
+      <a href="index.html#work"       style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Work</a>
+      <a href="about.html"  style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">About</a>
+      <a href="contact.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Contact</a>
+      <a href="assets/docs/Olga_Pertseva_Product_Designer_2026.pdf" target="_blank" rel="noopener noreferrer" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Resume</a>
+      </div>
+      <a href="https://www.linkedin.com/in/olga-pertseva/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+      ">
+        <img src="assets/images/linkedin-icon.svg" alt="" width="30" height="30" decoding="async" style="display:block"/>
+      </a>
+    </nav>
+  </div>
+
+</footer>
+
+        <section class="footer-year-strip full-bleed" aria-label="Site colophon" style="
+          position: relative;
+          width: 100vw;
+          left: 50%;
+          transform: translateX(-50%);
+          min-height: 64px;
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+          background: #040989;
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+          box-sizing: border-box;
+        ">
+          <span style="font-family:'Inter',sans-serif;font-size:16px;font-weight:300;color:rgba(255,255,255,0.7);line-height:1.35;">© 2026 · Hand-coded from scratch. No templates, just curiosity.</span>
+        </section>
+
+    </div>
+
+<script>
+    function initComparisonSlider() {
+        document.querySelectorAll(".comparison-slider").forEach((slider) => {
+            if (slider.dataset.comparisonInit === "true") return;
+            slider.dataset.comparisonInit = "true";
+
+            const handle = slider.querySelector(".comparison-slider__handle");
+            let dragging = false;
+
+            function setSplit(clientX) {
+                const rect = slider.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const split = Math.min(100, Math.max(0, (x / rect.width) * 100));
+                slider.style.setProperty("--split", String(split));
+                if (handle) {
+                    handle.setAttribute("aria-valuenow", String(Math.round(split)));
+                }
+            }
+
+            function onPointerMove(clientX) {
+                if (!dragging) return;
+                setSplit(clientX);
+            }
+
+            function stopDragging() {
+                dragging = false;
+            }
+
+            slider.addEventListener("mousedown", (event) => {
+                dragging = true;
+                setSplit(event.clientX);
+                event.preventDefault();
+            });
+
+            slider.addEventListener("touchstart", (event) => {
+                dragging = true;
+                if (event.touches[0]) {
+                    setSplit(event.touches[0].clientX);
+                }
+            }, { passive: true });
+
+            window.addEventListener("mousemove", (event) => {
+                onPointerMove(event.clientX);
+            });
+
+            window.addEventListener("mouseup", stopDragging);
+
+            window.addEventListener("touchmove", (event) => {
+                if (event.touches[0]) {
+                    onPointerMove(event.touches[0].clientX);
+                }
+            }, { passive: true });
+
+            window.addEventListener("touchend", stopDragging);
+            window.addEventListener("touchcancel", stopDragging);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initComparisonSlider();
+        gsap.registerPlugin(ScrollTrigger);
+
+        const menuTween = gsap.timeline({paused: true})
+            .to(".menulink", {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                stagger: 0.1,
+                ease: "power2.out"
+            })
+            .to("#burgermiddle", {opacity:0, duration: .25}, 0)
+            .to("#burgertop", {y: "10.9375px", transformOrigin:"50% 50%", rotation: 45, duration: .25}, 0)
+            .to("#burgerbottom", {transformOrigin:"50% 50%", rotation: -45, duration: .25}, 0);
+
+        const header = document.querySelector("header");
+        let isMenuOpen = false;
+
+        const burger = document.querySelector("#burger");
+        if (burger && header) {
+            burger.addEventListener("click", (event) => {
+                event.stopPropagation();
+                if (!isMenuOpen) {
+                window.pepperedOpenMobileMenu(header, menuTween);
+            } else {
+                window.pepperedCloseMobileMenu(header, menuTween);
+            }
+                isMenuOpen = !isMenuOpen;
+            });
+            document.querySelectorAll('header nav .menulink').forEach((link) => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) {
+                        window.pepperedCloseMobileMenu(header, menuTween);
+                    isMenuOpen = false;
+                    }
+                });
+            });
+        }
+
+        document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
+            const id = trigger.getAttribute("aria-controls");
+            const panel = id ? document.getElementById(id) : null;
+            if (!panel) return;
+            trigger.addEventListener("click", () => {
+                const expanded = trigger.getAttribute("aria-expanded") === "true";
+                trigger.setAttribute("aria-expanded", String(!expanded));
+                panel.hidden = expanded;
+            });
+        });
+
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!reducedMotion) {
+            const parallaxNarrow = window.matchMedia("(max-width: 767px)");
+            const parallaxImages = gsap.utils.toArray("[data-parallax-image]");
+            parallaxImages.forEach((img) => {
+                const wrap = img.closest("[data-parallax-wrap]") || img.parentElement;
+                if (!wrap) return;
+                const useScale = !parallaxNarrow.matches;
+                const scaleFrom = useScale ? 1.12 : 1;
+                const scaleTo = useScale ? 1.12 : 1;
+                gsap.fromTo(
+                    img,
+                    { yPercent: -14, scale: scaleFrom },
+                    {
+                        yPercent: 14,
+                        scale: scaleTo,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: wrap,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true,
+                        },
+                    }
+                );
+            });
+        }
+
+        const sideNav = document.getElementById("case-side-nav");
+        const contextSection = document.getElementById("context");
+        const contextCard = contextSection ? contextSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
+        const reflectionsSection = document.getElementById("reflections");
+        const reflectionsCard = reflectionsSection ? reflectionsSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
+        const sectionIds = ["context", "my-role", "research", "architecture", "prototype", "reflections"];
+        const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+        const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
+        const sideNavIndicator = sideNav ? sideNav.querySelector(".case-side-nav-indicator") : null;
+        const sideNavToggle = document.getElementById("case-side-nav-toggle");
+        const sideNavMenu = document.getElementById("case-side-nav-menu");
+        const overlapBlockers = Array.from(document.querySelectorAll(
+            '#map-image, #map-image img, [data-parallax-wrap], [data-parallax-wrap] img, main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3, main .comparison-slider, main [class*="bg-[#ECF1F4]"]'
+        ));
+
+        if (sideNav && contextSection && contextCard && reflectionsSection && sideNavLinks.length) {
+            const STICKY_OFFSET = 120;
+            const SCROLL_OFFSET = 120;
+            const INITIAL_GAP = 48;
+            const END_OFFSET = 120;
+            const ANCHOR_HOLD_MS = 700;
+            let ticking = false;
+            let visible = false;
+            let initialDocTop = 0;
+            let initialized = false;
+            let pendingAnchorDocTop = null;
+            let pendingAnchorUntil = 0;
+
+            function clamp(value, min, max) {
+                return Math.min(Math.max(value, min), max);
+            }
+
+            function absTop(node) {
+                return node.getBoundingClientRect().top + window.scrollY;
+            }
+
+            function setActiveLink(scrollY) {
+                const markerY = scrollY + window.innerHeight * 0.35;
+                let activeId = "context";
+                sectionNodes.forEach((node) => {
+                    if (node && absTop(node) <= markerY) {
+                        activeId = node.id;
+                    }
+                });
+                let activeLink = null;
+                sideNavLinks.forEach((link) => {
+                    const isActive = link.getAttribute("data-target") === activeId;
+                    link.classList.toggle("is-active", isActive);
+                    if (isActive) activeLink = link;
+                });
+                if (sideNavIndicator && activeLink && sideNavMenu) {
+                    const menuRect = sideNavMenu.getBoundingClientRect();
+                    const activeRect = activeLink.getBoundingClientRect();
+                    const indicatorHeight = sideNavIndicator.offsetHeight || 40;
+                    const activeCenterY = activeRect.top - menuRect.top + activeRect.height / 2;
+                    const indicatorY = activeCenterY - indicatorHeight / 2;
+                    sideNavIndicator.style.transform = "translateY(" + indicatorY + "px)";
+                    sideNavIndicator.style.opacity = sideNav.classList.contains("is-collapsed") ? "0" : "1";
+                }
+                return activeId;
+            }
+
+            function ensureInitialized() {
+                if (initialized) return;
+                const cardTop = absTop(contextCard);
+                initialDocTop = cardTop + contextCard.offsetHeight + INITIAL_GAP;
+                initialized = true;
+            }
+
+            function setupSmoothScroll() {
+                function easeInOutCubic(t) {
+                    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                function smoothScrollTo(targetTop, onComplete) {
+                    if (typeof window.__pepperedLenisScrollTo === "function") {
+                        const didScroll = window.__pepperedLenisScrollTo(targetTop, {
+                            immediate: false,
+                            force: true
+                        });
+                        if (didScroll) {
+                            if (typeof window.__pepperedLenisOnScrollComplete === "function") {
+                                window.__pepperedLenisOnScrollComplete(onComplete);
+                            } else if (typeof onComplete === "function") {
+                                window.setTimeout(onComplete, 850);
+                            }
+                            return;
+                        }
+                    }
+
+                    const startTop = window.scrollY || window.pageYOffset;
+                    const distance = targetTop - startTop;
+                    if (Math.abs(distance) < 1) {
+                        if (typeof onComplete === "function") onComplete();
+                        return;
+                    }
+                    const duration = 800;
+                    const startTime = performance.now();
+
+                    function tick(now) {
+                        const elapsed = now - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = easeInOutCubic(progress);
+                        window.scrollTo(0, startTop + distance * eased);
+                        if (progress < 1) {
+                            window.requestAnimationFrame(tick);
+                        } else if (typeof onComplete === "function") {
+                            onComplete();
+                        }
+                    }
+
+                    window.requestAnimationFrame(tick);
+                }
+
+                sideNavLinks.forEach((link) => {
+                    link.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        const targetId = link.getAttribute("data-target");
+                        if (!targetId) return;
+                        const targetNode = document.getElementById(targetId);
+                        if (!targetNode) return;
+                        const targetTop = absTop(targetNode) - SCROLL_OFFSET;
+                        const useKeyphraseLanding = targetId === "users";
+                        if (!useKeyphraseLanding) {
+                            pendingAnchorDocTop = null;
+                            pendingAnchorUntil = 0;
+                        }
+                        if (sideNav.classList.contains("is-collapsed")) {
+                            sideNav.classList.remove("is-collapsed");
+                            if (sideNavToggle) sideNavToggle.setAttribute("aria-expanded", "true");
+                        }
+                        requestUpdate();
+                        const clampedTop = Math.max(0, targetTop);
+                        smoothScrollTo(clampedTop, () => {
+                            if (!useKeyphraseLanding) return;
+                            const anchorTop = getSectionKeyphraseAnchorTop(targetId);
+                            if (anchorTop === null) return;
+                            pendingAnchorDocTop = anchorTop;
+                            pendingAnchorUntil = performance.now() + ANCHOR_HOLD_MS;
+                            requestUpdate();
+                        });
+                    });
+                });
+            }
+
+            function setupCollapseToggle() {
+                if (!sideNavToggle) return;
+                sideNavToggle.addEventListener("click", () => {
+                    const isCollapsed = sideNav.classList.toggle("is-collapsed");
+                    sideNavToggle.setAttribute("aria-expanded", String(!isCollapsed));
+                    requestUpdate();
+                    window.setTimeout(requestUpdate, 320);
+                });
+            }
+
+            function getSectionKeyphraseAnchorTop(sectionId) {
+                if (sectionId !== "users") return null;
+                const targetSection = document.getElementById(sectionId);
+                if (!targetSection) return null;
+                const localCard = targetSection.querySelector('div[class*="bg-[#ECF1F4]"]');
+                if (!localCard) return null;
+                return absTop(localCard) + localCard.offsetHeight + INITIAL_GAP;
+            }
+
+            function overlapRatio(a, b) {
+                const overlapWidth = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left));
+                const overlapHeight = Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+                return (overlapWidth * overlapHeight) / Math.max(1, a.width * a.height);
+            }
+
+            function getOverlapOpacity() {
+                const navRect = sideNav.getBoundingClientRect();
+                if (!navRect.width || !navRect.height) return 1;
+                let maxRatio = 0;
+                overlapBlockers.forEach((blocker) => {
+                    if (!blocker) return;
+                    const rect = blocker.getBoundingClientRect();
+                    if (rect.bottom <= 0 || rect.top >= window.innerHeight || rect.right <= 0 || rect.left >= window.innerWidth) return;
+                    maxRatio = Math.max(maxRatio, overlapRatio(navRect, rect));
+                });
+                return clamp(1 - maxRatio * 0.7, 0.45, 1);
+            }
+
+            function updateSideNav() {
+                ticking = false;
+                if (window.innerWidth < 1280) {
+                    sideNav.classList.remove("is-visible");
+                    sideNav.hidden = true;
+                    visible = false;
+                    initialized = false;
+                    return;
+                }
+
+                const scrollY = window.scrollY || window.pageYOffset;
+                const contextTop = absTop(contextSection);
+                const startThreshold = contextTop - SCROLL_OFFSET;
+                const shouldShow = scrollY >= startThreshold;
+
+                if (!shouldShow) {
+                    sideNav.classList.remove("is-visible");
+                    sideNav.hidden = true;
+                    visible = false;
+                    initialized = false;
+                    pendingAnchorDocTop = null;
+                    pendingAnchorUntil = 0;
+                    sideNav.style.setProperty("--case-nav-overlap-opacity", "1");
+                    return;
+                }
+
+                ensureInitialized();
+                sideNav.hidden = false;
+
+                const cardRect = contextCard.getBoundingClientRect();
+                const navHeight = sideNav.offsetHeight;
+                const reflectionsTop = absTop(reflectionsSection);
+                const reflectionsStop = reflectionsCard
+                    ? absTop(reflectionsCard) + reflectionsCard.offsetHeight + INITIAL_GAP
+                    : reflectionsTop - END_OFFSET - navHeight;
+                const docBottomLimit = document.documentElement.scrollHeight - navHeight - 24;
+                const maxDocTop = clamp(reflectionsStop, initialDocTop, docBottomLimit);
+                const stickyDocTop = scrollY + STICKY_OFFSET;
+                setActiveLink(scrollY);
+                let preferredDocTop = stickyDocTop;
+                if (pendingAnchorDocTop !== null) {
+                    if (performance.now() <= pendingAnchorUntil) {
+                        preferredDocTop = pendingAnchorDocTop;
+                    } else {
+                        pendingAnchorDocTop = null;
+                        pendingAnchorUntil = 0;
+                    }
+                }
+                const navDocTop = clamp(preferredDocTop, initialDocTop, maxDocTop);
+                sideNav.style.left = cardRect.left + "px";
+                sideNav.style.top = (navDocTop - scrollY) + "px";
+                sideNav.style.setProperty("--case-nav-overlap-opacity", String(getOverlapOpacity()));
+                if (!visible) {
+                    visible = true;
+                    sideNav.classList.add("is-visible");
+                }
+            }
+
+            function requestUpdate() {
+                if (ticking) return;
+                ticking = true;
+                window.requestAnimationFrame(updateSideNav);
+            }
+
+            window.addEventListener("scroll", requestUpdate, { passive: true });
+            window.addEventListener("resize", requestUpdate);
+            sideNav.addEventListener("transitionend", (event) => {
+                if (event.propertyName === "max-height" || event.propertyName === "padding" || event.propertyName === "height" || event.propertyName === "transform") {
+                    requestUpdate();
+                }
+            });
+            setupSmoothScroll();
+            setupCollapseToggle();
+            requestUpdate();
+        }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script>
+(function () {
+  var CARD_W = 104, CARD_H = 104;
+  var SPAWN_INTERVAL = 110;
+  var TOTAL_CARDS = 27;
+
+  var IMAGES = Array.from({ length: 27 }, function (_, i) {
+    return 'assets/images/' + String(i + 1).padStart(2, '0') + '-statement.png';
+  });
+
+  var root   = document.getElementById('footer-gg-root');
+  var footer = document.getElementById('footer-match');
+  var engine, runner, domCards = [], hasTriggered = false;
+
+  var Matter = window.Matter;
+  var Bodies = Matter.Bodies;
+  var Body   = Matter.Body;
+  var World  = Matter.World;
+
+  var drag = null;
+  var dragRect = null;
+  var samples = [];
+
+  function buildCard(i) {
+    var el = document.createElement('div');
+    el.style.cssText = [
+      'position:absolute;',
+      'width:' + CARD_W + 'px;height:' + CARD_H + 'px;',
+      'border-radius:20px;overflow:hidden;',
+      'user-select:none;transform-origin:center center;',
+      'will-change:transform;pointer-events:none;background:#e8e4dc;',
+      '-webkit-backface-visibility:hidden;backface-visibility:hidden;isolation:isolate;',
+    ].join('');
+    var img = document.createElement('img');
+    img.src = IMAGES[i % IMAGES.length];
+    img.alt = '';
+    img.draggable = false;
+    img.style.cssText = [
+      'position:absolute;left:0;top:0;width:100%;height:100%;',
+      'object-fit:cover;object-position:center;',
+      'transform:scale(1.1);transform-origin:center center;pointer-events:none;',
+    ].join('');
+    el.appendChild(img);
+    return el;
+  }
+
+  function ptFromEvent(e, rect) {
+    var src = e.touches ? e.touches[0] : e;
+    return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+  }
+
+  function cardAt(x, y) {
+    var hits = Matter.Query.point(engine.world.bodies, { x: x, y: y });
+    for (var i = hits.length - 1; i >= 0; i--) {
+      if (hits[i].label === 'card') return hits[i];
+    }
+    return null;
+  }
+
+  function initPhysics(W, H) {
+    engine = Matter.Engine.create({ positionIterations: 10, velocityIterations: 10 });
+    engine.gravity.y = 2.0;
+    runner = Matter.Runner.create({ delta: 1000 / 60 });
+    Matter.Runner.run(runner, engine);
+
+    World.add(engine.world, [
+      Bodies.rectangle(W / 2,  H + 26,  W * 3, 50,   { isStatic: true, friction: 1.0, restitution: 0.1, label: 'wall' }),
+      Bodies.rectangle(-26,    H / 2,   50,    H * 3, { isStatic: true, friction: 0.4, restitution: 0.2, label: 'wall' }),
+      Bodies.rectangle(W + 26, H / 2,   50,    H * 3, { isStatic: true, friction: 0.4, restitution: 0.2, label: 'wall' }),
+    ]);
+
+    var mc = document.createElement('canvas');
+    mc.width  = W; mc.height = H;
+    mc.style.cssText = [
+      'position:absolute;top:0;left:0;opacity:0;pointer-events:auto;',
+      'touch-action:none;z-index:8;',
+      'width:' + W + 'px;height:' + H + 'px;',
+    ].join('');
+    footer.appendChild(mc);
+
+    function onDown(e) {
+      dragRect = mc.getBoundingClientRect();
+      var p    = ptFromEvent(e, dragRect);
+      var body = cardAt(p.x, p.y);
+      if (!body) return;
+      drag = { body: body, offX: p.x - body.position.x, offY: p.y - body.position.y };
+      samples = [{ x: p.x, y: p.y, t: performance.now() }];
+      body.gravityScale = 0;
+      body.frictionAir  = 1;
+      Body.setVelocity(body, { x: 0, y: 0 });
+      Body.setAngularVelocity(body, 0);
+      mc.style.cursor = 'grabbing';
+    }
+
+    function onMove(e) {
+      if (!drag) {
+        var r2  = mc.getBoundingClientRect();
+        var p2  = ptFromEvent(e, r2);
+        var hov = cardAt(p2.x, p2.y);
+        mc.style.cursor = hov ? 'grab' : 'default';
+        return;
+      }
+      var p = ptFromEvent(e, dragRect);
+      Body.setPosition(drag.body, { x: p.x - drag.offX, y: p.y - drag.offY });
+      var now = performance.now();
+      samples.push({ x: p.x, y: p.y, t: now });
+      while (samples.length > 1 && now - samples[0].t > 120) samples.shift();
+    }
+
+    function onUp() {
+      if (!drag) return;
+      var body = drag.body;
+      drag = null;
+      mc.style.cursor = 'default';
+      body.gravityScale = 1;
+      body.frictionAir  = 0.03;
+
+      var now2   = performance.now();
+      var recent = samples.filter(function (s) { return now2 - s.t <= 80; });
+
+      if (recent.length >= 2) {
+        var a      = recent[0];
+        var b      = recent[recent.length - 1];
+        var idleMs = now2 - b.t;
+        var dtSec  = Math.max((b.t - a.t) / 1000, 0.016);
+        var rawVx  = (b.x - a.x) / dtSec;
+        var rawVy  = (b.y - a.y) / dtSec;
+        var speed  = Math.sqrt(rawVx * rawVx + rawVy * rawVy);
+
+        if (speed > 700 && idleMs < 100) {
+          var t  = Math.min((speed - 700) / 1400, 1);
+          var S  = 0.05;
+          var MV = 28;
+          Body.setVelocity(body, {
+            x: Math.max(-MV, Math.min(MV, rawVx * S * t)),
+            y: Math.max(-MV, Math.min(MV, rawVy * S * t)),
+          });
+          Body.setAngularVelocity(body, (rawVx * S * t) * 0.035);
+        }
+      }
+      samples = [];
+    }
+
+    mc.addEventListener('mousedown',  onDown);
+    mc.addEventListener('mousemove',  onMove);
+    mc.addEventListener('mouseup',    onUp);
+    mc.addEventListener('mouseleave', onUp);
+    mc.addEventListener('touchstart', function (e) { e.preventDefault(); onDown(e); }, { passive: false });
+    mc.addEventListener('touchmove',  function (e) { e.preventDefault(); onMove(e); }, { passive: false });
+    mc.addEventListener('touchend',   function (e) { e.preventDefault(); onUp();    }, { passive: false });
+    mc.addEventListener('wheel', function (e) {
+      window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+    }, { passive: true });
+  }
+
+  function spawnCards(W, H) {
+    var cols = 6;
+    var colW = W / cols;
+    var order = Array.from({ length: TOTAL_CARDS }, function (_, i) { return i; });
+    order.sort(function () { return Math.random() - 0.5; });
+
+    order.forEach(function (cardIdx, spawnIdx) {
+      setTimeout(function () {
+        var col = spawnIdx % cols;
+        var x   = colW * col + colW / 2 + (Math.random() - 0.5) * colW * 0.35;
+        x = Math.max(CARD_W / 2 + 8, Math.min(W - CARD_W / 2 - 8, x));
+
+        var body = Bodies.rectangle(x, -(CARD_H / 2 + spawnIdx * 4), CARD_W, CARD_H, {
+          label:       'card',
+          restitution: 0.2,
+          friction:    0.5,
+          frictionAir: 0.03,
+          density:     0.003,
+          chamfer:     { radius: 20 },
+          angle:       (Math.random() - 0.5) * 0.45,
+        });
+
+        Body.setVelocity(body, { x: (Math.random() - 0.5) * 2, y: Math.random() * 0.5 });
+        World.add(engine.world, body);
+
+        var el = buildCard(cardIdx);
+        root.appendChild(el);
+        domCards.push({ body: body, el: el });
+      }, spawnIdx * SPAWN_INTERVAL);
+    });
+  }
+
+  function syncLoop() {
+    for (var i = 0; i < domCards.length; i++) {
+      var dc = domCards[i];
+      var p  = dc.body.position;
+      var a  = dc.body.angle * (180 / Math.PI);
+      dc.el.style.left      = Math.round(p.x - CARD_W / 2) + 'px';
+      dc.el.style.top       = Math.round(p.y - CARD_H / 2) + 'px';
+      dc.el.style.transform = 'translateZ(0) rotate(' + a.toFixed(2) + 'deg)';
+    }
+    requestAnimationFrame(syncLoop);
+  }
+
+  function init() {
+    var W = footer.offsetWidth;
+    var H = footer.offsetHeight;
+    initPhysics(W, H);
+    spawnCards(W, H);
+    syncLoop();
+  }
+
+  var footerXsMq = window.matchMedia('(max-width: 639px)');
+
+  function checkScroll() {
+    if (hasTriggered) return;
+    if (footerXsMq.matches) {
+      if (root) root.style.display = 'none';
+      return;
+    }
+    if (root) root.style.display = '';
+    var rect = footer.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 400) {
+      hasTriggered = true;
+      setTimeout(init, 150);
+    }
+  }
+
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  footerXsMq.addEventListener('change', checkScroll);
+  checkScroll();
+})();
+</script>
+
+
+</body>
+</html>
