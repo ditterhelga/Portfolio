@@ -160,6 +160,7 @@
                 font-size: 16px;
                 color: var(--color-primary-dark);
                 text-decoration: none;
+                margin-left: 2px;
             }
 
             @media (max-width: 767px) {
@@ -380,6 +381,7 @@
             md:gap-y-8
             xl:mt-5
             xl:flex-row-reverse
+            xl:items-center
             xl:gap-x-14
             2xl:gap-x-20;
 
@@ -714,9 +716,10 @@
         }
 
         @utility card-title {
-            @apply text-primary-dark font-family-sofia font-normal text-7xl tracking-[-2px]
-            xl:mb-5
-            2xl:text-[102px];
+            @apply text-primary-dark font-family-sofia font-normal tracking-[-1px]
+            xl:mb-5;
+            font-size: 48px;
+            line-height: 1.05;
         }
 
         .card-description {
@@ -796,6 +799,29 @@
         /* #work: only image / title / CTA are links */
         #work a.work-case-card-link {
             cursor: pointer;
+        }
+
+        /* Whole card is clickable; title / image / CTA stay above and keep their hover effects */
+        #work .work-card-surface {
+            position: relative;
+        }
+
+        #work a.work-case-card-hit {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            border-radius: inherit;
+        }
+
+        #work .work-card-surface > .card-badges,
+        #work .work-card-surface > .card-content {
+            position: relative;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #work .work-card-surface a.work-case-card-link {
+            pointer-events: auto;
         }
 
         /* Work card titles: bright blue by default; darken on row hover/title focus */
@@ -1278,26 +1304,23 @@
             2xl:max-w-full 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px] 2xl:gap-y-14;
         }
 
-        /* Clip shell; image inside is taller and translates on scroll (Sequel-style pan) */
+        /* Case study cards: original width; height near natural, −64px */
         .card-image-frame {
             @apply rounded-[20px] w-full
-            max-sm:h-[460px] max-sm:aspect-auto
-            sm:h-auto sm:aspect-[460/400] sm:max-h-[538px] sm:max-w-[min(100%,618px)]
-            md:max-h-[620px] md:max-w-[min(100%,710px)]
-            xl:aspect-auto xl:h-[480px] xl:w-[552px] xl:max-h-none xl:max-w-[552px] xl:shrink-0
-            2xl:h-[586px] 2xl:w-[691px] 2xl:max-w-[691px];
+            max-sm:h-[316px] max-sm:aspect-auto
+            sm:h-[356px] sm:aspect-auto sm:max-w-[min(100%,618px)]
+            md:h-[396px] md:max-w-[min(100%,710px)]
+            xl:h-[436px] xl:w-[552px] xl:max-w-[552px] xl:shrink-0
+            2xl:h-[556px] 2xl:w-[691px] 2xl:max-w-[691px];
             position: relative;
             overflow: hidden;
         }
 
-        /* Slight vertical slack only; img fills track 1:1 like the old in-flow card-image */
         .card-image-parallax-track {
             position: absolute;
-            left: 0;
-            top: -9%;
+            inset: 0;
             width: 100%;
-            height: 118%;
-            will-change: transform;
+            height: 100%;
         }
 
         .card-image-frame .card-image {
@@ -1310,48 +1333,6 @@
             object-fit: cover;
             object-position: center;
             display: block;
-        }
-
-        /* Quray card video: no parallax, keep intrinsic aspect (1600×1034) */
-        #work .card-image-frame--native {
-            height: auto !important;
-            aspect-ratio: 1600 / 1034 !important;
-            max-height: none !important;
-        }
-
-        #work .card-image-frame--native .card-image--native {
-            position: relative;
-            inset: auto;
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            object-position: center;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            #work .card-image-frame--native:hover .card-image--native {
-                transform: none;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .card-image-parallax-track {
-                position: relative;
-                top: auto;
-                left: auto;
-                width: 100%;
-                height: 100%;
-                will-change: auto;
-            }
-
-            .card-image-frame .card-image {
-                position: relative;
-                top: auto;
-                left: auto;
-                width: 100%;
-                height: 100%;
-                max-width: none;
-            }
         }
 
 
@@ -1749,10 +1730,6 @@
                 #hero .rotating-words:hover .phrases {
                     animation: none !important;
                 }
-            }
-
-            #work .card-image-frame {
-                height: 235px !important;
             }
 
             #cards-beyond > .card-beyond:not(.card-beyond--more) > .image-wrapper {
@@ -2209,19 +2186,13 @@
             }
         }
 
-        /* Slight zoom of photo on hover (img only — parallax stays on .card-image-parallax-track). */
+        /* Slight zoom of photo on hover (Beyond Work only — case study cards stay 1:1). */
         #cards-beyond .card-beyond:not(.card-beyond--more) .image-wrapper > .image-parallax-track > img {
             transform-origin: center center;
             transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         @media (hover: hover) and (pointer: fine) {
-            #work .card-image-frame .card-image {
-                transform-origin: center center;
-                transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            }
-
-            #work .card-image-frame:hover .card-image,
             #cards-beyond .card-beyond:not(.card-beyond--more):hover .image-wrapper > .image-parallax-track > img {
                 transform: scale(1.06);
             }
@@ -2232,40 +2203,19 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            #work .card-image-frame .card-image,
             #cards-beyond .card-beyond:not(.card-beyond--more) .image-wrapper > .image-parallax-track > img {
                 transition: none;
             }
 
-            #work .card-image-frame:hover .card-image,
             #cards-beyond .card-beyond:not(.card-beyond--more):hover .image-wrapper > .image-parallax-track > img,
             #cards-beyond .card-beyond:not(.card-beyond--more):focus-within .image-wrapper > .image-parallax-track > img {
                 transform: none;
             }
         }
 
-        /* Blue overlay on work card images — fades in on hover */
+        /* Work card images: no blue hover overlay — VIEW cursor only */
         .card-image-overlay {
-            position: absolute;
-            inset: 0;
-            background-color: #0016F2;
-            mix-blend-mode: multiply;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-            transition: opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            .card-image-frame:hover .card-image-overlay {
-                opacity: 0.8;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .card-image-overlay {
-                transition: none;
-            }
+            display: none;
         }
 
         /* Beyond Work — blue multiply overlay at rest; clears when hovering / focusing anywhere on the card row */
@@ -2593,9 +2543,8 @@
             <h1 id="about-systems-lede" class="section-header intro-scroll-reveal">I create systems people want to use, not just tolerate.</h1>
 
             <div class="flex flex-col gap-y-2">
-                <p class="card-text">I’m Olga, a Product Designer based in Amsterdam.</p>
-                <p class="card-text">Over the past decade, I’ve turned complex, frustrating systems into intuitive products
-                    that people enjoy using — bringing calm to busy environments and giving people the confidence to do their jobs well.</p>
+                <p class="card-text">Hi, I'm Olga. I usually arrive before the product exists: no flows, no design system, sometimes just hardware and a rough idea of who will use it.</p>
+                <p class="card-text">Point of sale, dispatch, payments, and lately one musical instrument, which is the single exception to the line above. The oldest system I built this way has been running unchanged for ten years.</p>
             </div>
 
             <a href="about.html" class="button-about no-underline text-inherit" aria-label="About me" hidden>
@@ -2675,10 +2624,10 @@
 
             <div class="flex flex-col gap-y-6 xl:gap-y-12">
                 <h1 id="work-pos-lede" class="section-header intro-scroll-reveal">
-                    From POS systems and retail operations tools to logistics dashboards and enterprise software, I design products for environments where speed, clarity, and trust matter.
+                    From supermarket checkouts to dispatch systems and enterprise tools, I design products for environments where a mistake costs money or time.
                 </h1>
                 <p class="card-text">
-                    I’ve built products that cut training time by <span class="font-medium">40%</span>, reduced operational errors by over <span class="font-medium">70%</span>, and increased sales by <span class="font-medium">50%</span>. Many of them are still in use years later, quietly making everyday work simpler for the people who use them every day.
+                    Russia's first touchscreen self-checkouts, now standing in Lenta, SPAR and OBI. A cashless payment system running bars at festivals and stadiums worldwide. A dispatch platform for 700 vehicles and 150 operators, replacing phone calls and one shared WhatsApp group. Training and operations platforms for a national restaurant network. On most of these, the design team was me.
                 </p>
             </div>
         </div>
@@ -2688,36 +2637,29 @@
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
-                        <span class="badge">Product design</span>
-                        <span class="badge">Music hardware & software</span>
-                        <span class="badge">Startup</span>
+                        <span class="badge">Sole designer</span>
+                        <span class="badge">0→1 product</span>
+                        <span class="badge">Hardware + software</span>
+                        <span class="badge">Built in code</span>
+                        <span class="badge">User testing</span>
                     </div>
 
                     <div class="group card-content">
-                        <a href="quray.html" class="work-case-card-link block w-full shrink-0 sm:w-auto sm:max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" aria-label="Open Quray case study — project video">
-                            <div class="card-image-frame card-image-frame--native">
-                                <video class="card-image card-image--native"
-                                       src="assets/videos/Quray-main.mov"
-                                       poster="assets/images/Quray-main.png"
-                                       autoplay
-                                       loop
-                                       muted
-                                       playsinline
-                                       preload="metadata"
-                                       width="1600"
-                                       height="1034"
-                                       aria-label="Quray Project"></video>
+                        <a href="quray.html" class="work-case-card-link block w-full shrink-0 sm:w-auto sm:max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" aria-label="Open Quray case study — project image">
+                            <div class="card-image-frame">
+                                <div class="card-image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/Quray-main.png">
+                                    <img class="card-image lqip-fadein" src="assets/images/Quray-main.png" alt="Quray Project" loading="lazy"/>
+                                </div>
                                 <div class="card-image-overlay" aria-hidden="true"></div>
                             </div>
                         </a>
                         <div class="card-description">
                             <a href="quray.html" class="work-case-card-link block w-fit max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
-                                <h3 class="card-title intro-scroll-reveal">Quray</h3>
+                                <h3 class="card-title intro-scroll-reveal">Software for an instrument played in the air</h3>
                             </a>
 
                             <div class="card-paragraph">
-                                <p class="card-text">Designing the <span class="font-medium">full product experience</span> for a touchless musical instrument, from configurator to on-device performance flow.</p>
-                                <p class="card-text">Research, product architecture, interface design, and a working prototype built in code. <span class="font-medium">Currently in user testing.</span></p>
+                                <p class="card-text">Quray turns hand movement into MIDI and CV, but the playing surface is invisible and the device makes no sound on its own. My job is to make the configurator and the physical instrument behave like the same product.</p>
                             </div>
 
                             <a href="quray.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
@@ -2734,6 +2676,7 @@
 
                         </div>
                     </div>
+                    <a class="work-case-card-hit" href="quray.html" aria-hidden="true" tabindex="-1"></a>
                     </div>
 
                 </div>
@@ -2743,9 +2686,11 @@
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
-                        <span class="badge">Product design</span>
-                        <span class="badge">Startup</span>
-                        <span class="badge">RFID Payments For Live Events</span>
+                        <span class="badge">Sole designer</span>
+                        <span class="badge">RFID hardware + software</span>
+                        <span class="badge">Festivals + stadiums</span>
+                        <span class="badge">6-year product evolution</span>
+                        <span class="badge">Running worldwide</span>
                     </div>
 
                     <div class="group card-content">
@@ -2759,12 +2704,11 @@
                         </a>
                         <div class="card-description">
                             <a href="billfold.html" class="work-case-card-link block w-fit max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
-                                <h3 class="card-title intro-scroll-reveal">Billfold POS</h3>
+                                <h3 class="card-title intro-scroll-reveal">RFID payments for the festival bar rush</h3>
                             </a>
 
                             <div class="card-paragraph">
-                                <p class="card-text">Designed a complete POS ecosystem that keeps lines moving and revenue flowing when every second counts.</p>
-                                <p class="card-text"><b>Impact:</b> increased sales up to <span class="font-medium">50%</span> at major events • up to <span class="font-medium">60%</span> higher spend per person • <span class="font-medium">23%</span> more transactions • now deployed worldwide.</p>
+                                <p class="card-text">I designed the system from wristband registration to dual-screen POS. Staff had almost no training; guests barely looked at the screen. Every order appeared live before the wristband was charged, and the bar kept selling when Wi-Fi dropped.</p>
                             </div>
 
                             <a href="billfold.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
@@ -2780,6 +2724,7 @@
                             </a>
                         </div>
                     </div>
+                    <a class="work-case-card-hit" href="billfold.html" aria-hidden="true" tabindex="-1"></a>
                     </div>
 
                 </div>
@@ -2789,8 +2734,10 @@
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
-                        <span class="badge">Product Design</span>
-                        <span class="badge">Logistics & Customer Operations</span>
+                        <span class="badge">Sole designer + Team lead</span>
+                        <span class="badge">Built the product team</span>
+                        <span class="badge">Multi-product ecosystem</span>
+                        <span class="badge">700 vehicles · 150 operators</span>
                     </div>
 
                     <div class="group card-content">
@@ -2804,11 +2751,10 @@
                         </a>
                         <div class="card-description">
                             <a href="gazelkin.html" class="work-case-card-link block w-fit max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
-                                <h3 class="card-title intro-scroll-reveal">Gazelkin</h3>
+                                <h3 class="card-title intro-scroll-reveal">Rebuilding the product ecosystem of a 700-vehicle delivery company</h3>
                             </a>
                             <div class="card-paragraph">
-                                <p class="card-text">Built a multi-product logistics ecosystem including driver and customer apps, plus end-to-end tools for dispatchers and operators.</p>
-                                <p class="card-text"><b>Impact:</b> <span class="font-medium">45%</span> fewer dispatcher calls • <span class="font-medium">92%</span> driver app adoption in <span class="font-medium">3 weeks</span> • <span class="font-medium">65%</span> fewer customer callbacks • <span class="font-medium">40%</span> faster order processing.</p>
+                                <p class="card-text">As the sole product designer, I redesigned the ecosystem across customer products, operator tools, logistics and the driver app. The same team could handle more orders, with 70% fewer delivery errors.</p>
                             </div>
                             <a href="gazelkin.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
                                 <span class="work-card-cta">
@@ -2823,6 +2769,7 @@
                             </a>
                         </div>
                     </div>
+                    <a class="work-case-card-hit" href="gazelkin.html" aria-hidden="true" tabindex="-1"></a>
                     </div>
 
                 </div>
@@ -2832,8 +2779,11 @@
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
-                        <span class="badge">End-to-end ux design</span>
-                        <span class="badge">Restaurant training and operations</span>
+                        <span class="badge">Sole designer</span>
+                        <span class="badge">Two platforms</span>
+                        <span class="badge">Training + franchise operations</span>
+                        <span class="badge">6,000+ employees</span>
+                        <span class="badge">400+ restaurants</span>
                     </div>
 
                     <div class="group card-content">
@@ -2847,12 +2797,11 @@
                         </a>
                         <div class="card-description">
                             <a href="subway.html" class="work-case-card-link block w-fit max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
-                                <h3 class="card-title intro-scroll-reveal">Subway</h3>
+                                <h3 class="card-title intro-scroll-reveal">Two platforms for Subway: training staff and opening stores</h3>
                             </a>
 
                             <div class="card-paragraph">
-                                <p class="card-text">Led the design of two platforms that simplify employee learning and support franchisees from launch to growth.</p>
-                                <p class="card-text"><b>Impact:</b> <span class="font-medium">40%</span> faster employee onboarding • <span class="font-medium">60%</span> higher certification completion • <span class="font-medium">up to 30%</span> faster store launches • significant reduction in franchisee support calls.</p>
+                                <p class="card-text">Employee training lived in manuals and classroom sessions. Opening a restaurant meant PDFs, emails and repeated calls to HQ. I turned both into step-by-step digital products for people doing it for the first time.</p>
                             </div>
 
                             <a href="subway.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
@@ -2869,6 +2818,7 @@
 
                         </div>
                     </div>
+                    <a class="work-case-card-hit" href="subway.html" aria-hidden="true" tabindex="-1"></a>
                     </div>
 
                 </div>
@@ -2878,9 +2828,11 @@
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
-                        <span class="badge">Leadership</span>
-                        <span class="badge">Product Design</span>
-                        <span class="badge">High-volume Retail Systems</span>
+                        <span class="badge">Sole designer → Team lead</span>
+                        <span class="badge">Touchscreen POS</span>
+                        <span class="badge">Hardware + software</span>
+                        <span class="badge">National rollout</span>
+                        <span class="badge">Still in use</span>
                     </div>
 
                     <div class="group card-content">
@@ -2894,12 +2846,11 @@
                         </a>
                         <div class="card-description">
                             <a href="dreamkas.html" class="work-case-card-link block w-fit max-w-full no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
-                                <h3 class="card-title intro-scroll-reveal">Dreamkas POS</h3>
+                                <h3 class="card-title intro-scroll-reveal">A touchscreen POS cashiers could learn in five minutes</h3>
                             </a>
 
                             <div class="card-paragraph">
-                                <p class="card-text">Led the design of POS systems powering high-volume retail across major supermarket chains.</p>
-                                <p class="card-text"><b>Impact:</b> <span class="font-medium">25%</span> faster checkout speed • <span class="font-medium">40%</span> fewer user errors •  <span class="font-medium">60%</span> less cashier training time • deployed across major national retailers including Lenta, SPAR, OBI.</p>
+                                <p class="card-text">New fiscal rules pushed thousands of businesses from button-based registers to unfamiliar touchscreens almost overnight. I defined the interaction model from scratch and tested it in real stores. Many of the same flows are still running years later.</p>
                             </div>
                             <a href="dreamkas.html" class="work-case-card-link card-detail no-underline text-inherit focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]">
                                 <span class="work-card-cta">
@@ -2914,6 +2865,7 @@
                             </a>
                         </div>
                     </div>
+                    <a class="work-case-card-hit" href="dreamkas.html" aria-hidden="true" tabindex="-1"></a>
                     </div>
                 </div>
             </div>
@@ -2974,9 +2926,9 @@
                             <span class="badge">AI Experiments</span>
                         </div>
 
-                        <h2 class="beyond-card-title intro-scroll-reveal">Part designer. Part builder. Fully AI-native.</h2>
+                        <h2 class="beyond-card-title intro-scroll-reveal">Some ideas need working software.</h2>
 
-                        <p class="card-text">I’ve been deep in the AI rabbit hole — experimenting, breaking things, and figuring out what actually works. The result is a set of real projects built with real tools.</p>
+                        <p class="card-text">I use AI and code to test ideas beyond the clickable prototype. Some experiments stay experiments. Others turn into small products I actually use.</p>
 
                         <span class="beyond-card-cta-link card-detail text-inherit">
                             <span class="work-card-cta">
@@ -3377,12 +3329,12 @@
 
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        /** Scroll-scrubbed vertical pan on card images (animates the track; img stays 100% cover inside). */
+        /** Scroll-scrubbed vertical pan on Beyond Work images (case study cards show full asset, no pan). */
         function setupCardImageParallax() {
             if (reducedMotion) return;
 
             const tracks = gsap.utils.toArray(
-                "#work .card-image-parallax-track, #cards-beyond .image-wrapper > .image-parallax-track"
+                "#cards-beyond .image-wrapper > .image-parallax-track"
             );
 
             tracks.forEach((track) => {

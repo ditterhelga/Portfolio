@@ -148,6 +148,7 @@
                 font-size: 16px;
                 color: var(--color-primary-dark);
                 text-decoration: none;
+                margin-left: 2px;
             }
 
             @media (max-width: 767px) {
@@ -892,7 +893,6 @@
                 <a href="#project-2" data-target="project-2" class="case-side-nav-link">Mouth Ninja</a>
                 <a href="#project-3" data-target="project-3" class="case-side-nav-link">Peppered.design</a>
                 <a href="#project-4" data-target="project-4" class="case-side-nav-link">Leobank</a>
-                <a href="#project-5" data-target="project-5" class="case-side-nav-link">Coming soon</a>
             </nav>
         </aside>
 
@@ -910,7 +910,7 @@
                         <span aria-hidden="true">/</span>
                         <span class="text-[#8A8A8A]">AI Experiments</span>
                     </div>
-                    <h1 class="max-sm:order-2 section-header">Most designers design. I decided to build.</h1>
+                    <h1 class="max-sm:order-2 section-header">Things I built because I needed them.</h1>
                     <p class="max-sm:order-4 font-light text-5/8">These are personal projects I actually built: a sleep app, a therapy tracker, this website, and a pocket money app built with my son over breakfast. Real problems, real code, real outcomes.</p>
                 </div>
             </div>
@@ -1148,35 +1148,6 @@
                 </div>
             </div>
         </section>
-        <section id="project-5" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
-            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
-                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
-                        <h2 class="section-header w-full">The tool I got tired of waiting for.</h2>
-                    </div>
-
-                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">The tool I got tired of waiting for.</h2>
-
-                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
-                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-4 md:order-1 2xl:min-w-0">
-                            <p class="font-light text-5/8">The worst moment in AI-assisted design: you've built up the perfect context in one tool, then you need to switch. Open a new chat. Start over. Explain everything again. Every reference, every constraint, every decision you've already made.</p>
-                            <p class="font-light text-5/8">The pieces to solve this exist. They just don't connect. So I'm building the connection — a personal tool where project context lives once: palette, references, tone, constraints, moodboard. One button exports everything to any AI tool in the format it actually understands. A prompt for Claude or ChatGPT, a .cursorrules file for Cursor, a CLAUDE.md for Claude Code.</p>
-                        </div>
-
-                        <div class="dimme-built-copy w-full min-w-0 space-y-3 md:space-y-4 order-5 md:order-2">
-                            <p class="font-light text-5/8">Building it now. Will open source it when it's ready.</p>
-                        </div>
-
-                        <div class="order-3 md:order-3 min-w-0 overflow-hidden rounded-[20px]">
-                            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/coming-soon.png"><img src="assets/images/coming-soon.png"
-                                 alt="Coming soon project preview"
-                                 class="overview-img-1 mt-0 w-full rounded-[20px] object-cover aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full lqip-fadein"/></div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
     </main>
     </div>
 
@@ -1358,9 +1329,9 @@
         const sideNav = document.getElementById("case-side-nav");
         const overviewSection = document.getElementById("dimme-app");
         const shellEl = document.querySelector(".experiments-shell");
-        const reflectionsSection = document.getElementById("project-5") || document.getElementById("project-4") || document.getElementById("project-3");
-        const reflectionsCard = document.querySelector("#project-5 .lqip-parallax-host");
-        const sectionIds = ["dimme-app", "project-2", "project-3", "project-4", "project-5"];
+        const reflectionsSection = document.getElementById("project-4") || document.getElementById("project-3");
+        const reflectionsCard = document.querySelector("#project-4 .lqip-parallax-host");
+        const sectionIds = ["dimme-app", "project-2", "project-3", "project-4"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
         const sideNavIndicator = sideNav ? sideNav.querySelector(".case-side-nav-indicator") : null;

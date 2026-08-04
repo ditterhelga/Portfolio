@@ -132,6 +132,7 @@
                 font-size: 16px;
                 color: var(--color-primary-dark);
                 text-decoration: none;
+                margin-left: 2px;
             }
 
             @media (max-width: 767px) {
@@ -345,50 +346,120 @@
             line-height: 32px;
         }
 
-        /* Know Me Better — portrait swaps to hover still (no fade) */
-        .about-portrait-wrap {
+        /* Know Me Better — same layered portrait + cursor tilt as index */
+        .about-portrait-block {
+            position: relative;
+            isolation: isolate;
+            flex-shrink: 0;
+            width: min(100%, 400px);
+        }
+
+        .about-portrait-frame {
             position: relative;
             overflow: hidden;
             border-radius: 20px;
+            aspect-ratio: 1;
+            width: 100%;
         }
 
-        .about-portrait-wrap .about-portrait {
-            display: block;
+        .about-portrait-stage {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            perspective: 880px;
+            perspective-origin: 50% 42%;
+        }
+
+        .about-portrait-tilt {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: perspective(880px) rotateX(0deg) rotateY(0deg);
+            will-change: transform;
+        }
+
+        .about-portrait-stack {
+            position: absolute;
+            inset: -4%;
+            width: auto;
+            height: auto;
+            transform-style: preserve-3d;
+        }
+
+        .about-portrait-layer {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top;
-            border-radius: 20px;
-        }
-
-        .about-portrait-wrap .about-portrait--hover {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: none;
+            object-position: 50% 40%;
+            max-width: none;
             pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            will-change: transform;
         }
 
-        @media (hover: hover) and (pointer: fine) {
-            .about-portrait-wrap:hover .about-portrait--hover {
-                opacity: 1;
-            }
+        .about-portrait-back {
+            z-index: 1;
+            transform: scale(1);
         }
 
-        /* Tap / coarse-pointer toggle (JS adds --tapped); not limited to xs — tablets need this too */
-        .about-portrait-wrap.about-portrait-wrap--tapped .about-portrait--hover {
-            opacity: 1;
+        .about-portrait-front {
+            z-index: 2;
+            transform: scale(0.98);
+            transform-origin: 50% 40%;
         }
 
-        /* md+: keyboard focus shows hover still (same alternate as XS tap) */
-        @media (min-width: 640px) {
-            .about-portrait-wrap:focus-visible .about-portrait--hover {
-                opacity: 1;
-            }
+        /* Caption slides out from the top of the portrait (mirror of index-old bottom tray) */
+        .about-portrait-caption-tray {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 100%;
+            overflow: hidden;
+            max-height: 0;
+            margin-bottom: 0;
+            z-index: 3;
+            transition:
+                max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                margin-bottom 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .about-portrait-caption-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+            background-color: rgba(253, 228, 223, 0.6);
+            border-radius: 20px;
+            color: rgba(0, 22, 242, 0.7);
+            font-family: var(--font-family-inter);
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+            font-weight: 300;
+            font-style: italic;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .about-portrait-block:hover .about-portrait-caption-tray,
+        .about-portrait-block:focus-within .about-portrait-caption-tray {
+            max-height: 12rem;
+            margin-bottom: 8px;
+        }
+
+        .about-portrait-block:hover .about-portrait-caption-inner,
+        .about-portrait-block:focus-within .about-portrait-caption-inner {
+            transform: translateY(0);
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .about-portrait-wrap .about-portrait--hover {
+            .about-portrait-caption-tray,
+            .about-portrait-caption-inner {
                 transition: none;
             }
         }
@@ -1274,41 +1345,8 @@
             background-image: none;
         }
 
-        .about-portrait-wrap.lqip-portrait-host {
-            background-image: var(--lqip);
-            background-size: cover;
-            background-position: top center;
-            background-repeat: no-repeat;
-        }
-
-        .about-portrait-wrap.lqip-portrait-host .about-portrait--base.lqip-fadein {
-            opacity: 0;
-            transition: opacity 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .about-portrait-wrap.lqip-portrait-host .about-portrait--base.lqip-fadein.lqip-loaded {
-            opacity: 1;
-        }
-
-        .about-portrait-wrap.lqip-portrait-host:has(.about-portrait--base.lqip-fadein.lqip-loaded) {
-            background-image: none;
-        }
-
-        .about-portrait-hover-slot {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-            border-radius: inherit;
-        }
-
-        .about-portrait-hover-slot .about-portrait--hover {
-            border-radius: inherit;
-        }
-
         @media (prefers-reduced-motion: reduce) {
-            .lqip-parallax-host > img.lqip-fadein,
-            .about-portrait-wrap.lqip-portrait-host .about-portrait--base.lqip-fadein {
+            .lqip-parallax-host > img.lqip-fadein {
                 transition: none;
             }
         }
@@ -1999,21 +2037,32 @@
 
         <div class="flex flex-col gap-y-8 max-sm:gap-y-6 md:gap-y-12">
             <div class="flex flex-col gap-y-12 md:flex-row md:items-center md:justify-center md:gap-x-10 md:gap-y-0 xl:gap-x-14">
-            <div class="about-portrait-wrap lqip-portrait-host max-sm:order-2 max-sm:mx-auto w-[400px] h-[400px] max-w-full md:shrink-0 rounded-[20px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0016F2]" data-lqip-ref="assets/images/About-image.png" tabindex="0" role="button" aria-pressed="false" aria-label="Portrait of Olga Pertseva; tap to swap alternate photo">
-                <img src="assets/images/About-image.png"
-                     alt="Olga Pertseva"
-                     class="about-portrait about-portrait--base lqip-fadein"
-                     width="400"
-                     height="400"
-                     decoding="async"/>
-                <div class="about-portrait-hover-slot">
-                    <img src="assets/images/About-image-hover.png"
-                         alt=""
-                         class="about-portrait about-portrait--hover"
-                         width="400"
-                         height="400"
-                         decoding="async"
-                         aria-hidden="true"/>
+            <div class="about-portrait-block max-sm:order-2 max-sm:mx-auto">
+                <div class="about-portrait-caption-tray" aria-hidden="true">
+                    <div class="about-portrait-caption-inner">
+                        <span>Why peppers? My surname means pepper. Obviously.</span>
+                    </div>
+                </div>
+                <div class="about-portrait-frame">
+                    <div class="about-portrait-stage">
+                        <div class="about-portrait-tilt">
+                            <div class="about-portrait-stack">
+                                <img class="about-portrait-layer about-portrait-back"
+                                     src="assets/images/me-pepper-back.png"
+                                     alt=""
+                                     width="1094"
+                                     height="1094"
+                                     decoding="async"
+                                     aria-hidden="true"/>
+                                <img class="about-portrait-layer about-portrait-front"
+                                     src="assets/images/me-pepper-front.png"
+                                     alt="Olga Pertseva"
+                                     width="1094"
+                                     height="1094"
+                                     decoding="async"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2256,9 +2305,9 @@
                             <span class="badge">AI Experiments</span>
                         </div>
 
-                        <h2 class="beyond-card-title intro-scroll-reveal">Part designer. Part builder. Fully AI-native.</h2>
+                        <h2 class="beyond-card-title intro-scroll-reveal">Some ideas need working software.</h2>
 
-                        <p class="card-text">I’ve been deep in the AI rabbit hole — experimenting, breaking things, and figuring out what actually works. The result is a set of real projects built with real tools.</p>
+                        <p class="card-text">I use AI and code to test ideas beyond the clickable prototype. Some experiments stay experiments. Others turn into small products I actually use.</p>
 
                         <span class="beyond-card-cta-link card-detail text-inherit">
                             <span class="work-card-cta">
@@ -2501,37 +2550,68 @@
             document.documentElement.classList.add('is-safari');
         }
 
-        // About portrait: pure mouse desktop uses CSS :hover only; touch / hybrid devices toggle base ↔ hover on tap.
-        const aboutPortraitWrap = document.querySelector(".about-portrait-wrap");
-        const aboutPortraitFineHoverMq = window.matchMedia("(hover: hover) and (pointer: fine)");
-        function aboutPortraitUseTapToggle() {
-            if (!aboutPortraitFineHoverMq.matches) return true;
-            return typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0;
-        }
-        if (aboutPortraitWrap) {
-            const syncAboutPortraitTapState = () => {
-                if (!aboutPortraitUseTapToggle()) {
-                    aboutPortraitWrap.classList.remove("about-portrait-wrap--tapped");
-                    aboutPortraitWrap.setAttribute("aria-pressed", "false");
-                }
-            };
+        // About portrait: face / hand parallax + subtle 3D tilt toward cursor (same as index)
+        const portraitBlock = document.querySelector(".about-portrait-block");
+        const portraitFrame = portraitBlock?.querySelector(".about-portrait-frame");
+        const portraitTilt = portraitBlock?.querySelector(".about-portrait-tilt");
+        const portraitBack = portraitBlock?.querySelector(".about-portrait-back");
+        const portraitFront = portraitBlock?.querySelector(".about-portrait-front");
+        const portraitMotionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const portraitPointerFine = window.matchMedia("(pointer: fine)").matches;
 
-            aboutPortraitWrap.addEventListener("click", () => {
-                if (!aboutPortraitUseTapToggle()) return;
-                var next = !aboutPortraitWrap.classList.contains("about-portrait-wrap--tapped");
-                aboutPortraitWrap.classList.toggle("about-portrait-wrap--tapped", next);
-                aboutPortraitWrap.setAttribute("aria-pressed", next ? "true" : "false");
+        if (portraitBlock && portraitFrame && portraitTilt && portraitBack && portraitFront && portraitMotionOk && portraitPointerFine) {
+            const easeOut = "cubic-bezier(0.22, 1, 0.36, 1)";
+            const tiltMaxY = 4;
+            const tiltMaxX = 3;
+            const parallaxBack = 2.5;
+            const parallaxFront = 3.5;
+            const layerScaleBack = 1;
+            const layerScaleFront = 0.98;
+
+            function clamp(n, lo, hi) {
+                return Math.min(hi, Math.max(lo, n));
+            }
+
+            function clearPortraitTransitions() {
+                portraitTilt.style.transition = "";
+                portraitBack.style.transition = "";
+                portraitFront.style.transition = "";
+            }
+
+            function setPortraitPose(nx, ny) {
+                const rx = -ny * tiltMaxX;
+                const ry = nx * tiltMaxY;
+                portraitTilt.style.transform = `perspective(880px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+                portraitBack.style.transform =
+                    `translate3d(${nx * -parallaxBack}px, ${ny * -parallaxBack * 0.9}px, 0) scale(${layerScaleBack})`;
+                portraitFront.style.transform =
+                    `translate3d(${nx * parallaxFront}px, ${ny * parallaxFront * 0.9}px, 0) scale(${layerScaleFront})`;
+            }
+
+            function resetPortraitPose() {
+                portraitTilt.style.transition = `transform 0.5s ${easeOut}`;
+                portraitBack.style.transition = `transform 0.5s ${easeOut}`;
+                portraitFront.style.transition = `transform 0.5s ${easeOut}`;
+                portraitTilt.style.transform = "perspective(880px) rotateX(0deg) rotateY(0deg)";
+                portraitBack.style.transform = `translate3d(0, 0, 0) scale(${layerScaleBack})`;
+                portraitFront.style.transform = `translate3d(0, 0, 0) scale(${layerScaleFront})`;
+                const onEnd = (e) => {
+                    if (e.propertyName !== "transform") return;
+                    portraitTilt.removeEventListener("transitionend", onEnd);
+                    clearPortraitTransitions();
+                };
+                portraitTilt.addEventListener("transitionend", onEnd);
+            }
+
+            portraitBlock.addEventListener("mousemove", (e) => {
+                const rect = portraitFrame.getBoundingClientRect();
+                const nx = clamp(((e.clientX - rect.left) / rect.width) * 2 - 1, -1, 1);
+                const ny = clamp(((e.clientY - rect.top) / rect.height) * 2 - 1, -1, 1);
+                clearPortraitTransitions();
+                setPortraitPose(nx, ny);
             });
 
-            aboutPortraitWrap.addEventListener("keydown", (e) => {
-                if (!aboutPortraitUseTapToggle()) return;
-                if (e.key !== "Enter" && e.key !== " ") return;
-                e.preventDefault();
-                aboutPortraitWrap.click();
-            });
-
-            aboutPortraitFineHoverMq.addEventListener("change", syncAboutPortraitTapState);
-            syncAboutPortraitTapState();
+            portraitBlock.addEventListener("mouseleave", resetPortraitPose);
         }
 
         // Burger menu (identical to other pages)
