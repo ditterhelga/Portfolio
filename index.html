@@ -1746,17 +1746,17 @@
                 }
             }
 
-            /* Portrait sits under “product designer / With …” then about copy follows */
+            /* Portrait off on xs; stack title + copy closer under the header */
+            #hero {
+                margin-top: -1.5rem !important;
+            }
+
             #hero + #about {
-                margin-top: calc(24px - 4.5rem);
+                margin-top: calc(20px - 4.5rem);
             }
 
             #about > .about-portrait-block {
-                order: -1;
-                width: 182px !important;
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
-                align-self: flex-start;
+                display: none !important;
             }
 
             #about .button-about {
