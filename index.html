@@ -1704,6 +1704,14 @@
 
         /* Footer — xs: hide physics cards layer, single column, tighter padding */
         @media (max-width: 639px) {
+            #hero .hero-badges {
+                display: none !important;
+            }
+
+            #work .card-badges {
+                display: none !important;
+            }
+
             #hero .mask-screen {
                 mix-blend-mode: normal !important;
                 background: transparent !important;
@@ -1732,6 +1740,23 @@
                 }
             }
 
+            /* Portrait sits under “product designer / With …” then about copy follows */
+            #hero + #about {
+                margin-top: calc(24px - 4.5rem);
+            }
+
+            #about > .about-portrait-block {
+                order: -1;
+                width: 182px !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                align-self: flex-start;
+            }
+
+            #about .button-about {
+                margin-left: 0 !important;
+            }
+
             #cards-beyond > .card-beyond:not(.card-beyond--more) > .image-wrapper {
                 height: 235px !important;
             }
@@ -1748,14 +1773,6 @@
 
             #cards-beyond .card-beyond:not(.card-beyond--more) .beyond-image-overlay {
                 opacity: 0 !important;
-            }
-
-            #about .about-portrait-block {
-                width: 182px !important;
-            }
-
-            #about .button-about {
-                margin-left: 12rem !important;
             }
 
             #footer-match.site-footer {
