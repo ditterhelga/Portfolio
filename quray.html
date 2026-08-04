@@ -2592,7 +2592,7 @@
                         Flow 05 — creating a new preset.
                         <a href="https://whimsical.com/olga6695/flow-05-create-new-preset-zone-editor-CnrYjxqSBZ2LtqWX8TWkmN"
                            target="_blank" rel="noopener noreferrer"
-                           class="underline decoration-line-soft underline-offset-4 transition-colors duration-200 hover:text-primary-light hover:decoration-primary-light">Open the full flow in Whimsical</a>
+                           class="text-[#3B47C2] underline decoration-[#3B47C2] underline-offset-2 hover:text-[#0016F2] hover:decoration-[#0016F2]">Open the full flow in Whimsical →</a>
                     </p>
                     <ol class="mt-8 grid grid-cols-1 gap-x-10 gap-y-5 xl:mt-10 xl:grid-cols-2 xl:grid-flow-col xl:grid-rows-3 xl:gap-y-6">
                         <li class="flex min-w-0 gap-x-3">
@@ -3551,7 +3551,7 @@
             .quote-card:hover .quote-card__toggle { pointer-events: none; }
         }
     </style>
-    <div class="full-bleed bg-[#FFF2D7] h-[128px] flex items-center px-6 sm:px-8 md:px-10 xl:px-0 2xl:px-0">
+    <div id="adjacent-projects" class="full-bleed bg-[#FFF2D7] h-[128px] flex items-center px-6 sm:px-8 md:px-10 xl:px-0 2xl:px-0">
         <div class="w-full max-w-[1280px] 2xl:max-w-[1440px] mx-auto flex items-center justify-between xl:px-6 2xl:px-0">
             <a href="dreamkas.html" class="flex items-center gap-x-[16px] no-underline group" aria-label="Previous project: Dreamkas POS">
                 <span class="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-full bg-[#0007B2] transition-all duration-300 ease-out group-hover:bg-accent-yellow group-hover:scale-110">
@@ -3954,7 +3954,7 @@
         const contextSection = document.getElementById("context");
         const contextCard = contextSection ? contextSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
         const reflectionsSection = document.getElementById("reflections");
-        const nextProjectSection = document.getElementById("next-project");
+        const adjacentProjects = document.getElementById("adjacent-projects");
         const sectionIds = ["summary", "context", "challenge", "flows", "architecture-model", "status", "reflections"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
@@ -4164,10 +4164,10 @@
 
                 const cardRect = contextCard.getBoundingClientRect();
                 const navHeight = sideNav.offsetHeight;
-                const nextProjectStop = nextProjectSection
-                    ? absTop(nextProjectSection) - navHeight - 64
+                const adjacentStop = adjacentProjects
+                    ? absTop(adjacentProjects) - navHeight - 64
                     : document.documentElement.scrollHeight - navHeight - 64;
-                const maxDocTop = Math.max(initialDocTop, nextProjectStop);
+                const maxDocTop = Math.max(initialDocTop, adjacentStop);
                 const stickyDocTop = scrollY + STICKY_OFFSET;
                 setActiveLink(scrollY);
                 let preferredDocTop = stickyDocTop;
