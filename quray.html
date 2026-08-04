@@ -1522,7 +1522,7 @@
                         <div class="quray-hero-video relative w-full max-w-[1280px] overflow-hidden rounded-[20px] aspect-[1168/616] 2xl:max-w-[1440px] bg-[#0a0a12]">
                             <iframe id="quray-hero-yt"
                                     class="absolute inset-0 z-0 h-full w-full border-0"
-                                    src="https://www.youtube-nocookie.com/embed/WFil0JYZOVc?autoplay=1&mute=1&start=285&controls=0&modestbranding=1&rel=0&playsinline=1&fs=0&iv_load_policy=3&disablekb=1&enablejsapi=1"
+                                    src="https://www.youtube-nocookie.com/embed/WFil0JYZOVc?autoplay=1&mute=1&start=285&end=705&controls=0&modestbranding=1&rel=0&playsinline=1&fs=0&iv_load_policy=3&disablekb=1&enablejsapi=1"
                                     title="Quray gestural music instrument"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowfullscreen
@@ -2523,9 +2523,11 @@
 
             <div class="w-full overflow-hidden rounded-[20px] bg-surface-muted xl:max-w-[856px] 2xl:max-w-[1048px]">
                 <div class="flex flex-col md:grid md:grid-cols-[300px_minmax(0,1fr)] xl:grid-cols-[360px_minmax(0,1fr)]">
-                    <img src="assets/images/team-quray.png"
-                         alt="Reviewing a flow document with the team on a call"
-                         class="h-[220px] w-full object-cover md:h-full md:min-h-[340px]" />
+                    <div class="box-border flex h-[220px] p-4 md:h-full md:min-h-[300px]">
+                        <img src="assets/images/team-quray.png"
+                             alt="Reviewing a flow document with the team on a call"
+                             class="h-full w-full rounded-[12px] object-cover" />
+                    </div>
                     <div class="flex flex-col justify-center gap-y-5 px-8 py-10 md:px-10 md:py-12 xl:px-12 xl:py-14">
                         <p class="font-family-inter font-light text-[16px]/[24px] text-text-primary">The team was small and asynchronous. Important context was scattered across messages, and broad product discussions rarely ended with a clear answer.</p>
                         <p class="font-family-inter font-light text-[16px]/[24px] text-text-primary">So instead of producing more research documents, I wrote flows: user steps, interface behaviour, system behaviour, failure states and open questions, all on one page.</p>
@@ -3144,11 +3146,12 @@
                     <h2 class="section-header w-full">Notes from the middle</h2>
                 </div>
 
-                <div class="overview-text-1 font-light text-5/8 min-w-0 xl:col-start-1 xl:row-start-2 xl:max-w-[856px] 2xl:col-start-1 2xl:row-start-2 2xl:max-w-[1048px]">
+                <div class="flex w-full min-w-0 flex-col gap-y-8 md:gap-y-6 xl:col-start-1 xl:row-start-2 xl:gap-y-8 2xl:col-start-1 2xl:row-start-2 2xl:gap-y-[40px]">
+                <div class="overview-text-1 font-light text-5/8 min-w-0 xl:max-w-[856px] 2xl:max-w-[1048px]">
                     <p class="min-w-0">The project is not finished, so there are no launch metrics here and no field research yet. What it did give me was a reason to rebuild how I work: research, prototyping and documentation all moved into an AI-assisted process, and that turned out to demand more judgement rather than less. These are the notes I would keep.</p>
                 </div>
 
-                <div class="flex w-full flex-col border-t border-line-soft xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3">
+                <div class="flex w-full flex-col border-t border-line-soft">
 
                     <div class="border-b border-line-soft py-8 md:py-10">
                         <div class="flex items-center gap-x-4">
@@ -3191,8 +3194,9 @@
                     </div>
 
                 </div>
+                </div>
 
-                <div class="w-full overflow-hidden rounded-[20px] bg-surface-muted xl:col-start-1 xl:row-start-4 2xl:col-start-1 2xl:row-start-4">
+                <div class="w-full overflow-hidden rounded-[20px] bg-surface-muted xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3">
                     <div class="flex flex-col md:grid md:grid-cols-[300px_minmax(0,1fr)] xl:grid-cols-[360px_minmax(0,1fr)]">
                         <div class="box-border flex h-[220px] p-4 md:h-full md:min-h-[300px]">
                             <img src="assets/images/decision-log.png"
@@ -3331,7 +3335,7 @@
             background: #FFFFFF;
             border: 1px solid #DEE6F5;
             border-radius: 20px;
-            z-index: 0;
+            z-index: 1;
             opacity: 0;
             visibility: hidden;
             --case-nav-overlap-opacity: 1;
@@ -3950,7 +3954,7 @@
         const contextSection = document.getElementById("context");
         const contextCard = contextSection ? contextSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
         const reflectionsSection = document.getElementById("reflections");
-        const footerMatch = document.getElementById("footer-match");
+        const nextProjectSection = document.getElementById("next-project");
         const sectionIds = ["summary", "context", "challenge", "flows", "architecture-model", "status", "reflections"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
@@ -4160,10 +4164,10 @@
 
                 const cardRect = contextCard.getBoundingClientRect();
                 const navHeight = sideNav.offsetHeight;
-                const footerStop = footerMatch
-                    ? absTop(footerMatch) - navHeight - 64
+                const nextProjectStop = nextProjectSection
+                    ? absTop(nextProjectSection) - navHeight - 64
                     : document.documentElement.scrollHeight - navHeight - 64;
-                const maxDocTop = Math.max(initialDocTop, footerStop);
+                const maxDocTop = Math.max(initialDocTop, nextProjectStop);
                 const stickyDocTop = scrollY + STICKY_OFFSET;
                 setActiveLink(scrollY);
                 let preferredDocTop = stickyDocTop;
