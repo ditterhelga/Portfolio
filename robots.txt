@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /quray-old.html
 Disallow: /index-old.html
+Disallow: /billfold-old.html
