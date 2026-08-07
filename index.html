@@ -6,14 +6,8 @@
     <meta name="theme-color" content="#FFFFFF" />
     <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <style>
-        .card-view-cursor[hidden],
         .hero-cursor[hidden] {
             display: none !important;
-        }
-        .card-view-cursor:not(.is-ready) {
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
         }
         @media (max-width: 767px) {
             header:not(.menu-open) nav { display: none !important; }
@@ -1320,6 +1314,7 @@
             2xl:h-[556px] 2xl:w-[691px] 2xl:max-w-[691px];
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .card-image-parallax-track {
@@ -2106,44 +2101,6 @@
             left: 0;
         }
 
-        .card-view-cursor {
-            display: none;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            .card-view-cursor {
-                position: fixed;
-                width: 96px;
-                height: 96px;
-                background: white;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: 'Sofia Sans Condensed', sans-serif;
-                font-weight: 600;
-                font-size: 22px;
-                letter-spacing: 0.03em;
-                color: #0016F2;
-                top: 0;
-                left: 0;
-                transform: translateZ(0);
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                will-change: transform, opacity;
-            }
-
-            @supports (-webkit-hyphens: none) {
-                .card-view-cursor {
-                    box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.35);
-                    outline: 1px solid transparent;
-                    -webkit-font-smoothing: antialiased;
-                }
-            }
-        }
-
         /* LQIP: --lqip behind image until img.lqip-fadein loads and fades in */
         .lqip-parallax-host {
             background-image: var(--lqip);
@@ -2236,7 +2193,7 @@
             }
         }
 
-        /* Work card images: no blue hover overlay — VIEW cursor only */
+        /* Work card images: no blue hover overlay */
         .card-image-overlay {
             display: none;
         }
@@ -3621,63 +3578,9 @@
             });
         }
 
-        // Work card image — "View" / "Soon" cursor follower
-        const cardViewCursor = document.querySelector(".card-view-cursor");
-        const cardFrames = document.querySelectorAll("#work .card-image-frame");
-        const cardViewCursorDefaultLabel = cardViewCursor ? cardViewCursor.textContent.trim() : "VIEW";
-
-        if (cardViewCursor && cardFrames.length && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-            cardViewCursor.hidden = false;
-            gsap.set(cardViewCursor, { opacity: 0, scale: 0 });
-            cardViewCursor.classList.add("is-ready");
-
-            let isOverCard = false;
-
-            cardFrames.forEach(frame => {
-                const isComingSoon = Boolean(frame.closest(".work-case-card--coming-soon"));
-
-                frame.addEventListener("mouseenter", () => {
-                    isOverCard = true;
-                    frame.style.cursor = "none";
-                    cardViewCursor.textContent = isComingSoon ? "SOON" : cardViewCursorDefaultLabel;
-                    gsap.to(cardViewCursor, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" });
-                });
-                frame.addEventListener("mouseleave", () => {
-                    isOverCard = false;
-                    frame.style.cursor = "";
-                    cardViewCursor.textContent = cardViewCursorDefaultLabel;
-                    gsap.to(cardViewCursor, { opacity: 0, scale: 0, duration: 0.2, ease: "power2.in" });
-                });
-            });
-
-            document.addEventListener("mousemove", e => {
-                // Bounds-check fallback: force-hide if mouseleave was missed on fast exit
-                if (!isOverCard) {
-                    const overAnyFrame = Array.from(cardFrames).some(frame => {
-                        const r = frame.getBoundingClientRect();
-                        return e.clientX >= r.left && e.clientX <= r.right &&
-                               e.clientY >= r.top  && e.clientY <= r.bottom;
-                    });
-                    if (!overAnyFrame) {
-                        gsap.to(cardViewCursor, { opacity: 0, scale: 0, duration: 0.2, ease: "power2.in", overwrite: "auto" });
-                        return;
-                    }
-                    isOverCard = true; // re-sync if mouseenter was missed
-                }
-
-                gsap.set(cardViewCursor, {
-                    x: Math.round(e.clientX),
-                    y: Math.round(e.clientY),
-                    xPercent: -50,
-                    yPercent: -50
-                });
-            });
-        }
-
     });
 </script>
 <div class="hero-cursor" hidden aria-hidden="true"></div>
-<div class="card-view-cursor" hidden aria-hidden="true">VIEW</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 <script>
 (function () {
