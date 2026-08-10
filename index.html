@@ -338,7 +338,7 @@
 
     & .phrases {
         display: block;
-        animation: rotate-words 15s infinite ease-in-out;
+        animation: rotate-words 11.5s infinite ease-in-out;
     }
 
     & .phrases span {
@@ -359,13 +359,14 @@
 }
 
 @keyframes rotate-words {
+    /* brain → logic keeps the original ~0.8s slide; later slides are snappier */
     0%, 28% {
         transform: translateY(0);
     }
-    33.333%, 61.333% {
+    33.333%, 63.5% {
         transform: translateY(calc(-1 * var(--rotate-row)));
     }
-    66.666%, 94.666% {
+    66.5%, 88% {
         transform: translateY(calc(-2 * var(--rotate-row)));
     }
     100% {
@@ -1726,6 +1727,11 @@
                 -webkit-text-fill-color: #0016f2 !important;
             }
 
+            #hero .mask-screen .line-bottom {
+                color: #2834B8 !important;
+                -webkit-text-fill-color: #2834B8 !important;
+            }
+
             #hero .blob-layer {
                 display: none !important;
             }
@@ -2241,16 +2247,18 @@
             background: #0A43FF;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.55s ease;
         }
 
         @media (hover: hover) and (pointer: fine) {
             #hero .hero-mask:hover .blob-layer {
                 opacity: 1;
+                transition-duration: 0.25s;
             }
         }
         #hero .hero-mask:focus-within .blob-layer {
             opacity: 1;
+            transition-duration: 0.25s;
         }
 
         #hero .blob-layer .blob {
@@ -2290,21 +2298,35 @@
             mix-blend-mode: screen;
         }
 
+        #hero .mask-screen h1,
+        #hero .mask-screen .line-bottom {
+            transition: color 0.55s ease, -webkit-text-fill-color 0.55s ease;
+        }
+
         #hero .mask-screen h1 {
             color: #0016F2;
             -webkit-text-fill-color: #0016F2;
             padding-right: 0.5rem;
         }
 
+        #hero .mask-screen .line-bottom {
+            color: #2834B8;
+            -webkit-text-fill-color: #2834B8;
+        }
+
         @media (hover: hover) and (pointer: fine) {
-            #hero .hero-mask:hover .mask-screen h1 {
+            #hero .hero-mask:hover .mask-screen h1,
+            #hero .hero-mask:hover .mask-screen .line-bottom {
                 color: #000;
                 -webkit-text-fill-color: #000;
+                transition-duration: 0.25s;
             }
         }
-        #hero .hero-mask:focus-within .mask-screen h1 {
+        #hero .hero-mask:focus-within .mask-screen h1,
+        #hero .hero-mask:focus-within .mask-screen .line-bottom {
             color: #000;
             -webkit-text-fill-color: #000;
+            transition-duration: 0.25s;
         }
 
         
@@ -2495,25 +2517,24 @@
                                tracking-[-0.5rem]">
                         product designer
                     </h1>
+                    <div class="line-bottom
+                    font-family-sofia font-semibold uppercase
+                    text-[2rem]/[2rem] md:text-[4.75rem]/[5rem]
+                    tracking-normal">
+                        <span class="inline-block leading-none">With</span>
+                        <div class="hero-rotating-wrap">
+                            <div class="rotating-words">
+                                <span class="sizer">an architect's logic</span>
+                                <span class="phrases">
+                                    <span>an engineer's brain</span>
+                                    <span>an architect's logic</span>
+                                    <span>a builder's hands</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-            <div class="line-bottom
-            font-family-sofia font-semibold uppercase
-            text-[2rem]/[2rem] md:text-[4.75rem]/[5rem]
-            tracking-normal">
-    <span class="inline-block leading-none">With</span>
-    <div class="hero-rotating-wrap">
-        <div class="rotating-words">
-            <span class="sizer">an architect's logic</span>
-            <span class="phrases">
-                <span>an engineer's brain</span>
-                <span>an architect's logic</span>
-                <span>a builder's hands</span>
-            </span>
-        </div>
-    </div>
-</div>
         </div>
     </section>
 
