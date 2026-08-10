@@ -2,3 +2,5 @@ User-agent: *
 Disallow: /quray-old.html
 Disallow: /index-old.html
 Disallow: /billfold-old.html
+Disallow: /subway-old.html
+Disallow: /gazelkin-old.html

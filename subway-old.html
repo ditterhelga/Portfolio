@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"/>
+    <meta name="googlebot" content="noindex, nofollow"/>
     <link rel="stylesheet" href="assets/css/mobile-menu.css">
     <style>
         #case-side-nav[hidden] { display: none !important; }
@@ -17,7 +19,7 @@
         }
     </style>
 
-    <title>Subway — Olga Pertseva</title>
+    <title>Subway (archived) — Olga Pertseva</title>
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 
     <!-- Google Fonts -->
@@ -53,10 +55,6 @@
             --color-blue-light: #8891D6;
             --color-blue-dark: #040989;
             --color-accent-yellow: #FDC448;
-            --color-surface-muted: #ECF1F4;
-            --color-blue-muted: #6F77B4;
-            --color-line-soft: #D4D8E1;
-            --color-text-muted: #8A8A8A;
 
             --bg-color: 216, 29%, 97%;
 
@@ -111,24 +109,6 @@
                 md:text-[60px]/[64px]
                 xl:text-[64px]/[64px]
                 2xl:text-[64px]/[64px];
-        }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-
-        .section-label {
-            @apply font-family-inter font-light uppercase
-                text-[16px]/[24px] text-blue-muted
-                mb-3 md:mb-4 xl:mb-5;
         }
 
         @media (max-width: 767px) {
@@ -1377,7 +1357,6 @@
             </button>
             <nav id="case-side-nav-menu">
                 <span class="case-side-nav-indicator" aria-hidden="true"></span>
-                <a href="#summary" data-target="summary" class="case-side-nav-link">Summary</a>
                 <a href="#overview" data-target="overview" class="case-side-nav-link">Context</a>
                 <a href="#my-part" data-target="my-part" class="case-side-nav-link">My Role</a>
                 <a href="#research" data-target="research" class="case-side-nav-link">Research</a>
@@ -1391,9 +1370,9 @@
             <div class="subway-breadcrumbs mb-6 md:mb-4 font-light text-5/8 flex flex-row flex-wrap items-center gap-x-2" aria-label="Breadcrumb">
                 <a class="no-underline transition-colors duration-[250ms] ease-out hover:text-[#0016F2]" href="index.html#work">Work</a>
                 <span aria-hidden="true">/</span>
-                <span class="text-[#8A8A8A]">Subway</span>
+                <span class="text-[#8A8A8A]">Subway (archived)</span>
             </div>
-            <h1 class="subway-hero-title subway-page-title">Making 400 restaurants behave the same way</h1>
+            <h1 class="subway-hero-title subway-page-title">Two platforms. Zero confusion. 40% faster onboarding.</h1>
             <div class="subway-hero-media image-block mt-10">
                 <div class="subway-hero-media-bg full-bleed overflow-hidden bg-[#1A3716] py-8 md:py-12 xl:py-[80px]">
                     <div class="flex w-full justify-center px-4 sm:px-8 md:px-6 2xl:px-8">
@@ -1403,177 +1382,42 @@
             </div>
         </section>
 
-        <section id="summary" class="flex flex-col items-start">
-            <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
-                <div class="w-full">
-                    <p class="section-label">SUMMARY</p>
-                    <h2 class="section-header w-full">Designing two platforms for people starting their first job and people running their own restaurant</h2>
-                </div>
-                <div class="overview-text-1 min-w-0 font-light text-5/8 xl:max-w-[856px] 2xl:max-w-[1048px]">
-                    <p class="min-w-0">Subway Russia kept everything it knew about running a restaurant in binders and phone calls, and every restaurant in the country learned it that way. <span class="font-medium">As the only designer, I built the two platforms that replaced them.</span> One trains and certifies employees, with courses short enough to fit into the gaps in a shift. The other is for franchise owners: a knowledge base and live webinars covering how to open a restaurant and how to run it afterwards.</p>
-                </div>
-
-                <!-- summary card: role, team, timeline, scope + contribution pills -->
-                <div class="mt-2 md:mt-2 xl:mt-2 2xl:mt-2 w-full rounded-[16px] border border-line-soft p-6 pt-8 md:p-8 md:pt-10 xl:p-10 xl:pt-12">
-
-                    <div class="grid grid-cols-1 gap-y-8 md:grid-cols-[210px_minmax(0,1fr)] md:gap-x-6 md:gap-y-10 xl:grid-cols-[210px_auto_190px_minmax(0,1fr)] xl:gap-x-10 2xl:gap-x-[40px]">
-
-                        <div class="min-w-0">
-                            <p class="font-family-inter font-light uppercase text-[16px]/[24px] text-blue-muted">My role</p>
-                            <p class="mt-3 md:mt-4 max-w-[190px] font-family-sofia font-medium text-[32px]/[36px] text-text-primary">Sole product designer</p>
-                        </div>
-
-                        <div class="min-w-0">
-                            <p class="font-family-inter font-light uppercase text-[16px]/[24px] text-blue-muted">Team</p>
-                            <div class="mt-3 md:mt-4 flex w-fit flex-col">
-                                <div class="flex flex-row items-center">
-                                    <div class="group relative z-0 shrink-0">
-                                        <span aria-hidden="true" class="team-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded-[4px] bg-text-primary px-3 py-1 font-family-inter text-[14px]/[20px] text-white opacity-0 pointer-events-none transition-opacity">PMs</span>
-                                        <button type="button" aria-label="PMs" class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-white bg-text-primary focus-visible:outline-2 focus-visible:outline-primary-light">
-                                            <span class="font-family-inter font-semibold text-[14px]/[14px] text-white">P</span>
-                                        </button>
-                                    </div>
-                                    <div class="group relative z-10 -ml-3 shrink-0">
-                                        <span aria-hidden="true" class="team-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded-[4px] bg-text-primary px-3 py-1 font-family-inter text-[14px]/[20px] text-white opacity-0 pointer-events-none transition-opacity">Developers</span>
-                                        <button type="button" aria-label="Developers" class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-white bg-text-primary focus-visible:outline-2 focus-visible:outline-primary-light">
-                                            <span class="font-family-inter font-semibold text-[14px]/[14px] text-white">D</span>
-                                        </button>
-                                    </div>
-                                    <div class="group relative z-20 -ml-3 shrink-0">
-                                        <span aria-hidden="true" class="team-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded-[4px] bg-text-primary px-3 py-1 font-family-inter text-[14px]/[20px] text-white opacity-0 pointer-events-none transition-opacity">Content writers</span>
-                                        <button type="button" aria-label="Content writers" class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-white bg-text-primary focus-visible:outline-2 focus-visible:outline-primary-light">
-                                            <span class="font-family-inter font-semibold text-[14px]/[14px] text-white">C</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="relative z-30 -mt-3 flex flex-row items-center">
-                                    <div class="group relative z-0 shrink-0">
-                                        <span aria-hidden="true" class="team-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded-[4px] bg-text-primary px-3 py-1 font-family-inter text-[14px]/[20px] text-white opacity-0 pointer-events-none transition-opacity">Training and methodology experts</span>
-                                        <button type="button" aria-label="Training and methodology experts" class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-white bg-text-primary focus-visible:outline-2 focus-visible:outline-primary-light">
-                                            <span class="font-family-inter font-semibold text-[14px]/[14px] text-white">T</span>
-                                        </button>
-                                    </div>
-                                    <div class="group relative z-10 -ml-3 shrink-0">
-                                        <span aria-hidden="true" class="team-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded-[4px] bg-text-primary px-3 py-1 font-family-inter text-[14px]/[20px] text-white opacity-0 pointer-events-none transition-opacity">Franchise support</span>
-                                        <button type="button" aria-label="Franchise support" class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-white bg-text-primary focus-visible:outline-2 focus-visible:outline-primary-light">
-                                            <span class="font-family-inter font-semibold text-[14px]/[14px] text-white">S</span>
-                                        </button>
-                                    </div>
-                                    <div class="group relative z-50 -ml-3 shrink-0">
-                                        <span role="tooltip" class="team-tooltip pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-[4px] bg-text-primary px-3 py-1 font-family-inter text-[14px]/[20px] text-white opacity-0 transition-opacity duration-200">Product designer</span>
-                                        <button type="button" aria-label="Me — product designer" class="relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-white bg-primary-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-light">
-                                            <span class="team-me-label font-family-inter font-semibold text-[14px]/[14px] text-white transition-opacity duration-200">Me</span>
-                                            <img src="assets/images/painting-main.png" alt="" class="team-me-photo absolute inset-0 h-full w-full rounded-full object-cover opacity-0 transition-opacity duration-200"/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="md:hidden mt-3 font-family-inter text-[14px]/[20px] text-blue-muted">PMs · Developers · Content writers · Training and methodology experts · Franchise support · Me</p>
-                        </div>
-
-                        <div class="min-w-0 xl:pl-8 2xl:pl-12">
-                            <p class="font-family-inter font-light uppercase text-[16px]/[24px] text-blue-muted">Timeline</p>
-                            <p class="mt-3 md:mt-4 font-family-sofia font-medium text-[32px]/[36px] text-text-primary">2 years</p>
-                        </div>
-
-                        <div class="min-w-0">
-                            <p class="font-family-inter font-light uppercase text-[16px]/[24px] text-blue-muted">Scope</p>
-                            <ol class="mt-3 md:mt-4 flex w-full min-w-0 flex-col md:flex-row">
-                                <li class="flex min-w-0 gap-x-3 md:flex-1 md:flex-col md:gap-x-0 md:gap-y-2">
-                                    <div class="flex flex-col items-center md:h-[18px] md:w-full md:flex-row md:items-center">
-                                        <span class="block h-[14px] w-[14px] shrink-0 rounded-full bg-accent-yellow"></span>
-                                        <span class="block w-[2px] flex-1 bg-accent-yellow md:h-[2px] md:min-h-[2px] md:w-auto md:flex-1 md:self-center"></span>
-                                    </div>
-                                    <p class="min-w-0 pb-6 md:pb-0 md:pr-3 xl:pr-4 text-left font-family-inter font-normal text-[14px]/[20px] text-text-primary">Employee training platform<span class="mt-1 block text-text-muted">Covered in this case study</span></p>
-                                </li>
-                                <li class="flex min-w-0 gap-x-3 md:flex-1 md:flex-col md:gap-x-0 md:gap-y-2">
-                                    <div class="flex flex-col items-center md:h-[18px] md:w-full md:flex-row md:items-center">
-                                        <span class="block h-[14px] w-[14px] shrink-0 rounded-full bg-accent-yellow"></span>
-                                        <span class="block w-[2px] flex-1 bg-accent-yellow md:h-[2px] md:min-h-[2px] md:w-auto md:flex-1 md:self-center"></span>
-                                    </div>
-                                    <p class="min-w-0 pb-6 md:pb-0 md:pr-3 xl:pr-4 text-left font-family-inter font-normal text-[14px]/[20px] text-text-primary">Franchise owner support platform</p>
-                                </li>
-                                <li class="flex min-w-0 gap-x-3 md:flex-1 md:flex-col md:gap-x-0 md:gap-y-2">
-                                    <div class="flex flex-col items-center md:h-[18px] md:w-full md:flex-row md:items-center">
-                                        <span class="block h-[14px] w-[14px] shrink-0 rounded-full bg-accent-yellow"></span>
-                                    </div>
-                                    <p class="min-w-0 text-left font-family-inter font-normal text-[14px]/[20px] text-text-primary">Customer website<br>and ordering app</p>
-                                </li>
-                            </ol>
-                        </div>
-
+        <!-- #intro: left — logo + description; right — metadata (role, timeline, tools); below — large image -->
+        <section id="intro" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 bg-white">
+            <div class="intro-grid flex flex-col gap-y-10 xl:grid xl:grid-cols-[minmax(0,496px)_minmax(0,704px)] xl:gap-x-6 xl:gap-y-8 xl:items-start 2xl:flex 2xl:flex-row 2xl:items-start 2xl:gap-x-16 2xl:gap-y-0">
+                <div class="intro-left flex flex-col gap-y-8 xl:contents 2xl:flex 2xl:flex-col 2xl:max-w-[688px] 2xl:shrink-0">
+                    <div class="intro-logo min-w-0 xl:col-start-1 xl:row-start-1">
+                        <img class="w-[232px] h-auto" src="assets/images/subway-logo.png" alt="Subway logo"/>
                     </div>
-
-                    <ul class="mt-8 md:mt-10 xl:mt-12 flex flex-wrap gap-4">
-                        <li class="group relative">
-                            <button type="button" class="inline-flex items-center rounded-[4px] bg-surface-muted px-5 py-2 font-family-sofia font-medium uppercase text-[16px]/[24px] text-blue-muted">Research</button>
-                            <span role="tooltip" class="pill-tooltip pointer-events-none absolute top-full left-0 mt-2 z-10 w-[280px] rounded-[4px] bg-white border border-line-soft px-4 py-3 font-family-inter font-normal text-[14px]/[20px] text-text-primary shadow-[0_4px_16px_rgba(48,47,47,0.10)] opacity-0 transition-opacity duration-200">Interviews with employees, franchise owners and head office. I also sat in on the in-person classes the platform was going to replace.</span>
-                        </li>
-                        <li class="group relative">
-                            <button type="button" class="inline-flex items-center rounded-[4px] bg-surface-muted px-5 py-2 font-family-sofia font-medium uppercase text-[16px]/[24px] text-blue-muted">Content and methodology</button>
-                            <span role="tooltip" class="pill-tooltip pointer-events-none absolute top-full left-0 mt-2 z-10 w-[280px] rounded-[4px] bg-white border border-line-soft px-4 py-3 font-family-inter font-normal text-[14px]/[20px] text-text-primary shadow-[0_4px_16px_rgba(48,47,47,0.10)] opacity-0 transition-opacity duration-200">Worked with Subway's trainers to turn manuals and decks into lessons with a fixed structure and a way to check that someone had learned it.</span>
-                        </li>
-                        <li class="group relative">
-                            <button type="button" class="inline-flex items-center rounded-[4px] bg-surface-muted px-5 py-2 font-family-sofia font-medium uppercase text-[16px]/[24px] text-blue-muted">Information architecture</button>
-                            <span role="tooltip" class="pill-tooltip pointer-events-none absolute top-full right-0 xl:right-auto xl:left-0 mt-2 z-10 w-[280px] rounded-[4px] bg-white border border-line-soft px-4 py-3 font-family-inter font-normal text-[14px]/[20px] text-text-primary shadow-[0_4px_16px_rgba(48,47,47,0.10)] opacity-0 transition-opacity duration-200">What belongs in the employee platform, what belongs in the franchise portal, and how someone finds it without being told where to look.</span>
-                        </li>
-                        <li class="group relative">
-                            <button type="button" class="inline-flex items-center rounded-[4px] bg-surface-muted px-5 py-2 font-family-sofia font-medium uppercase text-[16px]/[24px] text-blue-muted">Task flows and states</button>
-                            <span role="tooltip" class="pill-tooltip pointer-events-none absolute top-full left-0 mt-2 z-10 w-[280px] rounded-[4px] bg-white border border-line-soft px-4 py-3 font-family-inter font-normal text-[14px]/[20px] text-text-primary shadow-[0_4px_16px_rgba(48,47,47,0.10)] opacity-0 transition-opacity duration-200">Flows and wireframes for both platforms, including what someone sees when a course is half-finished, an exam is failed, or a store opening stalls halfway.</span>
-                        </li>
-                        <li class="group relative">
-                            <button type="button" class="inline-flex items-center rounded-[4px] bg-surface-muted px-5 py-2 font-family-sofia font-medium uppercase text-[16px]/[24px] text-blue-muted">Interface patterns</button>
-                            <span role="tooltip" class="pill-tooltip pointer-events-none absolute top-full left-0 mt-2 z-10 w-[280px] rounded-[4px] bg-white border border-line-soft px-4 py-3 font-family-inter font-normal text-[14px]/[20px] text-text-primary shadow-[0_4px_16px_rgba(48,47,47,0.10)] opacity-0 transition-opacity duration-200">Reusable patterns for cards, progress and assessments, so two products built by one person did not drift apart. Not a design system, and I would not call it one.</span>
-                        </li>
-                        <li class="group relative">
-                            <button type="button" class="inline-flex items-center rounded-[4px] bg-surface-muted px-5 py-2 font-family-sofia font-medium uppercase text-[16px]/[24px] text-blue-muted">Prototyping and testing</button>
-                            <span role="tooltip" class="pill-tooltip pointer-events-none absolute top-full left-0 xl:left-auto xl:right-0 mt-2 z-10 w-[280px] rounded-[4px] bg-white border border-line-soft px-4 py-3 font-family-inter font-normal text-[14px]/[20px] text-text-primary shadow-[0_4px_16px_rgba(48,47,47,0.10)] opacity-0 transition-opacity duration-200">Prototypes tested with real employees and owners.</span>
-                        </li>
-                        <li class="group relative">
-                            <button type="button" class="inline-flex items-center rounded-[4px] bg-surface-muted px-5 py-2 font-family-sofia font-medium uppercase text-[16px]/[24px] text-blue-muted">Stakeholder work</button>
-                            <span role="tooltip" class="pill-tooltip pointer-events-none absolute top-full left-0 xl:left-auto xl:right-0 mt-2 z-10 w-[280px] rounded-[4px] bg-white border border-line-soft px-4 py-3 font-family-inter font-normal text-[14px]/[20px] text-text-primary shadow-[0_4px_16px_rgba(48,47,47,0.10)] opacity-0 transition-opacity duration-200">Presented and defended decisions to the digital director, the training team and franchise support.</span>
-                        </li>
-                    </ul>
-
+                    <div class="intro-description flex min-w-0 flex-col gap-y-2 text-5/8 font-light xl:col-start-1 xl:row-start-2">
+                        <p>I designed <span class="font-medium">Subway Russia's first digital platforms</span>: one to train employees and another to support franchise owners.</p>
+                        <p>They transformed scattered manuals into structured, step-by-step digital flows that helped users move from "Where do I start?" to <span class="font-medium">confident, effective work from day one</span>.</p>
+                    </div>
                 </div>
-
-                <section id="subway-transition-img" class="mt-2 md:mt-2 xl:mt-2 2xl:mt-2 flex w-full min-w-0 flex-col">
-                    <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-learning-main.png"><img class="w-full rounded-[20px] object-cover aspect-[1048/656] lqip-fadein" src="assets/images/subway-learning-main.png" alt="Subway Russia employee learning platform"/></div>
-                </section>
+                <div class="intro-right metadata-block min-w-0 xl:col-start-2 xl:row-start-2 xl:max-w-[704px] xl:shrink-0 xl:self-start 2xl:max-w-[688px]">
+                    <div class="metadata-grid grid grid-cols-1 gap-y-4">
+                        <div class="metadata-role flex flex-col gap-y-2">
+                            <p class="text-5/8"><span class="font-medium">Role:</span> Lead UX/UI Designer. Research, information architecture, wireframing, prototyping, visual design, usability testing.</p>
+                        </div>
+                        <div class="metadata-timeline flex flex-col gap-y-2">
+                            <p class="text-5/8"><span class="font-medium">Team:</span> PMs, developers, content writers, training and methodology experts, franchise support</p>
+                        </div>
+                        <div class="metadata-tools flex flex-col gap-y-2">
+                            <p class="text-5/8"><span class="font-medium">Timeline:</span> 12 months</p>
+                        </div>
+                        <div class="metadata-impact flex flex-col gap-y-4">
+                            <div class="font-medium">Impact</div>
+                            <p class="text-5/8">• <span class="font-medium">Employees:</span> <span class="font-medium text-[#146209]">40%</span> faster onboarding · <span class="font-medium text-[#146209]">60%</span> boost in successful certifications</p>
+                            <p class="text-5/8">• <span class="font-medium">Franchisees:</span> <span class="font-medium text-[#146209]">up to 30%</span> faster store launches · More autonomy in daily operations</p>
+                            <p class="text-5/8">• <span class="font-medium">HQ:</span> <span class="font-medium text-[#146209]">40%</span> fewer support requests · Lower training costs</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="impact" class="-mt-8 md:-mt-12 xl:-mt-14 2xl:-mt-16 flex flex-col items-start">
-            <div class="w-full rounded-[16px] bg-surface-muted px-6 pt-10 pb-10 md:px-8 xl:px-8 xl:pt-10 xl:pb-10">
-
-                <div class="mb-6 flex flex-col gap-y-2 xl:mb-8 xl:flex-row xl:items-center xl:justify-between xl:gap-y-0">
-                    <div class="flex items-center gap-x-3">
-                        <svg class="h-7 w-7 shrink-0 text-text-primary" viewBox="0 0 256 256" fill="none"
-                             stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"
-                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M96,240l16-80L48,136,160,16,144,96l64,24Z"/>
-                        </svg>
-                        <h2 class="font-family-sofia font-medium text-[32px]/[38px] text-text-primary">Impact*</h2>
-                    </div>
-                    <p class="font-family-inter font-normal italic text-[16px]/[24px] text-text-muted">* Figures measured and reported by Subway Russia.</p>
-                </div>
-
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-                    <div class="rounded-[12px] bg-white pt-8 pb-10 pl-6 pr-6">
-                        <h3 class="font-family-inter font-medium text-[20px]/[26px] text-text-primary">New hires stopped borrowing<br>a manager</h3>
-                        <p class="mt-3 font-family-inter font-normal text-[16px]/[22px] text-text-primary">Employees moved through lessons on their own and arrived on shift already checked. Successful certifications rose by <span class="font-bold">60%</span>.</p>
-                    </div>
-                    <div class="rounded-[12px] bg-white pt-8 pb-10 pl-6 pr-6">
-                        <h3 class="font-family-inter font-medium text-[20px]/[26px] text-text-primary">Head office stopped being the help desk for 400+ locations</h3>
-                        <p class="mt-3 font-family-inter font-normal text-[16px]/[22px] text-text-primary">Owners found the documents themselves, trainers stopped re-explaining the same basics every week. Support requests to head office fell by <span class="font-bold">37%</span>.</p>
-                    </div>
-                    <div class="rounded-[12px] bg-white pt-8 pb-10 pl-6 pr-6">
-                        <h3 class="font-family-inter font-medium text-[20px]/[26px] text-text-primary">6,000 employees, and a record for each of them</h3>
-                        <p class="mt-3 font-family-inter font-normal text-[16px]/[22px] text-text-primary">Progress and certification became visible per restaurant. A training gap surfaced while it was still cheap to fix, instead of as a failed inspection.</p>
-                    </div>
-                </div>
-
-            </div>
+        <section id="subway-intro-img" data-parallax-wrap class="max-md:-mt-[1.8rem] max-md:rounded-[20px] max-md:overflow-hidden md:full-bleed xl:full-bleed 2xl:full-bleed">
+            <div class="lqip-parallax-host min-w-0" data-lqip-ref="assets/images/subway-intro-main.png"><img data-parallax-image class="w-full rounded-[20px] max-md:rounded-[20px] object-cover aspect-[288/184] h-auto md:h-[504px] md:rounded-none xl:h-[600px] 2xl:h-[676px] lqip-fadein" src="assets/images/subway-intro-main.png" alt="Screens from Subway Russia's digital training and franchise platforms"/></div>
         </section>
 
         <section id="overview" class="flex flex-col items-start">
@@ -2474,7 +2318,7 @@
 
         </section>
 
-        <section id="results-hq-franchisees" hidden class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
+        <section id="results-hq-franchisees" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14">
             <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
                 <div class="flex w-full min-w-0 max-w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
                     <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
@@ -2927,28 +2771,6 @@
             padding-right: 32px;
         }
 
-        /* Summary card team tooltips: keyboard focus always reveals, hover only on precise pointers */
-        #summary .group:has(:focus-visible) .team-tooltip,
-        #summary .group:has(:focus-visible) .pill-tooltip,
-        #summary .group:has(:focus-visible) .team-me-photo {
-            opacity: 1;
-        }
-        #summary .group:has(:focus-visible) .team-me-label {
-            opacity: 0;
-        }
-        /* "main img" below pins every image to position:relative for the parallax layer,
-           which unlayered CSS applies over Tailwind's .absolute utility */
-        #summary .team-me-photo {
-            position: absolute;
-            inset: 0;
-        }
-        @media (hover: hover) and (pointer: fine) {
-        #summary .group:hover .team-tooltip { opacity: 1; }
-        #summary .group:hover .pill-tooltip { opacity: 1; }
-        #summary .group:hover .team-me-label { opacity: 0; }
-        #summary .group:hover .team-me-photo { opacity: 1; }
-        }
-
         main img,
         main [class*="bg-[#ECF1F4]"] {
             position: relative;
@@ -3236,7 +3058,7 @@
         const overviewCard = overviewSection ? overviewSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
         const reflectionsSection = document.getElementById("reflections");
         const reflectionsCard = reflectionsSection ? reflectionsSection.querySelector('div[class*="bg-[#ECF1F4]"]') : null;
-        const sectionIds = ["summary", "overview", "my-part", "research", "learning", "results-real-world"];
+        const sectionIds = ["overview", "my-part", "research", "learning", "results-real-world"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
         const sideNavIndicator = sideNav ? sideNav.querySelector(".case-side-nav-indicator") : null;
@@ -3269,7 +3091,7 @@
 
             function setActiveLink(scrollY) {
                 const markerY = scrollY + window.innerHeight * 0.35;
-                let activeId = "summary";
+                let activeId = "overview";
                 sectionNodes.forEach((node) => {
                     if (node && absTop(node) <= markerY) {
                         activeId = node.id;
@@ -3718,51 +3540,6 @@
   window.addEventListener('scroll', checkScroll, { passive: true });
   footerXsMq.addEventListener('change', checkScroll);
   checkScroll();
-})();
-</script>
-
-<script>
-(function () {
-    // The pills wrap differently at every window width, so the left/right classes on each
-    // tooltip are only a no-JS fallback: here we clamp each one inside the pill row instead.
-    const tooltips = document.querySelectorAll('#summary .pill-tooltip');
-    if (!tooltips.length) return;
-
-    const list = tooltips[0].closest('ul');
-    if (!list) return;
-
-    function place() {
-        const bounds = list.getBoundingClientRect();
-
-        tooltips.forEach(function (tooltip) {
-            const pill = tooltip.parentElement.getBoundingClientRect();
-
-            tooltip.style.width = '';
-            if (tooltip.offsetWidth > bounds.width) tooltip.style.width = bounds.width + 'px';
-
-            const widest = bounds.right - tooltip.offsetWidth;
-            const left = Math.max(bounds.left, Math.min(pill.left, widest));
-
-            tooltip.style.right = 'auto';
-            tooltip.style.left = Math.round(left - pill.left) + 'px';
-        });
-    }
-
-    let queued = false;
-    function schedule() {
-        if (queued) return;
-        queued = true;
-        requestAnimationFrame(function () {
-            queued = false;
-            place();
-        });
-    }
-
-    place();
-    window.addEventListener('resize', schedule);
-    list.addEventListener('pointerenter', place, true);
-    list.addEventListener('focusin', place);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 })();
 </script>
 

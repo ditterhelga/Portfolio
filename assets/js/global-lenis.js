@@ -7,7 +7,7 @@
     var lenisInstance = null;
     var rafId = null;
     var resizeTimer = null;
-    var fallbackCompletionMs = 850;
+    var fallbackCompletionMs = 600;
 
     function expoOutEasing(t) {
         return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
@@ -37,7 +37,7 @@
         if (lenisInstance || !shouldUseLenis()) return;
 
         lenisInstance = new window.Lenis({
-            duration: 1.3,
+            duration: 0.85,
             easing: expoOutEasing,
             direction: "vertical",
             gestureDirection: "vertical",
