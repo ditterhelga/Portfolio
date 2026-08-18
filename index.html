@@ -2348,6 +2348,13 @@
             }
         }
 
+        @media (min-width: 80rem) {
+            #footer-match .footer-match-main {
+                padding-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+                padding-right: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+            }
+        }
+
         @media (min-width: 1536px) {
             #footer-match .footer-match-main {
                 padding-left: max(2rem, calc((100vw - 1440px) / 2));
@@ -2371,6 +2378,13 @@
             .footer-year-strip {
                 padding-left: 2rem !important;
                 padding-right: 2rem !important;
+            }
+        }
+
+        @media (min-width: 80rem) {
+            .footer-year-strip {
+                padding-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem)) !important;
+                padding-right: max(2rem, calc((100vw - 1280px) / 2 + 2rem)) !important;
             }
         }
 
@@ -2446,6 +2460,455 @@
                 color: var(--color-text-primary) !important;
             }
         }
+
+        /* ===== #builds — personal software section ===== */
+        #builds {
+            --builds-media-w: 100%;
+            padding-bottom: 2rem;
+            margin-top: -1.5rem;
+        }
+
+        #builds + .full-bleed {
+            margin-top: 0;
+        }
+
+        @media (min-width: 48rem) {
+            #builds {
+                padding-bottom: 2.5rem;
+                margin-top: -2rem;
+            }
+        }
+
+        @media (min-width: 80rem) {
+            #builds {
+                padding-bottom: 3rem;
+                margin-top: -2.5rem;
+            }
+        }
+
+        .builds-panel {
+            box-sizing: border-box;
+            width: 100%;
+            background: #fff;
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .builds-body {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            gap: 24px;
+        }
+
+        .builds-copy {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            padding: 32px 16px 0 32px;
+            order: 3;
+        }
+
+        .builds-logo {
+            display: block;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            margin: 0 0 32px;
+            object-fit: cover;
+        }
+
+        #builds .builds-title.card-title {
+            margin-top: 0;
+            margin-bottom: 24px;
+            color: #0016F2;
+        }
+
+        #builds .builds-copy .card-paragraph {
+            margin: 0 0 48px;
+        }
+
+        .builds-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            width: fit-content;
+            max-width: 100%;
+            min-height: 48px;
+            margin-top: 0;
+            text-decoration: none;
+            color: #0016F2;
+            font-family: var(--font-family-sofia), 'Sofia Sans Condensed', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            line-height: 1.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .builds-cta-arrow {
+            display: block;
+            width: 18px;
+            height: 14px;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+            filter: brightness(0) saturate(100%) invert(13%) sepia(99%) saturate(5350%) hue-rotate(232deg) brightness(90%) contrast(128%);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .builds-cta:hover .builds-cta-arrow {
+                transform: translateX(4px);
+            }
+        }
+
+        .builds-media {
+            width: 100%;
+            order: 1;
+            min-width: 0;
+        }
+
+        .builds-media-frame {
+            position: relative;
+            width: var(--builds-media-w);
+            max-width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            border-radius: 16px;
+            container-type: inline-size;
+            container-name: builds-frame;
+        }
+
+        .builds-media-frame.is-orbit {
+            aspect-ratio: 704 / 512;
+        }
+
+        .builds-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .builds-tabs {
+            order: 2;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .builds-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .builds-tab {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            border: none;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+            opacity: 0.35;
+            transition: opacity 0.2s ease;
+        }
+
+        .builds-tab img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            object-fit: cover;
+        }
+
+        .builds-tab[aria-selected="true"] {
+            opacity: 1;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .builds-tab:not([aria-selected="true"]):hover {
+                opacity: 0.6;
+            }
+        }
+
+        .builds-tab:focus-visible {
+            outline: 2px solid #0016F2;
+            outline-offset: 2px;
+        }
+
+        @media (min-width: 40rem) {
+            .builds-panel {
+                padding: 24px;
+            }
+
+            .builds-copy {
+                padding: 24px 24px 0 24px;
+            }
+
+            .builds-logo {
+                width: 72px;
+                height: 72px;
+            }
+
+            .builds-tab {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        @media (max-width: 79.9375rem) {
+            .builds-logo {
+                display: none;
+            }
+
+            .builds-copy {
+                padding-top: 24px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        @media (min-width: 80rem) {
+            #builds {
+                --builds-media-w: 704px;
+            }
+
+            .builds-panel {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) var(--builds-media-w);
+                grid-template-rows: auto auto;
+                gap: 24px 48px;
+                align-items: stretch;
+            }
+
+            .builds-body {
+                display: contents;
+            }
+
+            .builds-copy {
+                grid-column: 1;
+                grid-row: 1 / -1;
+                padding: 24px 0 0 24px;
+            }
+
+            #builds .builds-copy .card-paragraph {
+                margin-bottom: 48px;
+            }
+
+            .builds-cta {
+                margin-top: 0;
+            }
+
+            .builds-media {
+                grid-column: 2;
+                grid-row: 1;
+                order: unset;
+                width: var(--builds-media-w);
+                flex-shrink: 0;
+            }
+
+            .builds-media-frame {
+                aspect-ratio: 704 / 512;
+            }
+
+            .builds-tabs {
+                grid-column: 2;
+                grid-row: 2;
+                width: calc(var(--builds-media-w) - 48px);
+                justify-self: center;
+                justify-content: space-between;
+                gap: 0;
+                overflow-x: visible;
+            }
+
+            .builds-tab {
+                width: 64px;
+                height: 64px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .builds-cta-arrow,
+            .builds-tab {
+                transition: none;
+            }
+
+            .builds-cta:hover .builds-cta-arrow {
+                transform: none;
+            }
+        }
+
+        /* ===== #builds — orbit animation (job search stack) ===== */
+        .orbit-stage {
+          --chip: 60px;                          /* logo size */
+          --duration: 12s;                       /* one full turn */
+          --ease: cubic-bezier(.6, 0, .2, 1);    /* snap of each step */
+
+          position: relative;
+          width: 704px;
+          height: 512px;
+          transform: scale(calc(100cqw / 704));
+          transform-origin: top left;
+          overflow: hidden;
+          background: #fff;
+        }
+
+        .orbit-stage__bg {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 699px;
+          height: 508px;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+
+        .orbit {
+          position: absolute;
+          inset: 0;
+          display: grid;
+          place-items: center;
+          animation: orbit-spin var(--duration) infinite var(--ease);
+          will-change: transform;
+        }
+
+        .seat {
+          position: absolute;
+          width: var(--chip);
+          height: var(--chip);
+        }
+
+        .chip { width: 100%; height: 100%; }
+
+        /* cancels the ring rotation so logos stay upright */
+        .spin {
+          width: 100%;
+          height: 100%;
+          display: grid;
+          place-items: center;
+          animation: orbit-counter var(--duration) infinite var(--ease);
+          will-change: transform;
+        }
+
+        .spin img { width: 100%; height: 100%; object-fit: contain; }
+
+        @keyframes orbit-spin {
+          0%       { transform: rotate(0deg); }
+          10.3333% { transform: rotate(60deg); }
+          16.6667% { transform: rotate(60deg); }
+          27.0%    { transform: rotate(120deg); }
+          33.3333% { transform: rotate(120deg); }
+          43.6667% { transform: rotate(180deg); }
+          50.0%    { transform: rotate(180deg); }
+          60.3333% { transform: rotate(240deg); }
+          66.6667% { transform: rotate(240deg); }
+          77.0%    { transform: rotate(300deg); }
+          83.3333% { transform: rotate(300deg); }
+          93.6667% { transform: rotate(360deg); }
+          100%     { transform: rotate(360deg); }
+        }
+
+        @keyframes orbit-counter {
+          0%       { transform: rotate(0deg); }
+          10.3333% { transform: rotate(-60deg); }
+          16.6667% { transform: rotate(-60deg); }
+          27.0%    { transform: rotate(-120deg); }
+          33.3333% { transform: rotate(-120deg); }
+          43.6667% { transform: rotate(-180deg); }
+          50.0%    { transform: rotate(-180deg); }
+          60.3333% { transform: rotate(-240deg); }
+          66.6667% { transform: rotate(-240deg); }
+          77.0%    { transform: rotate(-300deg); }
+          83.3333% { transform: rotate(-300deg); }
+          93.6667% { transform: rotate(-360deg); }
+          100%     { transform: rotate(-360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .orbit, .spin { animation: none; }
+        }
+
+        /* ===== #builds — cover-pending state (iOS-style spinner) ===== */
+        .builds-image { filter: none; transition: filter .2s ease; }
+        .builds-media-frame.is-pending .builds-image { filter: blur(2px); }
+
+        .cover-pending {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          background: rgba(20, 20, 20, .18);
+        }
+
+        .cover-pending[hidden] {
+          display: none;
+        }
+
+        /* classic iOS activity indicator: 12 bars, each fades in turn */
+        .cover-pending__spinner {
+          position: relative;
+          width: 44px;
+          height: 44px;
+        }
+
+        .cover-pending__spinner span {
+          position: absolute;
+          top: 0; left: 50%;
+          width: 3px;
+          height: 12px;
+          margin-left: -1.5px;
+          border-radius: 2px;
+          background: #fff;
+          transform-origin: 1.5px 22px;
+          animation: cover-pending-fade 1.2s linear infinite;
+        }
+
+        .cover-pending__spinner span:nth-child(1)  { transform: rotate(0deg);   animation-delay: -1.1s; }
+        .cover-pending__spinner span:nth-child(2)  { transform: rotate(30deg);  animation-delay: -1.0s; }
+        .cover-pending__spinner span:nth-child(3)  { transform: rotate(60deg);  animation-delay: -0.9s; }
+        .cover-pending__spinner span:nth-child(4)  { transform: rotate(90deg);  animation-delay: -0.8s; }
+        .cover-pending__spinner span:nth-child(5)  { transform: rotate(120deg); animation-delay: -0.7s; }
+        .cover-pending__spinner span:nth-child(6)  { transform: rotate(150deg); animation-delay: -0.6s; }
+        .cover-pending__spinner span:nth-child(7)  { transform: rotate(180deg); animation-delay: -0.5s; }
+        .cover-pending__spinner span:nth-child(8)  { transform: rotate(210deg); animation-delay: -0.4s; }
+        .cover-pending__spinner span:nth-child(9)  { transform: rotate(240deg); animation-delay: -0.3s; }
+        .cover-pending__spinner span:nth-child(10) { transform: rotate(270deg); animation-delay: -0.2s; }
+        .cover-pending__spinner span:nth-child(11) { transform: rotate(300deg); animation-delay: -0.1s; }
+        .cover-pending__spinner span:nth-child(12) { transform: rotate(330deg); animation-delay: 0s; }
+
+        @keyframes cover-pending-fade {
+          0%   { opacity: 1; }
+          100% { opacity: .15; }
+        }
+
+        .cover-pending__label {
+          color: #fff;
+          font-size: 14px;
+          font-weight: 500;
+          text-align: center;
+          text-shadow: 0 1px 3px rgba(0,0,0,.35);
+          margin: 0;
+          padding: 0 24px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .cover-pending__spinner span { animation: none; opacity: .6; }
+        }
     </style>
 </head>
 
@@ -2467,7 +2930,7 @@
 
             <nav class="hidden flex-col w-full justify-center md:flex md:flex-row md:gap-x-16 md:w-auto md:ml-auto items-center">
                 <a href="#work"    class="menulink">Work</a>
-                <a href="experiments.html?from=index" class="menulink">Play</a>
+                <a href="experiments.html?from=index" class="menulink">Build</a>
                 <a href="about.html"   class="menulink">About</a>
                 <a href="contact.html" class="menulink">Contact</a>
                 <a href="assets/docs/Olga_Pertseva_Product_Designer_2026.pdf" class="menulink" target="_blank" rel="noopener noreferrer">Resume</a>
@@ -2873,143 +3336,228 @@
 
     </section>
 
-    <div class="full-bleed bg-white flex flex-col gap-y-22">
+    <section id="builds" class="flex flex-col gap-y-12 xl:gap-y-16">
 
-        <section id="beyond"
-                 class="flex
-                        flex-col
-                        gap-y-12
-                        xl:gap-y-16
-                        max-w-[1280px]
-                        2xl:max-w-[1440px]
-                        mx-auto
-                        pt-14
-                        xl:pt-[104px]
-                        pb-8
-                        md:pb-10
-                        xl:pb-12
-                        px-4
-                        sm:px-8
-                        2xl:px-0">
+        <div class="flex flex-col gap-y-6 xl:gap-y-12">
+            <div class="section-kicker text-xl/[2rem] font-light uppercase flex flex-row gap-x-5 tracking-none items-center">
+                <span class="section-kicker-blob" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.6313 0.884258C9.6594 0.304573 10.8197 0 12 0C13.1803 0 14.3406 0.304573 15.3687 0.884258C17.5927 2.34072 19.7291 3.92675 21.7668 5.63412C23.439 7.08816 24.3842 9.99624 23.851 12.1773C23.1831 14.7828 22.3659 17.3478 21.4033 19.8595C20.9109 20.9379 20.1518 21.8732 19.1978 22.577C18.2437 23.2808 17.1261 23.7301 15.9503 23.8823C13.3191 24.0392 10.6809 24.0392 8.04965 23.8823C5.86848 23.7369 3.42072 21.9194 2.59672 19.8595C1.63415 17.3478 0.816881 14.7828 0.148959 12.1773C-0.384217 9.99624 0.560958 7.08816 2.23319 5.63412C4.26307 3.92752 6.39135 2.34151 8.60706 0.884258H8.6313Z" fill="currentColor"/>
+                    </svg>
+                </span>
+                <span>BUILD</span>
+            </div>
 
-            <div class="flex flex-col gap-y-6">
-                <div class="section-kicker text-xl/[2rem] font-light uppercase flex flex-row gap-x-5 tracking-none items-center">
-                    <span class="section-kicker-blob" aria-hidden="true">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.6313 0.884258C9.6594 0.304573 10.8197 0 12 0C13.1803 0 14.3406 0.304573 15.3687 0.884258C17.5927 2.34072 19.7291 3.92675 21.7668 5.63412C23.439 7.08816 24.3842 9.99624 23.851 12.1773C23.1831 14.7828 22.3659 17.3478 21.4033 19.8595C20.9109 20.9379 20.1518 21.8732 19.1978 22.577C18.2437 23.2808 17.1261 23.7301 15.9503 23.8823C13.3191 24.0392 10.6809 24.0392 8.04965 23.8823C5.86848 23.7369 3.42072 21.9194 2.59672 19.8595C1.63415 17.3478 0.816881 14.7828 0.148959 12.1773C-0.384217 9.99624 0.560958 7.08816 2.23319 5.63412C4.26307 3.92752 6.39135 2.34151 8.60706 0.884258H8.6313Z" fill="currentColor"/>
-                        </svg>
-                    </span>
-                    <span>Beyond Work</span>
-                </div>
-
-                <h1 id="beyond-life-lede" class="section-header intro-scroll-reveal">
-                    Design is a huge part of my life, but outside of work, I'm constantly making, exploring, and experimenting.
-                </h1>
-
+            <div class="flex flex-col gap-y-6 xl:gap-y-12">
+                <h2 id="builds-lede" class="section-header intro-scroll-reveal">Software I made because I needed it</h2>
                 <p class="card-text">
-                    Work shapes how I think. Everything else shapes who I am.
+                    None of these are for sale. I build them because I want the thing to exist, and I keep using most of them. Building is also how I check whether an idea survives contact with real code.
                 </p>
             </div>
+        </div>
 
-            <div id="cards-beyond">
-
-                <a class="group card-beyond card-beyond--experiments text-inherit no-underline" href="experiments.html?from=index">
-                    <div class="image-wrapper">
-                        <div class="image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/vibe_coding.png">
-                            <img class="lqip-fadein" src="assets/images/vibe_coding.png" alt="AI experiments — vibe coding" loading="lazy" decoding="async"/>
+        <div class="builds-panel">
+            <div class="builds-body" id="builds-tabpanel" role="tabpanel" aria-labelledby="builds-tab-dimme">
+                <div class="builds-media">
+                    <div class="builds-media-frame">
+                        <img class="builds-image" src="assets/images/hands-dimme.png" alt="DimMe" width="704" height="512" loading="lazy"/>
+                        <div class="cover-pending" hidden>
+                          <div class="cover-pending__spinner" aria-hidden="true">
+                            <span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span>
+                          </div>
+                          <p class="cover-pending__label">Still designing the cover for this one</p>
                         </div>
-                        <div class="beyond-image-overlay" aria-hidden="true"></div>
-                    </div>
-
-                    <div class="card-description">
-                        <div class="card-badges">
-                            <span class="badge">AI Experiments</span>
+                        <div class="orbit-stage" hidden>
+                          <img class="orbit-stage__bg" src="assets/images/back-job.png" alt="" width="699" height="508">
+                          <div class="orbit">
+                            <div class="seat" style="transform: rotate(0deg) translateY(-210px);">
+                              <div class="chip" style="transform: rotate(0deg);">
+                                <div class="spin"><img src="assets/icons/notion.svg" alt="Notion"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(60deg) translateY(-210px);">
+                              <div class="chip" style="transform: rotate(-60deg);">
+                                <div class="spin"><img src="assets/icons/chrome.svg" alt="Chrome"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(120deg) translateY(-210px);">
+                              <div class="chip" style="transform: rotate(-120deg);">
+                                <div class="spin"><img src="assets/icons/Octicons-mark-github.svg" alt="GitHub"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(180deg) translateY(-210px);">
+                              <div class="chip" style="transform: rotate(-180deg);">
+                                <div class="spin"><img src="assets/icons/claude.svg" alt="Claude"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(240deg) translateY(-210px);">
+                              <div class="chip" style="transform: rotate(-240deg);">
+                                <div class="spin"><img src="assets/icons/cursor.svg" alt="Cursor"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(300deg) translateY(-210px);">
+                              <div class="chip" style="transform: rotate(-300deg);">
+                                <div class="spin"><img src="assets/icons/Telegram.svg" alt="Telegram"></div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-
-                        <h2 class="beyond-card-title intro-scroll-reveal">Some ideas need working software.</h2>
-
-                        <p class="card-text">I use AI and code to test ideas beyond the clickable prototype. Some experiments stay experiments. Others turn into small products I actually use.</p>
-
-                        <span class="beyond-card-cta-link card-detail text-inherit">
-                            <span class="work-card-cta">
-                                <span class="work-card-cta-icon" aria-hidden="true">
-                                    <svg class="work-card-cta-chevron" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M22 18L28.25 24.25L22 30.5" stroke="white" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <img class="work-card-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
-                                </span>
-                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">SEE WHAT I BUILT</span></span>
-                            </span>
-                        </span>
                     </div>
-                </a>
+                </div>
 
-                <a class="group card-beyond text-inherit no-underline" href="artworks.html?from=index">
-                    <div class="image-wrapper">
-                        <div class="image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/other-medium.png">
-                            <img class="lqip-fadein" src="assets/images/other-medium.png" alt="My other medium" loading="lazy" decoding="async"/>
-                        </div>
-                        <div class="beyond-image-overlay" aria-hidden="true"></div>
+                <div class="builds-tabs" role="tablist" aria-label="BUILD">
+                    <button type="button" class="builds-tab" id="builds-tab-dimme" role="tab" aria-selected="true" aria-controls="builds-tabpanel" aria-label="DimMe" tabindex="0">
+                        <img src="assets/images/dimme-logo.png" alt="" width="64" height="64"/>
+                    </button>
+                    <button type="button" class="builds-tab" id="builds-tab-site" role="tab" aria-selected="false" aria-controls="builds-tabpanel" aria-label="My Portfolio" tabindex="-1">
+                        <img src="assets/images/app-site.png" alt="" width="64" height="64"/>
+                    </button>
+                    <button type="button" class="builds-tab" id="builds-tab-p3" role="tab" aria-selected="false" aria-controls="builds-tabpanel" aria-label="Job search stack" tabindex="-1">
+                        <img src="assets/images/app-search.png" alt="" width="64" height="64"/>
+                    </button>
+                    <button type="button" class="builds-tab" id="builds-tab-p4" role="tab" aria-selected="false" aria-controls="builds-tabpanel" aria-label="Mouth ninja" tabindex="-1">
+                        <img src="assets/images/app-ninja.png" alt="" width="64" height="64"/>
+                    </button>
+                    <button type="button" class="builds-tab" id="builds-tab-p5" role="tab" aria-selected="false" aria-controls="builds-tabpanel" aria-label="Restock" tabindex="-1">
+                        <img src="assets/images/app-shop.png" alt="" width="64" height="64"/>
+                    </button>
+                    <button type="button" class="builds-tab" id="builds-tab-p6" role="tab" aria-selected="false" aria-controls="builds-tabpanel" aria-label="Helaas Pindakaas" tabindex="-1">
+                        <img src="assets/images/app-helaas.png" alt="" width="64" height="64"/>
+                    </button>
+                    <button type="button" class="builds-tab" id="builds-tab-p7" role="tab" aria-selected="false" aria-controls="builds-tabpanel" aria-label="Kaboom" tabindex="-1">
+                        <img src="assets/images/app-kaboom.png" alt="" width="64" height="64"/>
+                    </button>
+                </div>
+
+                <div class="builds-copy">
+                    <img class="builds-logo" src="assets/images/dimme-logo.png" alt="" width="72" height="72"/>
+                    <h3 class="builds-title card-title">DimMe</h3>
+                    <div class="card-paragraph">
+                        <p class="card-text">Dozens of meditation apps and none had a voice I could listen to or a flow that worked: breathing in one app, meditation in another, music started by hand in the dark. I made the voice in ElevenLabs, the music in Suno, and put it all into one session that runs untouched. A month later I was falling asleep in minutes.</p>
                     </div>
-
-                    <div class="card-description">
-                        <div class="card-badges">
-                            <span class="badge">My Other Medium</span>
-                        </div>
-
-                        <h2 class="beyond-card-title intro-scroll-reveal">Away From Screens. Back to Making</h2>
-
-                        <p class="card-text">I've been drawing for as long as I can remember. It’s my way to explore emotions, humor, and the strange corners of everyday life. Below is a glimpse into this side of me.</p>
-
-                        <span class="beyond-card-cta-link card-detail text-inherit">
-                            <span class="work-card-cta">
-                                <span class="work-card-cta-icon" aria-hidden="true">
-                                    <svg class="work-card-cta-chevron" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M22 18L28.25 24.25L22 30.5" stroke="white" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <img class="work-card-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
-                                </span>
-                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">Explore my art</span></span>
-                            </span>
-                        </span>
-                    </div>
-                </a>
-
-                <a class="group card-beyond text-inherit no-underline" href="business.html?from=index">
-                    <div class="image-wrapper">
-                        <div class="image-parallax-track lqip-parallax-host" data-lqip-ref="assets/images/svale.png">
-                            <img class="lqip-fadein" src="assets/images/svale.png" alt="Entrepreneurial experiment" loading="lazy" decoding="async"/>
-                        </div>
-                        <div class="beyond-image-overlay" aria-hidden="true"></div>
-                    </div>
-                    <div class="card-description">
-                        <div class="card-badges">
-                            <span class="badge">My business side</span>
-                        </div>
-
-                        <h2 class="beyond-card-title intro-scroll-reveal">I almost built a business. Research said no.</h2>
-
-                        <p class="card-text">
-                            At one point, I came close to launching my own eco-friendly kitchenware brand. I built the concept, validated the market, and let the research make the call. It said no. Knowing when to stop is also a design skill.
-                        </p>
-
-                        <span class="beyond-card-cta-link card-detail text-inherit">
-                            <span class="work-card-cta">
-                                <span class="work-card-cta-icon" aria-hidden="true">
-                                    <svg class="work-card-cta-chevron" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path d="M22 18L28.25 24.25L22 30.5" stroke="white" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <img class="work-card-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
-                                </span>
-                                <span class="card-detail-text flex min-h-[48px] items-center"><span class="work-card-cta-label">READ THE STORY</span></span>
-                            </span>
-                        </span>
-                    </div>
-                </a>
-
+                    <a class="builds-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" href="experiments.html?from=index#dimme">
+                        <span class="work-card-cta-label">LEARN MORE</span>
+                        <img class="builds-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
+                    </a>
+                </div>
             </div>
+        </div>
 
-        </section>
+        <script>
+        const BUILDS = [
+          {
+            id: 'dimme',
+            name: 'DimMe',
+            logo: 'assets/images/dimme-logo.png',
+            image: 'assets/images/hands-dimme.png',
+            title: 'DimMe',
+            text: 'Dozens of meditation apps and none had a voice I could listen to or a flow that worked: breathing in one app, meditation in another, music started by hand in the dark. I made the voice in ElevenLabs, the music in Suno, and put it all into one session that runs untouched. A month later I was falling asleep in minutes.',
+            cta: 'LEARN MORE',
+            href: 'experiments.html?from=index#dimme'
+          },
+          {
+            id: 'site',
+            name: 'My Portfolio',
+            logo: 'assets/images/app-site.png',
+            image: 'assets/images/main-site.png',
+            title: 'My Portfolio',
+            text: 'Every site builder I tried gave me speed and quietly took my design with it: breakpoints I did not choose, animations that almost worked. I built this one from scratch in Cursor and made it hold every decision I had made. It also gave me a much better sense of what a design actually costs to build.',
+            cta: 'LEARN MORE',
+            href: 'experiments.html?from=index#site'
+          },
+          { id: 'p3', name: 'Job search stack', logo: 'assets/images/app-search.png', image: 'assets/images/hands-dimme.png', title: 'Job search stack', text: 'Job boards hand you a hundred postings a day and no way to tell which one deserves twenty minutes of reading. I wrote a Telegram bot that filters openings against rules I set myself and a Chrome extension that marks red and green flags on the posting before I commit to it. What survives both goes into Notion through a Claude integration.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
+          { id: 'p4', name: 'Mouth ninja', logo: 'assets/images/app-ninja.png', image: 'assets/images/Mouth-ninja-screen.png', title: 'Mouth ninja', text: 'Daily mouth exercises prescribed by a therapist, meant to happen twice a day without supervision. I built an app with a camera mirror and face tracking that confirms real movement, not just time spent waiting. Streaks and points didn\'t hold attention — a funny gif after each exercise and a spin wheel at the end did.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
+          { id: 'p5', name: 'Restock', logo: 'assets/images/app-shop.png', image: 'assets/images/preparing-image.png', pending: true, title: 'Restock', text: 'I wanted to stop overspending on groceries and stop deciding what to cook every single day. I connected Albert Heijn through their API, scraped Crisp\'s catalogue, and added everything sitting in my cabinets. The result: a weekly recipe base built around current discounts and what I already had.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
+          { id: 'p6', name: 'Helaas Pindakaas', logo: 'assets/images/app-helaas.png', image: 'assets/images/back.jpg', pending: true, title: 'Helaas Pindakaas', text: 'The inburgering exam rewards a narrow set of tricks: reusable sentence templates, negation instead of grammar you haven\'t learned yet, mirroring the question\'s words back into the answer. General language apps don\'t teach any of it. I built modes matching the exam formats, each pulling from a question bank I compiled while preparing for it myself.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
+          { id: 'p7', name: 'Kaboom', logo: 'assets/images/app-kaboom.png', image: 'assets/images/back2.png', pending: true, title: 'Kaboom', text: 'Tick Tock Bomb, but the version I wanted didn\'t exist as an app worth using. Show a picture, say the first association out loud, pass the phone before it explodes. I built it with illustrations I actually like looking at, timer randomised so nobody can game the rhythm.', cta: 'LEARN MORE', href: 'experiments.html?from=index' }
+        ];
+
+        (function () {
+            const root = document.getElementById("builds");
+            if (!root) return;
+
+            const logoEl = root.querySelector(".builds-logo");
+            const titleEl = root.querySelector(".builds-title");
+            const textEl = root.querySelector(".builds-copy .card-text");
+            const ctaEl = root.querySelector(".builds-cta");
+            const ctaLabelEl = root.querySelector(".builds-cta .work-card-cta-label");
+            const imageEl = root.querySelector(".builds-image");
+            const orbitEl = root.querySelector(".orbit-stage");
+            const frame = root.querySelector(".builds-media-frame");
+            const overlay = frame && frame.querySelector(".cover-pending");
+            const panelEl = root.querySelector(".builds-body");
+            const tablistEl = root.querySelector(".builds-tabs");
+            const tabs = Array.from(root.querySelectorAll(".builds-tab"));
+
+            function showBuild(index) {
+                const item = BUILDS[index];
+                if (!item) return;
+
+                logoEl.src = item.logo;
+                titleEl.textContent = item.title;
+                textEl.textContent = item.text;
+                ctaEl.href = item.href;
+                ctaLabelEl.textContent = item.cta;
+
+                const isOrbit = item.id === "p3";
+                if (orbitEl) orbitEl.hidden = !isOrbit;
+                if (frame) frame.classList.toggle("is-orbit", !!isOrbit);
+                imageEl.hidden = isOrbit;
+                if (!isOrbit) {
+                    imageEl.src = item.image;
+                    imageEl.alt = item.name;
+                }
+
+                if (overlay && frame) {
+                    overlay.hidden = !item.pending;
+                    frame.classList.toggle("is-pending", !!item.pending);
+                }
+
+                tabs.forEach((tab, i) => {
+                    const selected = i === index;
+                    tab.setAttribute("aria-selected", selected ? "true" : "false");
+                    tab.tabIndex = selected ? 0 : -1;
+                });
+
+                const activeTab = tabs[index];
+                if (panelEl && activeTab) {
+                    panelEl.setAttribute("aria-labelledby", activeTab.id);
+                }
+            }
+
+            tabs.forEach((tab, i) => {
+                const item = BUILDS[i];
+                if (item) {
+                    const img = tab.querySelector("img");
+                    if (img) img.src = item.logo;
+                    tab.id = "builds-tab-" + item.id;
+                    tab.setAttribute("aria-label", item.name);
+                }
+                tab.addEventListener("click", () => showBuild(i));
+            });
+
+            tablistEl.addEventListener("keydown", (event) => {
+                const current = tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true");
+                let next = current;
+                if (event.key === "ArrowRight") {
+                    next = (current + 1) % tabs.length;
+                } else if (event.key === "ArrowLeft") {
+                    next = (current - 1 + tabs.length) % tabs.length;
+                } else {
+                    return;
+                }
+                event.preventDefault();
+                showBuild(next);
+                tabs[next].focus();
+            });
+        })();
+        </script>
+
+    </section>
+
+    <div class="full-bleed bg-white flex flex-col gap-y-22">
 
         <div class="flex flex-col">
 
@@ -3118,7 +3666,7 @@
     ">
       <div class="footer-match-nav-links" style="display: flex; flex-direction: column; align-items: flex-end; gap: 16px;">
       <a href="#work"       style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Work</a>
-      <a href="experiments.html?from=index" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Play</a>
+      <a href="experiments.html?from=index" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Build</a>
       <a href="about.html"  style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">About</a>
       <a href="contact.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Contact</a>
       <a href="assets/docs/Olga_Pertseva_Product_Designer_2026.pdf" target="_blank" rel="noopener noreferrer" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:300;text-transform:uppercase;color:#ffffff;text-decoration:none;">Resume</a>
@@ -3452,7 +4000,7 @@
 
         setupIntroScrollReveal(document.getElementById("about-systems-lede"));
         setupIntroScrollReveal(document.getElementById("work-pos-lede"));
-        setupIntroScrollReveal(document.getElementById("beyond-life-lede"));
+        setupIntroScrollReveal(document.getElementById("builds-lede"));
         document.querySelectorAll("#work .work-card-surface h3.card-title.intro-scroll-reveal").forEach((el) => {
             setupWorkCardTitleScrollReveal(el);
         });
