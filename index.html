@@ -146,6 +146,9 @@
                 font-size: 30px;
                 color: var(--color-primary-dark);
                 text-decoration: none;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                font-synthesis: none;
             }
 
             & .logo-role {
@@ -2750,16 +2753,15 @@
         }
 
         /* ===== #builds — orbit animation (job search stack) ===== */
+        /* Sizes are expressed in container units against the 704x512 design so the
+           stage fits the frame at every breakpoint instead of being clipped. */
         .orbit-stage {
-          --chip: 60px;                          /* logo size */
+          --chip: calc(100cqw * (60 / 704));     /* logo size */
           --duration: 12s;                       /* one full turn */
           --ease: cubic-bezier(.6, 0, .2, 1);    /* snap of each step */
 
-          position: relative;
-          width: 704px;
-          height: 512px;
-          transform: scale(calc(100cqw / 704));
-          transform-origin: top left;
+          position: absolute;
+          inset: 0;
           overflow: hidden;
           background: #fff;
         }
@@ -2769,8 +2771,8 @@
           left: 50%;
           top: 50%;
           transform: translate(-50%, -50%);
-          width: 699px;
-          height: 508px;
+          width: calc(100cqw * (699 / 704));
+          height: auto;
           user-select: none;
           -webkit-user-drag: none;
         }
@@ -3372,32 +3374,32 @@
                         <div class="orbit-stage" hidden>
                           <img class="orbit-stage__bg" src="assets/images/back-job.png" alt="" width="699" height="508">
                           <div class="orbit">
-                            <div class="seat" style="transform: rotate(0deg) translateY(-210px);">
+                            <div class="seat" style="transform: rotate(0deg) translateY(-350%);">
                               <div class="chip" style="transform: rotate(0deg);">
                                 <div class="spin"><img src="assets/icons/notion.svg" alt="Notion"></div>
                               </div>
                             </div>
-                            <div class="seat" style="transform: rotate(60deg) translateY(-210px);">
+                            <div class="seat" style="transform: rotate(60deg) translateY(-350%);">
                               <div class="chip" style="transform: rotate(-60deg);">
                                 <div class="spin"><img src="assets/icons/chrome.svg" alt="Chrome"></div>
                               </div>
                             </div>
-                            <div class="seat" style="transform: rotate(120deg) translateY(-210px);">
+                            <div class="seat" style="transform: rotate(120deg) translateY(-350%);">
                               <div class="chip" style="transform: rotate(-120deg);">
                                 <div class="spin"><img src="assets/icons/Octicons-mark-github.svg" alt="GitHub"></div>
                               </div>
                             </div>
-                            <div class="seat" style="transform: rotate(180deg) translateY(-210px);">
+                            <div class="seat" style="transform: rotate(180deg) translateY(-350%);">
                               <div class="chip" style="transform: rotate(-180deg);">
                                 <div class="spin"><img src="assets/icons/claude.svg" alt="Claude"></div>
                               </div>
                             </div>
-                            <div class="seat" style="transform: rotate(240deg) translateY(-210px);">
+                            <div class="seat" style="transform: rotate(240deg) translateY(-350%);">
                               <div class="chip" style="transform: rotate(-240deg);">
                                 <div class="spin"><img src="assets/icons/cursor.svg" alt="Cursor"></div>
                               </div>
                             </div>
-                            <div class="seat" style="transform: rotate(300deg) translateY(-210px);">
+                            <div class="seat" style="transform: rotate(300deg) translateY(-350%);">
                               <div class="chip" style="transform: rotate(-300deg);">
                                 <div class="spin"><img src="assets/icons/Telegram.svg" alt="Telegram"></div>
                               </div>
@@ -3442,6 +3444,24 @@
                         <img class="builds-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
                     </a>
                 </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-y-6 xl:gap-y-12">
+            <div class="section-kicker text-xl/[2rem] font-light uppercase flex flex-row gap-x-5 tracking-none items-center">
+                <span class="section-kicker-blob" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.6313 0.884258C9.6594 0.304573 10.8197 0 12 0C13.1803 0 14.3406 0.304573 15.3687 0.884258C17.5927 2.34072 19.7291 3.92675 21.7668 5.63412C23.439 7.08816 24.3842 9.99624 23.851 12.1773C23.1831 14.7828 22.3659 17.3478 21.4033 19.8595C20.9109 20.9379 20.1518 21.8732 19.1978 22.577C18.2437 23.2808 17.1261 23.7301 15.9503 23.8823C13.3191 24.0392 10.6809 24.0392 8.04965 23.8823C5.86848 23.7369 3.42072 21.9194 2.59672 19.8595C1.63415 17.3478 0.816881 14.7828 0.148959 12.1773C-0.384217 9.99624 0.560958 7.08816 2.23319 5.63412C4.26307 3.92752 6.39135 2.34151 8.60706 0.884258H8.6313Z" fill="currentColor"/>
+                    </svg>
+                </span>
+                <span>WORDS</span>
+            </div>
+
+            <div class="flex flex-col gap-y-6 xl:gap-y-12">
+                <h2 id="builds-lede-after" class="section-header intro-scroll-reveal">What's it like working with me?</h2>
+                <p class="card-text">
+                    Most of what I've designed came out of long working relationships, which means the people I worked with saw the work up close. Here's what a few of them had to say about it.
+                </p>
             </div>
         </div>
 
@@ -4001,6 +4021,7 @@
         setupIntroScrollReveal(document.getElementById("about-systems-lede"));
         setupIntroScrollReveal(document.getElementById("work-pos-lede"));
         setupIntroScrollReveal(document.getElementById("builds-lede"));
+        setupIntroScrollReveal(document.getElementById("builds-lede-after"));
         document.querySelectorAll("#work .work-card-surface h3.card-title.intro-scroll-reveal").forEach((el) => {
             setupWorkCardTitleScrollReveal(el);
         });
