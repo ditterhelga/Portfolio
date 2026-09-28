@@ -2535,7 +2535,7 @@
         </div>
 
         <div class="work-cards-stack flex flex-col gap-y-12 md:gap-y-16 xl:gap-y-16">
-            <div class="card-wrapper" id="work-quray">
+            <div class="card-wrapper" id="work-first">
                 <div class="card">
                     <div class="work-card-surface flex flex-col gap-y-10 px-4 pt-14 pb-12 sm:px-8 sm:pt-16 sm:pb-13 xl:gap-y-14 xl:px-20 xl:pt-20 xl:pb-[104px] 2xl:px-[120px] 2xl:pt-[88px] 2xl:pb-[144px]">
                     <div class="card-badges">
@@ -3114,7 +3114,7 @@
         document.querySelectorAll('a[href="#work"]').forEach((link) => {
             link.addEventListener("click", (event) => {
                 if (!isMobileWorkAnchor()) return;
-                const target = document.getElementById("work-quray");
+                const target = document.getElementById("work-first");
                 if (!target) return;
                 event.preventDefault();
                 if (typeof window.__pepperedLenisScrollTo === "function") {
@@ -3123,7 +3123,7 @@
                     target.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
                 if (window.history && typeof window.history.pushState === "function") {
-                    window.history.pushState(null, "", "#work-quray");
+                    window.history.pushState(null, "", "#work-first");
                 }
             });
         });
