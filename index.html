@@ -21,7 +21,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Sofia+Sans+Condensed:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;700&family=Inter:wght@300;400;500;700;800&display=swap"
           rel="stylesheet">
 
     <!-- Tailwind -->
@@ -2605,6 +2605,135 @@
             display: block;
         }
 
+        .builds-media-frame.is-kaboom {
+            aspect-ratio: 704 / 512;
+        }
+
+        .kaboom-wrap {
+            position: absolute;
+            inset: 0;
+        }
+
+        .kaboom-stage {
+            --u: calc(100cqw / 704);
+            --screen-bg: #E0ECEE;
+            --coral: #F77F68;
+            --teal-dark: #1F4F5A;
+            container-type: inline-size;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #C9DCDF;
+            font-family: Inter, sans-serif;
+        }
+        .kaboom-stage * { box-sizing: border-box; }
+
+        .kb-strip { position: absolute; inset: 0; }
+        .kb-card {
+            position: absolute;
+            top: calc(144 * var(--u));
+            left: calc(264 * var(--u));
+            width: calc(176 * var(--u));
+            height: calc(176 * var(--u));
+            border-radius: calc(10 * var(--u));
+            background: #9FB8BC center / cover no-repeat;
+            transition: transform .6s cubic-bezier(.65, 0, .25, 1);
+        }
+        .kb-strip--back .kb-card { opacity: .55; }
+        .kb-card.no-anim { transition: none; }
+
+        .kb-phone {
+            position: absolute;
+            left: calc(245 * var(--u));
+            top: calc(24 * var(--u));
+            width: calc(214 * var(--u));
+            height: calc(464 * var(--u));
+            border-radius: calc(38 * var(--u));
+            background: #1B1B1D;
+            padding: calc(7 * var(--u));
+        }
+        .kb-screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: calc(31 * var(--u));
+            background: var(--screen-bg);
+            overflow: hidden;
+        }
+        .kb-island {
+            position: absolute;
+            top: calc(7 * var(--u));
+            left: 50%;
+            width: calc(60 * var(--u));
+            height: calc(17 * var(--u));
+            transform: translateX(-50%);
+            border-radius: 999px;
+            background: #1B1B1D;
+        }
+        .kb-chip {
+            position: absolute;
+            top: calc(41 * var(--u));
+            height: calc(24 * var(--u));
+            border-radius: calc(4 * var(--u));
+            background: #fff;
+            display: flex;
+            align-items: center;
+            gap: calc(5 * var(--u));
+            padding: 0 calc(4 * var(--u));
+            font-size: calc(7.5 * var(--u));
+            font-weight: 500;
+            color: #222;
+        }
+        .kb-chip--menu { left: calc(13 * var(--u)); width: calc(24 * var(--u)); justify-content: center; }
+        .kb-chip--menu span { display: block; width: calc(11 * var(--u)); height: calc(1.2 * var(--u)); background: #2C5E6B; box-shadow: 0 calc(3.5 * var(--u)) 0 #2C5E6B, 0 calc(-3.5 * var(--u)) 0 #2C5E6B; }
+        .kb-chip--p1 { left: calc(45 * var(--u)); width: calc(45 * var(--u)); }
+        .kb-chip--p2 { left: calc(98 * var(--u)); width: calc(44 * var(--u)); }
+        .kb-avatar {
+            width: calc(16 * var(--u));
+            height: calc(16 * var(--u));
+            border-radius: calc(3 * var(--u));
+            background: #D9B8A8 center / cover no-repeat;
+            flex: none;
+        }
+        .kb-round {
+            position: absolute;
+            top: calc(299 * var(--u));
+            left: 0; right: 0;
+            text-align: center;
+            font-size: calc(9 * var(--u));
+            letter-spacing: .02em;
+            color: #555;
+        }
+        .kb-start {
+            position: absolute;
+            top: calc(346 * var(--u));
+            left: calc(13 * var(--u));
+            width: calc(176 * var(--u));
+            height: calc(41 * var(--u));
+            border-radius: calc(3 * var(--u));
+            background: var(--coral);
+            color: #fff;
+            font-weight: 800;
+            font-size: calc(15 * var(--u));
+            letter-spacing: .03em;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: calc(2.5 * var(--u)) calc(3.5 * var(--u)) 0 var(--teal-dark);
+            transition: transform .12s ease-out, box-shadow .12s ease-out;
+        }
+        .kb-start.is-pressed { transform: translate(calc(2 * var(--u)), calc(3 * var(--u))); box-shadow: calc(.5 * var(--u)) calc(.5 * var(--u)) 0 var(--teal-dark); }
+
+        .kb-window {
+            position: absolute;
+            inset: 0;
+            clip-path: inset(calc(144 * var(--u)) calc(264 * var(--u)) calc(192 * var(--u)) calc(264 * var(--u)) round calc(10 * var(--u)));
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .kb-card, .kb-start { transition: none; }
+        }
+
         .builds-image {
             position: absolute;
             inset: 0;
@@ -3793,6 +3922,24 @@
                             </g>
                           </svg>
                         </div>
+                        <div class="kaboom-wrap" hidden>
+                          <div class="kaboom-stage" role="img" aria-label="Kaboom game screen on a phone, with picture cards sliding through it one round at a time">
+                            <div class="kb-strip kb-strip--back" aria-hidden="true"></div>
+                            <div class="kb-phone" aria-hidden="true">
+                              <div class="kb-screen">
+                                <div class="kb-island"></div>
+                                <div class="kb-chip kb-chip--menu"><span></span></div>
+                                <div class="kb-chip kb-chip--p1"><div class="kb-avatar" style="background-image:url('assets/images/Olga-pertseva-front.png')"></div>OL</div>
+                                <div class="kb-chip kb-chip--p2"><div class="kb-avatar" style="background-image:url('assets/images/app-kaboom.png')"></div>LE</div>
+                                <div class="kb-round">ROUND <span class="kb-round-n">1</span> OF 10</div>
+                                <div class="kb-start">START</div>
+                              </div>
+                            </div>
+                            <div class="kb-window" aria-hidden="true">
+                              <div class="kb-strip kb-strip--front"></div>
+                            </div>
+                          </div>
+                        </div>
                     </div>
                 </div>
 
@@ -4042,6 +4189,79 @@
             setActive(0);
         })();
 
+
+        (function () {
+          const KABOOM_IMAGES = [
+            'assets/images/kaboom/1.png',
+            'assets/images/kaboom/2.jpeg',
+            'assets/images/kaboom/3.png',
+            'assets/images/kaboom/4.png',
+            'assets/images/kaboom/5.png',
+            'assets/images/kaboom/6.png',
+            'assets/images/kaboom/7.png',
+            'assets/images/kaboom/8.png',
+            'assets/images/kaboom/9.png',
+            'assets/images/kaboom/10.png'
+          ];
+          const SLOT = 200, HOLD = 1600, PRESS = 140;
+
+          document.querySelectorAll('.kaboom-stage').forEach(stage => {
+            const back = stage.querySelector('.kb-strip--back');
+            const front = stage.querySelector('.kb-strip--front');
+            const btn = stage.querySelector('.kb-start');
+            const roundEl = stage.querySelector('.kb-round-n');
+            if (!back || !front || !btn || !roundEl) return;
+            const N = KABOOM_IMAGES.length;
+            const half = Math.floor(N / 2);
+            const pairs = KABOOM_IMAGES.map((src) => [back, front].map(strip => {
+              const c = document.createElement('div');
+              c.className = 'kb-card';
+              c.style.backgroundImage = "url('" + src + "')";
+              strip.appendChild(c);
+              return c;
+            }));
+
+            let k = 0, round = 1, timer = null, running = false;
+            const slotOf = i => ((i - k + half) % N + N) % N - half;
+            const lastSlot = pairs.map(() => null);
+
+            function place(animate) {
+              pairs.forEach((pair, i) => {
+                const s = slotOf(i);
+                const wrapped = lastSlot[i] !== null && s > lastSlot[i];
+                pair.forEach(c => {
+                  c.classList.toggle('no-anim', !animate || wrapped);
+                  c.style.transform = 'translateX(calc(' + (s * SLOT) + ' * var(--u)))';
+                });
+                lastSlot[i] = s;
+              });
+            }
+
+            function step() {
+              btn.classList.add('is-pressed');
+              setTimeout(() => {
+                btn.classList.remove('is-pressed');
+                k = (k + 1) % N;
+                round = round % N + 1;
+                roundEl.textContent = round;
+                place(true);
+              }, PRESS);
+            }
+
+            function start() {
+              if (running || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+              running = true;
+              timer = setInterval(step, HOLD + 600);
+            }
+            function stop() { running = false; clearInterval(timer); }
+
+            place(false);
+            new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting ? start() : stop()), { threshold: .3 }).observe(stage);
+            stage.kaboomStart = start;
+            stage.kaboomStop = stop;
+          });
+        })();
+
         const BUILDS = [
           {
             id: 'dimme',
@@ -4067,7 +4287,7 @@
           { id: 'p4', name: 'Mouth ninja', logo: 'assets/images/app-ninja.png', image: 'assets/images/Mouth-ninja-screen.png', title: 'Mouth ninja', text: 'Daily mouth exercises prescribed by a therapist, meant to happen twice a day without supervision. I built an app with a camera mirror and face tracking that confirms real movement, not just time spent waiting. Streaks and points didn\'t hold attention — a funny gif after each exercise and a spin wheel at the end did.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
           { id: 'p5', name: 'Restock', logo: 'assets/images/app-shop.png', image: 'assets/images/preparing-image.png', title: 'Restock', text: 'I wanted to stop overspending on groceries, stop throwing out food I forgot I had, and stop deciding what to cook every single day. I connected Albert Heijn through their API, scraped Crisp\'s catalogue, and added everything sitting in my cabinets. Every week I got a menu built around current discounts and what was already at home, and far less of it ended up in the bin.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
           { id: 'p6', name: 'Helaas Pindakaas', logo: 'assets/images/app-helaas.png', image: 'assets/images/back.jpg', pending: true, title: 'Helaas Pindakaas', text: 'The inburgering exam rewards a narrow set of tricks: reusable sentence templates, negation instead of grammar you haven\'t learned yet, mirroring the question\'s words back into the answer. General language apps don\'t teach any of it. I built modes matching the exam formats, each pulling from a question bank I compiled while preparing for it myself.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
-          { id: 'p7', name: 'Kaboom', logo: 'assets/images/app-kaboom.png', image: 'assets/images/back2.png', pending: true, title: 'Kaboom', text: 'Tick Tock Bomb, but the version I wanted didn\'t exist as an app worth using. Show a picture, say the first association out loud, pass the phone before it explodes. I built it with illustrations I actually like looking at, timer randomised so nobody can game the rhythm.', cta: 'LEARN MORE', href: 'experiments.html?from=index' }
+          { id: 'p7', name: 'Kaboom', logo: 'assets/images/app-kaboom.png', image: 'assets/images/back2.png', title: 'Kaboom', text: 'Tick Tock Bomb, but the version I wanted didn\'t exist as an app worth using. Show a picture, say the first association out loud, pass the phone before it explodes. I built it with illustrations I actually like looking at, timer randomised so nobody can game the rhythm.', cta: 'LEARN MORE', href: 'experiments.html?from=index' }
         ];
 
         (function () {
@@ -4083,6 +4303,8 @@
             const orbitEl = root.querySelector(".orbit-stage");
             const restockEl = root.querySelector(".restock-stage");
             const restockSvg = restockEl && restockEl.querySelector("svg");
+            const kaboomWrap = root.querySelector(".kaboom-wrap");
+            const kaboomStage = root.querySelector(".kaboom-stage");
             const frame = root.querySelector(".builds-media-frame");
             const overlay = frame && frame.querySelector(".cover-pending");
             const panelEl = root.querySelector(".builds-body");
@@ -4104,6 +4326,15 @@
                 }
             }
 
+            function syncKaboomAnim(active) {
+                if (!kaboomStage) return;
+                if (active) {
+                    if (typeof kaboomStage.kaboomStart === "function") kaboomStage.kaboomStart();
+                } else if (typeof kaboomStage.kaboomStop === "function") {
+                    kaboomStage.kaboomStop();
+                }
+            }
+
             if (restockSvg && typeof restockSvg.pauseAnimations === "function") {
                 restockSvg.pauseAnimations();
             }
@@ -4120,18 +4351,22 @@
 
                 const isOrbit = item.id === "p3";
                 const isRestock = item.id === "p5";
+                const isKaboom = item.id === "p7";
                 if (orbitEl) orbitEl.hidden = !isOrbit;
                 if (restockEl) restockEl.hidden = !isRestock;
+                if (kaboomWrap) kaboomWrap.hidden = !isKaboom;
                 if (frame) {
                     frame.classList.toggle("is-orbit", !!isOrbit);
                     frame.classList.toggle("is-restock", !!isRestock);
+                    frame.classList.toggle("is-kaboom", !!isKaboom);
                 }
-                imageEl.hidden = isOrbit || isRestock;
-                if (!isOrbit && !isRestock) {
+                imageEl.hidden = isOrbit || isRestock || isKaboom;
+                if (!isOrbit && !isRestock && !isKaboom) {
                     imageEl.src = item.image;
                     imageEl.alt = item.name;
                 }
                 syncRestockAnim(isRestock);
+                syncKaboomAnim(isKaboom);
 
                 if (overlay && frame) {
                     overlay.hidden = !item.pending;
