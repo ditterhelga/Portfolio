@@ -2557,12 +2557,13 @@
             width: 18px;
             height: 14px;
             flex-shrink: 0;
+            color: #0016F2;
             transition: transform 0.2s ease;
-            filter: brightness(0) saturate(100%) invert(13%) sepia(99%) saturate(5350%) hue-rotate(232deg) brightness(90%) contrast(128%);
         }
 
         @media (hover: hover) and (pointer: fine) {
             .builds-cta:hover .builds-cta-arrow {
+                color: #0016F2;
                 transform: translateX(4px);
             }
         }
@@ -2910,6 +2911,119 @@
 
         @media (prefers-reduced-motion: reduce) {
           .cover-pending__spinner span { animation: none; opacity: .6; }
+        }
+
+        /* Testimonials — gap matches #work .work-cards-stack (gap-y-12 / md:gap-y-16) */
+        #builds .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: stretch;
+        }
+
+        @media (min-width: 768px) {
+            #builds .testimonials-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+            }
+        }
+
+        #builds .testimonial-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            background: #fff;
+            border: 0;
+            border-radius: 20px;
+            box-shadow: none;
+            padding: 24px;
+        }
+
+        @media (min-width: 768px) {
+            #builds .testimonial-card {
+                padding: 32px;
+            }
+        }
+
+        #builds .testimonial-card .card-badges {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #builds .testimonial-quote {
+            margin: 24px 0 16px;
+            padding: 0;
+            border: 0;
+            font-family: var(--font-family-sofia), "Sofia Sans Condensed", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            font-size: 26px;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+        }
+
+        @media (min-width: 768px) {
+            #builds .testimonial-quote {
+                font-size: 32px;
+            }
+        }
+
+        #builds .testimonial-card > .card-text {
+            margin: 0;
+        }
+
+        #builds .testimonial-author {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 24px;
+        }
+
+        #builds .testimonial-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        #builds .testimonial-author-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        #builds .testimonial-name,
+        #builds .testimonial-role {
+            margin: 0;
+            font-family: var(--font-family-inter), Inter, sans-serif;
+            font-size: 16px;
+            line-height: 1.25;
+            color: var(--color-text-primary);
+        }
+
+        #builds .testimonial-name {
+            font-weight: 700;
+        }
+
+        #builds .testimonial-role {
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        #builds .testimonials-link {
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            #builds .testimonials-link {
+                margin-top: 4rem;
+            }
         }
     </style>
 </head>
@@ -3441,7 +3555,10 @@
                     </div>
                     <a class="builds-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" href="experiments.html?from=index#dimme">
                         <span class="work-card-cta-label">LEARN MORE</span>
-                        <img class="builds-cta-arrow" src="assets/images/arrow-hover.svg" alt="" width="18" height="14"/>
+                        <svg class="builds-cta-arrow" viewBox="0 0 16.0417 14.0833" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M9 1.04167L15 7.04167L9 13.0417" stroke="currentColor" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="13" y1="7.04167" x2="1" y2="7.04167" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -3465,7 +3582,81 @@
             </div>
         </div>
 
+        <div class="testimonials">
+            <div class="testimonials-grid" id="testimonials-grid" aria-labelledby="builds-lede-after"></div>
+            <a class="builds-cta testimonials-link focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" href="https://www.linkedin.com/in/olga-pertseva/details/recommendations/" target="_blank" rel="noopener">
+                <span class="work-card-cta-label">Read the full recommendations on LinkedIn</span>
+                <svg class="builds-cta-arrow" viewBox="0 0 16.0417 14.0833" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M9 1.04167L15 7.04167L9 13.0417" stroke="currentColor" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="13" y1="7.04167" x2="1" y2="7.04167" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a>
+        </div>
+
         <script>
+        const TESTIMONIALS = [
+          {
+            pill: "PUBLIC-SECTOR PLATFORM",
+            quote: "She always knows the users personally, not from a document.",
+            text: "When someone argued, she never got defensive. She just asked more questions.",
+            name: "Viacheslav Bogoroditckii",
+            title: "Product Manager",
+            photo: "assets/images/slava.jpeg"
+          },
+          {
+            pill: "DREAMKAS POS, CSI SELF-CHECKOUT",
+            quote: "Not just designing screens, but helping us shape how the whole system worked.",
+            text: "Olga was always asking the right questions, thinking about edge cases, and making sure we weren't just ticking boxes.",
+            name: "Sergey Kapatsevich",
+            title: "Product Manager",
+            photo: "assets/images/sergey.jpeg"
+          },
+          {
+            pill: "BILLFOLD POS",
+            quote: "I could bring her a rough problem, and she would turn it into a clear, thoughtful solution without needing constant direction or follow-up.",
+            text: "What impressed me the most was her ability to consistently deliver exceptional visual design while keeping the development process moving quickly.",
+            name: "Ruslan Nurgalin",
+            title: "Product Manager",
+            photo: "assets/images/ruslan.jpeg"
+          },
+          {
+            pill: "SUBWAY LEARNING PLATFORM",
+            quote: "Clear, thoughtful design solutions that aligned with our business goals.",
+            text: "She brought a structured, user-centered approach to a complex project with multiple stakeholders.",
+            name: "Dmitry Bolotov",
+            title: "Digital Director",
+            photo: "assets/images/dmitry.jpeg"
+          }
+        ];
+
+        (function () {
+            const grid = document.getElementById("testimonials-grid");
+            if (!grid) return;
+
+            const escapeHtml = (value) => String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+
+            grid.innerHTML = TESTIMONIALS.map((item) => `
+                <article class="testimonial-card">
+                    <ul class="card-badges">
+                        <li class="badge">${escapeHtml(item.pill)}</li>
+                    </ul>
+                    <blockquote class="testimonial-quote intro-scroll-reveal">\u201C${escapeHtml(item.quote)}\u201D</blockquote>
+                    <p class="card-text">${escapeHtml(item.text)}</p>
+                    <div class="testimonial-author">
+                        <img class="testimonial-photo" src="${escapeHtml(item.photo)}" alt="${escapeHtml(item.name)}" width="56" height="56" loading="lazy">
+                        <div class="testimonial-author-text">
+                            <p class="testimonial-name">${escapeHtml(item.name)}</p>
+                            <p class="testimonial-role">${escapeHtml(item.title)}</p>
+                        </div>
+                    </div>
+                </article>
+            `).join("");
+        })();
+
         const BUILDS = [
           {
             id: 'dimme',
@@ -3951,7 +4142,7 @@
 
         const introScrollRevealTickers = [];
 
-        function setupIntroScrollReveal(el) {
+        function setupIntroScrollReveal(el, delay) {
             if (!el || reducedMotion) return;
             const endColor = getComputedStyle(el).color || "#302f2f";
             const raw = el.textContent.trim().replace(/\s+/g, " ");
@@ -3970,7 +4161,7 @@
                 ease: "power3.inOut",
                 stagger: 0.65,
                 duration: 11,
-            });
+            }, delay || 0);
 
             function tick() {
                 const { startY, endY } = introScrollRevealViewportBand();
@@ -4022,6 +4213,9 @@
         setupIntroScrollReveal(document.getElementById("work-pos-lede"));
         setupIntroScrollReveal(document.getElementById("builds-lede"));
         setupIntroScrollReveal(document.getElementById("builds-lede-after"));
+        document.querySelectorAll("#testimonials-grid .testimonial-quote.intro-scroll-reveal").forEach((el, index) => {
+            setupIntroScrollReveal(el, index * 0.75);
+        });
         document.querySelectorAll("#work .work-card-surface h3.card-title.intro-scroll-reveal").forEach((el) => {
             setupWorkCardTitleScrollReveal(el);
         });
