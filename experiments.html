@@ -844,6 +844,143 @@
             z-index: 2;
         }
 
+
+        /* ===== experiment media stages (orbit + restock) ===== */
+        .experiment-anim {
+            container-type: inline-size;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .experiment-anim--orbit {
+            background: #fff;
+        }
+
+        .experiment-anim--restock {
+            background: #EBF0F3;
+        }
+
+        .experiment-anim .orbit-stage,
+        .experiment-anim .restock-stage {
+            position: absolute;
+            inset: auto;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: auto;
+            aspect-ratio: 704 / 512;
+            overflow: hidden;
+            container-type: inline-size;
+        }
+
+        /* Keep orbit logos above the bg; main img { z-index: 2 } would otherwise
+           lift .orbit-stage__bg over the chip stack. */
+        .experiment-anim .orbit-stage__bg {
+            z-index: 0;
+        }
+
+        .experiment-anim .orbit {
+            z-index: 1;
+        }
+
+        .experiment-anim .restock-stage > svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+/* ===== orbit animation (job search stack) ===== */
+        /* Sizes are expressed in container units against the 704x512 design so the
+           stage fits the frame at every breakpoint instead of being clipped. */
+        .orbit-stage {
+          --chip: calc(100cqw * (60 / 704));     /* logo size */
+          --duration: 12s;                       /* one full turn */
+          --ease: cubic-bezier(.6, 0, .2, 1);    /* snap of each step */
+
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #fff;
+        }
+
+        .orbit-stage__bg {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: calc(100cqw * (699 / 704));
+          height: auto;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+
+        .orbit {
+          position: absolute;
+          inset: 0;
+          display: grid;
+          place-items: center;
+          animation: orbit-spin var(--duration) infinite var(--ease);
+          will-change: transform;
+        }
+
+        .seat {
+          position: absolute;
+          width: var(--chip);
+          height: var(--chip);
+        }
+
+        .chip { width: 100%; height: 100%; }
+
+        /* cancels the ring rotation so logos stay upright */
+        .spin {
+          width: 100%;
+          height: 100%;
+          display: grid;
+          place-items: center;
+          animation: orbit-counter var(--duration) infinite var(--ease);
+          will-change: transform;
+        }
+
+        .spin img { width: 100%; height: 100%; object-fit: contain; }
+
+        @keyframes orbit-spin {
+          0%       { transform: rotate(0deg); }
+          10.3333% { transform: rotate(60deg); }
+          16.6667% { transform: rotate(60deg); }
+          27.0%    { transform: rotate(120deg); }
+          33.3333% { transform: rotate(120deg); }
+          43.6667% { transform: rotate(180deg); }
+          50.0%    { transform: rotate(180deg); }
+          60.3333% { transform: rotate(240deg); }
+          66.6667% { transform: rotate(240deg); }
+          77.0%    { transform: rotate(300deg); }
+          83.3333% { transform: rotate(300deg); }
+          93.6667% { transform: rotate(360deg); }
+          100%     { transform: rotate(360deg); }
+        }
+
+        @keyframes orbit-counter {
+          0%       { transform: rotate(0deg); }
+          10.3333% { transform: rotate(-60deg); }
+          16.6667% { transform: rotate(-60deg); }
+          27.0%    { transform: rotate(-120deg); }
+          33.3333% { transform: rotate(-120deg); }
+          43.6667% { transform: rotate(-180deg); }
+          50.0%    { transform: rotate(-180deg); }
+          60.3333% { transform: rotate(-240deg); }
+          66.6667% { transform: rotate(-240deg); }
+          77.0%    { transform: rotate(-300deg); }
+          83.3333% { transform: rotate(-300deg); }
+          93.6667% { transform: rotate(-360deg); }
+          100%     { transform: rotate(-360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .orbit, .spin { animation: none; }
+        }
         @media (min-width: 1536px) {
             #case-side-nav {
                 width: 352px;
@@ -898,6 +1035,8 @@
                 <a href="#dimme-app" data-target="dimme-app" class="case-side-nav-link">Dimme</a>
                 <a href="#project-2" data-target="project-2" class="case-side-nav-link">Mouth Ninja</a>
                 <a href="#project-3" data-target="project-3" class="case-side-nav-link">Peppered.design</a>
+                <a href="#project-4" data-target="project-4" class="case-side-nav-link">Job search</a>
+                <a href="#project-5" data-target="project-5" class="case-side-nav-link">Restock</a>
             </nav>
         </aside>
 
@@ -916,7 +1055,7 @@
                         <span class="text-[#8A8A8A]">AI Experiments</span>
                     </div>
                     <h1 class="max-sm:order-2 section-header">Things I built because I needed them.</h1>
-                    <p class="max-sm:order-4 font-light text-5/8">These are personal projects I actually built: a sleep app, a therapy tracker, and this website. Real problems, real code, real outcomes.</p>
+                    <p class="max-sm:order-4 font-light text-5/8">These are personal projects I built for problems in my own life, and I still use most of them.</p>
                 </div>
             </div>
         </section>
@@ -1114,6 +1253,289 @@
                 </div>
             </div>
         </section>
+
+        <section id="project-4" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="card-badges hidden sm:flex w-full min-w-0 mb-2 md:mb-3">
+                    <span class="badge">cursor</span>
+                    <span class="badge">claude</span>
+                    <span class="badge">notion</span>
+                    <span class="badge">telegram</span>
+                </div>
+
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                        <h2 class="section-header w-full">Job search stack. The tools that read postings before I do.</h2>
+                        <div class="card-badges w-full min-w-0 mt-4 mb-2 sm:hidden">
+                            <span class="badge">cursor</span>
+                            <span class="badge">claude</span>
+                            <span class="badge">notion</span>
+                            <span class="badge">telegram</span>
+                        </div>
+                    </div>
+
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Job search stack. The tools that read postings before I do.</h2>
+
+                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-4 md:order-1 2xl:min-w-0">
+                            <p class="font-light text-5/8">Job boards sent me around a hundred new postings a day. Most of them failed on something obvious at a glance, like a Dutch language requirement or a marketing role with a design title. Spotting it still meant opening every posting and reading until the problem showed up.</p>
+                        </div>
+
+                        <div class="order-3 md:order-3 min-w-0 overflow-hidden rounded-[20px]">
+                            <div class="experiment-anim experiment-anim--orbit mt-0 w-full aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full" role="img" aria-label="Job search tools orbiting around a shared workflow">
+<div class="orbit-stage">
+                          <img class="orbit-stage__bg" src="assets/images/back-job.png" alt="" width="699" height="508">
+                          <div class="orbit">
+                            <div class="seat" style="transform: rotate(0deg) translateY(-350%);">
+                              <div class="chip" style="transform: rotate(0deg);">
+                                <div class="spin"><img src="assets/icons/notion.svg" alt="Notion"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(60deg) translateY(-350%);">
+                              <div class="chip" style="transform: rotate(-60deg);">
+                                <div class="spin"><img src="assets/icons/chrome.svg" alt="Chrome"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(120deg) translateY(-350%);">
+                              <div class="chip" style="transform: rotate(-120deg);">
+                                <div class="spin"><img src="assets/icons/Octicons-mark-github.svg" alt="GitHub"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(180deg) translateY(-350%);">
+                              <div class="chip" style="transform: rotate(-180deg);">
+                                <div class="spin"><img src="assets/icons/claude.svg" alt="Claude"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(240deg) translateY(-350%);">
+                              <div class="chip" style="transform: rotate(-240deg);">
+                                <div class="spin"><img src="assets/icons/cursor.svg" alt="Cursor"></div>
+                              </div>
+                            </div>
+                            <div class="seat" style="transform: rotate(300deg) translateY(-350%);">
+                              <div class="chip" style="transform: rotate(-300deg);">
+                                <div class="spin"><img src="assets/icons/Telegram.svg" alt="Telegram"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 max-md:order-5 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">What I built</p>
+                            <p class="font-light text-5/8">Three small tools that hand work to each other. A Telegram bot collects new openings and drops anything that breaks rules I wrote myself. A Chrome extension marks red and green flags directly on the posting page, so I know within seconds whether a role is worth reading properly. Whatever survives both goes into my Notion tracker through a Claude integration, with the company and the next step already filled in.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">The result</p>
+                            <p class="font-light text-5/8">Every application I send has passed my own criteria twice, and the tracker shows where each one stands without me updating it by hand.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-5" class="flex flex-col gap-y-10 md:gap-y-12 xl:gap-y-14 scroll-mt-[120px]">
+            <div class="w-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px]">
+                <div class="card-badges hidden sm:flex w-full min-w-0 mb-2 md:mb-3">
+                    <span class="badge">cursor</span>
+                    <span class="badge">claude</span>
+                </div>
+
+                <div class="flex w-full min-w-0 max-w-full flex-col gap-y-8 md:gap-y-6 xl:gap-y-8 max-md:overflow-visible md:overflow-hidden md:flex md:flex-col xl:grid xl:grid-cols-[856px_320px] xl:items-start xl:gap-x-10 2xl:grid-cols-[1048px_352px] 2xl:gap-x-[40px] 2xl:gap-y-[40px]">
+                    <div class="flex w-full flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 2xl:gap-y-[40px] md:hidden">
+                        <h2 class="section-header w-full">Restock. The weekly menu that starts in my cabinets.</h2>
+                        <div class="card-badges w-full min-w-0 mt-4 mb-2 sm:hidden">
+                            <span class="badge">cursor</span>
+                            <span class="badge">claude</span>
+                        </div>
+                    </div>
+
+                    <h2 class="section-header hidden w-full md:order-0 md:block xl:col-span-2 2xl:col-span-2 2xl:row-start-1">Restock. The weekly menu that starts in my cabinets.</h2>
+
+                    <div class="flex w-full min-w-0 flex-col gap-y-8 max-md:contents md:gap-y-[48px] xl:min-w-0 xl:flex-col xl:gap-y-[48px] xl:col-start-1 xl:row-start-2 2xl:gap-y-[48px] 2xl:row-start-2">
+                        <div class="dimme-overview-problem w-full min-w-0 space-y-3 md:space-y-4 order-4 md:order-1 2xl:min-w-0">
+                            <p class="font-light text-5/8">I was overspending on groceries and still throwing food away: the half-used jar at the back of the shelf, vegetables bought for a recipe I never got round to. On top of that, someone had to decide what to cook every single day, and that someone was me.</p>
+                        </div>
+
+                        <div class="order-3 md:order-3 min-w-0 overflow-hidden rounded-[20px]">
+                            <div class="experiment-anim experiment-anim--restock mt-0 w-full aspect-[288/184] md:mt-4 md:aspect-[1048/656] xl:mt-6 xl:aspect-[1048/656] 2xl:mt-[24px] 2xl:w-full" role="img" aria-label="How Restock turns discounts and cabinet photos into a weekly menu">
+<div class="restock-stage">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 704 512" preserveAspectRatio="xMidYMid meet" class="restock-flow" role="img" aria-labelledby="rf-title rf-desc" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTphZTExNGRkOC1kZTk4LTRlYTItODk3MS0yNmExMmE0YzA4ZmQAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaEJoVf58INQfSfP4Kke7gckAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo1YTdkNDkzNC0xZmViLTRkYWYtYWZiYS1iN2RmOTk5NzcxN2VscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoDzecMNgT4bxCbFPORCL38gAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggmb8z6RX/mCg6NwIXbZVjh5N/M0CwfICD3IacoamQEOmkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaNVA7CrgTsf29dH46nxzaVAAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBpb5MkIfH03VlhKSfHNoo+EdlDjwJMUQ2UWung/CksjWRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjkZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmFlMTE0ZGQ4LWRlOTgtNGVhMi04OTcxLTI2YTEyYTRjMDhmZC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjViYmM0MDBhLWQ5YmEtNDE2NC1iMTMxLTBhYzk4ZTM4ZGZmY3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCZvzPpFf+YKDo3AhdtlWOHk38zQLB8gIPchpyhqZAQ6aJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggUJUye6f9YD/nT2QbF7hfA4KZ49GCghMdtNUZ+5Nq+22iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFgg8PkhVQXnzJUcpT5kX9Vh1MYMxw1Sz6W22RXbEjxXgKN0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQBreWTakNH92z7ga3zW01SO7psfO14zfDNCl2rc8AED6hLOsjrwPdeAti9STAWteJgTqUNxtPDaOqkEy8V6wUOc=</c2pa:manifest></metadata>
+                            <title id="rf-title">How Restock works</title>
+                            <desc id="rf-desc">Albert Heijn discounts, the Crisp catalogue, photos of my cabinets and my own rules flow into Restock, which produces a shopping list and a weekly menu, leading to less food waste and a smaller grocery bill.</desc>
+                            <defs>
+                              <clipPath id="rf-clip-ah"><rect x="30" y="44" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-crisp"><rect x="30" y="152" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-photos"><rect x="30" y="260" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-rules"><rect x="30" y="368" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-shop"><rect x="300" y="180" width="100" height="100" rx="16"/></clipPath>
+                              <clipPath id="rf-fill">
+                                <rect x="474" y="376" width="0" height="72" rx="24">
+                                  <animate attributeName="width" dur="7s" repeatCount="indefinite" values="0;0;210;210;0;0" keyTimes="0;0.62;0.7;0.93;0.97;1"/>
+                                </rect>
+                              </clipPath>
+                            </defs>
+                            <style>
+                              .restock-flow .title { font-family: 'Sofia Sans Condensed', sans-serif; font-weight: 500; font-size: 20px; fill: #333; transform-box: fill-box; }
+                              .restock-flow .caption { font-family: Inter, sans-serif; font-weight: 300; font-size: 12px; fill: #555; }
+                              .restock-flow .res-text { font-family: 'Sofia Sans Condensed', sans-serif; font-weight: 500; font-size: 20px; text-anchor: middle; }
+                              .restock-flow .line { fill: none; stroke: #0016F2; stroke-opacity: .22; stroke-width: 1.5; }
+                              .restock-flow .dot { fill: #0016F2; }
+                              .restock-flow .icon { fill: none; stroke: #0016F2; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+                              .restock-flow .pulse { fill: none; stroke: #0016F2; stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; animation: rf-pulse 7s infinite; }
+                              .restock-flow .hit { fill: none; stroke: #0016F2; stroke-width: 1.5; opacity: 0; animation: rf-hit 7s infinite; }
+                              .restock-flow .hit-2 { animation-delay: .2s; }
+                              .restock-flow .ghost { animation: none; }
+                              .restock-flow .result { transform-box: fill-box; transform-origin: center; animation: rf-settle 7s infinite; }
+                              .restock-flow .static-result { display: none; }
+                              @keyframes rf-pulse { 0%, 22% { opacity: 0; transform: scale(1); } 27% { opacity: .5; } 40%, 100% { opacity: 0; transform: scale(1.18); } }
+                              @keyframes rf-hit { 0%, 50% { opacity: 0; } 54% { opacity: 1; } 68%, 100% { opacity: 0; } }
+                              @keyframes rf-breathe { 0%, 100% { opacity: .35; } 50% { opacity: .7; } }
+                              @keyframes rf-settle { 0%, 69% { transform: scale(1); } 72% { transform: scale(1.04); } 76%, 100% { transform: scale(1); } }
+                              @container (max-width: 480px) {
+                                .restock-flow .caption { display: none; }
+                                .restock-flow .title { font-size: 28px; transform: translateY(13px); }
+                                .restock-flow .res-text { font-size: 23px; }
+                              }
+                              @media (prefers-reduced-motion: reduce) {
+                                .restock-flow .dot, .restock-flow .anim-result { display: none; }
+                                .restock-flow .static-result { display: inline; }
+                                .restock-flow .pulse, .restock-flow .hit, .restock-flow .ghost { animation: none; opacity: 0; }
+                              }
+                            </style>
+
+                            <rect class="stage-bg" width="704" height="512" fill="#EBF0F3"/>
+
+                            <g transform="translate(2 17)">
+                              <path id="rf-in1" class="line" d="M226 68 C 268 68, 262 230, 300 230"/>
+                              <path id="rf-in2" class="line" d="M226 176 C 266 176, 264 230, 300 230"/>
+                              <path id="rf-in3" class="line" d="M226 284 C 266 284, 264 230, 300 230"/>
+                              <path id="rf-in4" class="line" d="M226 392 C 268 392, 262 230, 300 230"/>
+                              <path id="rf-out1" class="line" d="M400 230 C 442 230, 440 168, 474 168"/>
+                              <path id="rf-out2" class="line" d="M400 230 C 442 230, 440 288, 474 288"/>
+                              <path id="rf-res" class="line" stroke-dasharray="3 5" d="M579 326 L 579 376"/>
+
+                              <g>
+                                <rect x="16" y="30" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect x="30" y="44" width="48" height="48" rx="12" fill="#FDE4DF"/>
+                                <image href="assets/images/albert.png" x="30" y="44" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-ah)"/>
+                                <text class="title" x="90" y="64">Albert Heijn</text>
+                                <text class="caption" x="90" y="84">this week's discounts</text>
+                              </g>
+                              <g>
+                                <rect x="16" y="138" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect x="30" y="152" width="48" height="48" rx="12" fill="#FDE4DF"/>
+                                <image href="assets/images/crisp.png" x="30" y="152" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-crisp)"/>
+                                <text class="title" x="90" y="172">Crisp</text>
+                                <text class="caption" x="90" y="192">the full catalogue</text>
+                              </g>
+                              <g>
+                                <rect x="16" y="246" width="210" height="76" rx="20" fill="#fff"/>
+                                <image href="assets/images/photo-app.webp" x="30" y="260" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-photos)"/>
+                                <text class="title" x="90" y="280">Photos</text>
+                                <text class="caption" x="90" y="300">what's in my cabinets</text>
+                              </g>
+                              <g>
+                                <rect x="16" y="354" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect x="30" y="368" width="48" height="48" rx="12" fill="#FDE4DF"/>
+                                <image href="assets/images/claude-app.png" x="30" y="368" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-rules)"/>
+                                <text class="title" x="90" y="388">My rules</text>
+                                <text class="caption" x="90" y="408">budget, taste, time</text>
+                              </g>
+
+                              <rect class="pulse" x="300" y="180" width="100" height="100" rx="16"/>
+                              <g clip-path="url(#rf-clip-shop)">
+                                <image href="assets/images/app-shop.png" x="300" y="180" width="100" height="100" preserveAspectRatio="xMidYMid meet"/>
+                              </g>
+
+                              <g>
+                                <rect x="474" y="130" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect class="hit" x="474" y="130" width="210" height="76" rx="20"/>
+                                <circle cx="512" cy="168" r="24" fill="#FFF2D7"/>
+                                <path class="icon" d="M503 160 l2 2 4-4 M513 160 H522 M503 168 l2 2 4-4 M513 168 H522 M503 176 l2 2 4-4 M513 176 H522"/>
+                                <text class="title" x="548" y="164">Shopping list</text>
+                                <text class="caption" x="548" y="184">only what's missing</text>
+                              </g>
+                              <g>
+                                <rect x="474" y="250" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect class="hit hit-2" x="474" y="250" width="210" height="76" rx="20"/>
+                                <circle cx="512" cy="288" r="24" fill="#FFF2D7"/>
+                                <rect class="icon" x="500" y="278" width="24" height="22" rx="4"/>
+                                <path class="icon" d="M500 285 H524 M506 274 V281 M518 274 V281"/>
+                                <text class="title" x="548" y="284">Weekly menu</text>
+                                <text class="caption" x="548" y="304">built around the deals</text>
+                              </g>
+
+                              <g class="result anim-result">
+                                <g class="ghost" opacity="0.1">
+                                  <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0.1;0.1;0;0;0.1;0.1" keyTimes="0;0.69;0.7;0.96;0.97;1"/>
+                                  <rect x="474" y="376" width="210" height="72" rx="24" fill="none" stroke="#0016F2" stroke-width="1.5" stroke-dasharray="4 5"/>
+                                  <text class="res-text" x="579" y="407" fill="#0016F2">Less food waste</text>
+                                  <text class="res-text" x="579" y="431" fill="#0016F2">Smaller grocery bill</text>
+                                </g>
+                                <g clip-path="url(#rf-fill)">
+                                  <rect x="474" y="376" width="210" height="72" rx="24" fill="#0016F2"/>
+                                  <text class="res-text" x="579" y="407" fill="#fff">Less food waste</text>
+                                  <text class="res-text" x="579" y="431" fill="#fff">Smaller grocery bill</text>
+                                </g>
+                              </g>
+                              <g class="static-result">
+                                <rect x="474" y="376" width="210" height="72" rx="24" fill="#0016F2"/>
+                                <text class="res-text" x="579" y="407" fill="#fff">Less food waste</text>
+                                <text class="res-text" x="579" y="431" fill="#fff">Smaller grocery bill</text>
+                              </g>
+
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.2;1"><mpath href="#rf-in1"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.01;0.19;0.2;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.035;0.235;1"><mpath href="#rf-in2"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.035;0.045;0.225;0.235;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.07;0.27;1"><mpath href="#rf-in3"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.07;0.08;0.26;0.27;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.105;0.305;1"><mpath href="#rf-in4"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.105;0.115;0.295;0.305;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.34;0.51;1"><mpath href="#rf-out1"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.35;0.5;0.51;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.37;0.54;1"><mpath href="#rf-out2"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.37;0.38;0.53;0.54;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.56;0.62;1"><mpath href="#rf-res"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.56;0.57;0.61;0.62;1"/>
+                              </circle>
+                            </g>
+                          </svg>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dimme-built-copy w-full min-w-0 space-y-8 md:space-y-10 max-md:order-5 xl:col-start-1 xl:row-start-3 2xl:col-start-1 2xl:row-start-3 xl:max-w-[856px] 2xl:max-w-[1048px]">
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">What I built</p>
+                            <p class="font-light text-5/8">A tool that plans the week's cooking from what is on offer right now and what is already at home. It pulls current discounts from Albert Heijn through their API and adds Crisp's catalogue, which I scraped. I added everything in my cabinets by photographing the shelves. From all of that, Claude puts together a weekly menu and a shopping list with only what's missing.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <p class="text-5/8 font-medium">The result</p>
+                            <p class="font-light text-5/8">Every week I got a menu built around the deals, and far less food ended up in the bin. Deciding what to cook stopped being a daily job.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
     </div>
 
@@ -1296,16 +1718,16 @@
         const sideNav = document.getElementById("case-side-nav");
         const overviewSection = document.getElementById("dimme-app");
         const shellEl = document.querySelector(".experiments-shell");
-        const reflectionsSection = document.getElementById("project-3");
-        const reflectionsCard = document.querySelector("#project-3 .lqip-parallax-host");
-        const sectionIds = ["dimme-app", "project-2", "project-3"];
+        const reflectionsSection = document.getElementById("project-5");
+        const reflectionsCard = document.querySelector("#project-5 .experiment-anim");
+        const sectionIds = ["dimme-app", "project-2", "project-3", "project-4", "project-5"];
         const sectionNodes = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
         const sideNavLinks = sideNav ? Array.from(sideNav.querySelectorAll(".case-side-nav-link")) : [];
         const sideNavIndicator = sideNav ? sideNav.querySelector(".case-side-nav-indicator") : null;
         const sideNavToggle = document.getElementById("case-side-nav-toggle");
         const sideNavMenu = document.getElementById("case-side-nav-menu");
         const overlapBlockers = Array.from(document.querySelectorAll(
-            'main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3'
+            'main section > img, main img.overview-img-1, main img.overview-img-2, main img.overview-img-3, main .experiment-anim'
         ));
 
         if (sideNav && overviewSection && reflectionsSection && sideNavLinks.length) {
