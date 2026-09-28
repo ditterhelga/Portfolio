@@ -2589,6 +2589,22 @@
             aspect-ratio: 704 / 512;
         }
 
+        .builds-media-frame.is-restock {
+            aspect-ratio: 704 / 512;
+        }
+
+        .restock-stage {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .restock-stage > svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
         .builds-image {
             position: absolute;
             inset: 0;
@@ -2925,6 +2941,106 @@
             #builds .testimonials-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 4rem;
+            }
+        }
+
+        /* Mobile carousel: bleed to screen edges, snap, peek next card */
+        @media (max-width: 767px) {
+            #builds .testimonials {
+                --testimonials-gutter: 1rem; /* matches body px-4 */
+            }
+
+            @media (min-width: 640px) {
+                #builds .testimonials {
+                    --testimonials-gutter: 2rem; /* matches body sm:px-8 */
+                }
+            }
+
+            #builds .testimonials-grid {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: stretch;
+                gap: 12px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                overscroll-behavior-x: contain;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                margin-left: calc(-1 * var(--testimonials-gutter));
+                margin-right: calc(-1 * var(--testimonials-gutter));
+                padding-left: var(--testimonials-gutter);
+                padding-right: var(--testimonials-gutter);
+                scroll-padding-inline: var(--testimonials-gutter);
+            }
+
+            #builds .testimonials-grid::-webkit-scrollbar {
+                display: none;
+                width: 0;
+                height: 0;
+            }
+
+            #builds .testimonials-grid .testimonial-card {
+                flex: 0 0 auto;
+                width: calc(100% - 40px);
+                height: auto;
+                min-width: 0;
+                scroll-snap-align: start;
+                scroll-snap-stop: normal;
+            }
+        }
+
+        #builds .testimonials-dots {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            #builds .testimonials-dots {
+                display: none;
+            }
+        }
+
+        #builds .testimonials-dot {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 32px;
+            height: 32px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #builds .testimonials-dot-visual {
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #0016F2;
+            opacity: 0.25;
+            transition:
+                width 250ms ease-out,
+                opacity 250ms ease-out;
+        }
+
+        #builds .testimonials-dot[aria-current="true"] .testimonials-dot-visual {
+            width: 24px;
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #builds .testimonials-dot-visual {
+                transition: none;
             }
         }
 
@@ -3520,6 +3636,163 @@
                             </div>
                           </div>
                         </div>
+                        <div class="restock-stage" hidden>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 704 512" preserveAspectRatio="xMidYMid meet" class="restock-flow" role="img" aria-labelledby="rf-title rf-desc" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTphZTExNGRkOC1kZTk4LTRlYTItODk3MS0yNmExMmE0YzA4ZmQAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaEJoVf58INQfSfP4Kke7gckAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo1YTdkNDkzNC0xZmViLTRkYWYtYWZiYS1iN2RmOTk5NzcxN2VscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoDzecMNgT4bxCbFPORCL38gAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggmb8z6RX/mCg6NwIXbZVjh5N/M0CwfICD3IacoamQEOmkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaNVA7CrgTsf29dH46nxzaVAAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBpb5MkIfH03VlhKSfHNoo+EdlDjwJMUQ2UWung/CksjWRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjkZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmFlMTE0ZGQ4LWRlOTgtNGVhMi04OTcxLTI2YTEyYTRjMDhmZC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjViYmM0MDBhLWQ5YmEtNDE2NC1iMTMxLTBhYzk4ZTM4ZGZmY3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCZvzPpFf+YKDo3AhdtlWOHk38zQLB8gIPchpyhqZAQ6aJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggUJUye6f9YD/nT2QbF7hfA4KZ49GCghMdtNUZ+5Nq+22iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFgg8PkhVQXnzJUcpT5kX9Vh1MYMxw1Sz6W22RXbEjxXgKN0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQBreWTakNH92z7ga3zW01SO7psfO14zfDNCl2rc8AED6hLOsjrwPdeAti9STAWteJgTqUNxtPDaOqkEy8V6wUOc=</c2pa:manifest></metadata>
+                            <title id="rf-title">How Restock works</title>
+                            <desc id="rf-desc">Albert Heijn discounts, the Crisp catalogue, photos of my cabinets and my own rules flow into Restock, which produces a shopping list and a weekly menu, leading to less food waste and a smaller grocery bill.</desc>
+                            <defs>
+                              <clipPath id="rf-clip-ah"><rect x="30" y="44" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-crisp"><rect x="30" y="152" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-photos"><rect x="30" y="260" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-rules"><rect x="30" y="368" width="48" height="48" rx="12"/></clipPath>
+                              <clipPath id="rf-clip-shop"><rect x="300" y="180" width="100" height="100" rx="16"/></clipPath>
+                              <clipPath id="rf-fill">
+                                <rect x="474" y="376" width="0" height="72" rx="24">
+                                  <animate attributeName="width" dur="7s" repeatCount="indefinite" values="0;0;210;210;0;0" keyTimes="0;0.62;0.7;0.93;0.97;1"/>
+                                </rect>
+                              </clipPath>
+                            </defs>
+                            <style>
+                              .restock-flow .title { font-family: 'Sofia Sans Condensed', sans-serif; font-weight: 500; font-size: 20px; fill: #333; transform-box: fill-box; }
+                              .restock-flow .caption { font-family: Inter, sans-serif; font-weight: 300; font-size: 12px; fill: #555; }
+                              .restock-flow .res-text { font-family: 'Sofia Sans Condensed', sans-serif; font-weight: 500; font-size: 20px; text-anchor: middle; }
+                              .restock-flow .line { fill: none; stroke: #0016F2; stroke-opacity: .22; stroke-width: 1.5; }
+                              .restock-flow .dot { fill: #0016F2; }
+                              .restock-flow .icon { fill: none; stroke: #0016F2; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+                              .restock-flow .pulse { fill: none; stroke: #0016F2; stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; animation: rf-pulse 7s infinite; }
+                              .restock-flow .hit { fill: none; stroke: #0016F2; stroke-width: 1.5; opacity: 0; animation: rf-hit 7s infinite; }
+                              .restock-flow .hit-2 { animation-delay: .2s; }
+                              .restock-flow .ghost { animation: none; }
+                              .restock-flow .result { transform-box: fill-box; transform-origin: center; animation: rf-settle 7s infinite; }
+                              .restock-flow .static-result { display: none; }
+                              @keyframes rf-pulse { 0%, 22% { opacity: 0; transform: scale(1); } 27% { opacity: .5; } 40%, 100% { opacity: 0; transform: scale(1.18); } }
+                              @keyframes rf-hit { 0%, 50% { opacity: 0; } 54% { opacity: 1; } 68%, 100% { opacity: 0; } }
+                              @keyframes rf-breathe { 0%, 100% { opacity: .35; } 50% { opacity: .7; } }
+                              @keyframes rf-settle { 0%, 69% { transform: scale(1); } 72% { transform: scale(1.04); } 76%, 100% { transform: scale(1); } }
+                              @container (max-width: 480px) {
+                                .restock-flow .caption { display: none; }
+                                .restock-flow .title { font-size: 28px; transform: translateY(13px); }
+                                .restock-flow .res-text { font-size: 23px; }
+                              }
+                              @media (prefers-reduced-motion: reduce) {
+                                .restock-flow .dot, .restock-flow .anim-result { display: none; }
+                                .restock-flow .static-result { display: inline; }
+                                .restock-flow .pulse, .restock-flow .hit, .restock-flow .ghost { animation: none; opacity: 0; }
+                              }
+                            </style>
+
+                            <rect class="stage-bg" width="704" height="512" fill="#EBF0F3"/>
+
+                            <g transform="translate(2 17)">
+                              <path id="rf-in1" class="line" d="M226 68 C 268 68, 262 230, 300 230"/>
+                              <path id="rf-in2" class="line" d="M226 176 C 266 176, 264 230, 300 230"/>
+                              <path id="rf-in3" class="line" d="M226 284 C 266 284, 264 230, 300 230"/>
+                              <path id="rf-in4" class="line" d="M226 392 C 268 392, 262 230, 300 230"/>
+                              <path id="rf-out1" class="line" d="M400 230 C 442 230, 440 168, 474 168"/>
+                              <path id="rf-out2" class="line" d="M400 230 C 442 230, 440 288, 474 288"/>
+                              <path id="rf-res" class="line" stroke-dasharray="3 5" d="M579 326 L 579 376"/>
+
+                              <g>
+                                <rect x="16" y="30" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect x="30" y="44" width="48" height="48" rx="12" fill="#FDE4DF"/>
+                                <image href="assets/images/albert.png" x="30" y="44" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-ah)"/>
+                                <text class="title" x="90" y="64">Albert Heijn</text>
+                                <text class="caption" x="90" y="84">this week's discounts</text>
+                              </g>
+                              <g>
+                                <rect x="16" y="138" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect x="30" y="152" width="48" height="48" rx="12" fill="#FDE4DF"/>
+                                <image href="assets/images/crisp.png" x="30" y="152" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-crisp)"/>
+                                <text class="title" x="90" y="172">Crisp</text>
+                                <text class="caption" x="90" y="192">the full catalogue</text>
+                              </g>
+                              <g>
+                                <rect x="16" y="246" width="210" height="76" rx="20" fill="#fff"/>
+                                <image href="assets/images/photo-app.webp" x="30" y="260" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-photos)"/>
+                                <text class="title" x="90" y="280">Photos</text>
+                                <text class="caption" x="90" y="300">what's in my cabinets</text>
+                              </g>
+                              <g>
+                                <rect x="16" y="354" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect x="30" y="368" width="48" height="48" rx="12" fill="#FDE4DF"/>
+                                <image href="assets/images/claude-app.png" x="30" y="368" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#rf-clip-rules)"/>
+                                <text class="title" x="90" y="388">My rules</text>
+                                <text class="caption" x="90" y="408">budget, taste, time</text>
+                              </g>
+
+                              <rect class="pulse" x="300" y="180" width="100" height="100" rx="16"/>
+                              <g clip-path="url(#rf-clip-shop)">
+                                <image href="assets/images/app-shop.png" x="300" y="180" width="100" height="100" preserveAspectRatio="xMidYMid meet"/>
+                              </g>
+
+                              <g>
+                                <rect x="474" y="130" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect class="hit" x="474" y="130" width="210" height="76" rx="20"/>
+                                <circle cx="512" cy="168" r="24" fill="#FFF2D7"/>
+                                <path class="icon" d="M503 160 l2 2 4-4 M513 160 H522 M503 168 l2 2 4-4 M513 168 H522 M503 176 l2 2 4-4 M513 176 H522"/>
+                                <text class="title" x="548" y="164">Shopping list</text>
+                                <text class="caption" x="548" y="184">only what's missing</text>
+                              </g>
+                              <g>
+                                <rect x="474" y="250" width="210" height="76" rx="20" fill="#fff"/>
+                                <rect class="hit hit-2" x="474" y="250" width="210" height="76" rx="20"/>
+                                <circle cx="512" cy="288" r="24" fill="#FFF2D7"/>
+                                <rect class="icon" x="500" y="278" width="24" height="22" rx="4"/>
+                                <path class="icon" d="M500 285 H524 M506 274 V281 M518 274 V281"/>
+                                <text class="title" x="548" y="284">Weekly menu</text>
+                                <text class="caption" x="548" y="304">built around the deals</text>
+                              </g>
+
+                              <g class="result anim-result">
+                                <g class="ghost" opacity="0.1">
+                                  <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0.1;0.1;0;0;0.1;0.1" keyTimes="0;0.69;0.7;0.96;0.97;1"/>
+                                  <rect x="474" y="376" width="210" height="72" rx="24" fill="none" stroke="#0016F2" stroke-width="1.5" stroke-dasharray="4 5"/>
+                                  <text class="res-text" x="579" y="407" fill="#0016F2">Less food waste</text>
+                                  <text class="res-text" x="579" y="431" fill="#0016F2">Smaller grocery bill</text>
+                                </g>
+                                <g clip-path="url(#rf-fill)">
+                                  <rect x="474" y="376" width="210" height="72" rx="24" fill="#0016F2"/>
+                                  <text class="res-text" x="579" y="407" fill="#fff">Less food waste</text>
+                                  <text class="res-text" x="579" y="431" fill="#fff">Smaller grocery bill</text>
+                                </g>
+                              </g>
+                              <g class="static-result">
+                                <rect x="474" y="376" width="210" height="72" rx="24" fill="#0016F2"/>
+                                <text class="res-text" x="579" y="407" fill="#fff">Less food waste</text>
+                                <text class="res-text" x="579" y="431" fill="#fff">Smaller grocery bill</text>
+                              </g>
+
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.2;1"><mpath href="#rf-in1"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.01;0.19;0.2;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.035;0.235;1"><mpath href="#rf-in2"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.035;0.045;0.225;0.235;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.07;0.27;1"><mpath href="#rf-in3"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.07;0.08;0.26;0.27;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.105;0.305;1"><mpath href="#rf-in4"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.105;0.115;0.295;0.305;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.34;0.51;1"><mpath href="#rf-out1"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.35;0.5;0.51;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.37;0.54;1"><mpath href="#rf-out2"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.37;0.38;0.53;0.54;1"/>
+                              </circle>
+                              <circle class="dot" r="4" opacity="0">
+                                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.56;0.62;1"><mpath href="#rf-res"/></animateMotion>
+                                <animate attributeName="opacity" dur="7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.56;0.57;0.61;0.62;1"/>
+                              </circle>
+                            </g>
+                          </svg>
+                        </div>
                     </div>
                 </div>
 
@@ -3583,7 +3856,15 @@
         </div>
 
         <div class="testimonials">
-            <div class="testimonials-grid" id="testimonials-grid" aria-labelledby="builds-lede-after"></div>
+            <div
+                class="testimonials-grid"
+                id="testimonials-grid"
+                role="region"
+                aria-roledescription="carousel"
+                aria-label="Recommendations"
+                tabindex="0"
+            ></div>
+            <div class="testimonials-dots" id="testimonials-dots" hidden></div>
             <a class="builds-cta testimonials-link focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0016F2]" href="https://www.linkedin.com/in/olga-pertseva/details/recommendations/" target="_blank" rel="noopener">
                 <span class="work-card-cta-label">Read the full recommendations on LinkedIn</span>
                 <svg class="builds-cta-arrow" viewBox="0 0 16.0417 14.0833" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -3631,7 +3912,8 @@
 
         (function () {
             const grid = document.getElementById("testimonials-grid");
-            if (!grid) return;
+            const dotsRoot = document.getElementById("testimonials-dots");
+            if (!grid || !dotsRoot) return;
 
             const escapeHtml = (value) => String(value)
                 .replace(/&/g, "&amp;")
@@ -3639,8 +3921,15 @@
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;");
 
-            grid.innerHTML = TESTIMONIALS.map((item) => `
-                <article class="testimonial-card">
+            const total = TESTIMONIALS.length;
+
+            grid.innerHTML = TESTIMONIALS.map((item, index) => `
+                <article
+                    class="testimonial-card"
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label="${index + 1} of ${total}"
+                >
                     <ul class="card-badges">
                         <li class="badge">${escapeHtml(item.pill)}</li>
                     </ul>
@@ -3655,6 +3944,102 @@
                     </div>
                 </article>
             `).join("");
+
+            dotsRoot.hidden = false;
+            dotsRoot.innerHTML = TESTIMONIALS.map((_, index) => `
+                <button
+                    type="button"
+                    class="testimonials-dot"
+                    aria-label="Show recommendation ${index + 1} of ${total}"
+                    ${index === 0 ? 'aria-current="true"' : ""}
+                >
+                    <span class="testimonials-dot-visual" aria-hidden="true"></span>
+                </button>
+            `).join("");
+
+            const cards = Array.from(grid.querySelectorAll(".testimonial-card"));
+            const dots = Array.from(dotsRoot.querySelectorAll(".testimonials-dot"));
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+            const mobileMq = window.matchMedia("(max-width: 767px)");
+            let activeIndex = 0;
+            let observer = null;
+
+            function setActive(index) {
+                if (index < 0 || index >= cards.length) return;
+                activeIndex = index;
+                dots.forEach((dot, i) => {
+                    if (i === index) dot.setAttribute("aria-current", "true");
+                    else dot.removeAttribute("aria-current");
+                });
+            }
+
+            function syncActiveFromScroll() {
+                if (!mobileMq.matches || !cards.length) return;
+                const trackLeft = grid.getBoundingClientRect().left;
+                let bestIndex = 0;
+                let bestDist = Infinity;
+                cards.forEach((card, index) => {
+                    const dist = Math.abs(card.getBoundingClientRect().left - trackLeft - (parseFloat(getComputedStyle(grid).paddingLeft) || 0));
+                    if (dist < bestDist) {
+                        bestDist = dist;
+                        bestIndex = index;
+                    }
+                });
+                setActive(bestIndex);
+            }
+
+            function scrollToCard(index) {
+                const card = cards[index];
+                if (!card || !mobileMq.matches) return;
+                const behavior = reduceMotion.matches ? "auto" : "smooth";
+                card.scrollIntoView({ behavior, inline: "start", block: "nearest" });
+                setActive(index);
+            }
+
+            function setupObserver() {
+                if (observer) {
+                    observer.disconnect();
+                    observer = null;
+                }
+                if (!mobileMq.matches || typeof IntersectionObserver !== "function") return;
+                observer = new IntersectionObserver(
+                    (entries) => {
+                        const visible = entries
+                            .filter((entry) => entry.isIntersecting)
+                            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+                        if (!visible.length) return;
+                        const index = cards.indexOf(visible[0].target);
+                        if (index >= 0) setActive(index);
+                    },
+                    { root: grid, threshold: 0.6 }
+                );
+                cards.forEach((card) => observer.observe(card));
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener("click", () => scrollToCard(index));
+            });
+
+            grid.addEventListener("scroll", () => {
+                if (!mobileMq.matches) return;
+                window.clearTimeout(grid._testimonialsScrollTimer);
+                grid._testimonialsScrollTimer = window.setTimeout(syncActiveFromScroll, 60);
+            }, { passive: true });
+
+            function onBreakpointChange() {
+                setupObserver();
+                if (!mobileMq.matches) setActive(0);
+                else syncActiveFromScroll();
+            }
+
+            if (typeof mobileMq.addEventListener === "function") {
+                mobileMq.addEventListener("change", onBreakpointChange);
+            } else if (typeof mobileMq.addListener === "function") {
+                mobileMq.addListener(onBreakpointChange);
+            }
+
+            setupObserver();
+            setActive(0);
         })();
 
         const BUILDS = [
@@ -3680,7 +4065,7 @@
           },
           { id: 'p3', name: 'Job search stack', logo: 'assets/images/app-search.png', image: 'assets/images/hands-dimme.png', title: 'Job search stack', text: 'Job boards hand you a hundred postings a day and no way to tell which one deserves twenty minutes of reading. I wrote a Telegram bot that filters openings against rules I set myself and a Chrome extension that marks red and green flags on the posting before I commit to it. What survives both goes into Notion through a Claude integration.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
           { id: 'p4', name: 'Mouth ninja', logo: 'assets/images/app-ninja.png', image: 'assets/images/Mouth-ninja-screen.png', title: 'Mouth ninja', text: 'Daily mouth exercises prescribed by a therapist, meant to happen twice a day without supervision. I built an app with a camera mirror and face tracking that confirms real movement, not just time spent waiting. Streaks and points didn\'t hold attention — a funny gif after each exercise and a spin wheel at the end did.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
-          { id: 'p5', name: 'Restock', logo: 'assets/images/app-shop.png', image: 'assets/images/preparing-image.png', pending: true, title: 'Restock', text: 'I wanted to stop overspending on groceries and stop deciding what to cook every single day. I connected Albert Heijn through their API, scraped Crisp\'s catalogue, and added everything sitting in my cabinets. The result: a weekly recipe base built around current discounts and what I already had.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
+          { id: 'p5', name: 'Restock', logo: 'assets/images/app-shop.png', image: 'assets/images/preparing-image.png', title: 'Restock', text: 'I wanted to stop overspending on groceries, stop throwing out food I forgot I had, and stop deciding what to cook every single day. I connected Albert Heijn through their API, scraped Crisp\'s catalogue, and added everything sitting in my cabinets. Every week I got a menu built around current discounts and what was already at home, and far less of it ended up in the bin.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
           { id: 'p6', name: 'Helaas Pindakaas', logo: 'assets/images/app-helaas.png', image: 'assets/images/back.jpg', pending: true, title: 'Helaas Pindakaas', text: 'The inburgering exam rewards a narrow set of tricks: reusable sentence templates, negation instead of grammar you haven\'t learned yet, mirroring the question\'s words back into the answer. General language apps don\'t teach any of it. I built modes matching the exam formats, each pulling from a question bank I compiled while preparing for it myself.', cta: 'LEARN MORE', href: 'experiments.html?from=index' },
           { id: 'p7', name: 'Kaboom', logo: 'assets/images/app-kaboom.png', image: 'assets/images/back2.png', pending: true, title: 'Kaboom', text: 'Tick Tock Bomb, but the version I wanted didn\'t exist as an app worth using. Show a picture, say the first association out loud, pass the phone before it explodes. I built it with illustrations I actually like looking at, timer randomised so nobody can game the rhythm.', cta: 'LEARN MORE', href: 'experiments.html?from=index' }
         ];
@@ -3696,11 +4081,32 @@
             const ctaLabelEl = root.querySelector(".builds-cta .work-card-cta-label");
             const imageEl = root.querySelector(".builds-image");
             const orbitEl = root.querySelector(".orbit-stage");
+            const restockEl = root.querySelector(".restock-stage");
+            const restockSvg = restockEl && restockEl.querySelector("svg");
             const frame = root.querySelector(".builds-media-frame");
             const overlay = frame && frame.querySelector(".cover-pending");
             const panelEl = root.querySelector(".builds-body");
             const tablistEl = root.querySelector(".builds-tabs");
             const tabs = Array.from(root.querySelectorAll(".builds-tab"));
+
+            function syncRestockAnim(active) {
+                if (!restockSvg) return;
+                if (typeof restockSvg.pauseAnimations !== "function") return;
+                if (active) {
+                    if (typeof restockSvg.unpauseAnimations === "function") {
+                        restockSvg.unpauseAnimations();
+                    }
+                    if (typeof restockSvg.setCurrentTime === "function") {
+                        restockSvg.setCurrentTime(0);
+                    }
+                } else {
+                    restockSvg.pauseAnimations();
+                }
+            }
+
+            if (restockSvg && typeof restockSvg.pauseAnimations === "function") {
+                restockSvg.pauseAnimations();
+            }
 
             function showBuild(index) {
                 const item = BUILDS[index];
@@ -3713,13 +4119,19 @@
                 ctaLabelEl.textContent = item.cta;
 
                 const isOrbit = item.id === "p3";
+                const isRestock = item.id === "p5";
                 if (orbitEl) orbitEl.hidden = !isOrbit;
-                if (frame) frame.classList.toggle("is-orbit", !!isOrbit);
-                imageEl.hidden = isOrbit;
-                if (!isOrbit) {
+                if (restockEl) restockEl.hidden = !isRestock;
+                if (frame) {
+                    frame.classList.toggle("is-orbit", !!isOrbit);
+                    frame.classList.toggle("is-restock", !!isRestock);
+                }
+                imageEl.hidden = isOrbit || isRestock;
+                if (!isOrbit && !isRestock) {
                     imageEl.src = item.image;
                     imageEl.alt = item.name;
                 }
+                syncRestockAnim(isRestock);
 
                 if (overlay && frame) {
                     overlay.hidden = !item.pending;
